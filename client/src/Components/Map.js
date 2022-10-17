@@ -1,13 +1,33 @@
 import data from '../db/test.json';
 import React, { useEffect, useState, useRef } from "react";
+import axios from 'axios';
+
 const { naver } = window;
 
 
 function MapComponent() {
 
-  const testData = data.location; //[{},{}]
-  // const [testLocation , setTestLocation ] = useState({testData});
+    // const AxiosData = () => {
+    //     axios.get('https://localhost:8000/')
+    //     .then((data) => {
+    //         console.log(data);
+    //     })
+    // }
 
+    // // 위나 아래나~
+    // // const AxiosData = async() => {
+    // //     const data = await axios.get('https://localhost:8000/');
+    // //     console.log(data);
+    // // }
+
+    // useEffect(() => {
+    //     AxiosData();
+    // },[]);
+    
+
+  const testData = data.location; //[{},{}]
+    
+    const [address, setAddress] = useState();
     const [myLocation, setMyLocation] = useState({latitude: 37.3724620, longitude: 127.1051714});
     const container = useRef();
 
