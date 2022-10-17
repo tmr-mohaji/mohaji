@@ -1,5 +1,6 @@
 import Component from '../Components/Component';
 import Map from '../Components/Map';
+import ImageMap from '../Components/ImageMap';
 
 const Main = () => {
 
@@ -7,6 +8,7 @@ const Main = () => {
         <div>
             <Component />
             <Map />
+            <ImageMap />
         </div>
     )
 }
