@@ -6,7 +6,7 @@ drop table event;
 CREATE TABLE event (
 	id int not null primary key auto_increment,
     title varchar(255) not null,
-    url varchar(255) not null default "없음",
+    url mediumtext,
     detail mediumtext,
     type varchar(255) not null,
     place varchar(255) not null,
