@@ -20,15 +20,15 @@ const Header = () => {
 
                     <ul class="navbar_1 navbar_pc">
                         <li>
-                            <Link to='/'> 서브 메뉴1 </Link>
+                            <Link className='bt_line' to='/'> 서브 메뉴1 </Link>
                         </li>
 
                         <li>
-                            <Link to='/'> 서브 메뉴2 </Link>
+                            <Link className='bt_line' to='/'> 서브 메뉴2 </Link>
                         </li>
 
                         <li>
-                            <Link to='/'> 서브 메뉴3 </Link>
+                            <Link className='bt_line' to='/'> 서브 메뉴3 </Link>
                         </li>
                     </ul>
 
