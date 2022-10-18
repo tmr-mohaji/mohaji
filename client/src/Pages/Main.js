@@ -8,9 +8,9 @@ const Main = () => {
     return (
         <div>
             <Component />
-            <Map />
+            {/* <Map />
             <ImageMap />
-            <Button />
+            <Button /> */}
         </div>
     )
 }
