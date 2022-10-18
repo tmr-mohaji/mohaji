@@ -38,6 +38,25 @@
     text-align: center;
 }
 
+.bt_line{
+    position: relative;
+}
+
+.bt_line:hover{
+    color:#7a266d;
+    font-weight: 600;
+}
+
+.bt_line:hover:after{
+    content:'';
+    background:#7a266d;
+    height:3px;
+    width:80px;
+    position:absolute;
+    bottom:-36px;
+    left:0;
+}
+
 
 .nav{
     position:relative;
@@ -54,6 +73,7 @@
     text-align: center;
 }   
 
+// 햄버거 메뉴 미리 정의 후 숨김
 .nav_icon{
     // display:inline-block;
     display:none;
@@ -84,10 +104,12 @@
     transition: all .2s ease-in-out;
 }
 
+// 햄버거 메뉴 클릭 전 => 화면에 보이지 않는다.
 .hide_box{
     display:none;
 }
 
+// 햄버거 메뉴 클릭 후 => 화면에 보인다.
 .mob_box{
     display:block;
 }
