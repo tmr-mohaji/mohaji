@@ -18,7 +18,7 @@ const Header = () => {
                         <Link to='/'>로고</Link>
                     </h1>
 
-                    <ul class="navbar_1 navbar_pc">
+                    <ul className="navbar_1 navbar_pc">
                         <li>
                             <Link className='bt_line' to='/'> 서브 메뉴1 </Link>
                         </li>
@@ -33,7 +33,7 @@ const Header = () => {
                     </ul>
 
                     <div className='nav'>
-                        <ul class="navbar_2 navbar_pc">
+                        <ul className="navbar_2 navbar_pc">
                             <li>
                                 <Link to='/'> 로그인 </Link>
                             </li>
