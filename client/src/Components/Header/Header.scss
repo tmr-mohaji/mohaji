@@ -1,0 +1,159 @@
+@import '../Commons/Commons.scss';
+@import '~include-media/dist/include-media';
+
+
+.headerArea{
+    width:100%;
+    height:92px;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:99;
+    background:#fff;
+    transition: .2s linear;
+}
+
+.head_wrap{
+    display:flex;
+    justify-content: space-between;
+    height:92px;
+    line-height:92px;
+    max-width: 1800px;
+    margin:0 auto;
+}
+
+.logo{
+    font-size:50px;
+}
+
+.navbar_1{
+    color:#000;
+    overflow: hidden;
+    // padding-right:70px;
+}
+
+.navbar_1 li{
+    width:140px;
+    float:left;
+    text-align: center;
+}
+
+
+.nav{
+    position:relative;
+}
+
+.navbar_2{
+    color:#000;
+    overflow: hidden;
+}
+
+.navbar_2 li{
+    width:100px;
+    float:left;
+    text-align: center;
+}   
+
+.nav_icon{
+    // display:inline-block;
+    display:none;
+    width:24px;
+    cursor: pointer;
+    position:absolute;
+    top:50%;
+    right:0;
+    z-index:100;
+    -webkit-transform: translateY(-50%);
+}
+
+.nav_hambuger{
+    background:#000;
+    display:block;
+    content:'';
+    height:2px;
+    margin:5px 0;
+    transition: all .2s ease-in-out;    
+}
+
+.nav_icon:after, .nav_icon:before{
+    background:#000;
+    display:block;
+    content:'';
+    height:2px;
+    margin:5px 0;
+    transition: all .2s ease-in-out;
+}
+
+.hide_box{
+    display:none;
+}
+
+.mob_box{
+    display:block;
+}
+
+
+
+
+
+@include media('<1800px'){
+    .head_wrap{
+        padding-left:40px;
+        padding-right:40px;
+    }
+}
+
+
+
+@include media('<800px'){
+    // 서브 메뉴 숨김
+    .navbar_1{
+        display:none;
+    }
+
+    .navbar_2{
+        padding-right:50px;
+    }
+
+    .navbar_2 li{
+        width:80px;
+    }
+
+    // 햄버거 아이콘 보임
+    .nav_icon{
+        display:inline-block;
+    }
+
+    // 모바일에서 보이는 메뉴
+    .navbar_3{
+        width:100%;
+        height:100%;
+        padding:0 40px;
+        background:#fff;
+        transition: opacity 0.5s ease;
+        margin:0;
+        position:fixed;
+        left:0;
+        right:0;
+    }
+
+    // 모바일에서 보이는 서브 메뉴
+    .mob_li{
+        border-bottom:1px solid #ededed;
+        position: relative;
+        line-height:50px;
+    }
+
+    // 모바일에서 보이는 메뉴 오른쪽 화살표
+    .arrow:before{
+        width: 14px;
+        height: 14px;
+        margin-top: -4.5px;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        background:url(../Header/img/nav-arrow.png);
+        background-size: contain;
+        content: '';        
+    }
+}
