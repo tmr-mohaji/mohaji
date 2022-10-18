@@ -8,8 +8,8 @@ const Main = () => {
     return (
         <div>
             <Component />
-            {/* <Map />
-            <ImageMap />
+            <Map />
+            {/* <ImageMap />
             <Button /> */}
         </div>
     )

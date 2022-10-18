@@ -74,6 +74,7 @@ function MapComponent() {
         .then((addressData) => {
             // console.log(addressData); // 1. db이벤트 데이터 배열로 가져옴.
 
+            // 1. 주소 >> 좌표 전환
             addressData.map(function(aData) {
                     naver.maps.Service.geocode({
                         query: aData.address
@@ -90,8 +91,9 @@ function MapComponent() {
                         var data_lng = item[0].x;
                         // console.log(data_lat);
                         // console.log(data_lng);
-                        
-                        new naver.maps.Marker({
+                    
+                    // 2. 각 이벤트별 마커 표시
+                        const event_marker = new naver.maps.Marker({
                             map: map,
                             position: new naver.maps.LatLng(data_lat,data_lng),
                             icon : {
@@ -101,15 +103,28 @@ function MapComponent() {
                                 anchor: new naver.maps.Point(25, 26),
                             }
                         });
-                        
+
+                    // 3. 각 마커별 정보창 표시
+                        const infoText = [ `<div class='iw_inner'><div style='font-weight:bold;'>${aData.title}</div></div>`].join('');
+                        // // console.log(infoText);
+                        const infowindow = new naver.maps.InfoWindow({
+                            content: infoText
+                        });
+                        naver.maps.Event.addListener(event_marker, 'click', function(e) {
+                            if (infowindow.getMap()) {
+                                infowindow.close();
+                            } else {
+                                infowindow.open(map, event_marker);
+                            }
+                        });
+                        infowindow.open(map,event_marker);
                     })
-                
             })
         })
     }
 
     //// 오류 발생 /////
-    // 1. [] 빈배열로 설정할 경우 현재위치가 나타나지 않음.
+    // 1. [] 빈배열로 설정할 경우 현재위치가 오락가락함. (나타나기도 하고, 정상적으로 표시되기도 하고, 아예 다른 위치를 나타내기도 함.)
     // 2. [myLocation, container] 로 설정할 경우 1) 현재 위치는 나타나지만 이벤트 주소 마커가 불안정함. 2)지도 줌인 줌아웃 안됨. 3) TypeError : Cannot read properties of undefined (reading 'length') 라는 오류가 무한반복됨. 
     useEffect(() => {
         initMap();
