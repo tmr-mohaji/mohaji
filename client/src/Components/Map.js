@@ -3,43 +3,25 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from 'axios';
 
 const { naver } = window;
-
+const SEARCH_PAGE = "http://localhost:8000/search";
 
 function MapComponent() {
 
-    // const AxiosData = () => {
-    //     axios.get('https://localhost:8000/')
-    //     .then((data) => {
-    //         console.log(data);
-    //     })
-    // }
-
-    // // 위나 아래나~
-    // // const AxiosData = async() => {
-    // //     const data = await axios.get('https://localhost:8000/');
-    // //     console.log(data);
-    // // }
-
-    // useEffect(() => {
-    //     AxiosData();
-    // },[]);
-    
-
-  const testData = data.location; //[{},{}]
-    
-    const [address, setAddress] = useState();
     const [myLocation, setMyLocation] = useState({latitude: 37.3724620, longitude: 127.1051714});
     const container = useRef();
 
     const initMap = () => {
 
-        // 현재 위치 가져오기
+        const mapOption = {
+            zoom: 10,
+            minZoom: 1,
+            disableKineticPan: false,
+            mapTypeControl : true,
+            zoomControl: true,
+            scrollWheel: true
+        };
 
-        // 현재 발생되고 있는 오류
-        // 1. 콘솔이 두번씩 찍히는 현상
-        // 2. 처음에 아래 "현재 위치 오류" alert가 나옴 -> 위치를 가져오는데 시간이 걸리는 거 같음
-        // 3. 특정한 다른 위치가 꾸준히 나옴 (나는 신길동..) -> 뒤늦게 정확한 현재 위치가 찍힘
-
+//------------------------------ 현재 위치 가져오기----------------------------------//
         if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
                     setMyLocation({
@@ -50,12 +32,6 @@ function MapComponent() {
         } else {
             alert("현재 위치 찾을 수 없음");
         }
-
-        const mapOption = {
-            zoom: 14,
-            zoomControl: true,
-            scrollWheel: true
-        };
 
         if (typeof myLocation.latitude == "number") {
             // console.log("위치", myLocation);
@@ -76,8 +52,7 @@ function MapComponent() {
             position: mapOption.center,
             map,
             icon: {
-                // content: `<img src=${require('./public/maker.png')} />`,
-                content: `<img src=${require('./marker.png')} width='30px' height='30px'/>`,
+                content: `<img src=${require('./1.png')} width='30px' height='30px'/>`,
                 size: new naver.maps.Size(50, 52),
                 origin: new naver.maps.Point(0,0),
                 anchor: new naver.maps.Point(25, 26),
@@ -87,33 +62,68 @@ function MapComponent() {
 
         const marker = new naver.maps.Marker(markerOptions);
 
-
-        // 임시 db파일에서 받아온 위도/경도를 이용해 마커 생성.
-        testData.map(function(tData,i) {
-            new naver.maps.Marker({
-              map: map,
-              position: new naver.maps.LatLng(tData.latitude, tData.longitude),
-              icon : {
-                  content: `<img src=${require('./marker.png')} width='30px' height='30px'/>`,
-                  size: new naver.maps.Size(50, 52),
-                  origin: new naver.maps.Point(0,0),
-                  anchor: new naver.maps.Point(25, 26),
-              }
-            });
-        })
-
         naver.maps.Event.addListener(map, 'click', function(e) {
             console.log(e.coord);
             marker.setPosition(e.coord);
         });
+
+//-------------------------- DB event 주소 -> 좌표 전환 및 마커표시------------------------------------//
+
+        axios.get(SEARCH_PAGE)
+        .then((req) => { return req.data;})
+        .then((addressData) => {
+            // console.log(addressData); // 1. db이벤트 데이터 배열로 가져옴.
+
+            addressData.map(function(aData) {
+                    naver.maps.Service.geocode({
+                        query: aData.address
+                    }, function(status,response) {
+                        if (status === naver.maps.Service.Status.ERROR) {
+                            return alert('error!');
+                        }
+                        
+                        var result = response.v2;
+                        var item = result.addresses;
+                        // console.log('result: ', result);
+                        // console.log('item: ', item);
+                        var data_lat = item[0].y;
+                        var data_lng = item[0].x;
+                        // console.log(data_lat);
+                        // console.log(data_lng);
+                        
+                        new naver.maps.Marker({
+                            map: map,
+                            position: new naver.maps.LatLng(data_lat,data_lng),
+                            icon : {
+                                content: `<img src=${require('./marker.png')} width='30px' height='30px'/>`,
+                                size: new naver.maps.Size(50, 52),
+                                origin: new naver.maps.Point(0,0),
+                                anchor: new naver.maps.Point(25, 26),
+                            }
+                        });
+                        
+                    })
+                
+            })
+        })
     }
 
+    //// 오류 발생 /////
+    // 1. [] 빈배열로 설정할 경우 현재위치가 나타나지 않음.
+    // 2. [myLocation, container] 로 설정할 경우 1) 현재 위치는 나타나지만 이벤트 주소 마커가 불안정함. 2)지도 줌인 줌아웃 안됨. 3) TypeError : Cannot read properties of undefined (reading 'length') 라는 오류가 무한반복됨. 
     useEffect(() => {
         initMap();
-    }, [myLocation, container]);
+    }, []); // [myLocation, container] 를 해줄경우 지도 줌인 줌아웃이 전혀 안됨.
+
+
+
 
     return (<>
         <div ref={container} style={{width: '500px', height: '500px'}}></div>
+        <div className='search'>
+            <input type='text' placeholder='주소입력창'></input>
+            <input type='button' value='주소검색' />
+        </div>
         <button>지도 이동하기</button>
     </>);
 }
