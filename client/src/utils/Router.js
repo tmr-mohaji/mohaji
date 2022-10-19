@@ -3,6 +3,7 @@ import Header from '../components/Header/Header';
 
 import Main from '../pages/Main';
 import Event from '../pages/Event';
+import FindId from '../pages/FindId';
 
 const Router = () => {
     return (
@@ -12,6 +13,7 @@ const Router = () => {
                 <Routes>
                     <Route path="/" element={<Main />} />
                     <Route path="/event" element={<Event />} />
+                    <Route path="/user/findid" element={<FindId />} />
                 </Routes>
             </BrowserRouter>
         </div>
