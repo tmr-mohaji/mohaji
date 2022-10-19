@@ -2,7 +2,6 @@ const models = require("../model");
 
 exports.getEvent = async (req, res) => {
     const { city } = req.query;
-    console.log("city", city);
 
     if (city == "전체") {
         let result = await models.Event.findAll();
@@ -13,4 +12,11 @@ exports.getEvent = async (req, res) => {
         // console.log(result[0]);
         res.send(result[0]);
     }
+}
+
+exports.getAddress = async (req, res) => {
+    let result = await models.Event.findOne({
+        where: {id : req.query.id}
+    });
+    res.send(result);
 }

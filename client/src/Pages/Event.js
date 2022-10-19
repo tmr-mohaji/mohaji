@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Map from '../components/Map';
@@ -13,23 +13,33 @@ const Event = () => {
 
     const [city, setCity] = useState(state);
     const [data, setData] = useState([]);
-    const [ event, setEvent ] = useState();
+    const [address, setAddress] = useState("");
+    // const [ event, setEvent ] = useState();
 
     const select_box = useRef();
 
+    // 도시 정보로 데이터 가져오기
     const getData = async () => {
         const response = await axios.get(EVENT_PAGE, {
             params: {city: city}
         })
-        // console.log(response.data);
         setData(response.data);
 
     }
 
+    // 도시 정보가 바뀌었을 때
     const onChange = (e) => {
+        navigate('/event?city=' + e.target.value, {state: e.target.value});
         setCity(e.target.value);
     }
     
+    // 클릭한 이벤트 주소 받아오기
+    const getAddress = async (id) => {
+        let response = await axios.get(EVENT_PAGE + "/address", {
+            params: {id : id}
+        })
+        setAddress(response.data.address);
+    }
 
     useEffect(() => {
         getData();
@@ -40,12 +50,12 @@ const Event = () => {
                 select.options[i].selected = true;
             }
         }
-    }, [city])
+    }, [city, address])
 
     return (
         <div style={{ width: "90%", margin: "100px auto 0 auto", display: "flex", gap: "50px"}}>
             <div>
-                <Map city={city} />
+                <Map city={city} address={address} />
             </div>
             <div>
                 <select onChange={onChange} ref={select_box}>
@@ -69,7 +79,8 @@ const Event = () => {
                             <p>{data.people}</p>
                             <p>{data.price}</p>
                             <img src={"./img/" + data.filename} style={{width: "200px"}}/>
-                            <button type='button' onClick={() => { navigate('/event', { state: { address: data.address} }) }}>지도로가기</button>
+                            {/* <button type='button' onClick={() => { navigate('/event', { state: { address: data.address} }) }}>지도로가기</button> */}
+                            <button type="button" onClick={() => {getAddress(data.id)}}>지도로가기</button>
                             <hr />
                         </div>
                     )

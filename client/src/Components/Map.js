@@ -12,25 +12,24 @@ function MapComponent(props) {
     const [myLocation, setMyLocation] = useState({latitude: 37.3724620, longitude: 127.1051714});
     const [zoom, setZoom] = useState(11);
     const container = useRef();
-    const addressInput = createRef();
-    const location = useLocation();
-
-
+    const addressInput = useRef();
+    // const location = useLocation();
 
     // 🤔 Event.js에서 button 누르면 누른 데이터 address 가져오게 함. 
     const [ event , setEvent ] = useState('');
-    console.log(event);
-    const EventAddress = location.state.address;
+    // console.log(event);
+    // const EventAddress = location.state.address;
     // console.log(EventAddress); //이벤트 목록에서 주소가 들어옴. 
-    // 참고로 이 데이터는 inptu창에서 readonly하도록 보내줌!
+    // 참고로 이 데이터는 input창에서 readonly하도록 보내줌!
     // 들어온 주소를 setEvent에 담아줌... 요 아래 부분이 맞는지 일단 의문.
-    useEffect(() => {
-        setEvent(EventAddress);
-    },[EventAddress]);
+    
+    // 미진 언니! 맨 아래에 useEffect()함수가 있었어!
+    // useEffect(() => {
+    //     setEvent(props.address);
+    // },[props.address]);
 
 
-
-    const initMap = () => {
+    const initMap = async () => {
 
         const mapOption = {
             center: myLocation,
@@ -56,7 +55,7 @@ function MapComponent(props) {
 
         if (typeof myLocation.latitude == "number") {
             // console.log("위치", myLocation);
-            //LatLng : 위/경도 좌표를 정의함.
+            // LatLng : 위/경도 좌표를 정의함.
             mapOption.center = new naver.maps.LatLng(myLocation.latitude, myLocation.longitude); // 지도 시작 지점
         } else {
             alert("현재 위치 오류");
@@ -83,18 +82,34 @@ function MapComponent(props) {
 
         const marker = new naver.maps.Marker(markerOptions);
 
-        naver.maps.Event.addListener(map, 'click', function(e) {
-            console.log(e.coord);
-            marker.setPosition(e.coord);
-        });
+        // naver.maps.Event.addListener(map, 'click', function(e) {
+        //     console.log(e.coord);
+        //     marker.setPosition(e.coord);
+        // });
 
 //-------------------------- DB event 주소 -> 좌표 전환 및 마커표시------------------------------------//
 
+        // let response = await axios.get(EVENT_PAGE, {
+        //     params: {city: props.city}
+        // });
+        // let addressData = response.data;
+
+        // console.log("addressData", addressData);
+        // console.log("props.address", props.address);
+
+        // if (props.address != '') {
+        //     const result = addressData.filter(data => { return data.address === props.address });
+        // } else {
+        //     return addressData;
+        // }
         axios.get(EVENT_PAGE, {
             params: {city: props.city}
         })
         .then((req) => { return req.data;})
         .then((addressData) => {
+
+        console.log(addressData);
+        console.log("props", props.address);
 
             // 1. 주소 >> 좌표 전환
 
@@ -102,16 +117,23 @@ function MapComponent(props) {
             //1)여기 전체 데이터에서 Event.js에서 버튼 클릭해서 받은 주소와 비교 해서 데이터가 일치할 경우 그 데이터만 담아서 .then에 보내줌. 
 
             //2) 1)이 아닐경우 전체 데이터를 .then에 보내줌.
-            if (addressInput.current.value != '') {
-                const result = addressData.filter (data => { return data.address === event });
-                return result;
+            if (props.address != null) {
+                const result = addressData.filter(data => { return data.address === props.address });
+                console.log(result);
             } else {
                 return addressData;
             }
-        })
-        .then((data) => {
+            // if (addressInput.current.value != '') {
+            //     const result = addressData.filter (data => { return data.address === event });
+            //     return result;
+            // } else {
+            //     return addressData;
+            // }
+        // })
+        // .then((data) => {
 
-            // addressData.map(function(aData) {                                       
+            // addressData.map(function(aData) {      
+                    // console.log(data);                                 
                     data.map(function(aData) {                   
 
                     naver.maps.Service.geocode({
@@ -170,13 +192,13 @@ function MapComponent(props) {
 
     useEffect(() => {
         initMap();
-    }, [props.city],[EventAddress]); 
+    }, [props.city, props.address]); 
     
 
 
     return (<>
         <div ref={container} style={{width: '500px', height: '500px'}}></div>
-        <input ref={addressInput} value={EventAddress || ''} readOnly />
+        <input ref={addressInput} value={props.address || ''} readOnly />
         <button type='button' onClick={() => { setEvent(''); addressInput.current.value = "";}}>전체</button>
         <br />
         <button>지도 이동하기</button>
