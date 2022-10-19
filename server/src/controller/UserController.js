@@ -54,9 +54,9 @@ exports.findId = async (req, res) => {
     });
 
     if (result == null) {
-        res.send("입력하신 정보로 등록된 아이디가 없습니다.");
+        res.send(false);
     } else {
-        res.send(result.id);
+        res.send(true);
     }
 }
 
