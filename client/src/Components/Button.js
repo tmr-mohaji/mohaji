@@ -8,7 +8,7 @@ const Button = () => {
     
     const sendCity = async () => {
         const city_name = city.current.innerText;
-        navigate('/search?city=' + city_name, {state: city_name});
+        navigate('/event?city=' + city_name, {state: city_name});
     }
 
     return(

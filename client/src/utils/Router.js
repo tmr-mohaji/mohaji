@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from '../components/Header/Header';
 
 import Main from '../pages/Main';
-import Search from '../pages/Search';
+import Event from '../pages/Event';
 
 const Router = () => {
     return (
@@ -11,7 +11,7 @@ const Router = () => {
             <Header />
                 <Routes>
                     <Route path="/" element={<Main />} />
-                    <Route path="/search" element={<Search />} />
+                    <Route path="/event" element={<Event />} />
                 </Routes>
             </BrowserRouter>
         </div>

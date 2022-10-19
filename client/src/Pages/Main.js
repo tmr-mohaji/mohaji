@@ -1,14 +1,10 @@
-import Component from '../components/Component';
-import Map from '../components/Map';
 import ImageMap from '../components/ImageMap';
 import Button from '../components/Button';
 
 const Main = () => {
 
     return (
-        <div>
-            <Component />
-            <Map />
+        <div style={{marginTop: "100px"}}>
             {/* <ImageMap />*/}
             <Button />
         </div>
