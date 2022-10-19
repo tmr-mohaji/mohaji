@@ -1,5 +1,5 @@
 import data from '../db/test.json';
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, createRef } from "react";
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './Map.scss';
@@ -12,10 +12,23 @@ function MapComponent(props) {
     const [myLocation, setMyLocation] = useState({latitude: 37.3724620, longitude: 127.1051714});
     const [zoom, setZoom] = useState(11);
     const container = useRef();
+    const addressInput = createRef();
     const location = useLocation();
 
-    const title = location.state.title;
-    console.log(title);
+
+
+    // 🤔 Event.js에서 button 누르면 누른 데이터 address 가져오게 함. 
+    const [ event , setEvent ] = useState('');
+    console.log(event);
+    const EventAddress = location.state.address;
+    // console.log(EventAddress); //이벤트 목록에서 주소가 들어옴. 
+    // 참고로 이 데이터는 inptu창에서 readonly하도록 보내줌!
+    // 들어온 주소를 setEvent에 담아줌... 요 아래 부분이 맞는지 일단 의문.
+    useEffect(() => {
+        setEvent(EventAddress);
+    },[EventAddress]);
+
+
 
     const initMap = () => {
 
@@ -82,11 +95,24 @@ function MapComponent(props) {
         })
         .then((req) => { return req.data;})
         .then((addressData) => {
-            // console.log("ad", addressData); // 1. db이벤트 데이터 배열로 가져옴.
-            const findTitles = addressData.title;
-            console.log(findTitles);
+
             // 1. 주소 >> 좌표 전환
-            addressData.map(function(aData) {                   
+
+            // 🤔 
+            //1)여기 전체 데이터에서 Event.js에서 버튼 클릭해서 받은 주소와 비교 해서 데이터가 일치할 경우 그 데이터만 담아서 .then에 보내줌. 
+
+            //2) 1)이 아닐경우 전체 데이터를 .then에 보내줌.
+            if (addressInput.current.value != '') {
+                const result = addressData.filter (data => { return data.address === event });
+                return result;
+            } else {
+                return addressData;
+            }
+        })
+        .then((data) => {
+
+            // addressData.map(function(aData) {                                       
+                    data.map(function(aData) {                   
 
                     naver.maps.Service.geocode({
                         query: aData.address
@@ -97,12 +123,9 @@ function MapComponent(props) {
                         
                         var result = response.v2;
                         var item = result.addresses;
-                        // console.log('result: ', result);
-                        // console.log('item: ', item);
+
                         var data_lat = item[0].y;
                         var data_lng = item[0].x;
-                        // console.log(data_lat);
-                        // console.log(data_lng);
                     
                     // 2. 각 이벤트별 마커 표시
                         const event_marker = new naver.maps.Marker({
@@ -140,31 +163,22 @@ function MapComponent(props) {
                         })
 
                 })
-
-            const result = findTitles.filter(findTitle => { return findTitle == title });
-            console.log(result);
+            
             })
+
     }
 
-    //// 오류 발생 /////
-    // 1. [] 빈배열로 설정할 경우 현재위치가 오락가락함. (나타나기도 하고, 정상적으로 표시되기도 하고, 아예 다른 위치를 나타내기도 함.)
-    // 2. [myLocation, container] 로 설정할 경우 1) 현재 위치는 나타나지만 이벤트 주소 마커가 불안정함. 2)지도 줌인 줌아웃 안됨. 3) TypeError : Cannot read properties of undefined (reading 'length') 라는 오류가 무한반복됨. 
     useEffect(() => {
         initMap();
-    }, [props.city]); // [myLocation, container] 를 해줄경우 지도 줌인 줌아웃이 전혀 안됨.
-
-    // useEffect(() => {
-    //     // selectMap();
-    // },[selectEventAddress]);
+    }, [props.city],[EventAddress]); 
+    
 
 
     return (<>
         <div ref={container} style={{width: '500px', height: '500px'}}></div>
-        <input value={props.city} readOnly />
-        <div className='search'>
-            <input type='text' placeholder='주소입력창'></input>
-            <input type='button' value='주소검색' />
-        </div>
+        <input ref={addressInput} value={EventAddress || ''} readOnly />
+        <button type='button' onClick={() => { setEvent(''); addressInput.current.value = "";}}>전체</button>
+        <br />
         <button>지도 이동하기</button>
     </>);
 }

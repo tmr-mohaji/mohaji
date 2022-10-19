@@ -69,7 +69,7 @@ const Event = () => {
                             <p>{data.people}</p>
                             <p>{data.price}</p>
                             <img src={"./img/" + data.filename} style={{width: "200px"}}/>
-                            <button type='button' onClick={() => { navigate('/event', { state: { title: data.title } }) }}>지도로가기</button>
+                            <button type='button' onClick={() => { navigate('/event', { state: { address: data.address} }) }}>지도로가기</button>
                             <hr />
                         </div>
                     )
