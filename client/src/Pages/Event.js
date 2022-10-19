@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
@@ -13,11 +13,13 @@ const Event = () => {
     const [city, setCity] = useState(state);
     const [data, setData] = useState([]);
 
+    const select_box = useRef();
+
     const getData = async () => {
         const response = await axios.get(EVENT_PAGE, {
             params: {city: city}
         })
-        console.log(response.data);
+        // console.log(response.data);
         setData(response.data);
     }
 
@@ -27,6 +29,13 @@ const Event = () => {
 
     useEffect(() => {
         getData();
+        const select = select_box.current;
+        const len = select.options.length;
+        for (let i=0; i<len; i++) {
+            if (select.options[i].value == city) {
+                select.options[i].selected = true;
+            }
+        }
     }, [city])
 
     return (
@@ -35,7 +44,7 @@ const Event = () => {
                 <Map />
             </div>
             <div>
-                <select onChange={onChange}>
+                <select onChange={onChange} ref={select_box}>
                     <option value="전체">전체</option>
                     <option value="강남구">강남구</option>
                     <option value="종로구">종로구</option>
