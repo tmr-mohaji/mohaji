@@ -9,8 +9,10 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const eventRouter = require("./routes/event");
+const userRouter = require("./routes/user");
 
 app.use("/event", eventRouter);
+app.use("/user", userRouter);
 
 app.listen(port, () => {
     console.log("Server Port : ", port);
