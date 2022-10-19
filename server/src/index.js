@@ -10,9 +10,11 @@ app.use(cors());
 
 const eventRouter = require("./routes/event");
 const userRouter = require("./routes/user");
+const emailRouter = require("./routes/email");
 
 app.use("/event", eventRouter);
 app.use("/user", userRouter);
+app.use("/email", emailRouter);
 
 app.listen(port, () => {
     console.log("Server Port : ", port);
