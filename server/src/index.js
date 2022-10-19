@@ -10,7 +10,7 @@ app.use(cors());
 
 const eventRouter = require("./routes/event");
 
-app.use("/search", eventRouter);
+app.use("/event", eventRouter);
 
 app.listen(port, () => {
     console.log("Server Port : ", port);
