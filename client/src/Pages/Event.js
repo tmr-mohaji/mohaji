@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Map from '../components/Map';
@@ -7,11 +7,13 @@ import Map from '../components/Map';
 const EVENT_PAGE = "http://localhost:8000/event";
 
 const Event = () => {
-
+    
+    const navigate = useNavigate();
     const { state } = useLocation();
 
     const [city, setCity] = useState(state);
     const [data, setData] = useState([]);
+    const [ event, setEvent ] = useState();
 
     const select_box = useRef();
 
@@ -21,11 +23,13 @@ const Event = () => {
         })
         // console.log(response.data);
         setData(response.data);
+
     }
 
     const onChange = (e) => {
         setCity(e.target.value);
     }
+    
 
     useEffect(() => {
         getData();
@@ -41,7 +45,7 @@ const Event = () => {
     return (
         <div style={{ width: "90%", margin: "100px auto 0 auto", display: "flex", gap: "50px"}}>
             <div>
-                <Map />
+                <Map city={city} />
             </div>
             <div>
                 <select onChange={onChange} ref={select_box}>
@@ -65,6 +69,7 @@ const Event = () => {
                             <p>{data.people}</p>
                             <p>{data.price}</p>
                             <img src={"./img/" + data.filename} style={{width: "200px"}}/>
+                            <button type='button' onClick={() => { navigate('/event', { state: { title: data.title } }) }}>지도로가기</button>
                             <hr />
                         </div>
                     )
