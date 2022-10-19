@@ -1,8 +1,8 @@
 const nodemailer = require('nodemailer');
 
 exports.sendEmail = async (req, res) => {
-    const user_email = req.body.email;
-    console.log("user_email", user_email);
+
+    const number = Math.floor(Math.random() * 99999);
 
     let transporter = nodemailer.createTransport({
         service: 'gmail', 
@@ -11,15 +11,15 @@ exports.sendEmail = async (req, res) => {
         secure: false, 
         requireTLS: true, 
         auth: {
-            user: '', 
-            pass: ''
+            user: process.env.google_email, 
+            pass: process.env.google_pw
         }
     });
 
     let info = await transporter.sendMail({   
-        from: '',
-        to: '',
-        subject: '안녕하세요',
-        text: 'ㅁㄴㅇㄹ'
+        from: process.env.google_email,
+        to: process.env.naver_email,
+        subject: '[내일 뭐하지?] 이메일 인증번호',
+        text: "인증번호 " + String(number)
       });
 }
