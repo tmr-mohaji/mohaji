@@ -1,19 +1,27 @@
 import data from '../db/test.json';
 import React, { useEffect, useState, useRef } from "react";
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import './Map.scss';
 
 const { naver } = window;
-const SEARCH_PAGE = "http://localhost:8000/search";
+const EVENT_PAGE = "http://localhost:8000/event";
 
-function MapComponent() {
+function MapComponent(props) {
 
     const [myLocation, setMyLocation] = useState({latitude: 37.3724620, longitude: 127.1051714});
+    const [zoom, setZoom] = useState(11);
     const container = useRef();
+    const location = useLocation();
+
+    const title = location.state.title;
+    console.log(title);
 
     const initMap = () => {
 
         const mapOption = {
-            zoom: 10,
+            center: myLocation,
+            zoom: zoom,
             minZoom: 1,
             disableKineticPan: false,
             mapTypeControl : true,
@@ -69,13 +77,17 @@ function MapComponent() {
 
 //-------------------------- DB event 주소 -> 좌표 전환 및 마커표시------------------------------------//
 
-        axios.get(SEARCH_PAGE)
+        axios.get(EVENT_PAGE, {
+            params: {city: props.city}
+        })
         .then((req) => { return req.data;})
         .then((addressData) => {
-            // console.log(addressData); // 1. db이벤트 데이터 배열로 가져옴.
-
+            // console.log("ad", addressData); // 1. db이벤트 데이터 배열로 가져옴.
+            const findTitles = addressData.title;
+            console.log(findTitles);
             // 1. 주소 >> 좌표 전환
-            addressData.map(function(aData) {
+            addressData.map(function(aData) {                   
+
                     naver.maps.Service.geocode({
                         query: aData.address
                     }, function(status,response) {
@@ -105,12 +117,19 @@ function MapComponent() {
                         });
 
                     // 3. 각 마커별 정보창 표시
-                        const infoText = [ `<div class='iw_inner'><div style='font-weight:bold;'>${aData.title}</div></div>`].join('');
-                        // // console.log(infoText);
+
+                        const infoText = [ `<div class='iw_inner_container' style="padding:20px;"><div style='font-weight:bold;'>${aData.title}</div><div>${aData.type}</div></div>`].join('');
+
                         const infowindow = new naver.maps.InfoWindow({
-                            content: infoText
+                            content: infoText,
+                            borderWidth:0,
+                            maxWidth:140,
+                            
                         });
+                        
                         naver.maps.Event.addListener(event_marker, 'click', function(e) {
+                            map.panTo(e.coord);
+                            map.setZoom(13);
                             if (infowindow.getMap()) {
                                 infowindow.close();
                             } else {
@@ -118,9 +137,13 @@ function MapComponent() {
                             }
                         });
                         infowindow.open(map,event_marker);
-                    })
+                        })
+
+                })
+
+            const result = findTitles.filter(findTitle => { return findTitle == title });
+            console.log(result);
             })
-        })
     }
 
     //// 오류 발생 /////
@@ -128,13 +151,16 @@ function MapComponent() {
     // 2. [myLocation, container] 로 설정할 경우 1) 현재 위치는 나타나지만 이벤트 주소 마커가 불안정함. 2)지도 줌인 줌아웃 안됨. 3) TypeError : Cannot read properties of undefined (reading 'length') 라는 오류가 무한반복됨. 
     useEffect(() => {
         initMap();
-    }, []); // [myLocation, container] 를 해줄경우 지도 줌인 줌아웃이 전혀 안됨.
+    }, [props.city]); // [myLocation, container] 를 해줄경우 지도 줌인 줌아웃이 전혀 안됨.
 
-
+    // useEffect(() => {
+    //     // selectMap();
+    // },[selectEventAddress]);
 
 
     return (<>
         <div ref={container} style={{width: '500px', height: '500px'}}></div>
+        <input value={props.city} readOnly />
         <div className='search'>
             <input type='text' placeholder='주소입력창'></input>
             <input type='button' value='주소검색' />
