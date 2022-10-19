@@ -1,22 +1,18 @@
 import { useRef } from 'react';
-import axios from 'axios';
-
-const SEARCH_PAGE = "http://localhost:8000/search";
+import { useNavigate } from 'react-router-dom';
 
 const Button = () => {
 
+    const navigate = useNavigate();
     const city = useRef();
     
     const sendCity = async () => {
-        const name = city.current.innerText;
-        await axios.get(SEARCH_PAGE, {
-            params: {city: name}
-        });
-        window.location = "/search?city=" + name;
+        const city_name = city.current.innerText;
+        navigate('/search?city=' + city_name, {state: city_name});
     }
 
     return(
-        <button onClick={sendCity} ref={city}>강남구</button>
+        <button onClick={sendCity} ref={city}>종로구</button>
     )
 }
 

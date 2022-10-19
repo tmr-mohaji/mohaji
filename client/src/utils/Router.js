@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from '../Components/Header/Header';
+import Header from '../components/Header/Header';
 
-import Main from '../Pages/Main';
-import Search from '../Pages/Search';
+import Main from '../pages/Main';
+import Search from '../pages/Search';
 
 const Router = () => {
     return (
