@@ -2,6 +2,7 @@ CREATE DATABASE mohaji;
 use mohaji;
 
 drop table event;
+drop table user;
 
 CREATE TABLE event (
 	id int not null primary key auto_increment,
@@ -19,6 +20,11 @@ CREATE TABLE event (
     price varchar(255) not null default "무료"
 );
 
-delete from event where id < 11;
+CREATE TABLE user (
+	id varchar(255) not null primary key,
+    password varchar(255),
+    nickname varchar(255),
+    email varchar(255)
+);
 
 select * from event;
