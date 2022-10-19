@@ -1,9 +1,11 @@
 const models = require("../model");
 
 exports.getEvent = async (req, res) => {
-    console.log(req.query);
-    city = req.query;
-    let result = await models.Event.findAll();
-    // console.log(result);
-    res.send(result);
+    const { city } = req.query;
+    console.log("city", city);
+
+    let query = `select * from event where address like '%${city}%'`;
+    let result = await models.Event.sequelize.query(query);
+    console.log(result[0]);
+    res.send(result[0]);
 }
