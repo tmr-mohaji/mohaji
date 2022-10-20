@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -24,6 +31,10 @@ h1, h2, h3, h4, h5, h6{
 
 }
 
+h1{
+	font-family: 'GmarketSansMedium';
+}
+
 ul,ol,li{
 	list-style:none;
 }
@@ -36,6 +47,11 @@ table{
 	width:100%;
 	border-spacing:0;
 	border-collapse:collapse;
+}
+
+img{
+    max-width: 100%;
+    height:auto;
 }
 
 img,fieldset{

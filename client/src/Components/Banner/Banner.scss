@@ -103,3 +103,142 @@
     background: url(./img/s1_bg00.jpg) no-repeat center/cover !important;
     overflow: hidden;
 }
+
+.bannerBox .bgwork .b_01 {
+    background: url(./img/s1_bg01.png);
+    z-index: 2;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.bannerBox .bgwork .b_02 {
+    background: url(./img/s1_bg02.png);
+    z-index: 3;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.bannerBox .bgwork .b_03 {
+    background: url(./img/s1_bg03.png);
+    z-index: 4;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+
+/*=========================================================
+    Text 박스 정의
+=========================================================*/
+.bannerBox .tbx {
+    text-align: center;
+    color: #fff;
+    position: relative;
+    z-index: 8;
+    width: 100%;
+    margin-top: 220px;
+}
+
+.bannerBox .tbx .im1 {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.bannerBox .tbx .im1 h1 {
+    font-size: 120px;
+    font-family: 'GmarketSansMedium';
+}
+
+.bannerBox .tbx .im2 p {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+.search_btn{
+    width:100%;
+    max-width: 240px;
+    height:54px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 14px;
+    padding: 8px;
+    box-shadow: 0 0 0 1px inset rgba(236, 232, 225, 0.3);
+    transition: all 0.15s ease-in-out;    
+    margin:0 auto;
+}
+
+.search_btn:hover{
+    background: #364b4d;
+    box-shadow: none;
+    transition: all 0.3s ease-in-out;
+}
+
+
+/*=========================================================
+    wave
+=========================================================*/
+.waveBox {
+    --wave: 6.1979vw;
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 360px;
+    position: relative;
+    z-index: 9;
+}
+
+.waveBox .w {
+    overflow: hidden;
+    width: 100%;
+    height: var(--wave);
+    position: absolute;
+    top: 0;
+    transform: translateY(-99%);
+}
+
+.waveBox .w .wave {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background-image: url(./img/w_wave.png);
+    background-repeat: repeat no-repeat;
+    background-position: 0 bottom;
+    width: 200%;
+    transform-origin: center bottom;
+    background-size: 50% calc(var(--wave) + 0.01vw);
+    animation: wave 20s linear infinite;
+}
+
+/* keyframe */
+@keyframes wave {
+    0% {
+        transform: translate3D(0, 0, 0) scaleY(1);
+    }
+
+    50% {
+        transform: translate3D(-25%, 0, 0) scaleY(0.8);
+    }
+
+    100% {
+        transform: translate3D(-50%, 0, 0) scaleY(1);
+    }
+}
