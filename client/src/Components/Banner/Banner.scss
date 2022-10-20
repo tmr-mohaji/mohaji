@@ -1,2 +1,105 @@
 @import '../Commons/Commons.scss';
 @import '~include-media/dist/include-media';
+
+
+
+
+.bannerBox {
+    display: flex;
+    justify-content: center;
+    height: 1060px;
+    margin-top: 92px;
+    // padding-top: 190px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+
+/*=========================================================
+    구경하는 사람들 일러스트 정의
+=========================================================*/
+.bannerBox .imgwork {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    pointer-events: none;
+}
+
+
+.bannerBox .imgwork .pp {
+    position: absolute;
+    display: inline-block;
+}
+
+.bannerBox .imgwork .p_01 {
+    left: calc(1479/1920 * 100%);
+    right: calc(100/1920 * 100%);
+    bottom: 0;
+}
+
+
+.bannerBox .imgwork .p_02 {
+    left: calc(123/1920 * 100%);
+    right: calc(1687/1920 * 100%);
+    bottom: 0;
+}
+
+
+/*=========================================================
+    폭죽 애니메이션 정의
+=========================================================*/
+.bannerBox .firework {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 6;
+    pointer-events: none;
+}
+
+.bannerBox .firework .ff {
+    position: absolute;
+    display: inline-block;
+}
+
+.bannerBox .firework .f_01 {
+    left: calc(605/1920 * 100%);
+    right: calc(1205/1920 * 100%);
+    top: calc(70/1060 * 100%);
+}
+
+.bannerBox .firework .f_02 {
+    left: calc(404/1920 * 100%);
+    right: calc(1305/1920 * 100%);
+    top: calc(285/1060 * 100%);
+}
+
+.bannerBox .firework .f_03 {
+    left: calc(1230/1920 * 100%);
+    right: calc(508/1920 * 100%);
+    top: calc(110/1060 * 100%);
+}
+
+.bannerBox .firework .f_04 {
+    left: calc(1360/1920 * 100%);
+    right: calc(440/1920 * 100%);
+    top: calc(320/1060 * 100%);
+}
+
+
+/*=========================================================
+    배경 및 일러스트 관련 정의
+=========================================================*/
+.bannerBox .bgwork {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: url(./img/s1_bg00.jpg) no-repeat center/cover !important;
+    overflow: hidden;
+}
