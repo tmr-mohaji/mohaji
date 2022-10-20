@@ -157,7 +157,7 @@ const Banner = ({timeline, ease}) => {
 
                     <div className='im3' ref={el => text3 = el} style={{ opacity: 1, transform: 'translate(0px, 0px)' }}>
                         <Link className='search_btn' to='/gang'>
-                            <span class="a_text">지역 검색</span>
+                            <span className="a_text">지역 검색</span>
                         </Link>
                     </div>
                 </div>
@@ -166,8 +166,8 @@ const Banner = ({timeline, ease}) => {
 
 
             <div className='waveBox'>
-                <div class="w">
-                    <div class="wave"></div>
+                <div className="w">
+                    <div className="wave"></div>
                 </div>
             </div>
 
