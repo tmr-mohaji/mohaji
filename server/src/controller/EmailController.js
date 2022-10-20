@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 exports.sendEmail = async (req, res) => {
 
-    const number = Math.floor(Math.random() * 99999);
+    const number = Math.floor((Math.random() * (99999 - 11111)) + 11111);
 
     let transporter = nodemailer.createTransport({
         service: 'gmail', 

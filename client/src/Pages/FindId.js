@@ -11,9 +11,12 @@ const FindId = () => {
     const codeInput = useRef();
 
     const sendEmail = async () => {
+
         let isId = await axios.post(BACK_SERVER + "/user/findId", {email: input.current.value});
-        
+
+        // 이메일이 존재하면
         if (isId.data) {
+            // 이메일로 인증코드 보내기
             let result = await axios.post(BACK_SERVER + "/email", {email});
             setCode(result.data);
         } else {
@@ -21,7 +24,9 @@ const FindId = () => {
         }
     }
 
+    // 인증코드가 일치하면
     const findId = async () => {
+
         if (codeInput.current.value == code) {
             let id = await axios.post(BACK_SERVER + "/user/findId", {email: input.current.value});
             console.log(id);
