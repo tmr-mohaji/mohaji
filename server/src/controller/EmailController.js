@@ -18,7 +18,7 @@ exports.sendEmail = async (req, res) => {
 
     let info = await transporter.sendMail({   
         from: process.env.google_email,
-        to: process.env.naver_email,
+        to: req.body.email,
         subject: '[내일 뭐하지?] 이메일 인증번호',
         text: "인증번호 " + String(number)
     });
