@@ -56,7 +56,7 @@ exports.findId = async (req, res) => {
     if (result == null) {
         res.send(false);
     } else {
-        res.send(true);
+        res.send(result.id);
     }
 }
 
