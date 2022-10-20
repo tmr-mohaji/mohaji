@@ -17,20 +17,11 @@ function MapComponent(props) {
 
     // 🤔 Event.js에서 button 누르면 누른 데이터 address 가져오게 함. 
     const [ event , setEvent ] = useState('');
-    // console.log(event);
-    // const EventAddress = location.state.address;
-    // console.log(EventAddress); //이벤트 목록에서 주소가 들어옴. 
-    // 참고로 이 데이터는 input창에서 readonly하도록 보내줌!
-    // 들어온 주소를 setEvent에 담아줌... 요 아래 부분이 맞는지 일단 의문.
     
-    // 미진 언니! 맨 아래에 useEffect()함수가 있었어!
-    // useEffect(() => {
-    //     setEvent(props.address);
-    // },[props.address]);
-
     const reset = () => {
         setEvent('');
         addressInput.current.value = "";
+        window.location.replace('/event?city=전체');
     }
 
 
@@ -109,15 +100,15 @@ function MapComponent(props) {
             //1)여기 전체 데이터에서 Event.js에서 버튼 클릭해서 받은 주소와 비교 해서 데이터가 일치할 경우 그 데이터만 담아서 .then에 보내줌. 
 
             //2) 1)이 아닐경우 전체 데이터를 .then에 보내줌.
-            if (props.address != "") {
-                const result = addressData.filter((data) => { return data.address === props.address });
-                setEvent(props.address);
-                console.log(result);
-                return result;
-            } else {
-                console.log('여기 : ', addressData);
-                return addressData;
-            }
+                if (props.address != "") {
+                    const result = addressData.filter((data) => { return data.address === props.address });
+                    setEvent(props.address);
+                    console.log(result);
+                    return result;
+                } else {
+                    console.log('여기 : ', addressData);
+                    return addressData;
+                }
             
 
         })
@@ -177,14 +168,12 @@ function MapComponent(props) {
 
                 })
             
-            })
-
+            })  
     }
 
     useEffect(() => {
         initMap();
     }, [props.city, props.address]); 
-    
 
 
     return (<>
