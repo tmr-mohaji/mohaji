@@ -12,7 +12,7 @@ function MapComponent(props) {
     const [myLocation, setMyLocation] = useState({latitude: 37.3724620, longitude: 127.1051714});
     const [zoom, setZoom] = useState(11);
     const container = useRef();
-    const addressInput = useRef();
+    const addressInput = createRef();
     // const location = useLocation();
 
     // 🤔 Event.js에서 button 누르면 누른 데이터 address 가져오게 함. 
@@ -27,6 +27,11 @@ function MapComponent(props) {
     // useEffect(() => {
     //     setEvent(props.address);
     // },[props.address]);
+
+    const reset = () => {
+        setEvent('');
+        addressInput.current.value = "";
+    }
 
 
     const initMap = async () => {
@@ -89,19 +94,6 @@ function MapComponent(props) {
 
 //-------------------------- DB event 주소 -> 좌표 전환 및 마커표시------------------------------------//
 
-        // let response = await axios.get(EVENT_PAGE, {
-        //     params: {city: props.city}
-        // });
-        // let addressData = response.data;
-
-        // console.log("addressData", addressData);
-        // console.log("props.address", props.address);
-
-        // if (props.address != '') {
-        //     const result = addressData.filter(data => { return data.address === props.address });
-        // } else {
-        //     return addressData;
-        // }
         axios.get(EVENT_PAGE, {
             params: {city: props.city}
         })
@@ -109,7 +101,7 @@ function MapComponent(props) {
         .then((addressData) => {
 
         console.log(addressData);
-        console.log("props", props.address);
+        console.log("props :", props.address);
 
             // 1. 주소 >> 좌표 전환
 
@@ -117,20 +109,19 @@ function MapComponent(props) {
             //1)여기 전체 데이터에서 Event.js에서 버튼 클릭해서 받은 주소와 비교 해서 데이터가 일치할 경우 그 데이터만 담아서 .then에 보내줌. 
 
             //2) 1)이 아닐경우 전체 데이터를 .then에 보내줌.
-            if (props.address != null) {
-                const result = addressData.filter(data => { return data.address === props.address });
+            if (props.address != "") {
+                const result = addressData.filter((data) => { return data.address === props.address });
+                setEvent(props.address);
                 console.log(result);
+                return result;
             } else {
+                console.log('여기 : ', addressData);
                 return addressData;
             }
-            // if (addressInput.current.value != '') {
-            //     const result = addressData.filter (data => { return data.address === event });
-            //     return result;
-            // } else {
-            //     return addressData;
-            // }
-        // })
-        // .then((data) => {
+            
+
+        })
+        .then((data) => {
 
             // addressData.map(function(aData) {      
                     // console.log(data);                                 
@@ -199,7 +190,7 @@ function MapComponent(props) {
     return (<>
         <div ref={container} style={{width: '500px', height: '500px'}}></div>
         <input ref={addressInput} value={props.address || ''} readOnly />
-        <button type='button' onClick={() => { setEvent(''); addressInput.current.value = "";}}>전체</button>
+        <button type='button' onClick={reset}>초기화</button>
         <br />
         <button>지도 이동하기</button>
     </>);
