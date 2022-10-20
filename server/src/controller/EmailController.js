@@ -21,5 +21,7 @@ exports.sendEmail = async (req, res) => {
         to: process.env.naver_email,
         subject: '[내일 뭐하지?] 이메일 인증번호',
         text: "인증번호 " + String(number)
-      });
+    });
+
+    res.send(String(number));
 }
