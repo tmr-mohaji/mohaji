@@ -5,7 +5,6 @@ const BACK_SERVER = "http://localhost:8000";
 
 const FindId = () => {
 
-    const [email, setEmail] = useState('');
     const [code, setCode] = useState('');
     const input = useRef();
     const codeInput = useRef();
@@ -17,7 +16,7 @@ const FindId = () => {
         // 이메일이 존재하면
         if (isId.data) {
             // 이메일로 인증코드 보내기
-            let result = await axios.post(BACK_SERVER + "/email", {email});
+            let result = await axios.post(BACK_SERVER + "/email", {email: input.current.value});
             setCode(result.data);
         } else {
             alert("입력하신 정보로 등록된 아이디를 찾을 수 없습니다.");
