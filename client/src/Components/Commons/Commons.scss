@@ -5,13 +5,26 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'WandohopeR';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/WandohopeR.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'EliceDigitalBaeum-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_elice@1.0/EliceDigitalBaeum-Bd.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
 	box-sizing: border-box;
 }
 
 body{
 	position:relative;
-	// background:#000;
 }
 
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -28,12 +41,13 @@ header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, vi
 
 
 h1, h2, h3, h4, h5, h6{
-
+	font-family: 'WandohopeR';
 }
 
-h1{
-	font-family: 'GmarketSansMedium';
+p, span, input, ul, li, table, dl, dt, dd{
+	font-family: 'EliceDigitalBaeum-Bd';
 }
+
 
 ul,ol,li{
 	list-style:none;
