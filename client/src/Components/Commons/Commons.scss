@@ -1,9 +1,33 @@
 @font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-family: 'WandohopeR';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/WandohopeR.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'EliceDigitalBaeum';
+    font-weight: 400;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumRegular.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumRegular.eot?#iefix') format('embedded-opentype'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumRegular.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumRegular.woff') format('woff'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumRegular.ttf') format("truetype");
+    font-display: swap;
+} 
+
+@font-face {
+    font-family: 'EliceDigitalBaeum';
+    font-weight: 700;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumBold.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumBold.eot?#iefix') format('embedded-opentype'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumBold.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumBold.woff') format('woff'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumBold.ttf') format("truetype");
+    font-display: swap;
+} 
 
 * {
 	box-sizing: border-box;
@@ -11,7 +35,6 @@
 
 body{
 	position:relative;
-	// background:#000;
 }
 
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -28,12 +51,13 @@ header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, vi
 
 
 h1, h2, h3, h4, h5, h6{
-
+	font-family: 'WandohopeR';
 }
 
-h1{
-	font-family: 'GmarketSansMedium';
+p, span, input, select, ul, li, table, dl, dt, dd{
+	font-family: 'EliceDigitalBaeum';
 }
+
 
 ul,ol,li{
 	list-style:none;
@@ -69,8 +93,9 @@ label,img,input,select,textarea,button{
 
 
 
-// 공통 색상 정의
-// $primary_color :;
-// $sub_color1 :;
+//공통 색상 정의
+$primary_color :#A24F63;
+$sub_color1 :#6B3767;
+
 // $sub_color2 :;
 // $sub_color3 :;
