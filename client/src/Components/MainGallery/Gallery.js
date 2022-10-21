@@ -45,7 +45,13 @@ const Gallery = () => {
                         return (
                             <div className='listGallery' key={data.id}>
                                 <img className='g_img' src={"./img/" + data.filename} />
-                                <p className='g_tit'>{data.title}</p>
+
+                                <div className='g_hover'>
+                                    <p className='g_tit_h1'>{data.title}</p>
+                                    <p className='g_tit_h2'>{data.start_date} - {data.end_date}</p>
+                                    <p className='g_tit_h3'>{data.type}</p>
+                                    <p className='g_tit_h3'>{data.place}</p>
+                                </div>
                             </div>
                         )
                     })}
