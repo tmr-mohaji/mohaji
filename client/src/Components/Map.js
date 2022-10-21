@@ -24,6 +24,10 @@ function MapComponent(props) {
         window.location.replace('/event?city=전체');
     }
 
+    const showMore = (id) => {
+        console.log(id);
+    }
+
 
     const initMap = async () => {
 
@@ -145,7 +149,7 @@ function MapComponent(props) {
 
                     // 3. 각 마커별 정보창 표시
 
-                        const infoText = [ `<div class='iw_inner_container' style="padding:20px;"><div style='font-weight:bold;'>${aData.title}</div><div>${aData.type}</div></div>`].join('');
+                        const infoText = [ `<div class='iw_inner_container' style="padding:20px;"><div style='font-weight:bold;'>${aData.title}</div><div>${aData.type}</div><button onClick={${() => showMore(aData.id)}}>자세히 보기</button></div>`].join('');
 
                         const infowindow = new naver.maps.InfoWindow({
                             content: infoText,

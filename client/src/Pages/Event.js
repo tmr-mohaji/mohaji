@@ -41,6 +41,10 @@ const Event = () => {
         setAddress(response.data.address);
     }
 
+    const dateFiltering = () => {
+        
+    }
+
     useEffect(() => {
         getData();
         const select = select_box.current;
@@ -64,6 +68,7 @@ const Event = () => {
                     <option value="종로구">종로구</option>
                     <option value="영등포구">영등포구</option>
                 </select>
+                <input type="date" onChange={dateFiltering}></input>
                 {data.map((data) => {
                     return (
                         <div key={data.id}>
