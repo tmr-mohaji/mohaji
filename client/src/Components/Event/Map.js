@@ -1,4 +1,3 @@
-import data from '../../db/test.json';
 import React, { useEffect, useState, useRef, createRef } from "react";
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
@@ -211,13 +210,14 @@ function MapComponent(props) {
     }, [props.city, props.address]); 
 
 
-    return (<>
-        <div ref={container} style={{width: '500px', height: '500px'}}></div>
+    return (
+    <div style={{display:'flex',flexDirection:'column', alignItems:'center'}}>
+        <div ref={container} style={{width: '100%', height: '700px'}}></div><br />
+        <div>
         <input ref={addressInput} value={props.address || ''} readOnly />
         <button type='button' onClick={reset}>초기화</button>
-        <br />
-        <button>지도 이동하기</button>
-    </>);
+        </div>
+    </div>);
 }
 
 export default MapComponent;
