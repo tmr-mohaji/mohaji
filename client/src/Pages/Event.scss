@@ -1,0 +1,148 @@
+@import '../components/Commons/Commons.scss';
+@import '~include-media/dist/include-media';
+
+
+// 이벤트 리스트 전체 구조
+.list_entire_section {
+  
+  // border: 1px solid black;
+  border-radius: 10px;
+  margin:30px 20px;
+  // box-shadow: 5px 5px 5px lightgray;
+//   box-shadow: 14px 16px 16px -1px rgba(186,186,186,0.91);
+// -webkit-box-shadow: 14px 16px 16px -1px rgba(186,186,186,0.91);
+// -moz-box-shadow: 14px 16px 16px -1px rgba(186,186,186,0.91);
+
+
+box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
+-webkit-box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
+-moz-box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
+
+
+  .list_entire_layout {
+
+    display: flex;
+    width: 100%;
+    height: 90%;
+    
+    .list_desc_layout {
+      position: relative;
+      margin: 10px;
+      width: 95%;
+    }
+
+  }
+}
+
+// 이벤트 제목 및 설명 구조
+.list_name_layout {
+
+  .list_name_title {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 700;
+    
+    .title {
+      display: flex;
+  }
+  }
+  .list_name_detail {
+    font-size: 13px;
+    color:rgb(179, 178, 178);
+    padding: 10px;
+    padding-right: 50px;
+  }
+}
+
+// 이벤트 발생 장소
+.list_place {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+//이벤트 발생 기간 및 시간
+.list_period_layout {
+  font-size: 14px;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+
+      .list_period_start {
+        padding-right: 5px;
+      }
+      .list_period_end {
+        padding-left: 5px;
+      }
+}
+.list_time_layout {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+// 이벤트 발생 비용
+.list_price_free {
+  position: absolute;
+  font-size: 14px;
+  background-color: rgb(255, 255, 0);
+  padding: 5px;
+  font-weight: 700;
+  right: 0px;
+
+}
+
+
+//이벤트 이미지 구조
+.list_img_layout {
+  position: relative;
+  width: 50%;
+  height: 300px;
+  overflow-y: hidden;
+  border-radius: 0 10px 10px 0;
+
+
+  .list_img_type {
+    position: absolute;
+    span{
+      background-color: rgb(162, 79, 99);
+      padding: 5px;
+      font-weight: 700;
+      color:white;
+  }
+}
+
+  .img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
+// 이벤트 버튼 모음
+.Btns {
+  position: absolute;
+  width: 100%;
+  bottom:0;
+}
+
+.goView {
+  width: 70%;
+  border:0;
+  background-color: #6B3767;
+  color:white;
+  height: 30px;
+  border-radius: 10px 0 0 10px;
+
+}
+.likes {
+  width: 30%;
+  height: 30px;
+  background-color: rgba(255, 0, 0, 0.5);
+  border:0;
+  border-radius: 0 10px 10px 0;
+} 
+
+// hover했을 때 지도로가기, 상세보기 넣을지 고민중쭝중중주웆~~!~
