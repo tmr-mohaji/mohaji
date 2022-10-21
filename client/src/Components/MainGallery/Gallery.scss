@@ -16,6 +16,7 @@
     margin:0 auto;
     display:flex;
     justify-content:space-around;
+    padding-bottom:70px;
 }
 
 
@@ -34,5 +35,16 @@
     리스트 세부 정의
 =========================================================*/
 .listGallery{
-    width:20%;
+    width:16.66666666666667%;
+    margin-bottom:2.6%;
+    text-align: center;
+}
+
+.g_img{
+    width:250px;
+    height:360px;
+}
+
+.g_tit{
+    display:none;
 }

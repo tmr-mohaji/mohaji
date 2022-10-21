@@ -42,8 +42,8 @@ const Gallery = () => {
                     {data.map((data) => {
                         return (
                             <div className='listGallery' key={data.id}>
-                                <p>{data.title}</p>
-                                <img src={"./img/" + data.filename} style={{ width: "200px" }} />
+                                <img className='g_img' src={"./img/" + data.filename} />
+                                <p className='g_tit'>{data.title}</p>
                             </div>
                         )
                     })}
