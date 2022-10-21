@@ -1,11 +1,4 @@
 @font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
     font-family: 'WandohopeR';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/WandohopeR.woff') format('woff');
     font-weight: normal;
@@ -13,11 +6,28 @@
 }
 
 @font-face {
-    font-family: 'EliceDigitalBaeum-Bd';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_elice@1.0/EliceDigitalBaeum-Bd.woff2') format('woff2');
-    font-weight: normal;
+    font-family: 'EliceDigitalBaeum';
+    font-weight: 400;
     font-style: normal;
-}
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumRegular.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumRegular.eot?#iefix') format('embedded-opentype'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumRegular.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumRegular.woff') format('woff'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumRegular.ttf') format("truetype");
+    font-display: swap;
+} 
+
+@font-face {
+    font-family: 'EliceDigitalBaeum';
+    font-weight: 700;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumBold.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumBold.eot?#iefix') format('embedded-opentype'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumBold.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumBold.woff') format('woff'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumBold.ttf') format("truetype");
+    font-display: swap;
+} 
 
 * {
 	box-sizing: border-box;
@@ -44,8 +54,8 @@ h1, h2, h3, h4, h5, h6{
 	font-family: 'WandohopeR';
 }
 
-p, span, input, ul, li, table, dl, dt, dd{
-	font-family: 'EliceDigitalBaeum-Bd';
+p, span, input, select, ul, li, table, dl, dt, dd{
+	font-family: 'EliceDigitalBaeum';
 }
 
 
