@@ -1,5 +1,5 @@
-import Button from '../components/Button';
 import Banner from '../components/Banner/Banner';
+import Gallery from '../components/Gallery'
 
 import {gsap, Power3} from 'gsap';
 
@@ -10,7 +10,7 @@ const Main = () => {
     return (
         <div>
             <Banner timeline={tl} ease={ease} />
-            <Button />
+            <Gallery />
         </div>
     )
 }

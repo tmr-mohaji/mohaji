@@ -1,5 +1,19 @@
 const models = require("../model");
 
+// 메인 페이지 갤러리
+exports.getMain = async (req, res) => {
+    const { type } = req.query;
+
+    if (type == "전체") {
+        let result = await models.Event.findAll();
+        res.send(result);
+    } else {
+        let query = `select * from event where type like '%${type}%'`;
+        let result = await models.Event.sequelize.query(query);
+        res.send(result[0]);
+    }
+}
+
 exports.getEvent = async (req, res) => {
     const { city } = req.query;
 
