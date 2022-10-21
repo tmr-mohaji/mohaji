@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Banner.scss';
 
 // Wave 근처에 있는 사람 일러스트 정의
@@ -30,6 +30,12 @@ const Banner = ({timeline, ease}) => {
     let fireWork2 = useRef(null);
     let fireWork3 = useRef(null);
     let fireWork4 = useRef(null);
+
+    const navigate = useNavigate();
+
+    const goToEvent = () => {
+        navigate('/event?city=전체', {state: '전체'});
+    }
 
     // 배경 애니메이션 효과
     useEffect(() => {
@@ -156,9 +162,7 @@ const Banner = ({timeline, ease}) => {
 
 
                     <div className='im3' ref={el => text3 = el} style={{ opacity: 1, transform: 'translate(0px, 0px)' }}>
-                        <Link className='search_btn' to='/gang'>
-                            <span className="a_text">지역 검색</span>
-                        </Link>
+                        <span onClick={goToEvent} className="a_text search_btn">지역 검색</span>
                     </div>
                 </div>
 

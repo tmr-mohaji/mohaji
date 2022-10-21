@@ -29,6 +29,29 @@ function MapComponent(props) {
     //     console.log(id);
     // }
 
+    const createDetail = (aData) => {
+        return (
+        <div className='infoText' style='padding:20px; background-color:white; color:black; border-radius:20px; opcity:75%; display:flex; align-items:center;'>
+            <div style='margin-right:30px;'>
+                <div style='font-weight:normal; text-align:center; font-size:11px; margin-top:3px; width:50px; background-color:#FFE6E6; border-radius:4px;'>{aData.type}</div>    
+                <div style='font-weight:bold; font-size:15px; cursor:pointer;'>
+                    {aData.title}
+                    <span><img src={require('./arrow.png')} style='width:12px; height:12px; margin-left:5px; margin-bottom:4px;' alt='상세보기' onClick={() => showMore(aData.id)} /></span></div>
+                <div>
+                    <span style='font-size:11px; border-right: 1px solid #dcdcdc;'>⭐⭐⭐</span>
+                    <span style='font-size:11px;' >리뷰 (5)</span>
+                </div>
+                <div style='margin-top:10px;'>
+                <span style='font-size:12px; font-weight:bold;padding:5px; border-radius:3px;background-color:#5AD2FF; color:white;'><img src={require('./detour.png')} style='width:15px; height:15px;' />길찾기</span>
+                </div>
+            </div>
+            <div>
+                <img src='./img/${aData.filename}' style='width:70px; height:100px;' />
+            </div>
+        </div>
+        );
+    }
+
 
     const initMap = async () => {
 
@@ -152,7 +175,8 @@ function MapComponent(props) {
 
                         // const infoText = [ `<div class='iw_inner_container' style="padding:20px;"><div style='font-weight:bold;'>${aData.title}</div><div>${aData.type}</div><button onClick={${() => showMore(aData.id)}}>자세히 보기</button></div>`].join('');
 
-                        const infoText = [
+                        // const infoText = createDetail(aData);
+                        const infoText = 
                             `<div className='infoText' style='padding:20px; background-color:white; color:black; border-radius:20px; opcity:75%; display:flex; align-items:center;'>
                             <div style='margin-right:30px;'>
                                 <div style='font-weight:normal; text-align:center; font-size:11px; margin-top:3px; width:50px; background-color:#FFE6E6; border-radius:4px;'>${aData.type}</div>    
@@ -168,8 +192,8 @@ function MapComponent(props) {
                             <div>
                                 <img src='./img/${aData.filename}' style='width:70px; height:100px;' />
                             </div>
-                            </div>`].join('');
-
+                            </div>`;
+                        // console.log( c)
 
                         const infowindow = new naver.maps.InfoWindow({
                             content: infoText,
