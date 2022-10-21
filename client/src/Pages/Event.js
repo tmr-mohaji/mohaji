@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import Map from '../components/Map';
+import Map from '../components/Event/Map';
 
 const EVENT_PAGE = "http://localhost:8000/event";
 
