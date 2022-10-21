@@ -1,32 +1,115 @@
+@import '../Commons/Commons.scss';
+@import '~include-media/dist/include-media';
+
+
 /*=========================================================
     
 =========================================================*/
-.galleryBox{
-    width:100%;
-    max-width:1800px;
-    margin:0 auto;
+.galleryBox {
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
 }
 
 
 /*=========================================================
     카테고리 버튼 관련 정의
 =========================================================*/
-.buttonBox{
-    width:50%;
-    margin:0 auto;
-    display:flex;
-    justify-content:space-around;
-    padding-bottom:70px;
+.buttonBox {
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+
 }
+
+
+.buttonBox button {
+    position: relative;
+    background:none;
+    font-size:16px;
+    border:0;
+    // width: 33.333%;
+    display: table-cell;
+    text-align: center;
+    padding: 10px 20px;
+    transition: 0.2s ease color;
+    font-family: 'EliceDigitalBaeum';
+    cursor: pointer;
+}
+
+.buttonBox button:before,
+.buttonBox button:after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 0.2s ease transform;
+}
+
+.buttonBox button:before{
+    top: 0;
+    left: 10px;
+    width: 6px;
+    height: 6px;
+}
+
+.buttonBox button:after{
+    top: 5px;
+    left: 18px;
+    width: 4px;
+    height: 4px
+}
+
+.buttonBox button:nth-child(1):before,
+.buttonBox button:nth-child(2):before,
+.buttonBox button:nth-child(3):before,
+.buttonBox button:nth-child(4):before,
+.buttonBox button:nth-child(5):before,
+.buttonBox button:nth-child(6):before{
+    background-color: $primary_color;
+}
+
+.buttonBox button:nth-child(1):after,
+.buttonBox button:nth-child(2):after,
+.buttonBox button:nth-child(3):after,
+.buttonBox button:nth-child(4):after,
+.buttonBox button:nth-child(5):after,
+.buttonBox button:nth-child(6):after{
+    background-color: $sub_color1;
+}
+
+
+.buttonBox button:hover:before, .buttonBox button:hover:after{
+    transform: scale(1);
+}
+
+
+.buttonBox button:hover{
+    color:$primary_color;
+    font-family: 'EliceDigitalBaeum';
+    font-weight: 700;
+}
+
+
+.buttonBox button:focus{
+    color:$primary_color;
+    font-family: 'EliceDigitalBaeum';
+    font-weight: 700;
+}
+
+
 
 
 /*=========================================================
     카테고리에 맞게 리스트 보여주는 부분 정의
 =========================================================*/
-.listBox{
-    width:100%;
-    display:flex;
+.listBox {
+    width: 100%;
+    display: flex;
     flex-wrap: wrap;
+    margin-top:2%;
 }
 
 
@@ -34,17 +117,17 @@
 /*=========================================================
     리스트 세부 정의
 =========================================================*/
-.listGallery{
-    width:16.66666666666667%;
-    margin-bottom:2.6%;
+.listGallery {
+    width: 16.66666666666667%;
+    margin-bottom: 2.6%;
     text-align: center;
 }
 
-.g_img{
-    width:250px;
-    height:360px;
+.g_img {
+    width: 250px;
+    height: 360px;
 }
 
-.g_tit{
-    display:none;
+.g_tit {
+    display: none;
 }

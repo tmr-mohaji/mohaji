@@ -38,6 +38,8 @@ const Gallery = () => {
                     <Button name="전시" onClick={setCategory} />
                 </div>
 
+
+
                 <div className='listBox'>
                     {data.map((data) => {
                         return (
