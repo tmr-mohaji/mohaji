@@ -4,6 +4,10 @@ import Button from '../Button';
 import axios from 'axios';
 import './Gallery.scss';
 
+import h_icon1 from './img/g_tit_01.png';
+import h_icon2 from './img/g_tit_02.png';
+import h_icon3 from './img/g_tit_03.png';
+
 const MAIN_PAGE = "http://localhost:8000/";
 
 const Gallery = () => {
@@ -45,10 +49,15 @@ const Gallery = () => {
                     {data.map((data) => {
                         return (
                             <div className='listGallery' key={data.id}>
-                                <Link to={"/event/" + data.id}>
-                                    <img className='g_img' src={"./img/" + data.filename} />
-                                    <p className='g_tit'>{data.title}</p>
-                                </Link>
+                                <img className='g_img' src={"./img/" + data.filename} />
+
+                                <div className='g_hover'>
+                                    <p className='g_tit_h1'>{data.title}</p>
+                                    <p className='g_tit_h2'><img className='g_tit_img' src={h_icon1} alit='' /> {data.start_date} - {data.end_date}</p>
+                                    <p className='g_tit_h3'><img className='g_tit_img' src={h_icon2} alit='' /> {data.type}</p>
+                                    <p className='g_tit_h3'><img className='g_tit_img' src={h_icon3} alit='' /> {data.place}</p>
+                                    <p className='g_tit_h4'>{data.detail}</p>
+                                </div>
                             </div>
                         )
                     })}
