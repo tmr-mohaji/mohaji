@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Button from './Button';
+import Button from '../Button';
 import axios from 'axios';
 
 const MAIN_PAGE = "http://localhost:8000/";
@@ -26,7 +26,7 @@ const Gallery = () => {
     }, [type])
 
     return(
-        <div>
+        <section>
             <Button name="전체" onClick={setCategory}/>
             <Button name="축제" onClick={setCategory}/>
             <Button name="공연" onClick={setCategory}/>
@@ -42,7 +42,7 @@ const Gallery = () => {
                     </div>
                 )
             })}
-        </div>
+        </section>
     )
 }
 
