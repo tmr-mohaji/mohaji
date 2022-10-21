@@ -1,4 +1,4 @@
-import data from '../db/test.json';
+import data from '../../db/test.json';
 import React, { useEffect, useState, useRef, createRef } from "react";
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
@@ -25,9 +25,9 @@ function MapComponent(props) {
         window.location.replace('/event?city=전체');
     }
 
-    const showMore = (id) => {
-        console.log(id);
-    }
+    // const showMore = (id) => {
+    //     console.log(id);
+    // }
 
 
     const initMap = async () => {
@@ -73,7 +73,7 @@ function MapComponent(props) {
             position: mapOption.center,
             map,
             icon: {
-                content: `<img src=${require('./1.png')} width='30px' height='30px'/>`,
+                content: `<img src=${require('./img/nowlocation.png')} width='30px' height='30px'/>`,
                 size: new naver.maps.Size(50, 52),
                 origin: new naver.maps.Point(0,0),
                 anchor: new naver.maps.Point(25, 26),
@@ -141,7 +141,7 @@ function MapComponent(props) {
                             map: map,
                             position: new naver.maps.LatLng(data_lat,data_lng),
                             icon : {
-                                content: `<img src=${require('./marker.png')} width='30px' height='30px'/>`,
+                                content: `<img src=${require('./img/marker.png')} width='30px' height='30px'/>`,
                                 size: new naver.maps.Size(50, 52),
                                 origin: new naver.maps.Point(0,0),
                                 anchor: new naver.maps.Point(25, 26),
@@ -156,13 +156,13 @@ function MapComponent(props) {
                             `<div className='infoText' style='padding:20px; background-color:white; color:black; border-radius:20px; opcity:75%; display:flex; align-items:center;'>
                             <div style='margin-right:30px;'>
                                 <div style='font-weight:normal; text-align:center; font-size:11px; margin-top:3px; width:50px; background-color:#FFE6E6; border-radius:4px;'>${aData.type}</div>    
-                                <div style='font-weight:bold; font-size:15px; cursor:pointer;'>${aData.title}<span><img src=${require('./arrow.png')} style='width:12px; height:12px; margin-left:5px; margin-bottom:4px;' alt='상세보기'></span></div>
+                                <div style='font-weight:bold; font-size:15px; cursor:pointer;'>${aData.title}<span><img src=${require('./img/arrow.png')} style='width:12px; height:12px; margin-left:5px; margin-bottom:4px;' alt='상세보기'></span></div>
                                 <div>
                                     <span style='font-size:11px; border-right: 1px solid #dcdcdc;'>⭐⭐⭐</span>
                                     <span style='font-size:11px;' >리뷰 (5)</span>
                                 </div>
                                 <div style='margin-top:10px;'>
-                                <span style='font-size:12px; font-weight:bold;padding:5px; border-radius:3px;background-color:#5AD2FF; color:white;'><img src=${require('./detour.png')} style='width:15px; height:15px;' />길찾기</span>
+                                <span style='font-size:12px; font-weight:bold;padding:5px; border-radius:3px;background-color:#5AD2FF; color:white;'><img src=${require('./img/detour.png')} style='width:15px; height:15px;' />길찾기</span>
                                 </div>
                             </div>
                             <div>
@@ -185,7 +185,7 @@ function MapComponent(props) {
                         
                         naver.maps.Event.addListener(event_marker, 'click', function(e) {
                             map.panTo(e.coord);
-                            map.setZoom(13);
+                            map.setZoom(12);
 
                             if (event_marker.getAnimation() != null) {
                                 event_marker.setAnimation(null);
