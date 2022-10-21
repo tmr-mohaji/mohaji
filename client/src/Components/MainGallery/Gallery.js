@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../Button';
 import axios from 'axios';
 import './Gallery.scss';
@@ -44,8 +45,10 @@ const Gallery = () => {
                     {data.map((data) => {
                         return (
                             <div className='listGallery' key={data.id}>
-                                <img className='g_img' src={"./img/" + data.filename} />
-                                <p className='g_tit'>{data.title}</p>
+                                <Link to={"/event/" + data.id}>
+                                    <img className='g_img' src={"./img/" + data.filename} />
+                                    <p className='g_tit'>{data.title}</p>
+                                </Link>
                             </div>
                         )
                     })}

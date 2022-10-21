@@ -35,6 +35,15 @@ exports.getEvent = async (req, res) => {
     }
 }
 
+// 이벤트 상세 페이지
+exports.getDetail = async (req, res) => {
+    let result = await models.Event.findOne({
+        where: {id : req.query.id}
+    });
+    console.log(result);
+    res.send(result);
+}
+
 exports.getAddress = async (req, res) => {
     let result = await models.Event.findOne({
         where: {id : req.query.id}
