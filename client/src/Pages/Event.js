@@ -16,26 +16,31 @@ const Event = () => {
     const navigate = useNavigate();
     const { state } = useLocation();
 
-    const [city, setCity] = useState(state);
+    const [filter, setFilter] = useState({
+        city: state,
+        type: '전체',
+        date: ''
+    });
     const [data, setData] = useState([]);
     const [address, setAddress] = useState("");
-    // const [ event, setEvent ] = useState();
 
-    const select_box = useRef();
+    const select_city = useRef();
+    const select_type = useRef();
+    const date = useRef();
 
     // 도시 정보로 데이터 가져오기
     const getData = async () => {
         const response = await axios.get(EVENT_PAGE, {
-            params: {city: city}
+            params: {city: filter.city, type: filter.type, date: filter.date}
         })
         setData(response.data);
 
     }
 
-    // 도시 정보가 바뀌었을 때
+    // 필터링 정보가 바뀌었을 때
     const onChange = (e) => {
-        navigate('/event?city=' + e.target.value, {state: e.target.value});
-        setCity(e.target.value);
+        // navigate('/event?city=' + e.target.value, {state: e.target.value});
+        setFilter({...filter, [e.target.name]: e.target.value,});
     }
     
     // 클릭한 이벤트 주소 받아오기
@@ -46,35 +51,44 @@ const Event = () => {
         setAddress(response.data.address);
     }
 
-    const dateFiltering = () => {
-        
-    }
-
     useEffect(() => {
+        console.log( filter );
         getData();
-        const select = select_box.current;
+        const select = select_city.current;
         const len = select.options.length;
-        for (let i=0; i<len; i++) {
-            if (select.options[i].value == city) {
-                select.options[i].selected = true;
-            }
-        }
-    }, [city, address])
+        // for (let i=0; i<len; i++) {
+        //     if (select.options[i].value == city) {
+        //         select.options[i].selected = true;
+        //     }
+        // }
+    }, [filter, address])
 
     return (
+
         // <div style={{ width: "50%", margin: "100px auto 0 auto", display: "flex", gap: "50px"}}>
         <div style={{ width: "70%", margin: "100px auto 0 auto", display: "flex", gap: "50px", justifyContent: 'center'}}>
             <div style={{width:'100%',position:'relative'}}>
-                <Map city={city} address={address} />
+                <Map filter={filter} address={address} />
             </div>
             <div style={{width:'100%', position:'relative'}}>
-                <select onChange={onChange} ref={select_box}>
+                <select name="city" onChange={onChange} ref={select_city}>
                     <option value="전체">전체</option>
                     <option value="강남구">강남구</option>
                     <option value="종로구">종로구</option>
                     <option value="영등포구">영등포구</option>
                 </select>
-                <input type="date" onChange={dateFiltering}></input>
+
+
+                <select name="type" onChange={onChange} ref={select_type}>
+                    <option value="전체">전체</option>
+                    <option value="축제">축제</option>
+                    <option value="공연">공연</option>
+                    <option value="콘서트">콘서트</option>
+                    <option value="박람회">박람회</option>
+                    <option value="전시">전시</option>
+                </select>
+                
+                <input type="date" name="date" onChange={onChange} ref={date}></input>
 
                 {data.map((data) => {
                     return (
@@ -123,6 +137,7 @@ const Event = () => {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     )
                 })}
