@@ -26,7 +26,6 @@ function MapComponent(props) {
         window.location.replace('/event?city=전체');
     }
 
-
     const initMap = async () => {
 
         const mapOption = {

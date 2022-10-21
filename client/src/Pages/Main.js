@@ -1,5 +1,5 @@
 import Banner from '../components/Banner/Banner';
-import Gallery from '../components/Gallery'
+import Gallery from '../components/MainGallery/Gallery'
 
 import {gsap, Power3} from 'gsap';
 
