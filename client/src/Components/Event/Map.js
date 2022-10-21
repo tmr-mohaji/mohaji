@@ -13,6 +13,7 @@ function MapComponent(props) {
     const [zoom, setZoom] = useState(11);
     const container = useRef();
     const addressInput = createRef();
+    const {city, type, date} = props.filter;
     // const location = useLocation();
 
     // 🤔 Event.js에서 button 누르면 누른 데이터 address 가져오게 함. 
@@ -24,13 +25,6 @@ function MapComponent(props) {
         addressInput.current.value = "";
         window.location.replace('/event?city=전체');
     }
-
-    const showMore = (id) => {
-        console.log(id);
-    }
-
-
-
 
     const initMap = async () => {
 
@@ -93,7 +87,7 @@ function MapComponent(props) {
 //-------------------------- DB event 주소 -> 좌표 전환 및 마커표시------------------------------------//
 
         axios.get(EVENT_PAGE, {
-            params: {city: props.city}
+            params: {city: city, type: type, date: date}
         })
         .then((req) => { return req.data;})
         .then((addressData) => {
@@ -152,9 +146,6 @@ function MapComponent(props) {
 
                     // 3. 각 마커별 정보창 표시
 
-                        // const infoText = [ `<div class='iw_inner_container' style="padding:20px;"><div style='font-weight:bold;'>${aData.title}</div><div>${aData.type}</div><button onClick={${() => showMore(aData.id)}}>자세히 보기</button></div>`].join('');
-
-                        // const infoText = createDetail(aData);
                         const infoText = 
                             `<div className='infoText' style='padding:20px; background-color:white; color:black; border-radius:20px; opcity:75%; display:flex; align-items:center;'>
                             <div style='margin-right:30px;'>
@@ -172,7 +163,6 @@ function MapComponent(props) {
                                 <img src='./img/${aData.filename}' style='width:70px; height:100px;' />
                             </div>
                             </div>`;
-                        // console.log( c)
 
                         const infowindow = new naver.maps.InfoWindow({
                             content: infoText,
