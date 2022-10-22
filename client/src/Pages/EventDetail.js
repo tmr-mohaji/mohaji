@@ -33,7 +33,6 @@ const EventDetail = () => {
             <p>{data.time}</p>
             <p>{data.people}</p>
             <p>{data.price}</p>
-            <p>{data.filename}</p>
             <img src={"/img/" + data.filename} style={{width: "200px"}}/>
         </div>
     )
