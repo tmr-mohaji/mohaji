@@ -5,14 +5,57 @@ import './Event.scss';
 import Map from '../components/Event/Map';
 import { MdPlace } from 'react-icons/md';
 import { FcCalendar,FcClock } from 'react-icons/fc'
-import {FaWonSign} from 'react-icons/fa';
-// import {BsFillBookmarkHeartFill} from 'react-icos/bs'
-
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+// import {AdapterDayjs ,LocalizationProvider,DatePicker } from '@mui/x-date-pickers';
+import TextField from '@mui/material/TextField';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 const EVENT_PAGE = "http://localhost:8000/event";
 
 const Event = () => {
+
+    // select box 설정
+    const [city, setCity] = useState('');
+    const [type, setType] = useState('');
+    //달력 정보
+    const [calendar, setCalendar] = useState(null);
+
+    // const handleChange = (event) => {
+    //     setCity(event.target.value);
+    //     setType(event.target.value);
+    //     //setCalendar(event.target.value);
+    //     // 필터링 정보가 바뀌었을 때
+    //     setFilter({...filter, [event.target.name]: event.target.value,});
+    //     console.log(filter);
+    // };
+
+    const handleChange_city = (event) => {
+        setCity(event.target.value);
+        setFilter({...filter, [event.target.name]: event.target.value,});
+        console.log(filter);
+    };
+
+    const handleChange_type = (event) => {
+        setType(event.target.value);
+        setFilter({...filter, [event.target.name]: event.target.value,});
+        console.log(filter);
+    };
     
+    const handleChange_date = (event) => {
+        console.log(event.$d);
+        let pickDate = String(event.$d).split(" ");
+        console.log(pickDate)
+        //여기 날짜 변환하는 것 해야함~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(month 변환해야함!)
+                
+        // console.log(pickDate)
+        // setCalendar(pickDate);
+        // setFilter({...filter, date : pickDate });
+        // console.log(filter);
+    };
+    
+
     const navigate = useNavigate();
     const { state } = useLocation();
 
@@ -21,12 +64,13 @@ const Event = () => {
         type: '전체',
         date: ''
     });
+
     const [data, setData] = useState([]);
     const [address, setAddress] = useState("");
 
     const select_city = useRef();
     const select_type = useRef();
-    const date = useRef();
+    const select_date = useRef();
 
     // 도시 정보로 데이터 가져오기
     const getData = async () => {
@@ -37,12 +81,6 @@ const Event = () => {
 
     }
 
-    // 필터링 정보가 바뀌었을 때
-    const onChange = (e) => {
-        // navigate('/event?city=' + e.target.value, {state: e.target.value});
-        setFilter({...filter, [e.target.name]: e.target.value,});
-    }
-    
     // 클릭한 이벤트 주소 받아오기
     const getAddress = async (id) => {
         let response = await axios.get(EVENT_PAGE + "/address", {
@@ -54,14 +92,10 @@ const Event = () => {
     useEffect(() => {
         console.log( filter );
         getData();
-        const select = select_city.current;
-        const len = select.options.length;
-        // for (let i=0; i<len; i++) {
-        //     if (select.options[i].value == city) {
-        //         select.options[i].selected = true;
-        //     }
-        // }
+
     }, [filter, address])
+
+
 
     return (
         <div style={{ width: "70%", margin: "100px auto 0 auto", display: "flex", gap: "50px", justifyContent: 'center'}}>
@@ -69,24 +103,54 @@ const Event = () => {
                 <Map filter={filter} address={address} />
             </div>
             <div style={{width:'100%', position:'relative'}}>
-                <select name="city" onChange={onChange} ref={select_city}>
-                    <option value="전체">전체</option>
-                    <option value="강남구">강남구</option>
-                    <option value="종로구">종로구</option>
-                    <option value="영등포구">영등포구</option>
-                </select>
+                <div style={{display:'flex',width:'90%'}}>
+                <FormControl style={{width:'30%',margin:'10px'}}>
+                    <InputLabel>city</InputLabel>
+                    <Select
+                        value={city}
+                        label="city"
+                        onChange={handleChange_city}
+                        ref={select_city}
+                        name='city'
+                    >
+                        <MenuItem value='전체'>전체</MenuItem>
+                        <MenuItem value='강남구'>강남구</MenuItem>
+                        <MenuItem value='종로구'>종로구</MenuItem>
+                        <MenuItem value='영등포구'>영등포구</MenuItem>
+                    </Select>
+                </FormControl>
+                    
+                <FormControl style={{width:'30%',margin:'10px'}}>
+                    <InputLabel>type</InputLabel>
+                    <Select
+                        value={type}
+                        label="type"
+                        onChange={handleChange_type}
+                        ref={select_type}
+                        name='type'
+                    >
+                        <MenuItem value='전체'>전체</MenuItem>
+                        <MenuItem value='축제'>축제</MenuItem>
+                        <MenuItem value='공연'>공연</MenuItem>
+                        <MenuItem value='콘서트'>콘서트</MenuItem>
+                        <MenuItem value='박람회'>박람회</MenuItem>
+                        <MenuItem value='전시'>전시</MenuItem>
+                    </Select>
+                </FormControl>
+                <div style={{width:'40%', margin:'10px'}}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                        label="Basic example"
+                        value={calendar}
+                        onChange={handleChange_date}
+                        ref={select_date}
+                        name="date"
+                        renderInput={(params) => <TextField {...params} />}
+                    />
+                </LocalizationProvider>
+                </div>
+                </div>
 
-
-                <select name="type" onChange={onChange} ref={select_type}>
-                    <option value="전체">전체</option>
-                    <option value="축제">축제</option>
-                    <option value="공연">공연</option>
-                    <option value="콘서트">콘서트</option>
-                    <option value="박람회">박람회</option>
-                    <option value="전시">전시</option>
-                </select>
-                
-                <input type="date" name="date" onChange={onChange} ref={date}></input>
 
                 {data.map((data) => {
                     return (
