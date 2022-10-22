@@ -35,11 +35,11 @@ const Header = () => {
                     <div className='nav'>
                         <ul className="navbar_2 navbar_pc">
                             <li>
-                                <Link to='/user/signup'> 로그인 </Link>
+                                <Link to='/user/login'> 로그인 </Link>
                             </li>
 
                             <li>
-                                <Link to='/'> 회원가입 </Link>
+                                <Link to='/user/signup'> 회원가입 </Link>
                             </li>
                         </ul>
 

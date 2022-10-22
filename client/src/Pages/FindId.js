@@ -6,6 +6,7 @@ const BACK_SERVER = "http://localhost:8000";
 const FindId = () => {
 
     const [code, setCode] = useState('');
+    const [id, setId] = useState('');
     const input = useRef();
     const codeInput = useRef();
 
@@ -16,6 +17,7 @@ const FindId = () => {
         // 이메일이 존재하면
         if (isId.data) {
             // 이메일로 인증코드 보내기
+            console.log("인증코드가 발송되었습니다.");
             let result = await axios.post(BACK_SERVER + "/email", {email: input.current.value});
             setCode(result.data);
         } else {
@@ -28,7 +30,10 @@ const FindId = () => {
 
         if (codeInput.current.value == code) {
             let id = await axios.post(BACK_SERVER + "/user/findId", {email: input.current.value});
-            console.log(id);
+            console.log(id.data.id);
+            setId(id.data.id);
+        } else {
+            console.log("인증 실패");
         }
     }
 

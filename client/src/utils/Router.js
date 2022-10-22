@@ -4,7 +4,8 @@ import Header from '../components/Header/Header';
 import Main from '../pages/Main';
 import Event from '../pages/Event';
 import EventDetail from '../pages/EventDetail';
-import Signup from '../pages/Signup'
+import Signup from '../pages/Signup';
+import Login from '../pages/Login';
 import FindId from '../pages/FindId';
 
 const Router = () => {
@@ -17,6 +18,7 @@ const Router = () => {
                     <Route path="/event" element={<Event />} />
                     <Route path="/event/:id" element={<EventDetail />} />
                     <Route path="/user/signup" element={<Signup />} />
+                    <Route path="/user/login" element={<Login />} />
                     <Route path="/user/findid" element={<FindId />} />
                 </Routes>
             </BrowserRouter>

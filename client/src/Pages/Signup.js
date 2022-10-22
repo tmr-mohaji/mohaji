@@ -25,10 +25,11 @@ const Signup = () => {
         })
         if (response.data == true) {
             const res = await axios.post(USER_URL + "signup", {
-                id : form.current.id.value, password : form.current.password.value,
-                nickname : form.current.nickname.value, email : form.current.email.value
+                id : form.current.id.value, 
+                password : form.current.password.value,
+                nickname : form.current.nickname.value, 
+                email : form.current.email.value
             });
-            console.log(res.data);
             alert(form.current.nickname.value + "님 환영합니다.");
             navigate("/user/login");
         } else {
