@@ -64,8 +64,6 @@ const Event = () => {
     }, [filter, address])
 
     return (
-
-        // <div style={{ width: "50%", margin: "100px auto 0 auto", display: "flex", gap: "50px"}}>
         <div style={{ width: "70%", margin: "100px auto 0 auto", display: "flex", gap: "50px", justifyContent: 'center'}}>
             <div style={{width:'100%',position:'relative'}}>
                 <Map filter={filter} address={address} />

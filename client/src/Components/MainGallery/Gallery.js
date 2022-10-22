@@ -49,15 +49,16 @@ const Gallery = () => {
                     {data.map((data) => {
                         return (
                             <div className='listGallery' key={data.id}>
-                                <img className='g_img' src={"./img/" + data.filename} />
-
-                                <div className='g_hover'>
-                                    <p className='g_tit_h1'>{data.title}</p>
-                                    <p className='g_tit_h2'><img className='g_tit_img' src={h_icon1} alit='' /> {data.start_date} - {data.end_date}</p>
-                                    <p className='g_tit_h3'><img className='g_tit_img' src={h_icon2} alit='' /> {data.type}</p>
-                                    <p className='g_tit_h3'><img className='g_tit_img' src={h_icon3} alit='' /> {data.place}</p>
-                                    <p className='g_tit_h4'>{data.detail}</p>
-                                </div>
+                                <Link to={"/event/" + data.id}>
+                                    <img className='g_img' src={"./img/" + data.filename} />
+                                    <div className='g_hover'>
+                                        <p className='g_tit_h1'>{data.title}</p>
+                                        <p className='g_tit_h2'><img className='g_tit_img' src={h_icon1} alit='' /> {data.start_date} - {data.end_date}</p>
+                                        <p className='g_tit_h3'><img className='g_tit_img' src={h_icon2} alit='' /> {data.type}</p>
+                                        <p className='g_tit_h3'><img className='g_tit_img' src={h_icon3} alit='' /> {data.place}</p>
+                                        <p className='g_tit_h4'>{data.detail}</p>
+                                    </div>
+                                </Link>
                             </div>
                         )
                     })}

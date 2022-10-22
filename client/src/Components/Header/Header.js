@@ -35,7 +35,7 @@ const Header = () => {
                     <div className='nav'>
                         <ul className="navbar_2 navbar_pc">
                             <li>
-                                <Link to='/'> 로그인 </Link>
+                                <Link to='/user/signup'> 로그인 </Link>
                             </li>
 
                             <li>
