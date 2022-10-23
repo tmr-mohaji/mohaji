@@ -61,6 +61,7 @@ const Event = () => {
 
     const [data, setData] = useState([]);
     const [address, setAddress] = useState("");
+    const [clickData, setClickData] = useState([]);
 
     const select_city = useRef();
     const select_type = useRef();
@@ -81,6 +82,7 @@ const Event = () => {
             params: {id : id}
         })
         setAddress(response.data.address);
+        setClickData(response.data);
     }
 
     // 좋아요 버튼 설정
@@ -97,7 +99,7 @@ const Event = () => {
     return (
         <div className="totalSection">
             <div className='mapSection'>
-                <Map filter={filter} address={address} />
+                <Map filter={filter} address={address} clickData={clickData}/>
             </div>
             <div className='descSection'>
                 <div className='searchControllSection'>
