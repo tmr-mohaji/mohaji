@@ -9,7 +9,7 @@ const EVENT_PAGE = "http://localhost:8000/event";
 function MapComponent(props) {
 
     const [myLocation, setMyLocation] = useState({latitude: 37.3724620, longitude: 127.1051714});
-    const [zoom, setZoom] = useState(11);
+    const [zoom, setZoom] = useState(12);
     const container = useRef();
     const addressInput = createRef();
     const {city, type, date} = props.filter;
@@ -19,11 +19,11 @@ function MapComponent(props) {
     const [ event , setEvent ] = useState('');
     // const [animation, setAnimation ] = useState(null);
     
-    const reset = () => {
-        setEvent('');
-        addressInput.current.value = "";
-        window.location.replace('/event?city=전체');
-    }
+    // const reset = () => {
+    //     setEvent('');
+    //     addressInput.current.value = "";
+    //     window.location.replace('/event?city=전체');
+    // }
 
     const initMap = async () => {
 
@@ -78,10 +78,10 @@ function MapComponent(props) {
 
         const marker = new naver.maps.Marker(markerOptions);
 
-        // naver.maps.Event.addListener(map, 'click', function(e) {
-        //     console.log(e.coord);
-        //     marker.setPosition(e.coord);
-        // });
+        naver.maps.Event.addListener(map, 'click', function() {
+            setEvent('');
+            window.location.replace('/event?city=전체');
+        });
 
 //-------------------------- DB event 주소 -> 좌표 전환 및 마커표시------------------------------------//
 
@@ -177,7 +177,7 @@ function MapComponent(props) {
                         
                         naver.maps.Event.addListener(event_marker, 'click', function(e) {
                             map.panTo(e.coord);
-                            map.setZoom(12);
+                            map.setZoom(14);
 
                             if (event_marker.getAnimation() != null) {
                                 event_marker.setAnimation(null);
@@ -204,11 +204,11 @@ function MapComponent(props) {
 
 
     return (
-    <div style={{display:'flex',flexDirection:'column', alignItems:'center'}}>
-        <div ref={container} style={{width: '100%', height: '700px'}}></div><br />
+    <div className="mapPart">
+        <div ref={container} style={{width: '100%', height: '90vh'}}></div><br />
         <div>
-        <input ref={addressInput} value={props.address || ''} readOnly />
-        <button type='button' onClick={reset}>초기화</button>
+        <input ref={addressInput} value={props.address || ''} readOnly style={{display:'none'}} />
+        {/* <button type='button' onClick={reset}>초기화</button> */}
         </div>
     </div>);
 }

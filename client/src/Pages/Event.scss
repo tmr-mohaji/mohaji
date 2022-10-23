@@ -1,6 +1,39 @@
 @import '../components/Commons/Commons.scss';
 @import '~include-media/dist/include-media';
 
+$tablet : 1024px;
+$mobile : 600px;
+
+//지도 + 리스트 전체 구조 
+.totalSection {
+  width: 100%; 
+  margin: 100px auto 0 auto;
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+
+}
+
+// 지도 구조
+.mapSection {
+  width:100%;
+  position:relative;
+}
+
+// 리스트 구조
+.descSection {
+  width:100%; 
+  position:relative;
+  text-align:center;
+
+}
+.listSection {
+  
+  @include media('<1300px') {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
 
 // 이벤트 리스트 전체 구조
 .list_entire_section {
@@ -8,27 +41,29 @@
   // border: 1px solid black;
   border-radius: 10px;
   margin:30px 20px;
-  // box-shadow: 5px 5px 5px lightgray;
-//   box-shadow: 14px 16px 16px -1px rgba(186,186,186,0.91);
-// -webkit-box-shadow: 14px 16px 16px -1px rgba(186,186,186,0.91);
-// -moz-box-shadow: 14px 16px 16px -1px rgba(186,186,186,0.91);
-
 
 box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
 -webkit-box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
 -moz-box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
 
+@include media('<1300px') {
+  width: 40%;
+}
 
   .list_entire_layout {
 
     display: flex;
     width: 100%;
     height: 90%;
+
     
     .list_desc_layout {
       position: relative;
       margin: 10px;
       width: 95%;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
     }
 
   }
@@ -45,6 +80,11 @@ box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
     
     .title {
       display: flex;
+
+      @include media('<1300px') {
+        font-size: 15px;
+        font-weight: 700;
+      }
   }
   }
   .list_name_detail {
@@ -52,6 +92,29 @@ box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
     color:rgb(179, 178, 178);
     padding: 10px;
     padding-right: 50px;
+    max-height: 70px;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+
+    @include media('<1300px') {
+      display: none;
+    }
+  }
+}
+
+.eventInfo {
+  display:flex;
+  align-items:center;
+  position:absolute;
+  bottom:15%;
+  width:80%;
+
+  @include media('<1300px') {
+    top:15%;
   }
 }
 
@@ -60,14 +123,21 @@ box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
   display: flex;
   align-items: center;
   font-size: 14px;
+  margin-top: 5px;
+  @include media('<1300px') {
+    font-size: 12px;
+  }
 }
 
 //이벤트 발생 기간 및 시간
 .list_period_layout {
   font-size: 14px;
-  margin-top: 0;
+  margin-top: 5px;
   display: flex;
   align-items: center;
+  @include media('<1300px') {
+    font-size: 12px;
+  }
 
       .list_period_start {
         padding-right: 5px;
@@ -78,8 +148,12 @@ box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
 }
 .list_time_layout {
   font-size: 14px;
+  margin-top: 5px;
   display: flex;
   align-items: center;
+  @include media('<1300px') {
+    font-size: 12px;
+  }
 }
 
 // 이벤트 발생 비용
@@ -117,16 +191,27 @@ box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
     position: relative;
     width: 100%;
     height: 100%;
+
   }
 }
 
 
 // 이벤트 버튼 모음
+
+
 .Btns {
   position: absolute;
   width: 100%;
   bottom:0;
 }
+
+.goMap {
+  background: transparent;
+  border:0;
+  cursor: pointer;
+
+}
+
 
 .goView {
   width: 70%;
@@ -135,14 +220,95 @@ box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
   color:white;
   height: 30px;
   border-radius: 10px 0 0 10px;
+  cursor: pointer;
 
 }
 .likes {
   width: 30%;
   height: 30px;
-  background-color: rgba(255, 0, 0, 0.5);
-  border:0;
+  // background-color: rgba(255, 0, 0, 0.5);
+  background-color: transparent;
+  border:0.3px solid rgba(255, 0, 0, 0.5);
   border-radius: 0 10px 10px 0;
+  font-size: 1.5rem;
+  color:rgba(255, 0, 0, 0.5);
+  cursor: pointer;
 } 
 
-// hover했을 때 지도로가기, 상세보기 넣을지 고민중쭝중중주웆~~!~
+
+
+// 필터링 date 부분
+.datepicker {
+  div {
+    label {
+      font-size: 12px;
+      font-family: 'EliceDigitalBaeum';
+    }
+    
+    .MuiInputBase-root {
+      height: 41px;
+    }
+  }
+}
+
+// 필터링 섹션 부분
+.searchControllSection {
+  display: flex;
+  justify-content: center;
+  font-family:'EliceDigitalBaeum';
+
+  .searchControll {
+    display: flex;
+    justify-content: center;
+    border: 3px solid #A24F63;
+    width:450px;
+    border-radius: 40px;
+    padding:10px;
+  }
+}
+
+.SelectCity {
+  border:0;
+  margin:10px;
+  border-right: 0.5px solid #9999997a;
+  width: 100px;
+
+}
+.SelectCity:hover {
+  color: rgb(162, 79, 99);
+}
+
+.SelectCity option:checked {
+  background:  rgb(162, 79, 99);
+  color: white;
+}
+.SelectCity option:hover {
+  background:  rgb(162, 79, 99);
+  color: white;
+}
+
+
+.SelectType {
+  border:0;
+  margin:10px;
+  border-right: 0.5px solid #9999997a;
+  width: 100px;
+}
+
+.SelectType:hover {
+  color: rgb(162, 79, 99);
+}
+
+.SelectType option:checked {
+  background:  rgb(162, 79, 99);
+  color: white;
+}
+.SelectType option:hover {
+  background:  rgb(162, 79, 99);
+  color: white;
+}
+
+.option:hover {
+  background:  rgb(162, 79, 99);
+  color: white;
+}

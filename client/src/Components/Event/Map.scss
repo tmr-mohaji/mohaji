@@ -1,1 +1,15 @@
 @import '../Commons/Commons.scss';
+@import '~include-media/dist/include-media';
+
+.mapPart {
+
+    // @include media('>1301px') {
+    display:flex;
+    flex-direction:column; 
+    align-items:center;
+    position:fixed;
+    left:0;
+    width:50%;
+    // }
+    
+}
