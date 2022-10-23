@@ -3,6 +3,7 @@ import Gallery from '../components/MainGallery/Gallery'
 
 import {gsap, Power3} from 'gsap';
 
+
 const Main = () => {
     let tl = new gsap.timeline();
     let ease = Power3.easeOut;
