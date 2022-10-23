@@ -38,6 +38,7 @@
     // font-family: 'EliceDigitalBaeum';
     font-family: 'WandohopeR';
     cursor: pointer;
+    color:#0a0a0a;
 }
 
 .buttonBox button:before,
@@ -69,7 +70,7 @@
 .buttonBox button:nth-child(4):before,
 .buttonBox button:nth-child(5):before,
 .buttonBox button:nth-child(6):before{
-    background-color: $primary_color;
+    background: $primary_color;
 }
 
 .buttonBox button:nth-child(1):after,
@@ -78,7 +79,7 @@
 .buttonBox button:nth-child(4):after,
 .buttonBox button:nth-child(5):after,
 .buttonBox button:nth-child(6):after{
-    background-color: $sub_color1;
+    background: $sub_color1;
 }
 
 
@@ -87,20 +88,14 @@
 }
 
 
-.buttonBox button:hover{
+.buttonBox .active button{
     color:$primary_color;
-    // font-family: 'EliceDigitalBaeum';
-    font-family: 'WandohopeR';
-    font-weight: 700;
 }
 
 
-.buttonBox button:focus{
-    color:$primary_color;
-    // font-family: 'EliceDigitalBaeum';
-    font-family: 'WandohopeR';
-    font-weight: 700;
-}
+
+
+
 
 
 
@@ -113,7 +108,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top:2%;
+    margin-top:1%;
 }
 
 
