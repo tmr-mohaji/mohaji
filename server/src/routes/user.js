@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const user = require("../controller/UserController");
+const auth = require("../middleware/auth");
 
 // 회원가입
 router.post("/signup", user.postSignup);
@@ -14,5 +15,7 @@ router.post("/findId", user.findId);
 router.post("/resetPW", user.resetPW);
 // 로그인
 router.post("/login", user.postLogin);
+// auth
+router.get("/auth", auth.verifyToken, user.getAuth);
 
 module.exports = router;

@@ -1,11 +1,14 @@
 import Banner from '../components/Banner/Banner';
-import Gallery from '../components/MainGallery/Gallery'
+import Gallery from '../components/MainGallery/Gallery';
+import axios from 'axios';
 
 import {gsap, Power3} from 'gsap';
 
 const Main = () => {
     let tl = new gsap.timeline();
     let ease = Power3.easeOut;
+
+    const result = axios.get("http://localhost:8000/user/auth");
 
     return (
         <div>

@@ -93,13 +93,10 @@ exports.postLogin = async (req, res) => {
         const result = await bcrypt.compare(req.body.password, idResult.password);
 
         if (result == true) {
-            // const token = jwt.sign({
-            //     type : 'JWT',
-            //     id : req.body.id
-            // }, secret, {
-            //     expiresIn: '15m',
-            //     issuer: '토큰발급자'
-            // });
+            const token = jwt.sign({
+                type : 'JWT',
+                id : req.body.id
+            }, secret);
             res.send({isLogin : true});
         } else {
             res.send({isLogin : false});
@@ -107,4 +104,8 @@ exports.postLogin = async (req, res) => {
     } else {
         res.send({isLogin : false});
     }
+}
+
+exports.getAuth = (req, res) => {
+    
 }
