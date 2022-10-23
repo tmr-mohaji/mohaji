@@ -18,12 +18,6 @@ function MapComponent(props) {
     // 🤔 Event.js에서 button 누르면 누른 데이터 address 가져오게 함. 
     const [ event , setEvent ] = useState('');
     // const [animation, setAnimation ] = useState(null);
-    
-    // const reset = () => {
-    //     setEvent('');
-    //     addressInput.current.value = "";
-    //     window.location.replace('/event?city=전체');
-    // }
 
     const initMap = async () => {
 
@@ -83,6 +77,8 @@ function MapComponent(props) {
             window.location.replace('/event?city=전체');
         });
 
+
+
 //-------------------------- DB event 주소 -> 좌표 전환 및 마커표시------------------------------------//
 
         axios.get(EVENT_PAGE, {
@@ -100,22 +96,25 @@ function MapComponent(props) {
             //1)여기 전체 데이터에서 Event.js에서 버튼 클릭해서 받은 주소와 비교 해서 데이터가 일치할 경우 그 데이터만 담아서 .then에 보내줌. 
 
             //2) 1)이 아닐경우 전체 데이터를 .then에 보내줌.
-                if (props.address != "") {
+                // if (props.address != "") {
+                //     const result = addressData.filter((data) => { return data.address === props.address });
+                //     setEvent(props.address);
+                //     console.log(result);
+                //     return result;
+                // } 
+                
+                if (props.clickData != "") {
                     const result = addressData.filter((data) => { return data.address === props.address });
                     setEvent(props.address);
-                    console.log(result);
                     return result;
                 } else {
-                    console.log('여기 : ', addressData);
                     return addressData;
                 }
             
 
         })
         .then((data) => {
-
-            // addressData.map(function(aData) {      
-                    // console.log(data);                                 
+                
                     data.map(function(aData) {                   
 
                     naver.maps.Service.geocode({
@@ -163,6 +162,24 @@ function MapComponent(props) {
                             </div>
                             </div>`;
 
+                        const infoText2 = 
+                            `<div className='infoText' style='padding:20px; background-color:white; color:black; border-radius:20px; opcity:75%; display:flex; align-items:center;'>
+                            <div style='margin-right:30px;'>
+                                <div style='font-weight:normal; text-align:center; font-size:11px; margin-top:3px; width:50px; background-color:#FFE6E6; border-radius:4px;'>${props.clickData.type}</div>    
+                                <div style='font-weight:bold; font-size:15px; cursor:pointer;'>${props.clickData.title}<span><img src=${require('./img/arrow.png')} style='width:12px; height:12px; margin-left:5px; margin-bottom:4px;' alt='상세보기'></span></div>
+                                <div>
+                                    <span style='font-size:11px; border-right: 1px solid #dcdcdc;'>⭐⭐⭐</span>
+                                    <span style='font-size:11px;' >리뷰 (5)</span>
+                                </div>
+                                <div style='margin-top:10px;'>
+                                <span style='font-size:12px; font-weight:bold;padding:5px; border-radius:3px;background-color:#5AD2FF; color:white;'><img src=${require('./img/detour.png')} style='width:15px; height:15px;' />길찾기</span>
+                                </div>
+                            </div>
+                            <div>
+                                <img src='./img/${props.clickData.filename}' style='width:70px; height:100px;' />
+                            </div>
+                            </div>`;
+                        
                         const infowindow = new naver.maps.InfoWindow({
                             content: infoText,
                             borderWidth:0,
@@ -174,24 +191,49 @@ function MapComponent(props) {
                                 height: 15
                             },                            
                         });
-                        
-                        naver.maps.Event.addListener(event_marker, 'click', function(e) {
-                            map.panTo(e.coord);
-                            map.setZoom(14);
 
-                            if (event_marker.getAnimation() != null) {
-                                event_marker.setAnimation(null);
-                            } else {
-                                event_marker.setAnimation(naver.maps.Animation.BOUNCE)
-                            }
-                            if (infowindow.getMap()) {
-                                infowindow.close();
-                            } else {
-                                infowindow.open(map, event_marker);
-                            }
+                        const infowindow2 = new naver.maps.InfoWindow({
+                            content: infoText2,
+                            borderWidth:0,
+                            maxWidth:500,
+                            backgroundColor:'transparent',
+                            anchorColor: '#fff',
+                            anchorSize: {
+                                width: 15,
+                                height: 15
+                            },                            
                         });
-                        infowindow.open(map,event_marker);
-                        })
+                        
+
+                            naver.maps.Event.addListener(event_marker, 'click', function(e) {
+                                map.panTo(e.coord);
+                                map.setZoom(14);
+
+                                if (event_marker.getAnimation() != null) {
+                                    event_marker.setAnimation(null);
+                                } else {
+                                    event_marker.setAnimation(naver.maps.Animation.BOUNCE)
+                                }
+                                if (infowindow.getMap()) {
+                                    infowindow.close();
+                                } else {
+                                    infowindow.open(map, event_marker);
+                                }
+
+                                if(props.clickData != "") {
+                                    if (infowindow2.getMap()) {
+                                        infowindow2.close();
+                                    } else {
+                                        infowindow2.open(map, event_marker);
+                                    }
+                                }
+
+                            });
+                            infowindow.open(map,event_marker);
+                            infowindow2.open(map,event_marker);
+                            }
+
+                    )
 
                 })
             
@@ -200,7 +242,7 @@ function MapComponent(props) {
 
     useEffect(() => {
         initMap();
-    }, [props.city, props.address]); 
+    }, [props.city, props.address, props.clickData]); 
 
 
     return (
