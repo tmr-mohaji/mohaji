@@ -27,18 +27,16 @@
 
 .buttonBox button {
     position: relative;
-    background:none;
-    font-size:18px;
-    border:0;
+    background: none;
+    font-size: 16px;
+    border: 0;
     // width: 33.333%;
     display: table-cell;
     text-align: center;
     padding: 10px 20px;
     transition: 0.2s ease color;
-    // font-family: 'EliceDigitalBaeum';
-    font-family: 'WandohopeR';
     cursor: pointer;
-    color:#0a0a0a;
+    color: #000;
 }
 
 .buttonBox button:before,
@@ -50,14 +48,14 @@
     transition: 0.2s ease transform;
 }
 
-.buttonBox button:before{
+.buttonBox button:before {
     top: 0;
     left: 10px;
     width: 6px;
     height: 6px;
 }
 
-.buttonBox button:after{
+.buttonBox button:after {
     top: 5px;
     left: 18px;
     width: 4px;
@@ -69,7 +67,7 @@
 .buttonBox button:nth-child(3):before,
 .buttonBox button:nth-child(4):before,
 .buttonBox button:nth-child(5):before,
-.buttonBox button:nth-child(6):before{
+.buttonBox button:nth-child(6):before {
     background: $primary_color;
 }
 
@@ -78,24 +76,33 @@
 .buttonBox button:nth-child(3):after,
 .buttonBox button:nth-child(4):after,
 .buttonBox button:nth-child(5):after,
-.buttonBox button:nth-child(6):after{
+.buttonBox button:nth-child(6):after {
     background: $sub_color1;
 }
 
 
-.buttonBox button:hover:before, .buttonBox button:hover:after{
+.buttonBox button:hover:before,
+.buttonBox button:hover:after {
     transform: scale(1);
 }
 
 
-.buttonBox .active button{
-    color:$primary_color;
+.buttonBox .active button {
+    color: $primary_color;
 }
 
 
+/*=========================================================
+    카테고리에 맞게 리스트 보여주는 부분 정의
+=========================================================*/
+.galleryTitle{
+    text-align: center;
+    margin-bottom:1%;
+}
 
-
-
+.g_tit{
+    font-size:45px;
+}
 
 
 
@@ -108,7 +115,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top:1%;
+    margin-top: 1%;
 }
 
 
@@ -118,9 +125,9 @@
 =========================================================*/
 .listGallery {
     width: 18%;
-    margin:1%;
+    margin: 1%;
     text-align: center;
-    position:relative;
+    position: relative;
 }
 
 .g_img {
@@ -132,56 +139,54 @@
 /*=========================================================
     listGallery 호버 시 배경 정의
 =========================================================*/
-.g_hover{
-    position:absolute;
-    top:0;
+.g_hover {
+    position: absolute;
+    top: 0;
     width: 100%;
     height: 440px;
-    padding:10% 5%;
+    padding: 10% 5%;
     transition: .5s ease;
     opacity: 0;
-    background:rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
     text-align: left;
 }
 
-.listGallery:hover .g_hover{
+.listGallery:hover .g_hover {
     opacity: 1;
 }
 
 
-.g_tit_h1{
-    color:#fff;
-    font-size:18px;
+.g_tit_h1 {
+    color: #fff;
+    font-size: 18px;
     font-family: 'WandohopeR';
 }
 
-.g_tit_h2{
-    color:#fff;
-    font-size:12px;
-    padding-top:20px;
-    display:flex;
+.g_tit_h2 {
+    color: #fff;
+    font-size: 12px;
+    padding-top: 20px;
+    display: flex;
     align-items: center;
 }
 
-.g_tit_h3{
-    color:#fff;
-    font-size:12px;
-    padding-top:10px;
+.g_tit_h3 {
+    color: #fff;
+    font-size: 12px;
+    padding-top: 10px;
 }
 
-.g_tit_h4{
-    color:#fff;
-    padding-top:10px;
-    font-size:12px;
+.g_tit_h4 {
+    color: #fff;
+    padding-top: 10px;
+    font-size: 12px;
 }
 
 
 /*=========================================================
     listGallery 호버 시 미니 아이콘 정의
 =========================================================*/
-.g_tit_img{
-    width:27px;
-    margin-right:10px;
+.g_tit_img {
+    width: 27px;
+    margin-right: 10px;
 }
-
-

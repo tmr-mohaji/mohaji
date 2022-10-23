@@ -5,29 +5,9 @@
     font-style: normal;
 }
 
-@font-face {
-    font-family: 'EliceDigitalBaeum';
-    font-weight: 400;
-    font-style: normal;
-    src: url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumRegular.eot');
-    src: url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumRegular.eot?#iefix') format('embedded-opentype'),
-         url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumRegular.woff2') format('woff2'),
-         url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumRegular.woff') format('woff'),
-         url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumRegular.ttf') format("truetype");
-    font-display: swap;
-} 
+@import url("https://font.elice.io/EliceDigitalBaeum.css");
 
-@font-face {
-    font-family: 'EliceDigitalBaeum';
-    font-weight: 700;
-    font-style: normal;
-    src: url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumBold.eot');
-    src: url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumBold.eot?#iefix') format('embedded-opentype'),
-         url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumBold.woff2') format('woff2'),
-         url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumBold.woff') format('woff'),
-         url('https://cdn.jsdelivr.net/gh/webfontworld/elice/EliceDigitalBaeumBold.ttf') format("truetype");
-    font-display: swap;
-} 
+
 
 * {
 	box-sizing: border-box;
@@ -54,8 +34,9 @@ h1, h2, h3, h4, h5, h6{
 	font-family: 'WandohopeR';
 }
 
-p, span, input, select, ul, li, table, dl, dt, dd{
-	font-family: 'EliceDigitalBaeum';
+p, span, input, select, ul, li, table, dl, dt, dd, button{
+    font-family: "Elice Digital Baeum", sans-serif;
+    font-weight: 400;
 }
 
 

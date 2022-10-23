@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../Button';
 import axios from 'axios';
 import './Gallery.scss';
 
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
 import h_icon1 from './img/g_tit_01.png';
 import h_icon2 from './img/g_tit_02.png';
@@ -44,6 +43,7 @@ const Gallery = () => {
     });
 
 
+    // 카테고리 불러오기 위해 정의
     const setCategory = (name) => {
         setType(name);
     }
@@ -63,6 +63,10 @@ const Gallery = () => {
 
     return (
         <section>
+            <div className='galleryTitle'>
+                <h1 className='g_tit'>공연 일정</h1>
+            </div>
+
             <div className='galleryBox'>
                 <div className='buttonBox'>
                     <span className='active'>
