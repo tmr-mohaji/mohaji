@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from '../components/Header/Header';
+import Footer from '../components/Footer/Footer';
 
 import Main from '../pages/Main';
 import Event from '../pages/Event';
@@ -7,6 +8,7 @@ import EventDetail from '../pages/EventDetail';
 import Signup from '../pages/Signup';
 import Login from '../pages/Login';
 import FindId from '../pages/FindId';
+
 
 const Router = () => {
     return (
@@ -21,6 +23,7 @@ const Router = () => {
                     <Route path="/user/login" element={<Login />} />
                     <Route path="/user/findid" element={<FindId />} />
                 </Routes>
+                <Footer />
             </BrowserRouter>
         </div>
     )
