@@ -1,5 +1,7 @@
 const models = require("../model");
 const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken');
+const secret = 'JWT-SECRET-KEY';
 
 // 회원가입
 exports.postSignup = async (req, res) => {
@@ -22,36 +24,36 @@ exports.postSignup = async (req, res) => {
     }
 
     let result = await models.User.create(obj);
-    res.send(result);
+    res.send({success: true});
 }
 
 // 아이디 중복 확인
 exports.idCheck = async (req, res) => {
 
-    let result = await models.User.findAll({
+    let result = await models.User.findOne({
         where: {id : req.body.id}
     });
 
-    // true : 유효한 아이디, false : 중복 아이디
-    if (result.length == 0) {
-        res.send(true);
+    console.log(result);
+
+    if (result == null) {
+        res.send({valid: true});
     } else {
-        res.send(false);
+        res.send({valid: false});
     }
 }
 
 // 이메일 중복 확인
 exports.emailCheck = async (req, res) => {
 
-    let result = await models.User.findAll({
+    let result = await models.User.findOne({
         where: {email : req.body.email}
     });
     
-    // true : 유효한 이메일, false : 중복 이메일
-    if (result.length == 0) {
-        res.send(true);
+    if (result == null) {
+        res.send({valid: true});
     } else {
-        res.send(false);
+        res.send({valid: false});
     }
 }
 
@@ -61,12 +63,8 @@ exports.findId = async (req, res) => {
     let result = await models.User.findOne({
         where: {email : req.body.email}
     });
-
-    if (result == null) {
-        res.send(false);
-    } else {
-        res.send(result);
-    }
+    console.log(result);
+    res.send({id: result});
 }
 
 // 비밀번호 재설정
@@ -87,16 +85,26 @@ exports.resetPW = async (req, res) => {
 // 로그인
 exports.postLogin = async (req, res) => {
 
-    const id_result = await models.User.findOne({
+    const idResult = await models.User.findOne({
         where: {id : req.body.id}
     });
+     
+    if (idResult != null) {
+        const result = await bcrypt.compare(req.body.password, idResult.password);
 
-    const result = await bcrypt.compare(req.body.password, id_result.password);
-
-    // false : 로그인 실패 , true : 로그인 성공
-    if (result == true) {
-        res.send(true);
+        if (result == true) {
+            // const token = jwt.sign({
+            //     type : 'JWT',
+            //     id : req.body.id
+            // }, secret, {
+            //     expiresIn: '15m',
+            //     issuer: '토큰발급자'
+            // });
+            res.send({isLogin : true});
+        } else {
+            res.send({isLogin : false});
+        }
     } else {
-        res.send(false);
+        res.send({isLogin : false});
     }
 }

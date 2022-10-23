@@ -6,20 +6,21 @@ const BACK_SERVER = "http://localhost:8000";
 const FindId = () => {
 
     const [code, setCode] = useState('');
-    const [id, setId] = useState('');
     const input = useRef();
     const codeInput = useRef();
 
     const sendEmail = async () => {
 
-        let isId = await axios.post(BACK_SERVER + "/user/findId", {email: input.current.value});
+        const emailCheck = await axios.post(BACK_SERVER + "/user/emailCheck", {email: input.current.value});
+        const isEmail = emailCheck.data.valid;
 
         // 이메일이 존재하면
-        if (isId.data) {
-            // 이메일로 인증코드 보내기
+        if (!isEmail) {
             console.log("인증코드가 발송되었습니다.");
-            let result = await axios.post(BACK_SERVER + "/email", {email: input.current.value});
-            setCode(result.data);
+            // 이메일로 인증코드 보내기
+            const result = await axios.post(BACK_SERVER + "/email", {email: input.current.value});
+            const code = result.data.code;
+            setCode(code);
         } else {
             alert("입력하신 정보로 등록된 아이디를 찾을 수 없습니다.");
         }
@@ -29,9 +30,16 @@ const FindId = () => {
     const findId = async () => {
 
         if (codeInput.current.value == code) {
-            let id = await axios.post(BACK_SERVER + "/user/findId", {email: input.current.value});
-            console.log(id.data.id);
-            setId(id.data.id);
+
+            const idResult = await axios.post(BACK_SERVER + "/user/findId", {email: input.current.value});
+            const id = idResult.data.id;
+
+            if (id == null) {
+                console.log("존재하지 않는 아이디");
+            } else {
+                console.log(id.id);
+            }
+
         } else {
             console.log("인증 실패");
         }

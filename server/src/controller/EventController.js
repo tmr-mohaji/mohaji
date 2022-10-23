@@ -2,6 +2,7 @@ const models = require("../model");
 
 // 메인 페이지 갤러리
 exports.getMain = async (req, res) => {
+
     const { type } = req.query;
 
     if (type == "전체") {

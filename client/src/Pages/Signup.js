@@ -5,13 +5,18 @@ import { useNavigate } from 'react-router-dom';
 const USER_URL = "http://localhost:8000/user/"
 
 const Signup = () => {
+
     const form = useRef();
     const navigate = useNavigate();
 
+    // 아이디 중복 확인
     const idCheck = async (e) => {
+
         const response = await axios.post(USER_URL + "idCheck", {id : e.target.value});
+        const validId = response.data.valid;
+
         if (e.target.value != "") {
-            if (response.data == true) {
+            if (validId == true) {
                 console.log("유효한 아이디");
             } else {
                 console.log("중복 아이디");
@@ -19,19 +24,32 @@ const Signup = () => {
         }
     }
 
+    // 회원가입
     const signup = async () => {
-        const response = await axios.post(USER_URL + "emailCheck", {
+
+        let result = form.current.checkValidity();
+
+        if ( !result ) {
+            form.current.reportValidity();
+            return false;
+        }
+
+        const emailCheck = await axios.post(USER_URL + "emailCheck", {
             email : form.current.email.value
         })
-        if (response.data == true) {
-            const res = await axios.post(USER_URL + "signup", {
+
+        const validEmail = emailCheck.data.valid;
+
+        if (validEmail == true) {
+
+            const response = await axios.post(USER_URL + "signup", {
                 id : form.current.id.value, 
                 password : form.current.password.value,
                 nickname : form.current.nickname.value, 
                 email : form.current.email.value
             });
-            alert(form.current.nickname.value + "님 환영합니다.");
             navigate("/user/login");
+            
         } else {
             alert("해당 이메일 아이디 존재");
         }
