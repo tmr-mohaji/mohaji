@@ -1,4 +1,7 @@
+import { Link } from 'react-router-dom';
 import './Mypage.scss';
+
+import mypage from './img/mypage_i.png';
 
 const Mypage = () => {
     return (
@@ -27,7 +30,10 @@ const Mypage = () => {
                     </div>
 
                     <div className='mypage_box2'>
-
+                        <img className='box2_img' src={mypage} alt='' />
+                        <div className='box2_btn'>
+                            <Link>마이 페이지</Link>
+                        </div>
                     </div>
                 </div>
             </div>
