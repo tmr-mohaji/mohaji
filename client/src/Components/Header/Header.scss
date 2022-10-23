@@ -11,6 +11,7 @@
     z-index:99;
     background:#fff;
     transition: .2s linear;
+    border-bottom:1px solid #ddd;
 }
 
 .head_wrap{
@@ -50,11 +51,11 @@
 .bt_line:hover:after{
     content:'';
     background:#7a266d;
-    height:3px;
-    width:80px;
+    height:3.5px;
+    width:90px;
     position:absolute;
-    bottom:-36px;
-    left:0;
+    bottom:-34px;
+    left:-8px;
 }
 
 
