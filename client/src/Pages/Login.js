@@ -11,12 +11,21 @@ const Signup = () => {
 
     const login = async () => {
 
+        let result = form.current.checkValidity();
+
+        if ( !result ) {
+            form.current.reportValidity();
+            return false;
+        }
+
         const response = await axios.post(USER_URL, {
             id : form.current.id.value,
             password : form.current.password.value
         })
 
-        if (response.data) {
+        const isLogin = response.data.isLogin;
+
+        if (isLogin) {
             console.log("성공");
             navigate("/");
         } else {

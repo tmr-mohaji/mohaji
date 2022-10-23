@@ -23,5 +23,5 @@ exports.sendEmail = async (req, res) => {
         text: "인증번호 " + String(number)
     });
 
-    res.send(String(number));
+    res.send({code : String(number)});
 }
