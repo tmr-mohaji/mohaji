@@ -88,4 +88,36 @@
 =========================================================*/
 .mypage_box2{
     width:30%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.box2_img{
+    width:80%;
+}
+
+.box2_btn{
+    width:71.6%;
+    padding:10px 0;
+    position: relative;
+    left:5px;
+    text-align: center;
+    border:2px solid #fff;
+    cursor: pointer;
+}
+
+.box2_btn a{
+    color:#fff;
+    font-family: "Elice Digital Baeum", sans-serif;
+}
+
+.box2_btn:hover{
+    background:#fff;
+}
+
+.box2_btn:hover a{
+    color:#000;
+    
 }
