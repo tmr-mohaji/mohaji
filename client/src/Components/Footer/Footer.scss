@@ -1,0 +1,89 @@
+@import '../Commons/Commons.scss';
+@import '~include-media/dist/include-media';
+
+
+/*=========================================================
+    푸터 정의
+=========================================================*/
+footer{
+    width:100%;
+    background:#000;
+    color:#fff;
+    position: relative;
+    margin:0 auto;
+}
+
+.footer{
+    padding:20px 0;
+}
+
+footer .container{
+    max-width:1800px;
+    margin:0 auto;
+    position: relative;
+}
+
+/*=========================================================
+    푸터 세부 정의
+=========================================================*/
+.footer .wrap{
+    display:flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.footer ul{
+    overflow: hidden;
+}
+
+
+/*=========================================================
+    홈 | 서브메뉴 | 서브메뉴 | 서브메뉴 정의
+=========================================================*/
+.f17{
+    font-size:14px;
+    letter-spacing: -0.05rem;
+}
+
+.footer ul li{
+    float:left;
+}
+
+.footer ul.menu li{
+    margin-right:34px;
+}
+
+.footer ul.menu li a{
+    color:#fff;
+}
+
+
+/*=========================================================
+    푸터 간격 정의
+=========================================================*/
+.footer .privacy{
+    margin:30px 0 30px;
+    border-bottom:1px solid #ddd;
+}
+
+
+/*=========================================================
+    푸터 조장 및 copyright 정의
+=========================================================*/
+.copy{
+    font-size:12px;
+    line-height: 20px;
+}
+
+.c_line{
+    font-size:10px;
+    position: relative;
+    margin:0 5px;
+    top:-1px;
+}
+
+.footer ul.f_logo{
+    margin-top:-16px;
+    font-size:50px;
+}

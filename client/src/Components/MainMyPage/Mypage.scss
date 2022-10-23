@@ -1,0 +1,123 @@
+@import '../Commons/Commons.scss';
+@import '~include-media/dist/include-media';
+
+
+.mypageBox{
+    width:100%;
+    padding-bottom:120px;
+    box-sizing: border-box;
+}
+
+.mypage_back{
+    max-width: 1800px;
+    position: relative;
+    // background:#6332f8;
+    background:linear-gradient(#6B3767, #A24F63);
+    margin:0 auto;    
+
+    display:flex;
+    align-items: center;
+    padding:50px 80px 50px 80px;
+
+}
+
+
+/*=========================================================
+    왼쪽 컨텐츠 정의
+=========================================================*/
+.mypage_box1{
+    width:70%;
+
+}
+
+
+/*=========================================================
+    큰 타이틀 정의
+=========================================================*/
+.box1_h1{
+    font-size:45px;
+    color:#fff;
+}
+
+
+/*=========================================================
+    세부 내용 정의 1)
+=========================================================*/
+.box1_a{
+    margin-top:30px;
+    margin-bottom:30px;
+    color:#fff;
+}
+
+.box1_span{
+    font-size:12px;
+    padding-left:15px;
+    color:#ddd;
+}
+
+.box1_b{
+
+}
+
+.box1_c{
+    margin-top:10px;
+}
+
+
+.b_list{
+    width:80px;
+    text-align: center;
+    height:35px;
+    line-height: 35px;
+    background:rgba(0,0,0,0.2);
+    display:inline-block;
+    color:#fff;
+    font-size:12px;
+    margin-right:10px;
+}
+
+.b_list2{
+    font-size:12px;
+    color:#fff;
+}
+
+
+
+/*=========================================================
+    오른쪽 컨텐츠 정의
+=========================================================*/
+.mypage_box2{
+    width:30%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.box2_img{
+    width:80%;
+}
+
+.box2_btn{
+    width:71.6%;
+    padding:10px 0;
+    position: relative;
+    left:5px;
+    text-align: center;
+    border:2px solid #fff;
+    cursor: pointer;
+}
+
+.box2_btn a{
+    color:#fff;
+    font-family: "Elice Digital Baeum", sans-serif;
+}
+
+.box2_btn:hover{
+    background:#fff;
+}
+
+.box2_btn:hover a{
+    color:#000;
+    
+}
