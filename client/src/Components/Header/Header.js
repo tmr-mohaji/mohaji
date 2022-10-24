@@ -24,7 +24,6 @@ const Header = () => {
                     'Authorization': localStorage.getItem("access_token")
                 }
             }).then((result) => {
-                console.log( result.data );
                 setNickname(result.data.nickname);
             });
         }

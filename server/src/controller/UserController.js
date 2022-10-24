@@ -107,7 +107,13 @@ exports.postLogin = async (req, res) => {
     }
 }
 
+exports.getInfo = async (req, res) => {
+    const result = await models.User.findOne({
+        where: {id : req.query.id}
+    });
+    res.send(result);
+}
+
 exports.getAuth = (req, res) => {
-    console.log(req.decoded.id, req.decoded.nickname);
     res.send({id : req.decoded.id, nickname : req.decoded.nickname});
 }

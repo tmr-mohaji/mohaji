@@ -15,6 +15,8 @@ router.post("/findId", user.findId);
 router.post("/resetPW", user.resetPW);
 // 로그인
 router.post("/login", user.postLogin);
+// 유저 정보
+router.get("/info", user.getInfo);
 // auth
 router.get("/auth", auth.verifyToken, user.getAuth);
 
