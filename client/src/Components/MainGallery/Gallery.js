@@ -11,12 +11,11 @@ import h_icon3 from './img/g_tit_03.png';
 
 const MAIN_PAGE = "http://localhost:8000/";
 
-const Gallery = ({timeline, ease}) => {
+const Gallery = () => {
 
     const [type, setType] = useState("전체");
     const [data, setData] = useState([]);
 
-    let title1 = useRef(null);
 
     // 전체 카테고리에 관련된 내용이 활성화 되었을 시 전체 카테고리 active 주기 위해 정의
     const links = [...document.querySelectorAll('.buttonBox span')];
@@ -64,16 +63,57 @@ const Gallery = ({timeline, ease}) => {
     }, [type])
 
 
-    // 텍스트 애니메이션 효과
-    useEffect(() => {
-        timeline.fromTo(title1, {opacity: 0, y:400}, {opacity: 1, y:0, duration: 2}, 0.8);
 
-    })
+    // 페이지 스크롤 애니메이션 정의
+    const options = {
+        // viewport
+        root: null,
+        rootMargin: "0px",
+        // 50%가 viewport에 들어와 있어야 callback 실행
+        threshold: 1.0,
+    }
+
+    const options2 = {
+        // viewport
+        root: null,
+        rootMargin: "0px",
+        // 0%가 viewport에 들어와 있어야 callback 실행
+        threshold: 0,
+    }
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            } else {
+                entry.target.classList.remove('active');
+            }
+        });
+    }, options);
+
+    const observer2 = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            } else {
+                entry.target.classList.remove('active');
+            }
+        });
+    }, options2);
+
+    const boxList1 = document.querySelectorAll('.galleryTitle');
+    const boxList2 = document.querySelectorAll('.buttonBox');
+    const boxList3 = document.querySelectorAll('.listBox');
+
+    boxList1.forEach(el => observer.observe(el));
+    boxList2.forEach(el => observer.observe(el));
+    boxList3.forEach(el => observer2.observe(el));
+
 
 
     return (
         <section>
-            <div className='galleryTitle' ref={el => title1 = el}>
+            <div className='galleryTitle'>
                 <h1 className='g_tit'>공연 일정</h1>
             </div>
 
