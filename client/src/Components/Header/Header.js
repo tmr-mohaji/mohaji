@@ -1,25 +1,23 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+
+import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import './Header.scss';
 
 const Header = (props) => {
 
     const navigate = useNavigate();
     const [isMenu, setMenu] = useState(false);
-    // const [nickname, setNickname] = useState('');
 
     const hambugerBtn = () => {
         setMenu(isMenu => !isMenu);
     }
-
+    
     const LogOut = () => {
         // props.setNickname();
         window.localStorage.clear();
         window.location.replace('/');
     }
-
+    
     return (
         <header>
             <div className='headerArea'>
@@ -45,13 +43,13 @@ const Header = (props) => {
                     <div className='nav'>
                         { props.name == "" ? (
                             <ul className="navbar_2 navbar_pc">
-                            <li>
-                                <Link to='/user/login'> 로그인 </Link>
-                            </li>
+                                <li>
+                                    <Link to='/user/login'> 로그인 </Link>
+                                </li>
 
-                            <li>
-                                <Link to='/user/signup'> 회원가입 </Link>
-                            </li>
+                                <li>
+                                    <Link to='/user/signup'> 회원가입 </Link>
+                                </li>
                             </ul>
                         ) : (
                             <ul className="navbar_2 navbar_pc">

@@ -1,7 +1,7 @@
 import { useRef } from 'react';
-import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import './Login.scss';
+import axios from 'axios';
 
 const USER_URL = "http://localhost:8000/user/login"
 
@@ -27,7 +27,6 @@ const Login = ( props ) => {
         const isLogin = response.data.isLogin;
 
         if (isLogin) {
-            console.log("성공");
             props.setNickname( response.data.nickname );
             window.localStorage.setItem("access_token", response.data.token );
             navigate("/");

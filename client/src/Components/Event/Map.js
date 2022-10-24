@@ -87,8 +87,8 @@ function MapComponent(props) {
         .then((req) => { return req.data;})
         .then((addressData) => {
 
-        console.log(addressData);
-        console.log("props :", props.address);
+        // console.log(addressData);
+        // console.log("props :", props.address);
 
             // 1. 주소 >> 좌표 전환
 

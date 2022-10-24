@@ -107,6 +107,7 @@ exports.postLogin = async (req, res) => {
     }
 }
 
+// 마이 페이지
 exports.getInfo = async (req, res) => {
     const result = await models.User.findOne({
         where: {id : req.query.id}

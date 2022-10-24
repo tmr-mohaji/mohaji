@@ -53,5 +53,8 @@ exports.getAddress = async (req, res) => {
 }
 
 exports.like = async (req, res) => {
-    
+    console.log( "event like ");
+    console.log(req.body);
+    res.send(true);
+    let result = await models.Event.findAll();
 }

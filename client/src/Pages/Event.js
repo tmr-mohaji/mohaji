@@ -1,7 +1,9 @@
 import { useEffect, useState, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 import './Event.scss';
+
 import Map from '../components/Event/Map';
 import dateData from './Date.json';
 import { MdPlace } from 'react-icons/md';
@@ -22,8 +24,6 @@ const Event = () => {
     const [type, setType] = useState('');
     //달력 정보
     const [calendar, setCalendar] = useState(null);
-    //좋아요 설정
-    // const [like, setLike] = useState();
 
 
     // city, type, date 선택시 필터링 적용
@@ -36,7 +36,7 @@ const Event = () => {
     const handleChange_type = (event) => {
         setType(event.target.value);
         setFilter({...filter, [event.target.name]: event.target.value,});
-        console.log(filter);
+        // console.log(filter);
     };
     
     const handleChange_date = (event) => {
@@ -84,14 +84,25 @@ const Event = () => {
 
     // 좋아요 버튼 설정
     const LikeIt = (id) => {
-        console.log(id);
+        if ( localStorage.getItem("access_token") != undefined ) {
+            axios({
+                url: 'http://localhost:8000/user/auth',
+                headers: {
+                    'Authorization': localStorage.getItem("access_token")
+                }
+            }).then( (result) => {
+                console.log(result.data.id, id);
+                // axios.post(EVENT_PAGE + "/like", {user_id : result.data.id, event_id : id});
+                axios.get(EVENT_PAGE + "/like", {params : {user_id : result.data.id, event_id : id}});
+            });
+        } else {
+            alert("로그인 후 이용가능");
+        }
         
     }
 
     useEffect(() => {
-        console.log( filter );
         getData();
-
     }, [filter, address])
 
     return (
