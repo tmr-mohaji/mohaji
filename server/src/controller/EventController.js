@@ -51,3 +51,7 @@ exports.getAddress = async (req, res) => {
     });
     res.send(result);
 }
+
+exports.like = async (req, res) => {
+    
+}

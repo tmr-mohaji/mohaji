@@ -33,10 +33,10 @@ const Footer = () => {
                         </p>
 
                         <ul className="f_logo">
-                                <li>
-                                    <h1>내일 뭐하지?</h1>
-                                </li>
-                            </ul>
+                            <li>
+                                <h1>내일 뭐하지?</h1>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
