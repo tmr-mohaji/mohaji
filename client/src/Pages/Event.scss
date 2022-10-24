@@ -155,8 +155,9 @@ box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
   display:flex;
   align-items:center;
   position:absolute;
-  bottom:15%;
+  bottom:7%;
   width:90%;
+  margin-top: 5%;
 
   @include media('<1300px') {
     top:15%;
