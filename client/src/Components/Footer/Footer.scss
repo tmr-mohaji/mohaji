@@ -87,3 +87,26 @@ footer .container{
     margin-top:-16px;
     font-size:50px;
 }
+
+
+
+
+@include media('<1800px'){
+    .footer{
+        padding-left:40px;
+        padding-right:40px;
+    }
+}
+
+
+@include media('<691px'){
+    .footer .wrap{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer ul.f_logo{
+        margin-top:0;
+        display:none;
+    }
+}
