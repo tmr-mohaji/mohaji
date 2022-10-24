@@ -1,37 +1,24 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Header.scss';
 
 const Header = (props) => {
+
+    const navigate = useNavigate();
     const [isMenu, setMenu] = useState(false);
-    const [nickname, setNickname] = useState('');
+    // const [nickname, setNickname] = useState('');
 
     const hambugerBtn = () => {
         setMenu(isMenu => !isMenu);
     }
 
-    // const getAuth =  () => {
-    //     if ( localStorage.getItem("access_token") == undefined ) {
-    //         // 로그인, 회원가입 버튼 보여주기
-    //         console.log( 'login fail' );
-    //     } else {
-    //         // 로그인, 회원가입 버튼 대신 마이페이지 버튼 보여주기
-    //         console.log( 'login success' );
-    //         axios({
-    //             url: 'http://localhost:8000/user/auth',
-    //             headers: {
-    //                 'Authorization': localStorage.getItem("access_token")
-    //             }
-    //         }).then((result) => {
-    //             setNickname(result.data.nickname);
-    //         });
-    //     }
-    // }
-
-    useEffect(() => {
-
-    }, [props.name])
+    const LogOut = () => {
+        // props.setNickname();
+        window.localStorage.clear();
+        window.location.replace('/');
+    }
 
     return (
         <header>
@@ -67,9 +54,9 @@ const Header = (props) => {
                             </li>
                             </ul>
                         ) : (
-                            <ul>
-                            <li>{props.name}</li>
-
+                            <ul className="navbar_2 navbar_pc">
+                                <li>{props.name}</li>
+                                <li style={{cursor:'pointer'}} onClick={LogOut}> 로그아웃 </li>
                             </ul>
                         ) }
 

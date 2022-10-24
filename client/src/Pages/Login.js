@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 
 const USER_URL = "http://localhost:8000/user/login"
 
-const Signup = ( props ) => {
+const Login = ( props ) => {
 
     const form = useRef();
     const navigate = useNavigate();
@@ -48,4 +48,4 @@ const Signup = ( props ) => {
     )
 }
 
-export default Signup;
+export default Login;
