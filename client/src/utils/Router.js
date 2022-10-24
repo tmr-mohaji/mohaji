@@ -10,6 +10,7 @@ import Login from '../pages/Login';
 import FindId from '../pages/FindId';
 import ChatList from '../pages/ChatList';
 import Chat from '../pages/Chat';
+import MyPage from '../pages/MyPage';
 
 
 const Router = () => {
@@ -26,6 +27,7 @@ const Router = () => {
                     <Route path="/user/findid" element={<FindId />} />
                     <Route path="/chatlist" element={<ChatList />} />
                     <Route path="/chat" element={<Chat />} />
+                    <Route path="/mypage" element={<MyPage />} />
                 </Routes>
                 <Footer />
             </BrowserRouter>

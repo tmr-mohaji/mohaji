@@ -10,8 +10,6 @@ const Main = () => {
     let tl = new gsap.timeline();
     let ease = Power3.easeOut;
 
-    const result = axios.get("http://localhost:8000/user/auth");
-
     return (
         <div>
             <Banner timeline={tl} ease={ease} />

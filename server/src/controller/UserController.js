@@ -95,9 +95,10 @@ exports.postLogin = async (req, res) => {
         if (result == true) {
             const token = jwt.sign({
                 type : 'JWT',
-                id : req.body.id
+                id : req.body.id,
+                nickname: idResult.nickname
             }, secret);
-            res.send({isLogin : true});
+            res.send({isLogin : true, token: token});
         } else {
             res.send({isLogin : false});
         }
@@ -107,5 +108,6 @@ exports.postLogin = async (req, res) => {
 }
 
 exports.getAuth = (req, res) => {
-    
+    console.log(req.decoded.id, req.decoded.nickname);
+    res.send({id : req.decoded.id, nickname : req.decoded.nickname});
 }
