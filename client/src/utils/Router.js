@@ -8,6 +8,8 @@ import EventDetail from '../pages/EventDetail';
 import Signup from '../pages/Signup';
 import Login from '../pages/Login';
 import FindId from '../pages/FindId';
+import ChatList from '../pages/ChatList';
+import Chat from '../pages/Chat';
 
 
 const Router = () => {
@@ -22,6 +24,8 @@ const Router = () => {
                     <Route path="/user/signup" element={<Signup />} />
                     <Route path="/user/login" element={<Login />} />
                     <Route path="/user/findid" element={<FindId />} />
+                    <Route path="/chatlist" element={<ChatList />} />
+                    <Route path="/chat" element={<Chat />} />
                 </Routes>
                 <Footer />
             </BrowserRouter>
