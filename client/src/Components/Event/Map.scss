@@ -11,5 +11,11 @@
     left:0;
     width:50%;
     // }
+
+    //221024
+  @include media ('<1300px') {
+    width: 100%;
+    height: 40%;
+  }
     
 }
