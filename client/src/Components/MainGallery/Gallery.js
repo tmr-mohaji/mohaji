@@ -77,8 +77,8 @@ const Gallery = () => {
         // viewport
         root: null,
         rootMargin: "0px",
-        // --%가 viewport에 들어와 있어야 callback 실행
-        threshold: 0.1,
+        // 0%가 viewport에 들어와 있어야 callback 실행
+        threshold: 0,
     }
 
     const observer = new IntersectionObserver(entries => {
