@@ -4,6 +4,30 @@ import './Mypage.scss';
 import mypage from './img/mypage_i.png';
 
 const Mypage = () => {
+        // 페이지 스크롤 애니메이션 정의
+        const options = {
+            // viewport
+            root: null,
+            rootMargin: "0px",
+            // 0%가 viewport에 들어와 있어야 callback 실행
+            
+        }
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, options);
+
+        const boxList1 = document.querySelectorAll('.box1_h1');
+
+        boxList1.forEach(el => observer.observe(el));
+
+
     return (
         <section>
             <div className='mypageBox'>
