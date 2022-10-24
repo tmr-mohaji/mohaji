@@ -16,7 +16,7 @@ const Gallery = ({timeline, ease}) => {
     const [type, setType] = useState("전체");
     const [data, setData] = useState([]);
 
-    let text1 = useRef(null);
+    let title1 = useRef(null);
 
     // 전체 카테고리에 관련된 내용이 활성화 되었을 시 전체 카테고리 active 주기 위해 정의
     const links = [...document.querySelectorAll('.buttonBox span')];
@@ -66,16 +66,14 @@ const Gallery = ({timeline, ease}) => {
 
     // 텍스트 애니메이션 효과
     useEffect(() => {
-        timeline.from(text1, {
-            opacity: 0,
-            y: 100,
-        })
+        timeline.fromTo(title1, {opacity: 0, y:400}, {opacity: 1, y:0, duration: 2}, 0.8);
+
     })
 
 
     return (
         <section>
-            <div className='galleryTitle' ref={el => text1 = el} style={{ opacity: 1}}>
+            <div className='galleryTitle' ref={el => title1 = el}>
                 <h1 className='g_tit'>공연 일정</h1>
             </div>
 
