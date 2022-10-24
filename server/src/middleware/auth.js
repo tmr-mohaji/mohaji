@@ -4,6 +4,6 @@ const secret = 'JWT-SECRET-KEY';
 
 exports.verifyToken = (req, res, next) => {
 
-    req.decoded = jwt.verify(req.headers.authorization, secret);
+    // req.decoded = jwt.verify(req.headers.authorization, secret);
     // console.log(req.decoded);
 }

@@ -1,8 +1,10 @@
 const express = require("express");
 const app = express();
-const port = 8000;
+const http = require("http").Server(app);
+const io = require("socket.io")(http, { cors : { origin : "*" }});
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const port = 8000;
 
 require('dotenv').config();
 
@@ -22,6 +24,39 @@ app.use("/email", emailRouter);
 
 app.get("/", event.getMain);
 
-app.listen(port, () => {
+io.on("connection", (socket) => {
+
+    socket.on("enterRoom", (room, done) => {
+        socket.join(room.room);
+        done();
+        // 자신 제외
+        socket.to(room.room).emit("welcome");
+        // 자기한테도
+        // socket.emit("welcome");
+    })
+
+    socket.on("newMsg", (data, done) => {
+        socket.to(data.room).emit("newMsg", data.msg);
+        done();
+    })
+
+    socket.on("disconnecting", () => {
+        socket.rooms.forEach((room) => {
+            socket.to(room).emit("bye");
+        })
+    })
+
+    // io.emit("notice", socket.id + "입장");
+
+    // socket.on("disconnect", () => {
+    //     io.emit("notice", socket.id + "퇴장");
+    // })
+
+    // socket.on("send", (data) => {
+    //     io.emit("newMsg", data.msg);
+    // })
+})
+
+http.listen(port, () => {
     console.log("Server Port : ", port);
 });
