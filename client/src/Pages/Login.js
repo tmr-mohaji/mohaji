@@ -28,6 +28,7 @@ const Login = ( props ) => {
 
         if (isLogin) {
             props.setNickname( response.data.nickname );
+            props.setId( form.current.id.value );
             window.localStorage.setItem("access_token", response.data.token );
             navigate("/");
         } else {

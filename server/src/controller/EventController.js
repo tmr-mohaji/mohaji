@@ -23,8 +23,6 @@ exports.getEvent = async (req, res) => {
     if (city == "전체") city='';
     if (type == "전체") type='';
 
-    console.log(date);
-
     if (date == '') {
         let query = `select * from event where address like '%${city}%' and type like '%${type}%'`;
         let result = await models.Event.sequelize.query(query);
@@ -41,7 +39,6 @@ exports.getDetail = async (req, res) => {
     let result = await models.Event.findOne({
         where: {id : req.query.id}
     });
-    console.log(result);
     res.send(result);
 }
 
@@ -53,8 +50,21 @@ exports.getAddress = async (req, res) => {
 }
 
 exports.like = async (req, res) => {
-    console.log( "event like ");
-    console.log(req.body);
-    res.send(true);
-    let result = await models.Event.findAll();
+    console.log("like");
+    let obj = {
+        user_id : req.body.user_id,
+        event_id : req.body.event_id
+    }
+    let result = await models.Like.create(obj);
+}
+
+exports.dislike = async (req, res) => {
+    console.log("dislike");
+    let result = await models.Like.destroy({where: {user_id : req.body.user_id, event_id : req.body.event_id}});
+    console.log(result);
+}
+
+exports.likeinfo = async (req, res) => {
+    let result = await models.Like.findOne({where: {user_id : req.body.user_id, event_id : req.body.event_id}});
+    res.send(result);
 }

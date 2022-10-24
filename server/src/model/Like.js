@@ -12,10 +12,10 @@ const Like = (Sequelize, DataTypes) => {
             user_id: {
                 type: DataTypes.STRING(255),
                 allowNull: false,
-                primaryKey: true
             },
             event_id: {
-                type: DataTypes.STRING(255),
+                type: DataTypes.INTEGER,
+                allowNull: false
             }
         },
         {
