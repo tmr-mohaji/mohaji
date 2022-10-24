@@ -1,14 +1,38 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './Header.scss';
-
 
 const Header = () => {
     const [isMenu, setMenu] = useState(false);
+    const [nickname, setNickname] = useState('');
 
     const hambugerBtn = () => {
         setMenu(isMenu => !isMenu);
     }
+
+    const getAuth =  () => {
+        if ( localStorage.getItem("access_token") == undefined ) {
+            // 로그인, 회원가입 버튼 보여주기
+            console.log( 'login fail' );
+        } else {
+            // 로그인, 회원가입 버튼 대신 마이페이지 버튼 보여주기
+            console.log( 'login success' );
+            axios({
+                url: 'http://localhost:8000/user/auth',
+                headers: {
+                    'Authorization': localStorage.getItem("access_token")
+                }
+            }).then((result) => {
+                console.log( result.data );
+                setNickname(result.data.nickname);
+            });
+        }
+    }
+
+    useEffect(() => {
+        getAuth();
+    })
 
     return (
         <header>
@@ -34,6 +58,7 @@ const Header = () => {
 
                     <div className='nav'>
                         <ul className="navbar_2 navbar_pc">
+                            <li>{nickname}</li>
                             <li>
                                 <Link to='/user/login'> 로그인 </Link>
                             </li>
