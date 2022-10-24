@@ -27,4 +27,12 @@ CREATE TABLE user (
     email varchar(255)
 );
 
+CREATE TABLE event_like (
+    id int not null primary key auto_increment,
+	user_id varchar(255) not null,
+    FOREIGN KEY ( user_id ) REFERENCES user(id) ON DELETE CASCADE,
+	event_id int not null,
+    FOREIGN KEY ( event_id ) REFERENCES event(id) ON DELETE CASCADE
+);
+
 select * from event;

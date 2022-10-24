@@ -23,14 +23,14 @@ const Event = () => {
     //달력 정보
     const [calendar, setCalendar] = useState(null);
     //좋아요 설정
-    const [like, setLike] = useState();
+    // const [like, setLike] = useState();
 
 
     // city, type, date 선택시 필터링 적용
     const handleChange_city = (event) => {
         setCity(event.target.value);
         setFilter({...filter, [event.target.name]: event.target.value,});
-        console.log(filter);
+        // console.log(filter);
     };
 
     const handleChange_type = (event) => {
@@ -48,13 +48,10 @@ const Event = () => {
         setFilter({...filter, date : pickDate[3]+ '-' + month + '-' + pickDate[2] });
     };
     
-
-
     const navigate = useNavigate();
-    const { state } = useLocation();
 
     const [filter, setFilter] = useState({
-        city: state,
+        city: '전체',
         type: '전체',
         date: ''
     });
@@ -86,7 +83,8 @@ const Event = () => {
     }
 
     // 좋아요 버튼 설정
-    const LikeIt = () => {
+    const LikeIt = (id) => {
+        console.log(id);
         
     }
 
@@ -183,7 +181,7 @@ const Event = () => {
                                             <button className='goMap' type="button" onClick={() => {getAddress(data.id)}}><img src={GPS} style={{width:'30px',height:'30px'}}/></button>
                                         </div>
                                         <button className='goView' type="button" onClick={() => { navigate('/event/'+ data.id); }}>상세보기</button>
-                                        <button className='likes' onClick={LikeIt}><FaHeart /></button>
+                                        <button className='likes' onClick={() => {LikeIt(data.id)}}><FaHeart /></button>
                                     </div>
                                     
                                 </div>

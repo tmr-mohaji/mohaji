@@ -98,7 +98,7 @@ exports.postLogin = async (req, res) => {
                 id : req.body.id,
                 nickname: idResult.nickname
             }, secret);
-            res.send({isLogin : true, token: token});
+            res.send({isLogin : true, token: token, nickname: idResult.nickname });
         } else {
             res.send({isLogin : false});
         }

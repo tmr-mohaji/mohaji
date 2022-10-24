@@ -34,7 +34,7 @@ const Banner = ({timeline, ease}) => {
     const navigate = useNavigate();
 
     const goToEvent = () => {
-        navigate('/event?city=전체', {state: '전체'});
+        navigate('/event');
     }
 
     // 배경 애니메이션 효과

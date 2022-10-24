@@ -32,7 +32,7 @@ const Mypage = () => {
                     <div className='mypage_box2'>
                         <img className='box2_img' src={mypage} alt='' />
                         <div className='box2_btn'>
-                            <Link>마이 페이지</Link>
+                            <Link to="/mypage">마이 페이지</Link>
                         </div>
                     </div>
                 </div>
