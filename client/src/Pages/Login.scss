@@ -1,0 +1,10 @@
+@import '../components/Commons/Commons.scss';
+@import '~include-media/dist/include-media';
+
+.login_entire_layout {
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

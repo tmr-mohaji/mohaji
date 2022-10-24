@@ -55,6 +55,7 @@ const Header = (props) => {
                             <ul className="navbar_2 navbar_pc">
                                 <li>{props.name}</li>
                                 <li style={{cursor:'pointer'}} onClick={LogOut}> 로그아웃 </li>
+                                <li style={{cursor:'pointer'}} onClick={() => navigate('/mypage')}> 마이페이지 </li>
                             </ul>
                         ) }
 
