@@ -191,3 +191,74 @@
     width: 27px;
     margin-right: 10px;
 }
+
+
+@include media('<1800px'){
+    .g_img{
+        height:375px;
+    }
+
+    .g_hover{
+        height:375px;
+    }
+}
+
+
+@include media('<1200px'){
+    .listGallery{
+        width:22%;
+    }
+
+    .g_img{
+        height:340px;
+    }
+
+    .g_hover{
+        height:340px;
+    }
+
+    .g_tit_h1{
+        font-size:14px;
+    }
+
+    .g_tit_h2{
+        padding-top:10px;
+        font-size:10px;
+    }
+
+    p.g_tit_h3{
+        font-size:10px;
+    }
+
+    .g_tit_h4{
+        font-size:10px;
+    }
+
+    .g_tit_img{
+        width:22px;
+    }
+}
+
+
+@include media('<691px'){
+    .listGallery{
+        width:40%;
+    }
+
+    .g_img{
+        height:300px;
+    }
+
+    .g_hover{
+        height:300px;
+        padding:5% 5%;
+    }    
+
+    .buttonBox{
+        width:80%;
+    }
+
+    .buttonBox button{
+        font-size:12px;
+    }
+}
