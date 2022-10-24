@@ -1,14 +1,23 @@
+
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './Header.scss';
 
 const Header = (props) => {
+
+    const navigate = useNavigate();
     const [isMenu, setMenu] = useState(false);
 
     const hambugerBtn = () => {
         setMenu(isMenu => !isMenu);
     }
-
+    
+    const LogOut = () => {
+        // props.setNickname();
+        window.localStorage.clear();
+        window.location.replace('/');
+    }
+    
     return (
         <header>
             <div className='headerArea'>
@@ -43,8 +52,9 @@ const Header = (props) => {
                                 </li>
                             </ul>
                         ) : (
-                            <ul>
+                            <ul className="navbar_2 navbar_pc">
                                 <li>{props.name}</li>
+                                <li style={{cursor:'pointer'}} onClick={LogOut}> 로그아웃 </li>
                             </ul>
                         ) }
 

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const USER_URL = "http://localhost:8000/user/login"
 
-const Signup = ( props ) => {
+const Login = ( props ) => {
 
     const form = useRef();
     const navigate = useNavigate();
@@ -47,4 +47,4 @@ const Signup = ( props ) => {
     )
 }
 
-export default Signup;
+export default Login;
