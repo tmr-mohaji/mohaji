@@ -17,14 +17,16 @@ import GPS from './img/gps.png';
 
 const EVENT_PAGE = "http://localhost:8000/event";
 
-const Event = () => {
+const Event = (props) => {
 
     // select box 설정
     const [city, setCity] = useState('');
     const [type, setType] = useState('');
     //달력 정보
     const [calendar, setCalendar] = useState(null);
-
+    // 좋아요 상태
+    // const [isLike, setIsLike] = useState(false);
+    // const [likeEvent, setLikeEvent] = useState([]);
 
     // city, type, date 선택시 필터링 적용
     const handleChange_city = (event) => {
@@ -57,6 +59,7 @@ const Event = () => {
     });
 
     const [data, setData] = useState([]);
+    const [eventData, setEventData] = useState([]);
     const [address, setAddress] = useState("");
     const [clickData, setClickData] = useState([]);
 
@@ -64,13 +67,38 @@ const Event = () => {
     const select_type = useRef();
     const select_date = useRef();
 
-    // 도시 정보로 데이터 가져오기
+    // 필터 정보로 데이터 가져오기
     const getData = async () => {
+
         const response = await axios.get(EVENT_PAGE, {
             params: {city: filter.city, type: filter.type, date: filter.date}
         })
+        console.log(response.data);
         setData(response.data);
 
+        if ( props.id != "" ) {
+            let ls = []
+            for(let i=0; i<response.data.length; i++) {
+
+                let result = await axios.post(EVENT_PAGE + "/likeInfo", {user_id: props.id, event_id: response.data[i].id});
+
+                if (result.data != "") {
+                    ls.push(true);
+                } else {
+                    ls.push(false);
+                }
+            }
+            console.log(ls.length);
+            console.log(data.length);
+            let event = []
+            for (let i=0; i<data.length; i++) {
+                data[i]['like'] = ls[i];
+                console.log(data[i]);
+                event.push(data[i]);
+            }
+            setEventData(event);
+        }
+        console.log(eventData);
     }
 
     // 클릭한 이벤트 주소 받아오기
@@ -85,16 +113,22 @@ const Event = () => {
     // 좋아요 버튼 설정
     const LikeIt = (id) => {
         if ( localStorage.getItem("access_token") != undefined ) {
-            axios({
-                url: 'http://localhost:8000/user/auth',
-                headers: {
-                    'Authorization': localStorage.getItem("access_token")
-                }
-            }).then( (result) => {
-                console.log(result.data.id, id);
-                // axios.post(EVENT_PAGE + "/like", {user_id : result.data.id, event_id : id});
-                axios.get(EVENT_PAGE + "/like", {params : {user_id : result.data.id, event_id : id}});
-            });
+            // axios({
+            //     url: 'http://localhost:8000/user/auth',
+            //     headers: {
+            //         'Authorization': localStorage.getItem("access_token")
+            //     }
+            // }).then( (result) => {
+            //     if (isLike == false) {
+            //         axios.post(EVENT_PAGE + "/like", {user_id : result.data.id, event_id : id});
+            //         setIsLike(true);
+            //         console.log("좋아요");
+            //     } else {
+            //         axios.post(EVENT_PAGE + "/dislike", {user_id : result.data.id, event_id : id});
+            //         setIsLike(false);
+            //         console.log("좋아요 취소");
+            //     }
+            // });
         } else {
             alert("로그인 후 이용가능");
         }
@@ -103,7 +137,8 @@ const Event = () => {
 
     useEffect(() => {
         getData();
-    }, [filter, address])
+        // getLike();
+    }, [filter, address, props.id])
 
     return (
         <div className="totalSection">
