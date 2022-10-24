@@ -13,7 +13,7 @@ const Main = () => {
     return (
         <div>
             <Banner timeline={tl} ease={ease} />
-            <Gallery />
+            <Gallery timeline={tl} ease={ease} />
             <Mypage />
         </div>
     )

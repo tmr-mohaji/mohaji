@@ -11,10 +11,12 @@ import h_icon3 from './img/g_tit_03.png';
 
 const MAIN_PAGE = "http://localhost:8000/";
 
-const Gallery = () => {
+const Gallery = ({timeline, ease}) => {
 
     const [type, setType] = useState("전체");
     const [data, setData] = useState([]);
+
+    let text1 = useRef(null);
 
     // 전체 카테고리에 관련된 내용이 활성화 되었을 시 전체 카테고리 active 주기 위해 정의
     const links = [...document.querySelectorAll('.buttonBox span')];
@@ -61,9 +63,19 @@ const Gallery = () => {
         getData();
     }, [type])
 
+
+    // 텍스트 애니메이션 효과
+    useEffect(() => {
+        timeline.from(text1, {
+            opacity: 0,
+            y: 100,
+        })
+    })
+
+
     return (
         <section>
-            <div className='galleryTitle'>
+            <div className='galleryTitle' ref={el => text1 = el} style={{ opacity: 1}}>
                 <h1 className='g_tit'>공연 일정</h1>
             </div>
 
