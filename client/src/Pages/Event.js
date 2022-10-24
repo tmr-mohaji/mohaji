@@ -179,11 +179,12 @@ const Event = () => {
                                         </div>
                                     </div>
                                     <div className='Btns'>
-                                        <div style={{textAlign:'right',marginBottom:'10px'}}>
-                                            <button className='goMap' type="button" onClick={() => {getAddress(data.id)}}><img src={GPS} style={{width:'30px',height:'30px'}}/></button>
-                                        </div>
+                                        {/* <div style={{textAlign:'right',marginBottom:'10px'}}>
+                                                <button className='goMap' type="button" onClick={() => {getAddress(data.id)}}><img src={GPS} style={{width:'30px',height:'30px'}}/></button> */}
+                                        
                                         <button className='goView' type="button" onClick={() => { navigate('/event/'+ data.id); }}>상세보기</button>
                                         <button className='likes' onClick={LikeIt}><FaHeart /></button>
+                                        <button className='goMap' type="button" onClick={() => {getAddress(data.id)}}><img src={GPS} style={{width:'30px',height:'30px'}}/></button>
                                     </div>
                                     
                                 </div>

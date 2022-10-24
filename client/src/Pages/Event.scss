@@ -79,10 +79,11 @@ box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
 
 @include media('<1300px') {
   width: 40%;
-  max-height: 200px;
+  max-height: 240px;
+  margin:40px 30px;
 }
 
-@include media('<910px') {
+@include media('<930px') {
     width: 70%;
 }
 
@@ -92,8 +93,9 @@ box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
     width: 100%;
 
     @include media('<1300px'){
+      position: relative;
       min-width: 358px;
-      max-height: 200px;
+      height: 220px;
       overflow: hidden;
     }
 
@@ -119,6 +121,7 @@ box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
   .list_name_title {
     display: flex;
     align-items: center;
+    text-align: left;
     font-size: 18px;
     font-weight: 700;
     
@@ -146,7 +149,9 @@ box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
     -webkit-box-orient: vertical;
 
     @include media('<1300px') {
-      display: none;
+      max-height: 30px;
+      -webkit-line-clamp: 1;
+      font-size: 12px;
     }
   }
 }
@@ -228,6 +233,11 @@ box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
   overflow-y: hidden;
   border-radius: 0 10px 10px 0;
 
+  @include media ('<1300px') {
+    position: relative;
+    height: 100%;
+    // height: 220px;
+  }
 
   .list_img_type {
     position: absolute;
@@ -242,20 +252,22 @@ box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
   .img {
     position: relative;
     width: 100%;
-    // height: 100%;
+    height: 100%;
 
     @include media ('<1300px') {
-      max-height: 200px;
+      // max-height: 220px;
+      min-height: 220px;
     }
 
   }
 }
 
-
 // 이벤트 버튼 모음
 
-
 .Btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   width: 100%;
   bottom:0;
@@ -265,30 +277,31 @@ box-shadow: -17px -15px 16px -1px rgba(186,186,186,0.91);
   background: transparent;
   border:0;
   cursor: pointer;
+  padding: 0;
 
 }
 
 
 .goView {
-  width: 70%;
+  width: 60%;
   border:0;
   background-color: #6B3767;
   color:white;
   height: 30px;
-  border-radius: 10px 0 0 10px;
+  border-radius:10px;
   cursor: pointer;
 
 }
 .likes {
-  width: 30%;
+  width: 20%;
   height: 30px;
   // background-color: rgba(255, 0, 0, 0.5);
   background-color: transparent;
-  border:0.3px solid rgba(255, 0, 0, 0.5);
-  border-radius: 0 10px 10px 0;
+  border:0;
   font-size: 1.5rem;
   color:rgba(255, 0, 0, 0.5);
   cursor: pointer;
+  padding: 0;
 
 } 
 
