@@ -19,19 +19,13 @@ const Router = () => {
     const [nickname, setNickname] = useState('');
 
     const getAuth =  () => {
-        if ( localStorage.getItem("access_token") == undefined ) {
-            // 로그인, 회원가입 버튼 보여주기
-            console.log( 'login fail' );
-        } else {
-            // 로그인, 회원가입 버튼 대신 마이페이지 버튼 보여주기
-            console.log( 'login success' );
+        if ( localStorage.getItem("access_token") != undefined ) {
             axios({
                 url: 'http://localhost:8000/user/auth',
                 headers: {
                     'Authorization': localStorage.getItem("access_token")
                 }
             }).then((result) => {
-                console.log(result.data.nickname);
                 setNickname(result.data.nickname);
             });
         }
