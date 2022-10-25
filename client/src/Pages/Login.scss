@@ -1,10 +1,86 @@
 @import '../components/Commons/Commons.scss';
 @import '~include-media/dist/include-media';
 
+* {
+  font-family: "Elice Digital Baeum", sans-serif;
+}
+
+a:link {
+  text-decoration: none;
+  color:black;
+}
+
+input:focus {
+  outline: 2px solid #A24F63;
+}
+
 .login_entire_layout {
-  padding-top: 100px;
+  min-height: 100vh;
+  // padding-top: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .login_section {
+    position: relative;
+    box-sizing: border-box;
+    border: 0.5px solid #f2f4f5;
+    width:390px;
+    height: 500px;
+    padding: 60px 50px;
+  }
+}
+
+.login_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin:0;
+  padding: 0;
+
+  .login_id, .login_pw{
+    position:relative;
+    width: 250px;
+    height: 48px;
+    padding: 16px;
+    border: 0.5px solid #aaa;
+    margin: 5px 0;
+
+  }
+
+  .login_id:focus, .login_pw:focus {
+
+    color:#A24F63;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .login_btn {
+    position:relative;
+    width: 250px;
+    height: 48px;
+    padding: 16px;
+    border: 0.5px solid #A24F63;
+    background-color: #A24F63;;
+    color: white;
+    margin: 5px 0;
+  }
+
+}
+
+.login_etc {
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+
+  .find_id {
+    border-right: 1px solid #aaa;
+    margin: 10px;
+    padding:10px;
+  }
 }
