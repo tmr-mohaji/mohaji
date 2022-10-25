@@ -35,4 +35,21 @@ CREATE TABLE event_like (
     FOREIGN KEY ( event_id ) REFERENCES event(id) ON DELETE CASCADE
 );
 
+CREATE TABLE review (
+	id int not null primary key auto_increment,
+    user_id varchar(255) not null,
+    FOREIGN KEY ( user_id ) REFERENCES user(id) ON DELETE CASCADE,
+    event_id int not null,
+    FOREIGN KEY ( event_id ) REFERENCES event(id) ON DELETE CASCADE,
+    score decimal(3,2) not null,
+    content mediumtext
+);
+
+CREATE TABLE review_img (
+	id int not null primary key auto_increment,
+    review_id int not null,
+    FOREIGN KEY (review_id) REFERENCES review(id) on DELETE CASCADE,
+    filename varchar(255) not null
+);
+
 select * from event;
