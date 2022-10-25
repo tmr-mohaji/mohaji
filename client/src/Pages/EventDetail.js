@@ -59,11 +59,17 @@ const EventDetail = () => {
                                 <span className="ico-stars">즐겨찾기</span>
                             </button>
 
-                            <button type="button" class="bg-black w2">
-                                <span className='ico-starts2'>마이페이지</span>
+                            <button type="button" className="bg-black w2">
+                                <span className='ico-stars2'>마이페이지</span>
                             </button>
                         </div>
                     </div>
+                </div>
+
+                <div className='line_box'></div>
+
+                <div className='d_box2'>
+                    
                 </div>
             </div>
         </section>
