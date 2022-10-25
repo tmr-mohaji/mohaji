@@ -52,4 +52,13 @@ CREATE TABLE review_img (
     filename varchar(255) not null
 );
 
+CREATE TABLE schedule (
+	id int not null primary key auto_increment,
+    user_id varchar(255) not null,
+    FOREIGN KEY ( user_id ) REFERENCES user(id) ON DELETE CASCADE,
+    event_id int not null,
+    FOREIGN KEY ( event_id ) REFERENCES event(id) ON DELETE CASCADE,
+    date date not null
+);
+
 select * from event;

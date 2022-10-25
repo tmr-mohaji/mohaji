@@ -3,8 +3,6 @@ const app = express();
 const http = require("http").Server(app);
 const io = require("socket.io")(http, { cors : { origin : "*" }});
 const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const session = require('express-session');
 const cors = require("cors");
 const port = 8000;
 
@@ -12,27 +10,19 @@ require('dotenv').config();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cookieParser('secret'));
-app.use(session({
-    resave: false,
-    saveUninitialized: false,
-    secret: 'secret',
-    cookie: {
-        httpOnly: true,
-        secure: false,
-    }
-}))
 app.use(cors());
 
 const eventRouter = require("./routes/event");
 const userRouter = require("./routes/user");
 const emailRouter = require("./routes/email");
+const scheduleRouter = require("./routes/schedule");
 
 const event = require("./controller/EventController");
 
 app.use("/event", eventRouter);
 app.use("/user", userRouter);
 app.use("/email", emailRouter);
+app.use("/schedule", scheduleRouter);
 
 app.get("/", event.getMain);
 

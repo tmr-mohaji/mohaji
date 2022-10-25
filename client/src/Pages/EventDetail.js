@@ -1,20 +1,50 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import './EventDetail.scss';
+import Modal from '../components/Modal/Modal';
 import axios from 'axios';
 
 const DETAIL_PAGE = "http://localhost:8000/event/";
+const SCHEDULE_URL = "http://localhost:8000/schedule/addEvent";
 
-const EventDetail = () => {
+const EventDetail = (props) => {
 
     const { id } = useParams();
     const [data, setData] = useState([]);
+    const [date, setDate] = useState("");
+    const modal = useRef();
 
     const getData = async () => {
         const response = await axios.get(DETAIL_PAGE + id, {
             params: { id: id }
         });
         setData(response.data);
+    }
+
+    const showModal = () => {
+        if (props.user_id != "") {
+            modal.current.classList.remove("d-none");
+        } else {
+            alert("로그인 후 이용가능");
+        }
+    }
+
+    const getDate = (e) => {
+        setDate(e.target.value);
+    }
+
+    const closeModal = async () => {
+        if (date == "") {
+            alert("날짜 선택 안됨");
+        } else {
+            let result = await axios.post(SCHEDULE_URL, {user_id : props.user_id, event_id : id, date : date});
+            alert(result.data);
+            closeBtn();
+        }
+    }
+
+    const closeBtn = () => {
+        modal.current.classList.add("d-none");
     }
 
     useEffect(() => {
@@ -59,7 +89,7 @@ const EventDetail = () => {
                                 <span className="ico-stars">즐겨찾기</span>
                             </button>
 
-                            <button type="button" className="bg-black w2">
+                            <button type="button" className="bg-black w2" onClick={showModal}>
                                 <span className='ico-stars2'>마이페이지</span>
                             </button>
                         </div>
@@ -71,6 +101,9 @@ const EventDetail = () => {
                 <div className='d_box2'>
                     
                 </div>
+            </div>
+            <div ref={modal} className="d-none">
+                <Modal onChange={getDate} onClick={closeModal} closeBtn={closeBtn}/>
             </div>
         </section>
     )

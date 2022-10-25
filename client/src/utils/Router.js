@@ -44,7 +44,7 @@ const Router = () => {
                 <Routes>
                     <Route path="/" element={<Main />} />
                     <Route path="/event" element={<Event id={id} />} />
-                    <Route path="/event/:id" element={<EventDetail />} />
+                    <Route path="/event/:id" element={<EventDetail user_id={id} />} />
                     <Route path="/user/signup" element={<Signup />} />
                     <Route path="/user/login" element={<Login setNickname={setNickname} setId={setId} />} />
                     <Route path="/user/findid" element={<FindId />} />
