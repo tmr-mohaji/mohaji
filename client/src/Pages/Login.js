@@ -1,4 +1,4 @@
-import { useState,useRef } from 'react';
+import { useState,useRef, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,9 +11,11 @@ const Login = ( props ) => {
 
     const [warning, setWarning] = useState('');
     const form = useRef();
+    const Id = useRef();
+    const PW = useRef();
     const navigate = useNavigate();
 
-    const error = () => toast('아이디 또는 비밀번호를 확인해주세요!', { autoClose:3000, hideProgressBar:true, progress:undefined,})
+    const error = () => toast('아이디 또는 비밀번호를 확인해주세요!', { autoClose:3000, hideProgressBar:true, progress:undefined});
 
     const login = async () => {
 
@@ -40,20 +42,24 @@ const Login = ( props ) => {
             console.log("실패");
             error();
             setWarning(<ToastContainer />);
+            Id.current.value = '';
+            PW.current.value='';
+
             setTimeout(() => {
                 setWarning('');
             },3000);
         }
     }
 
+
     return(
         <div className='login_entire_layout'>
             <div className='login_section'>
                 <form ref={form} className='login_form'>
-                    <h1>로고 넣을지 말지</h1>
-                    <div style={{height:'40px'}}>{warning}</div>
-                    <input className='login_id' type="text" placeholder="아이디" name="id" required/>
-                    <input className='login_pw' type="password" placeholder="비밀번호" name="password" required/>
+                    <h1 style={{marginBottom:'50px'}}>로고 넣을지 말지</h1>
+                    <div className='warningText' style={{height:'40px', marginBottom:'20px'}}>{warning}</div>
+                    <input ref={Id} className='login_id' type="text" placeholder="아이디" name="id" required/>
+                    <input ref={PW} className='login_pw' type="password" placeholder="비밀번호" name="password" required/>
                     <button className='login_btn' type="button" onClick={login}>로그인</button>
 
                     <hr />

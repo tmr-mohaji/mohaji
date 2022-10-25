@@ -1,16 +1,16 @@
 @import '../components/Commons/Commons.scss';
 @import '~include-media/dist/include-media';
 
-* {
-  font-family: "Elice Digital Baeum", sans-serif;
-}
+// * {
+//   font-family: "Elice Digital Baeum", sans-serif;
+// }
 
-a:link {
+.find_id:link, .set_pw:link, .signup:link {
   text-decoration: none;
   color:black;
 }
 
-a:hover {
+.find_id:hover, .set_pw:hover, .signup:hover {
   border-bottom: 1px solid #A24F63;
   margin:-1px;
 }
@@ -31,6 +31,7 @@ hr {
 
 // 로그인 전체 레이아웃
 .login_entire_layout {
+  font-family: "Elice Digital Baeum", sans-serif;
   min-height: 100vh;
   // padding-top: 100px;
   display: flex;
@@ -43,7 +44,7 @@ hr {
     box-sizing: border-box;
     border: 0.5px solid #f2f4f5;
     width:390px;
-    height: 550px;
+    height: 600px;
     padding: 60px 50px;
   }
 }
@@ -124,6 +125,9 @@ hr {
   }
 }
 
+
+//////////////////////////////////// 로그인 경고창 부분
+
 .Toastify {
   // border: 0.2px solid rgb(179, 179, 179);
   background-color: rgba(255, 127, 80, 0.2);
@@ -134,12 +138,10 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 5px 5px 5px 5px rgba(179,179,179,0.3)
-;  // rgba(0,0,0,0.16);
+  box-shadow: 5px 5px 5px 5px rgba(179,179,179,0.3);
+  animation: slideIn 0.5s ease-in-out 0s 1 normal forwards;
 }
 
-
-//////////////////////////////////// 로그인 경고창 부분
 .Toastify__toast-body {
   width: '100px';
   display: flex;
@@ -163,26 +165,9 @@ hr {
 
 @keyframes slideIn {
   from {
-    transform: translateX(-100%);
+    transform: translateY(-100%);
   }
   to {
-    transform: translateX(0%);
+    transform: translateY(0%);
   }
-}
-
-@keyframes slideOut {
-  from {
-    transform: translateX(0%);
-  }
-  to {
-    transform: translateX(-300%);
-  }
-}
-
-.openAlert {
-  animation: slideIn 0.5s ease-in-out 0s 1 normal forwards;
-}
-
-.closeAlert {
-  animation: slideOut 0.5s ease-in-out 0s 1 normal forwards;
 }
