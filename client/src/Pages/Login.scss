@@ -43,9 +43,10 @@ hr {
     position: relative;
     box-sizing: border-box;
     border: 0.5px solid #f2f4f5;
-    width:390px;
+    width:500px;
     height: 600px;
     padding: 60px 50px;
+    box-shadow: 3px 3px 3px 3px rgba(170, 170, 170,0.5);
   }
 }
 
@@ -81,7 +82,7 @@ hr {
     height: 48px;
     padding: 16px;
     border: 0.5px solid #A24F63;
-    background-color: #A24F63;;
+    background-color: #A24F63;
     color: white;
     margin: 5px 0;
   }
@@ -104,8 +105,7 @@ hr {
   justify-content: center;
   margin:20px;
   border-top: 1px solid rgba(170, 170, 170,0.3);
-  position: absolute;
-  bottom: 0;
+  margin-top: 20%;
 
   .find_id {
     // margin: 10px;

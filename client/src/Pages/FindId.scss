@@ -1,0 +1,150 @@
+@import '../components/Commons/Commons.scss';
+@import '~include-media/dist/include-media';
+
+
+// 아이디찾기 전체 레이아웃
+.find_entire_layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    // 인증코드 발송하는 부분
+    .find_section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position:relative;
+        box-sizing: border-box;
+        border: 0.5px solid #f2f4f5;
+        width:500px;
+        height: 600px;
+        padding: 60px 50px;
+        box-shadow: 3px 3px 3px 3px rgba(170, 170, 170,0.5);
+
+        .find_logo_section {
+            margin: 30px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .code_section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .email{
+                position:relative;
+                width: 250px;
+                height: 48px;
+                padding: 16px;
+                border: 0.5px solid #aaa;
+                margin:0;
+                text-align: center;
+            }
+            .email::placeholder {
+                text-align: center;
+                font-size: 12px;
+                color:rgba(170, 170, 170,0.5);
+            }
+
+            .email:focus {
+                color:#A24F63;
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            .sendEmail{
+                position:relative;
+                width: 250px;
+                height: 50px;
+                padding: 16px;
+                border: 0.5px solid #A24F63;
+                background-color: #A24F63;
+                color: white;
+                cursor: pointer;
+                font-size: 14px;
+            }
+
+        }
+
+
+        // 인증코드 발송 후, 인증코드 입력하는 부분
+        .findId_section {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+
+
+            .code_input{
+                position:relative;
+                width: 200px;
+                height: 40px;
+                padding: 16px;
+                border: 0.5px solid #aaa;
+                margin:0;
+                text-align: center;
+                border-radius: 5px 0px 0px 5px;
+            }
+            .code_input::placeholder {
+                text-align: center;
+                font-size: 12px;
+                color:rgba(170, 170, 170,0.5);
+            }
+
+            .code_input:focus {
+                color:#6b3867;
+                font-size: 14px;
+                font-weight: 500;
+            }
+
+            .findBtn{
+                font-size: 12px;
+                position:relative;
+                width: 90px;
+                height: 40px;
+                // padding: 10px;
+                border: 0.5px solid #A24F63;
+                border-radius: 0px 5px 5px 0px;
+                background-color:#6b3867;
+                color: white;
+                cursor: pointer;
+            }
+        }   
+    }
+}
+
+
+// 경고창 띄우는 부분
+
+.warning_section {
+    font-family: "Elice Digital Baeum";
+    margin: 20px 0;
+    font-size: 13px;
+    font-weight: 600;
+    // border: 1px solid yellow;
+    background-color: rgba(255, 255, 0, 0.5);
+    border-radius: 20px;
+    // color:blue;
+    max-width: 320px;
+    min-height: 30px;
+    padding:10px;
+    padding-left: 30px;
+    position: relative;
+}
+
+.warning_section:after {
+    border-top: 10px solid  rgba(255, 255, 0, 0.5);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 0px solid transparent;
+    content: "";
+    position: relative;
+    top:39px;
+    left:-50%;
+
+}
