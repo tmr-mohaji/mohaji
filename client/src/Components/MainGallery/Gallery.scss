@@ -7,7 +7,8 @@
 =========================================================*/
 .galleryBox {
     width: 100%;
-    max-width: 1800px;
+    // max-width: 1800px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
@@ -134,7 +135,8 @@
 
 .g_img {
     width: 100%;
-    height: 440px;
+    // height: 440px;
+    height: 360px;
 }
 
 
@@ -145,8 +147,9 @@
     position: absolute;
     top: 0;
     width: 100%;
-    height: 440px;
-    padding: 10% 5%;
+    // height: 440px;
+    height: 360px;
+    padding: 5% 5%;
     transition: .5s ease;
     opacity: 0;
     background: rgba(0, 0, 0, 0.8);
@@ -160,7 +163,7 @@
 
 .g_tit_h1 {
     color: #fff;
-    font-size: 18px;
+    font-size: 16px;
     font-family: 'WandohopeR';
 }
 
@@ -191,13 +194,9 @@
     listGallery 호버 시 미니 아이콘 정의
 =========================================================*/
 .g_tit_img {
-    width: 27px;
+    width: 24px;
     margin-right: 10px;
 }
-
-
-
-
 
 
 
