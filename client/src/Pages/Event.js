@@ -19,14 +19,29 @@ const EVENT_PAGE = "http://localhost:8000/event";
 
 const Event = (props) => {
 
+    const navigate = useNavigate();
+
+    const [filter, setFilter] = useState({
+        city: '전체',
+        type: '전체',
+        date: ''
+    });
+
+    const [eventData, setEventData] = useState([]);
+    const [address, setAddress] = useState("");
+    const [clickData, setClickData] = useState([]);
+    const [render, setRender] = useState(false);
+
+    const select_city = useRef();
+    const select_type = useRef();
+    const select_date = useRef();
+    const heart = useRef();
+
     // select box 설정
     const [city, setCity] = useState('');
     const [type, setType] = useState('');
     //달력 정보
     const [calendar, setCalendar] = useState(null);
-    // 좋아요 상태
-    // const [isLike, setIsLike] = useState(false);
-    // const [likeEvent, setLikeEvent] = useState([]);
 
     // city, type, date 선택시 필터링 적용
     const handleChange_city = (event) => {
@@ -49,23 +64,6 @@ const Event = (props) => {
         setCalendar(pickDate[3]+ '-' + month + '-' + pickDate[2]);
         setFilter({...filter, date : pickDate[3]+ '-' + month + '-' + pickDate[2] });
     };
-    
-    const navigate = useNavigate();
-
-    const [filter, setFilter] = useState({
-        city: '전체',
-        type: '전체',
-        date: ''
-    });
-
-    const [data, setData] = useState([]);
-    const [eventData, setEventData] = useState([]);
-    const [address, setAddress] = useState("");
-    const [clickData, setClickData] = useState([]);
-
-    const select_city = useRef();
-    const select_type = useRef();
-    const select_date = useRef();
 
     // 필터 정보로 데이터 가져오기
     const getData = async () => {
@@ -73,8 +71,6 @@ const Event = (props) => {
         const response = await axios.get(EVENT_PAGE, {
             params: {city: filter.city, type: filter.type, date: filter.date}
         })
-        console.log(response.data);
-        setData(response.data);
 
         if ( props.id != "" ) {
             let ls = []
@@ -88,17 +84,13 @@ const Event = (props) => {
                     ls.push(false);
                 }
             }
-            console.log(ls.length);
-            console.log(data.length);
             let event = []
-            for (let i=0; i<data.length; i++) {
-                data[i]['like'] = ls[i];
-                console.log(data[i]);
-                event.push(data[i]);
+            for (let i=0; i<response.data.length; i++) {
+                response.data[i]['like'] = ls[i];
+                event.push(response.data[i]);
             }
             setEventData(event);
         }
-        console.log(eventData);
     }
 
     // 클릭한 이벤트 주소 받아오기
@@ -113,22 +105,27 @@ const Event = (props) => {
     // 좋아요 버튼 설정
     const LikeIt = (id) => {
         if ( localStorage.getItem("access_token") != undefined ) {
-            // axios({
-            //     url: 'http://localhost:8000/user/auth',
-            //     headers: {
-            //         'Authorization': localStorage.getItem("access_token")
-            //     }
-            // }).then( (result) => {
-            //     if (isLike == false) {
-            //         axios.post(EVENT_PAGE + "/like", {user_id : result.data.id, event_id : id});
-            //         setIsLike(true);
-            //         console.log("좋아요");
-            //     } else {
-            //         axios.post(EVENT_PAGE + "/dislike", {user_id : result.data.id, event_id : id});
-            //         setIsLike(false);
-            //         console.log("좋아요 취소");
-            //     }
-            // });
+            const heartIcon = heart.current.querySelector("svg");
+            axios({
+                url: 'http://localhost:8000/user/auth',
+                headers: {
+                    'Authorization': localStorage.getItem("access_token")
+                }
+            }).then( (result) => {
+                console.log(heartIcon.classList.contains('unliked'));
+                if (heartIcon.classList.contains('unliked')) {
+                    heartIcon.classList.remove('unliked');
+                    console.log(heartIcon.classList);
+                    axios.post(EVENT_PAGE + "/like", {user_id : result.data.id, event_id : id});
+                    console.log('like');
+                    setRender(true);
+                } else {
+                    heartIcon.classList.add('unliked');
+                    axios.post(EVENT_PAGE + "/dislike", {user_id : result.data.id, event_id : id});
+                    console.log("dislike");
+                    setRender(false);
+                }
+            });
         } else {
             alert("로그인 후 이용가능");
         }
@@ -137,8 +134,7 @@ const Event = (props) => {
 
     useEffect(() => {
         getData();
-        // getLike();
-    }, [filter, address, props.id])
+    }, [filter, address, props.id, render])
 
     return (
         <div className="totalSection">
@@ -195,7 +191,7 @@ const Event = (props) => {
                 
 
                 <div className='listSection'>
-                {data.map((data) => {
+                {eventData.map((data) => {
                     return (
                         <div key={data.id} className='list_entire_section'>
                             <div className='list_entire_layout'>
@@ -227,7 +223,10 @@ const Event = (props) => {
                                                 <button className='goMap' type="button" onClick={() => {getAddress(data.id)}}><img src={GPS} style={{width:'30px',height:'30px'}}/></button> */}
                                         
                                         <button className='goView' type="button" onClick={() => { navigate('/event/'+ data.id); }}>상세보기</button>
-                                        <button className='likes' onClick={() => {LikeIt(data.id)}}><FaHeart /></button>
+                                        <button className='likes' onClick={() => {LikeIt(data.id)}} ref={heart}>
+                                            {/* {data.like ? <FaHeart style={{color: "pink"}} /> : <FaHeart style={{color: "lightgray"}} />} */}
+                                            {data.like ? <FaHeart /> : <FaHeart className="unliked" />}
+                                        </button>
                                         <button className='goMap' type="button" onClick={() => {getAddress(data.id)}}><img src={GPS} style={{width:'30px',height:'30px'}}/></button>
                                     </div>
                                     
