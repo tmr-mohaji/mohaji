@@ -1,0 +1,52 @@
+@import '../components/Commons/Commons.scss';
+@import '~include-media/dist/include-media';
+
+
+.sub_visual{
+    margin-top:92px;
+    box-sizing: border-box;
+    padding:100px 0 100px 0;
+    position: relative;
+    color:#fff;
+}
+
+.sub_visual .bg_w{
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height:100%;
+    top:0;
+    left:0;
+}
+
+.sub_visual .bg{
+    background:url(./img/detailBack_02.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    position: absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+}
+
+.sub_visual .sub-t{
+    position: relative;
+    z-index: 1;
+}
+
+.sub-t{
+    font-size:45px;
+    color:#fff;
+    text-align: center;
+    line-height: 1.5;
+}
+
+
+.detailBox{
+    min-height:100vh;
+    margin-top: 92px;
+    box-sizing: border-box;
+    position: relative;
+}
