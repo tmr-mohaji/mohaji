@@ -38,16 +38,19 @@ const Login = ( props ) => {
 
     return(
         <div className='login_entire_layout'>
-            <div>
-                <form ref={form}>
-                    <input type="text" placeholder="아이디" name="id" required/> <br />
-                    <input type="password" placeholder="비밀번호" name="password" required/> <br />
-                    <button type="button" onClick={login}>로그인</button>
+            <div className='login_section'>
+                <form ref={form} className='login_form'>
+                    <h1>로고 넣을지 말지</h1>
+                    <div> 경고창부분 </div>
+                    <input className='login_id' type="text" placeholder="아이디" name="id" required/>
+                    <input className='login_pw' type="password" placeholder="비밀번호" name="password" required/>
+                    <button className='login_btn' type="button" onClick={login}>로그인</button>
                 </form>
-            </div>
-            <div>
-                <div><Link to="/user/findid">아이디 찾기</Link></div>
-                <div><Link to="/user/resetpw">비밀번호 재설정</Link></div>
+                <div><hr />간편로그인<hr /></div>
+                <div className='login_etc'>
+                    <Link className='find_id' to="/user/findid">아이디 찾기</Link>
+                    <Link className='set_pw' to="/user/resetpw">비밀번호 재설정</Link>
+                </div>
             </div>
         </div>
     )
