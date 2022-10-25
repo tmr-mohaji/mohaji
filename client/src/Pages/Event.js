@@ -112,18 +112,19 @@ const Event = (props) => {
                     'Authorization': localStorage.getItem("access_token")
                 }
             }).then( (result) => {
-                console.log(heartIcon.classList.contains('unliked'));
+                console.log("unliked 포함: ", heartIcon.classList.contains('unliked'));
                 if (heartIcon.classList.contains('unliked')) {
-                    heartIcon.classList.remove('unliked');
-                    console.log(heartIcon.classList);
-                    axios.post(EVENT_PAGE + "/like", {user_id : result.data.id, event_id : id});
                     console.log('like');
-                    setRender(true);
+                    heartIcon.classList.remove('unliked');
+                    console.log("false 나와야 함", heartIcon.classList.contains('unliked'));
+                    axios.post(EVENT_PAGE + "/like", {user_id : result.data.id, event_id : id});
+                    // setRender(true);
                 } else {
-                    heartIcon.classList.add('unliked');
-                    axios.post(EVENT_PAGE + "/dislike", {user_id : result.data.id, event_id : id});
                     console.log("dislike");
-                    setRender(false);
+                    heartIcon.classList.add('unliked');
+                    console.log("true 나와야 함", heartIcon.classList.contains('unliked'));
+                    axios.post(EVENT_PAGE + "/dislike", {user_id : result.data.id, event_id : id});
+                    // setRender(false);
                 }
             });
         } else {
@@ -224,7 +225,6 @@ const Event = (props) => {
                                         
                                         <button className='goView' type="button" onClick={() => { navigate('/event/'+ data.id); }}>상세보기</button>
                                         <button className='likes' onClick={() => {LikeIt(data.id)}} ref={heart}>
-                                            {/* {data.like ? <FaHeart style={{color: "pink"}} /> : <FaHeart style={{color: "lightgray"}} />} */}
                                             {data.like ? <FaHeart /> : <FaHeart className="unliked" />}
                                         </button>
                                         <button className='goMap' type="button" onClick={() => {getAddress(data.id)}}><img src={GPS} style={{width:'30px',height:'30px'}}/></button>
