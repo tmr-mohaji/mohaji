@@ -72,8 +72,9 @@ const Event = (props) => {
             params: {city: filter.city, type: filter.type, date: filter.date}
         })
 
+        // 로그인 상태
         if ( props.id != "" ) {
-            let ls = []
+            let ls = [];
             for(let i=0; i<response.data.length; i++) {
 
                 let result = await axios.post(EVENT_PAGE + "/likeInfo", {user_id: props.id, event_id: response.data[i].id});
@@ -84,7 +85,19 @@ const Event = (props) => {
                     ls.push(false);
                 }
             }
-            let event = []
+            let event = [];
+            for (let i=0; i<response.data.length; i++) {
+                response.data[i]['like'] = ls[i];
+                event.push(response.data[i]);
+            }
+            setEventData(event);
+        // 비로그인 상태
+        } else {
+            let ls = [];
+            for(let i=0; i<response.data.length; i++) {
+                ls.push(false);
+            }
+            let event = [];
             for (let i=0; i<response.data.length; i++) {
                 response.data[i]['like'] = ls[i];
                 event.push(response.data[i]);
