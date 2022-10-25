@@ -51,6 +51,11 @@ $mobile : 600px;
 
 }
 .listSection {
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  width: 100%;
+  height: 100vh;
   
   @include media('<1300px') {
     display: flex;
