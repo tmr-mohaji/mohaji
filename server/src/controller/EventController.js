@@ -65,6 +65,17 @@ exports.dislike = async (req, res) => {
 }
 
 exports.likeinfo = async (req, res) => {
-    let result = await models.Like.findOne({where: {user_id : req.body.user_id, event_id : req.body.event_id}});
-    res.send(result);
+    if (req.body.event_id == undefined) {
+        let result = await models.Like.findAll({where: {user_id : req.body.user_id}});
+        let ls = [];
+        for (let i = 0; i<result.length; i++) {
+            let event = await models.Event.findOne({where : {id : result[i].event_id}});
+            console.log(event);
+            ls.push({'id' : event.id, 'title' : event.title, 'filename' : event.filename});
+        }
+        res.send(ls);
+    } else {
+        let result = await models.Like.findOne({where: {user_id : req.body.user_id, event_id : req.body.event_id}});
+        res.send(result);
+    }
 }
