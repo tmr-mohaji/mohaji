@@ -34,18 +34,37 @@ const EventDetail = () => {
             </div>
 
             <div className='detailBox'>
-                <p>{data.title}</p>
-                <p>{data.detail}</p>
-                <p>{data.url}</p>
-                <p>{data.type}</p>
-                <p>{data.place}</p>
-                <p>{data.address}</p>
-                <p>{data.start_date}</p>
-                <p>{data.end_date}</p>
-                <p>{data.time}</p>
-                <p>{data.people}</p>
-                <p>{data.price}</p>
-                <img src={"/img/" + data.filename} style={{ width: "200px" }} alt='' />
+                <div className='d_box'>
+                    <div className='d_img'>
+                        <img className='img_w' src={"/img/" + data.filename} alt='' />
+                    </div>
+
+                    <div className='d_info'>
+                        <div className='d_tit'>
+                            <h1>{data.title}</h1>
+                        </div>
+
+                        <ul className='d_ul'>
+                            <li><span className='d_dt'>기간</span> <span className='r_dt'>{data.start_date} ~ {data.end_date}</span></li>
+                            <li><span className='d_dt'>장소</span> <span className='r_dt'>{data.address}, {data.place}</span></li>
+                            <li><span className='d_dt'>시간</span> <span className='r_dt'>{data.time}</span></li>
+                            <li><span className='d_dt'>장르</span> <span className='r_dt'>{data.type}</span></li>
+                            <li><span className='d_dt'>연령</span> <span className='r_dt'>{data.people}</span></li>
+                            <li><span className='d_dt'>티켓</span> <span className='r_dt'>{data.price}</span></li>
+                            <li><span className='d_dt'>소개</span> <span className='r_dt'>{data.detail}</span></li>
+                        </ul>
+
+                        <div className='d_link'>
+                            <button type="button" className="bg-black_r w1">
+                                <span className="ico-stars">즐겨찾기</span>
+                            </button>
+
+                            <button type="button" class="bg-black w2">
+                                <span className='ico-starts2'>마이페이지</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     )
