@@ -34,7 +34,7 @@ const EventDetail = (props) => {
 
 
     // 좋아요 버튼 설정
-    const like = (id) => {
+    const like = () => {
         if (localStorage.getItem("access_token") != undefined) {
             axios({
                 url: 'http://localhost:8000/user/auth',
@@ -115,7 +115,7 @@ const EventDetail = (props) => {
                             </div>
 
                             <div className='d_like'>
-                                <button className='like_btn' onClick={() => { like(data.id) }} ref={heart}>
+                                <button className='like_btn' onClick={like}>
                                     {likeStatus ? <FaHeart /> : <FaHeart style={{ color: "lightgray" }} />}
                                 </button>
                             </div>
