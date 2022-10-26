@@ -215,7 +215,7 @@ const Event = (props) => {
                                         <p className='list_name_detail'>{data.detail}</p>
                                     </div>
                                     <div className='eventInfo'>
-                                        <div style={{width:'100%'}}>
+                                        <div style={{width:'100%',marginTop:'15px'}}>
                                             <p className='list_place'><MdPlace style={{color:'red', marginRight:'5px'}}/>{data.place}</p>
                                             <div className='list_period_layout'>
                                                 <div><FcCalendar style={{marginRight: '5px'}}/></div>

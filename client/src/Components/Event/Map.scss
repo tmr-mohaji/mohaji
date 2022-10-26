@@ -3,17 +3,13 @@
 
 .mapPart {
 
-    // @include media('>1301px') {
     display:flex;
     flex-direction:column; 
-    align-items:center;
-    position:fixed;
-    left:0;
-    width:50%;
-    // }
+    width:100%;
 
     //221024
   @include media ('<1300px') {
+    position:fixed;
     width: 100%;
     height: 35%;
   }
