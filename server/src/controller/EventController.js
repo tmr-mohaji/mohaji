@@ -61,7 +61,6 @@ exports.like = async (req, res) => {
 exports.dislike = async (req, res) => {
     console.log("dislike");
     let result = await models.Like.destroy({where: {user_id : req.body.user_id, event_id : req.body.event_id}});
-    console.log(result);
 }
 
 exports.likeinfo = async (req, res) => {

@@ -2,12 +2,14 @@ import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import './EventDetail.scss';
 import Modal from '../components/Modal/Modal';
+import ReviewForm from '../components/ReviewForm/ReviewForm';
 import axios from 'axios';
 
 import { FaHeart } from 'react-icons/fa'
 
 const EVENT_URL = "http://localhost:8000/event/";
 const SCHEDULE_URL = "http://localhost:8000/schedule/addEvent";
+const REVIEW_URL = "http://localhost:8000/review/";
 
 const EventDetail = (props) => {
 
@@ -15,9 +17,11 @@ const EventDetail = (props) => {
     const [data, setData] = useState([]);
     const [date, setDate] = useState("");
     const [likeStatus, setLikeStatus] = useState("");
+    const [reviewData, setReviewData] = useState({
+        score: 0,
+        comment: ''
+    });
     const modal = useRef();
-
-    const heart = useRef();
 
     const getData = async () => {
         const response = await axios.get(EVENT_URL + id, {
@@ -32,16 +36,17 @@ const EventDetail = (props) => {
         }
     }
 
-
     // 좋아요 버튼 설정
     const like = () => {
         if (localStorage.getItem("access_token") != undefined) {
+
             axios({
                 url: 'http://localhost:8000/user/auth',
                 headers: {
                     'Authorization': localStorage.getItem("access_token")
                 }
             }).then((result) => {
+                console.log("work");
                 // 좋아요 안 된 상태
                 if (!likeStatus) {
                     console.log('like');
@@ -52,6 +57,30 @@ const EventDetail = (props) => {
                     axios.post(EVENT_URL + "dislike", { user_id: result.data.id, event_id: id });
                     setLikeStatus(false);
                 }
+            });
+        } else {
+            alert("로그인 후 이용가능");
+        }
+    }
+
+    // 리뷰 가져오기
+    const getReview = (e) => {
+        setReviewData({...reviewData, [e.target.name]: e.target.value,});
+    }
+
+    // 리뷰 등록
+    const writeComment = async () => {
+        if (localStorage.getItem("access_token") != undefined) {
+
+            axios({
+                url: 'http://localhost:8000/user/auth',
+                headers: {
+                    'Authorization': localStorage.getItem("access_token")
+                }
+            }).then((result) => {
+                console.log(result.data.id);
+                console.log("reviewdata", reviewData);
+                axios.post(REVIEW_URL + "writeComment", {user_id: result.data.id, event_id: id, score: reviewData.score, comment: reviewData.comment});
             });
         } else {
             alert("로그인 후 이용가능");
@@ -146,7 +175,7 @@ const EventDetail = (props) => {
                 <div className='line_box'></div>
 
                 <div className='d_box2'>
-
+                    <ReviewForm onChange={getReview} onClick={writeComment}/>
                 </div>
             </div>
             <div ref={modal} className="d-none">
