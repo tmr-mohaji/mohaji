@@ -149,8 +149,12 @@ const EventDetail = (props) => {
 
                 </div>
             </div>
+
+
             <div ref={modal} className="d-none">
-                <Modal onChange={getDate} onClick={closeModal} closeBtn={closeBtn} />
+                <div className='m_box'>
+                    <Modal onChange={getDate} onClick={closeModal} closeBtn={closeBtn} />
+                </div>
             </div>
         </section>
     )
