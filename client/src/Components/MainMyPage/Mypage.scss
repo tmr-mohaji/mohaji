@@ -128,9 +128,9 @@
     오른쪽 컨텐츠 정의
 =========================================================*/
 .box1_h1{
-    // opacity: 0;
-    // transform: translateY(50%);
-    // transition: .6s;    
+    transform: translateY(50%);
+    transition: .6s;    
+    opacity: 0;
 }
 
 .box1_h1.active{
