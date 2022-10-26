@@ -1,31 +1,35 @@
 import { Link } from 'react-router-dom';
 import './Mypage.scss';
-
 import mypage from './img/mypage_i.png';
+import {useEffect, useState} from 'react';
 
 const Mypage = () => {
         // 페이지 스크롤 애니메이션 정의
-        // const options = {
-        //     // viewport
-        //     root: null,
-        //     rootMargin: "0px",
-        //     // 0%가 viewport에 들어와 있어야 callback 실행
-            
-        // }
+        const [boxList1, setBoxList] = useState(document.querySelector('.box1_h1')); 
+        const options = {
+            // viewport
+            root: null,
+            rootMargin: "0px",
+            threshold: 1,
+            // 0%가 viewport에 들어와 있어야 callback 실행            
+        }
+        useEffect(() => {
+            const boxList = document.querySelector('.box1_h1');
+            setBoxList(boxList);
+        }, []);
 
-        // const observer = new IntersectionObserver(entries => {
-        //     entries.forEach(entry => {
-        //         if (entry.isIntersecting) {
-        //             entry.target.classList.add('active');
-        //         } else {
-        //             entry.target.classList.remove('active');
-        //         }
-        //     });
-        // }, options);
-
-        // const boxList1 = document.querySelectorAll('.box1_h1');
-
-        // boxList1.forEach(el => observer.observe(el));
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                console.log( "entry2 : ", entry );
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, options);
+        console.log("box : ", boxList1);
+        if ( boxList1 != null ) observer.observe(boxList1);
 
 
     return (
