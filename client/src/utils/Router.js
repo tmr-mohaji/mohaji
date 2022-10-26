@@ -14,6 +14,8 @@ import FindId from '../pages/FindId';
 import Resetpw from '../pages/Resetpw';
 import MyPage from '../pages/MyPage';
 
+import ScrollToTop from '../components/ScrollToTop';
+
 
 const Router = () => {
 
@@ -42,6 +44,7 @@ const Router = () => {
         <div>
             <BrowserRouter>
                 <Header name={nickname} />
+                <ScrollToTop />
                 <Routes>
                     <Route path="/" element={<Main />} />
                     <Route path="/event" element={<Event id={id} />} />
