@@ -4,7 +4,7 @@ import './EventDetail.scss';
 import Modal from '../components/Modal/Modal';
 import axios from 'axios';
 
-const DETAIL_PAGE = "http://localhost:8000/event/";
+const EVENT_URL = "http://localhost:8000/event/";
 const SCHEDULE_URL = "http://localhost:8000/schedule/addEvent";
 
 const EventDetail = (props) => {
@@ -12,13 +12,44 @@ const EventDetail = (props) => {
     const { id } = useParams();
     const [data, setData] = useState([]);
     const [date, setDate] = useState("");
+    const [likeStatus, setLikeStatus] = useState("");
     const modal = useRef();
 
     const getData = async () => {
-        const response = await axios.get(DETAIL_PAGE + id, {
+        const response = await axios.get(EVENT_URL + id, {
             params: { id: id }
         });
         setData(response.data);
+        const likeResult = await axios.post(EVENT_URL + "likeInfo", {user_id: props.user_id, event_id: id});
+        if (likeResult.data == "") {
+            setLikeStatus(false);
+        } else {
+            setLikeStatus(true);
+        }
+    }
+
+    const like = () => {
+        if ( localStorage.getItem("access_token") != undefined ) {
+            axios({
+                url: 'http://localhost:8000/user/auth',
+                headers: {
+                    'Authorization': localStorage.getItem("access_token")
+                }
+            }).then( (result) => {
+                // 좋아요 안 된 상태
+                if (!likeStatus) {
+                    console.log('like');
+                    axios.post(EVENT_URL + "like", {user_id : result.data.id, event_id : id});
+                    setLikeStatus(true);
+                } else {
+                    console.log("dislike");
+                    axios.post(EVENT_URL + "dislike", {user_id : result.data.id, event_id : id});
+                    setLikeStatus(false);
+                }
+            });
+        } else {
+            alert("로그인 후 이용가능");
+        }
     }
 
     const showModal = () => {
@@ -49,7 +80,7 @@ const EventDetail = (props) => {
 
     useEffect(() => {
         getData();
-    }, [])
+    }, [likeStatus])
 
     return (
         <section>
@@ -85,7 +116,7 @@ const EventDetail = (props) => {
                         </ul>
 
                         <div className='d_link'>
-                            <button type="button" className="bg-black_r w1">
+                            <button type="button" className="bg-black_r w1" onClick={like}>
                                 <span className="ico-stars">즐겨찾기</span>
                             </button>
 
