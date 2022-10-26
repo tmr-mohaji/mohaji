@@ -4,6 +4,8 @@ import './EventDetail.scss';
 import Modal from '../components/Modal/Modal';
 import axios from 'axios';
 
+import { FaHeart } from 'react-icons/fa'
+
 const EVENT_URL = "http://localhost:8000/event/";
 const SCHEDULE_URL = "http://localhost:8000/schedule/addEvent";
 
@@ -15,12 +17,14 @@ const EventDetail = (props) => {
     const [likeStatus, setLikeStatus] = useState("");
     const modal = useRef();
 
+    const heart = useRef();
+
     const getData = async () => {
         const response = await axios.get(EVENT_URL + id, {
             params: { id: id }
         });
         setData(response.data);
-        const likeResult = await axios.post(EVENT_URL + "likeInfo", {user_id: props.user_id, event_id: id});
+        const likeResult = await axios.post(EVENT_URL + "likeInfo", { user_id: props.user_id, event_id: id });
         if (likeResult.data == "") {
             setLikeStatus(false);
         } else {
@@ -28,22 +32,24 @@ const EventDetail = (props) => {
         }
     }
 
-    const like = () => {
-        if ( localStorage.getItem("access_token") != undefined ) {
+
+    // 좋아요 버튼 설정
+    const like = (id) => {
+        if (localStorage.getItem("access_token") != undefined) {
             axios({
                 url: 'http://localhost:8000/user/auth',
                 headers: {
                     'Authorization': localStorage.getItem("access_token")
                 }
-            }).then( (result) => {
+            }).then((result) => {
                 // 좋아요 안 된 상태
                 if (!likeStatus) {
                     console.log('like');
-                    axios.post(EVENT_URL + "like", {user_id : result.data.id, event_id : id});
+                    axios.post(EVENT_URL + "like", { user_id: result.data.id, event_id: id });
                     setLikeStatus(true);
                 } else {
                     console.log("dislike");
-                    axios.post(EVENT_URL + "dislike", {user_id : result.data.id, event_id : id});
+                    axios.post(EVENT_URL + "dislike", { user_id: result.data.id, event_id: id });
                     setLikeStatus(false);
                 }
             });
@@ -52,6 +58,7 @@ const EventDetail = (props) => {
         }
     }
 
+    // 마이페이지 클릭 시 모달 창 설정(비로그인 시)
     const showModal = () => {
         if (props.user_id != "") {
             modal.current.classList.remove("d-none");
@@ -64,11 +71,12 @@ const EventDetail = (props) => {
         setDate(e.target.value);
     }
 
+    // 마이페이지 클릭 시 모달 창 설정(로그인 시)
     const closeModal = async () => {
         if (date == "") {
             alert("날짜 선택 안됨");
         } else {
-            let result = await axios.post(SCHEDULE_URL, {user_id : props.user_id, event_id : id, date : date});
+            let result = await axios.post(SCHEDULE_URL, { user_id: props.user_id, event_id: id, date: date });
             alert(result.data);
             closeBtn();
         }
@@ -101,8 +109,16 @@ const EventDetail = (props) => {
                     </div>
 
                     <div className='d_info'>
-                        <div className='d_tit'>
-                            <h1>{data.title}</h1>
+                        <div className='info_first'>
+                            <div className='d_tit'>
+                                <h1>{data.title}</h1>
+                            </div>
+
+                            <div className='d_like'>
+                                <button className='like_btn' onClick={() => { like(data.id) }} ref={heart}>
+                                    {likeStatus ? <FaHeart /> : <FaHeart style={{ color: "lightgray" }} />}
+                                </button>
+                            </div>
                         </div>
 
                         <ul className='d_ul'>
@@ -130,11 +146,11 @@ const EventDetail = (props) => {
                 <div className='line_box'></div>
 
                 <div className='d_box2'>
-                    
+
                 </div>
             </div>
             <div ref={modal} className="d-none">
-                <Modal onChange={getDate} onClick={closeModal} closeBtn={closeBtn}/>
+                <Modal onChange={getDate} onClick={closeModal} closeBtn={closeBtn} />
             </div>
         </section>
     )

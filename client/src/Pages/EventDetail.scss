@@ -96,9 +96,25 @@
 /*=========================================================
     타이틀 정의
 =========================================================*/
+.info_first{
+    display:flex;
+    justify-content:space-between;
+}
+
 .d_info h1{
     font-size:24px;
 }
+
+.like_btn {
+    width: 10%;
+    height: 30px;
+    background-color: transparent;
+    border:0;
+    font-size: 1.5rem;
+    color:rgba(255, 0, 0, 0.5);
+    cursor: pointer;
+    padding: 0;
+} 
 
 
 /*=========================================================
