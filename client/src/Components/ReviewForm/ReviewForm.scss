@@ -21,3 +21,45 @@
     overflow: hidden;
     pointer-events: none;
 }
+
+
+
+
+
+/*=========================================================
+    리뷰 & 공연 후기 ~ 있습니다. 관련 정의
+=========================================================*/
+.review_tit{
+    font-size:12px;
+    margin-bottom:10px;
+}
+
+.review_tit2{
+    color:#8f8f8f;
+}
+
+
+.review_line{
+    font-size:10px;
+    margin:0 5px;
+    position:relative;
+    top:-1px;
+}
+
+
+/*=========================================================
+    textarea 관련 정의
+=========================================================*/
+.tf_write{
+    width:100%;
+    height:116px;
+    padding:20px;
+    border:1px solid #dadada;
+    font-size:14px;
+    vertical-align: top;
+    appearance: none;
+    box-sizing: border-box;
+    resize: none;
+}
+
+
