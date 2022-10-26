@@ -50,8 +50,13 @@
 /*=========================================================
     textarea 관련 정의
 =========================================================*/
+.rt_box{
+    display:flex;
+}
+
+
 .tf_write{
-    width:100%;
+    width:90%;
     height:116px;
     padding:20px;
     border:1px solid #dadada;
@@ -60,6 +65,16 @@
     appearance: none;
     box-sizing: border-box;
     resize: none;
+}
+
+
+
+.tf_label{
+    border:1px solid #dadada;
+    border-left:0;
+    width:150px;
+    height:116px;
+    text-align: center;
 }
 
 
