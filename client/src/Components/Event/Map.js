@@ -248,10 +248,10 @@ function MapComponent(props) {
     return (
     <div className="mapPart">
         <div ref={container} style={{width: '100%', height: '90vh'}}></div><br />
-        <div>
-        <input ref={addressInput} value={props.address || ''} readOnly style={{display:'none'}} />
+        {/* <div> */}
+        {/* <input ref={addressInput} value={props.address || ''} readOnly style={{display:'none'}} /> */}
         {/* <button type='button' onClick={reset}>초기화</button> */}
-        </div>
+        {/* </div> */}
     </div>);
 }
 
