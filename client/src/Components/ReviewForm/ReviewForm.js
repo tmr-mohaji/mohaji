@@ -4,9 +4,27 @@ import './ReviewForm.scss';
 const ReviewForm = (props) => {
 
     const score = useRef();
+    const file = useRef();
+    const img = useRef();
 
     const drawStar = () => {
         document.querySelector('.star span').style.width = `${score.current.value * 20}%`;
+    }
+
+    const imgPreview = () => {
+        let file_tag = file.current;
+        let img_tag = img.current;
+
+        if (file_tag.files.length > 0) {
+            let reader = new FileReader();
+
+            reader.onload = function(data) {
+                img_tag.src = data.target.result;
+            }
+            reader.readAsDataURL(file_tag.files[0]);
+        } else {
+            img_tag.src = "/img/no_image.png";
+        }
     }
 
     return (
@@ -29,6 +47,11 @@ const ReviewForm = (props) => {
                     <option value='banana' disabled>바나나</option>
                     <option value='lemon' label='LM'>레몬</option>
                 </select>
+                
+                            <label for="img">
+                <img src="/img/no_image.png" style={{width: "200px", height: "200px"}} ref={img}/>
+            </label>
+            <input type="file" id="img" onChange={() => {imgPreview(); props.fileUpload()}} hidden ref={file}/>
 
                 <button onClick={props.onClick}>등록</button>
             </div>
