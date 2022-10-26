@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './EventDetail.scss';
 import Modal from '../components/Modal/Modal';
 import ReviewForm from '../components/ReviewForm/ReviewForm';
@@ -22,6 +22,7 @@ const EventDetail = (props) => {
         comment: ''
     });
     const modal = useRef();
+    const navigate = useNavigate();
 
     const getData = async () => {
         const response = await axios.get(EVENT_URL + id, {
@@ -68,8 +69,19 @@ const EventDetail = (props) => {
         setReviewData({ ...reviewData, [e.target.name]: e.target.value, });
     }
 
+    let formData = new FormData();
+
+    const fileUpload = () => {
+        let fileUpload = document.getElementById("img");
+
+        for (let i=0; i<fileUpload.files.length; i++) {
+            formData.append("userfile", fileUpload.files[i]);
+        }
+    }
+
     // 리뷰 등록
     const writeComment = async () => {
+
         if (localStorage.getItem("access_token") != undefined) {
 
             axios({
@@ -78,9 +90,22 @@ const EventDetail = (props) => {
                     'Authorization': localStorage.getItem("access_token")
                 }
             }).then((result) => {
-                console.log(result.data.id);
-                console.log("reviewdata", reviewData);
-                axios.post(REVIEW_URL + "writeComment", { user_id: result.data.id, event_id: id, score: reviewData.score, comment: reviewData.comment });
+                formData.append('user_id', result.data.id);
+                formData.append('event_id', id);
+                formData.append('score', reviewData.score);
+                formData.append('content', reviewData.comment);
+
+                for (let key of formData.keys()) {
+                    console.log(key, ":", formData.get(key));
+                }
+
+                axios.post(REVIEW_URL + "writeComment", formData, {
+                    headers: {
+                        "Contest-Type": "multipart/form-data"
+                    }
+                }).then(() => {
+                    navigate("/event/" + id);
+                })
             });
         } else {
             alert("로그인 후 이용가능");
@@ -181,7 +206,7 @@ const EventDetail = (props) => {
                 <div className='line_box'></div>
 
                 <div className='d_box2'>
-                    <ReviewForm onChange={getReview} onClick={writeComment} />
+                    <ReviewForm onChange={getReview} fileUpload={fileUpload} onClick={writeComment}/>
                 </div>
             </div>
         </section>
