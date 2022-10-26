@@ -65,7 +65,7 @@ const EventDetail = (props) => {
 
     // 리뷰 가져오기
     const getReview = (e) => {
-        setReviewData({...reviewData, [e.target.name]: e.target.value,});
+        setReviewData({ ...reviewData, [e.target.name]: e.target.value, });
     }
 
     // 리뷰 등록
@@ -80,7 +80,7 @@ const EventDetail = (props) => {
             }).then((result) => {
                 console.log(result.data.id);
                 console.log("reviewdata", reviewData);
-                axios.post(REVIEW_URL + "writeComment", {user_id: result.data.id, event_id: id, score: reviewData.score, comment: reviewData.comment});
+                axios.post(REVIEW_URL + "writeComment", { user_id: result.data.id, event_id: id, score: reviewData.score, comment: reviewData.comment });
             });
         } else {
             alert("로그인 후 이용가능");
@@ -168,6 +168,12 @@ const EventDetail = (props) => {
                             <button type="button" className="bg-black w2" onClick={showModal}>
                                 <span className='ico-stars2'>마이페이지</span>
                             </button>
+
+                            <div ref={modal} className="d-none">
+                                <div className='m_box'>
+                                    <Modal onChange={getDate} onClick={closeModal} closeBtn={closeBtn} />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -175,14 +181,7 @@ const EventDetail = (props) => {
                 <div className='line_box'></div>
 
                 <div className='d_box2'>
-                    <ReviewForm onChange={getReview} onClick={writeComment}/>
-                </div>
-            </div>
-
-
-            <div ref={modal} className="d-none">
-                <div className='m_box'>
-                    <Modal onChange={getDate} onClick={closeModal} closeBtn={closeBtn} />
+                    <ReviewForm onChange={getReview} onClick={writeComment} />
                 </div>
             </div>
         </section>
