@@ -202,7 +202,9 @@ const Event = (props) => {
                 <div className='listSection'>
 
                 {Object.entries(eventData).map((value) =>{
+
                     let data = value[1];
+                    let time = value[1].time.replaceAll('\\n','  ');
                     return (
                         <div key={data.id} className='list_entire_section'>
                             <div className='list_entire_layout'>
@@ -225,7 +227,7 @@ const Event = (props) => {
                                             </div>
                                             <div className='list_time_layout'>
                                                 <div><FcClock style={{marginRight: '5px'}}/></div>
-                                                <div className='list_period_time'>{data.time}</div>
+                                                <div className='list_period_time'>{time}</div>
                                             </div>
                                         </div>
                                     </div>
