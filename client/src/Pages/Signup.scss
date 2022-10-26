@@ -1,0 +1,115 @@
+@import '../components/Commons/Commons.scss';
+@import '~include-media/dist/include-media';
+
+
+.signup_entire_layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+
+  .signup_section {
+    position: relative;
+    box-sizing: border-box;
+    border: 0.5px solid #f2f4f5;
+    width:500px;
+    height: 700px;
+    padding: 60px 50px;
+    box-shadow: 3px 3px 3px 3px rgba(170, 170, 170,0.5);
+  }
+}
+
+.signup_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin:0;
+  padding: 0;
+
+
+  .sign_warning {
+    height: 40px;
+    // margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color:red;
+  }
+
+  .signup_nickname, .signup_id, .signup_pw, .signup_pw_check,.signup_email{
+    position:relative;
+    width: 250px;
+    height: 48px;
+    padding: 16px;
+    border: 0.5px solid #aaa;
+    margin: 5px 0;
+
+  }
+
+  .signup_nickname:focus, .signup_id:focus, .signup_pw:focus, .signup_pw_check:focus,.signup_email:focus {
+
+    color:#A24F63;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .signup_btn {
+    position:relative;
+    width: 250px;
+    height: 48px;
+    padding: 16px;
+    border: 0.5px solid #A24F63;
+    background-color: #A24F63;
+    color: white;
+    margin: 5px 0;
+  }
+
+  .signup_btn:hover {
+    cursor: pointer;
+  }
+}
+
+
+//경고창 부분~~~~
+.sign_warning {
+  font-family: "Elice Digital Baeum";
+  // margin: 20px 0;
+  font-size: 13px;
+  font-weight: 600;
+  // border: 1px solid yellow;
+  background-color: rgba(255, 255, 0, 0.5);
+  border-radius: 20px;
+  // color:blue;
+  max-width: 320px;
+  // min-height: 30px;
+  padding:10px;
+  padding-left: 30px;
+  position: relative;
+}
+
+.sign_warning:after {
+  border-top: 10px solid  rgba(255, 255, 0, 0.5);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 0px solid transparent;
+  content: "";
+  position: relative;
+  top:38px;
+  left:-50%;
+}
+
+.goFind {
+  font-size: 12px;
+  border: 0;
+  border-radius: 3px;
+  background: rgba(107, 56, 103,0.7);
+  color:white;
+  padding: 8px;
+  margin:5px;
+}
+
+.goFind:hover {
+  background: rgb(107, 56, 103);
+  cursor: pointer;
+}

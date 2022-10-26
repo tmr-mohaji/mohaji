@@ -1,7 +1,7 @@
 import { useState,useRef, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import 'react-toastify/dist/ReactToastify.css';
 import './Login.scss';
 import axios from 'axios';
 
@@ -58,7 +58,7 @@ const Login = ( props ) => {
         <div className='login_entire_layout'>
             <div className='login_section'>
                 <form ref={form} className='login_form'>
-                    <h1 style={{marginBottom:'50px'}}>로고 넣을지 말지</h1>
+                    <h1 style={{marginBottom:'50px'}}>로고</h1>
                     <div className='warningText' style={{height:'40px', marginBottom:'20px'}}>{warning}</div>
                     <input ref={Id} className='login_id' type="text" placeholder="아이디" name="id" required/>
                     <input ref={PW} className='login_pw' type="password" placeholder="비밀번호" name="password" required/>
