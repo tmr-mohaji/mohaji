@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import './ReviewForm.scss';
 
 const ReviewForm = (props) => {
@@ -11,6 +11,7 @@ const ReviewForm = (props) => {
         document.querySelector('.star span').style.width = `${score.current.value * 20}%`;
     }
 
+
     const imgPreview = () => {
         let file_tag = file.current;
         let img_tag = img.current;
@@ -18,7 +19,7 @@ const ReviewForm = (props) => {
         if (file_tag.files.length > 0) {
             let reader = new FileReader();
 
-            reader.onload = function(data) {
+            reader.onload = function (data) {
                 img_tag.src = data.target.result;
             }
             reader.readAsDataURL(file_tag.files[0]);
@@ -32,7 +33,14 @@ const ReviewForm = (props) => {
             <div className='reviewBox1'>
                 {/* <textarea name="comment" onChange={props.onChange}></textarea> */}
                 <p className='review_tit'>리뷰 <span className='review_line'>|</span> <span className='review_tit2'>공연 후기를 작성하실 수 있습니다.</span></p>
-                <textarea name="comment" className="tf_write" onChange={props.onChange}></textarea>
+
+                <div className='rt_box'>
+                    <textarea name="comment" className="tf_write" onChange={props.onChange}></textarea>
+                    <label className='tf_label' for="img">
+                        <img src="/img/no_image.png" style={{ width: "100px", height: "116px" }} ref={img} />
+                    </label>
+                    <input type="file" id="img" onChange={() => { imgPreview(); props.fileUpload() }} hidden ref={file} />
+                </div>
             </div>
 
             <div className='reviewBox2'>
@@ -41,17 +49,14 @@ const ReviewForm = (props) => {
                     <input type="range" name="score" value="3" min="0" max="5" step="0.5" onInput={drawStar} ref={score} onChange={props.onChange} />
                 </span>
 
-                <select name='fruits'>
-                    <option value=''>-- 선택 --</option>
-                    <option value='apple' selected>사과</option>
-                    <option value='banana' disabled>바나나</option>
-                    <option value='lemon' label='LM'>레몬</option>
-                </select>
-                
-                            <label for="img">
-                <img src="/img/no_image.png" style={{width: "200px", height: "200px"}} ref={img}/>
-            </label>
-            <input type="file" id="img" onChange={() => {imgPreview(); props.fileUpload()}} hidden ref={file}/>
+
+                {/* <select name="select">
+                    <option value="1" selected>
+                        <span className='r_star'>★</span> ★★★★
+                    </option>
+                </select> */}
+
+
 
                 <button onClick={props.onClick}>등록</button>
             </div>
