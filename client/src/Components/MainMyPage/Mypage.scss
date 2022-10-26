@@ -125,7 +125,7 @@
 
 
 /*=========================================================
-    오른쪽 컨텐츠 정의
+    축제와 ~ 등록해보세요. 애니메이션 정의
 =========================================================*/
 .box1_h1{
     transform: translateY(50%);
@@ -136,4 +136,72 @@
 .box1_h1.active{
     opacity: 1;
     transform: translateY(0);    
+}
+
+
+/*=========================================================
+    마이 페이지 ~ 로그인 후 이용 가능합니다. 애니메이션 정의
+=========================================================*/
+.box1_a{
+    transform: translateY(50%);
+    transition: .6s;    
+    opacity: 0;    
+}
+
+
+.box1_a.active{
+    opacity: 1;
+    transform: translateY(0);    
+    transition-delay: 0.3s;   
+}
+
+
+/*=========================================================
+    즐겨찾기 애니메이션 정의
+=========================================================*/
+.box1_b{
+    transform: translateY(50%);
+    transition: .6s;    
+    opacity: 0;    
+}
+
+
+.box1_b.active{
+    opacity: 1;
+    transform: translateY(0);    
+    transition-delay: 0.3s;   
+}
+
+
+/*=========================================================
+    이벤트 애니메이션 정의
+=========================================================*/
+.box1_c{
+    transform: translateY(60%);
+    transition: .6s;    
+    opacity: 0;    
+}
+
+
+.box1_c.active{
+    opacity: 1;
+    transform: translateY(0);    
+    transition-delay: 0.3s;   
+}
+
+
+/*=========================================================
+    오른쪽 일러스트 이미지 애니메이션 정의
+=========================================================*/
+.mypage_box2{
+    transform: translateY(50%);
+    transition: .6s;    
+    opacity: 0;    
+}
+
+
+.mypage_box2.active{
+    opacity: 1;
+    transform: translateY(0);    
+    transition-delay: 0.3s;   
 }

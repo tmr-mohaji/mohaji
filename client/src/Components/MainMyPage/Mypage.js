@@ -6,21 +6,57 @@ import {useEffect, useState} from 'react';
 const Mypage = () => {
         // 페이지 스크롤 애니메이션 정의
         const [boxList1, setBoxList] = useState(document.querySelector('.box1_h1')); 
+        const [boxList2, setBoxList2] = useState(document.querySelector('.box1_a')); 
+        const [boxList3, setBoxList3] = useState(document.querySelector('.box1_b')); 
+        const [boxList4, setBoxList4] = useState(document.querySelector('.box1_c')); 
+        const [boxList5, setBoxList5] = useState(document.querySelector('.mypage_box2')); 
+
         const options = {
             // viewport
             root: null,
             rootMargin: "0px",
-            threshold: 1,
-            // 0%가 viewport에 들어와 있어야 callback 실행            
+            // 50%가 viewport에 들어와 있어야 callback 실행 
+            threshold: 1.0,          
         }
+
+        const options2 = {
+            // viewport
+            root: null,
+            rootMargin: "0px",
+            // 50%가 viewport에 들어와 있어야 callback 실행 
+            threshold: 1.0,          
+        }
+
         useEffect(() => {
-            const boxList = document.querySelector('.box1_h1');
-            setBoxList(boxList);
+            const $boxList = document.querySelector('.box1_h1');
+            setBoxList($boxList);
         }, []);
+
+        useEffect(() => {
+            const $$boxList = document.querySelector('.box1_a');
+            setBoxList2($$boxList);
+        }, []);
+
+        useEffect(() => {
+            const $$$boxList = document.querySelector('.box1_b');
+            setBoxList3($$$boxList);
+        }, []);
+
+        useEffect(() => {
+            const $$$$boxList = document.querySelector('.box1_c');
+            setBoxList4($$$$boxList);
+        }, []);
+
+        useEffect(() => {
+            const $$$$$boxList = document.querySelector('.mypage_box2');
+            setBoxList5($$$$$boxList);
+        }, []);
+
+
 
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-                console.log( "entry2 : ", entry );
+                // console.log( "entry2 : ", entry );
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
                 } else {
@@ -28,8 +64,23 @@ const Mypage = () => {
                 }
             });
         }, options);
-        console.log("box : ", boxList1);
+
+        const observer2 = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                // console.log( "entry2 : ", entry );
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, options2);
+
         if ( boxList1 != null ) observer.observe(boxList1);
+        if ( boxList2 != null ) observer.observe(boxList2);
+        if ( boxList3 != null ) observer.observe(boxList3);
+        if ( boxList4 != null ) observer2.observe(boxList4);
+        if ( boxList5 != null ) observer.observe(boxList5);
 
 
     return (
