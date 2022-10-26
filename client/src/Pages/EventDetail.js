@@ -66,7 +66,7 @@ const EventDetail = (props) => {
 
     // 리뷰 가져오기
     const getReview = (e) => {
-        setReviewData({...reviewData, [e.target.name]: e.target.value,});
+        setReviewData({ ...reviewData, [e.target.name]: e.target.value, });
     }
 
     let formData = new FormData();
@@ -193,6 +193,12 @@ const EventDetail = (props) => {
                             <button type="button" className="bg-black w2" onClick={showModal}>
                                 <span className='ico-stars2'>마이페이지</span>
                             </button>
+
+                            <div ref={modal} className="d-none">
+                                <div className='m_box'>
+                                    <Modal onChange={getDate} onClick={closeModal} closeBtn={closeBtn} />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -202,9 +208,6 @@ const EventDetail = (props) => {
                 <div className='d_box2'>
                     <ReviewForm onChange={getReview} fileUpload={fileUpload} onClick={writeComment}/>
                 </div>
-            </div>
-            <div ref={modal} className="d-none">
-                <Modal onChange={getDate} onClick={closeModal} closeBtn={closeBtn} />
             </div>
         </section>
     )
