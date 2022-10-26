@@ -30,7 +30,6 @@ const Event = (props) => {
     const [eventData, setEventData] = useState({});
     const [address, setAddress] = useState("");
     const [clickData, setClickData] = useState([]);
-    const [render, setRender] = useState(false);
 
     const select_city = useRef();
     const select_type = useRef();
@@ -89,9 +88,7 @@ const Event = (props) => {
             for (let i=0; i<response.data.length; i++) {
                 response.data[i]['like'] = ls[i];
                 event[response.data[i].id] = response.data[i];
-                console.log(event);
             }
-            console.log( event );
             setEventData(event);
         // 비로그인 상태
         } else {
@@ -120,7 +117,6 @@ const Event = (props) => {
     // 좋아요 버튼 설정
     const LikeIt = (id) => {
         if ( localStorage.getItem("access_token") != undefined ) {
-            const heartIcon = heart.current.querySelector("svg");
             const datas = JSON.parse(JSON.stringify(eventData));
             axios({
                 url: 'http://localhost:8000/user/auth',
