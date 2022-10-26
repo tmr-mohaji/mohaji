@@ -16,6 +16,7 @@ const eventRouter = require("./routes/event");
 const userRouter = require("./routes/user");
 const emailRouter = require("./routes/email");
 const scheduleRouter = require("./routes/schedule");
+const reviewRouter = require("./routes/review");
 
 const event = require("./controller/EventController");
 
@@ -23,6 +24,7 @@ app.use("/event", eventRouter);
 app.use("/user", userRouter);
 app.use("/email", emailRouter);
 app.use("/schedule", scheduleRouter);
+app.use("/review", reviewRouter);
 
 app.get("/", event.getMain);
 

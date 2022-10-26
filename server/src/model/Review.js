@@ -22,8 +22,7 @@ const Review = (Sequelize, DataTypes) => {
                 allowNull: false
             },
             content: {
-                type: DataTypes.TEXT('medium'),
-                allowNull: false
+                type: DataTypes.TEXT('medium')
             }
         },
         {

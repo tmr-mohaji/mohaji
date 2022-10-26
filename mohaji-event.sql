@@ -42,7 +42,9 @@ CREATE TABLE review (
     event_id int not null,
     FOREIGN KEY ( event_id ) REFERENCES event(id) ON DELETE CASCADE,
     score decimal(3,2) not null,
-    content mediumtext
+    content mediumtext,
+    createdAt TIMESTAMP,
+    updatedAt TIMESTAMP
 );
 
 CREATE TABLE review_img (
