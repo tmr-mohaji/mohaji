@@ -132,9 +132,9 @@ const EventDetail = (props) => {
                         </ul>
 
                         <div className='d_link'>
-                            <button type="button" className="bg-black_r w1" onClick={like}>
+                            {/* <button type="button" className="bg-black_r w1" onClick={like}>
                                 <span className="ico-stars">즐겨찾기</span>
-                            </button>
+                            </button> */}
 
                             <button type="button" className="bg-black w2" onClick={showModal}>
                                 <span className='ico-stars2'>마이페이지</span>
