@@ -1,3 +1,26 @@
+@import '../Commons/Commons.scss';
+@import '~include-media/dist/include-media';
+
+
+/*=========================================================
+    닫기 버튼 클릭 시 모달 창 숨김 정의
+=========================================================*/
 .d-none {
     display: none;
+}
+
+
+
+/*=========================================================
+    
+=========================================================*/
+.modalBox{
+    width:200px;
+    height:100px;
+    position:absolute;
+    top:300px;
+    z-index: 10;
+    padding-top:40px;
+    margin-lefT:40%;
+    background:black;
 }
