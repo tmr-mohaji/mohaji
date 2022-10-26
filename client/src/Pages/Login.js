@@ -1,5 +1,5 @@
 import { useState,useRef, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Login.scss';
@@ -14,6 +14,7 @@ const Login = ( props ) => {
     const Id = useRef();
     const PW = useRef();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const error = () => toast('아이디 또는 비밀번호를 확인해주세요!', { autoClose:3000, hideProgressBar:true, progress:undefined});
 
@@ -49,6 +50,7 @@ const Login = ( props ) => {
                 setWarning('');
             },3000);
         }
+    
     }
 
 
@@ -69,7 +71,7 @@ const Login = ( props ) => {
                 <div className='login_etc'>
                     <Link className='find_id' to="/user/findid">아이디 찾기</Link>
                     <span style={{fontSize:'10px', color:'rgba(170,170,170,0.3)'}}>|</span>
-                    <Link className='set_pw' to="/user/resetpw">비밀번호 재설정</Link>
+                    <Link className='set_pw' to="/user/findid">비밀번호 재설정</Link>
                     <span style={{fontSize:'10px', color:'rgba(170,170,170,0.3)'}}>|</span>
                     <Link className='signup' to="/user/signup">회원가입</Link>
                 </div>

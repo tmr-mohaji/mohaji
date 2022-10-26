@@ -11,6 +11,7 @@ import EventDetail from '../pages/EventDetail';
 import Signup from '../pages/Signup';
 import Login from '../pages/Login';
 import FindId from '../pages/FindId';
+import Resetpw from '../pages/Resetpw';
 import MyPage from '../pages/MyPage';
 
 
@@ -48,6 +49,7 @@ const Router = () => {
                     <Route path="/user/signup" element={<Signup />} />
                     <Route path="/user/login" element={<Login setNickname={setNickname} setId={setId} />} />
                     <Route path="/user/findid" element={<FindId />} />
+                    <Route path='/user/resetpw' element={<Resetpw />} />
                     <Route path="/mypage" element={<MyPage id={id}/>} />
                 </Routes>
                 <Footer />

@@ -144,7 +144,40 @@
     border-bottom: 0px solid transparent;
     content: "";
     position: relative;
-    top:39px;
+    top:38px;
     left:-50%;
 
+}
+
+
+// 인증완료 이동버튼
+
+.goLogin {
+    font-size: 12px;
+    border: 0;
+    border-radius: 3px;
+    background: rgba(162, 79, 99,0.7);
+    color:white;
+    padding: 8px;
+    margin:5px;
+}
+
+.goLogin:hover {
+    background: rgb(162, 79, 99);
+    cursor: pointer;
+}
+
+.goReset {
+    font-size: 12px;
+    border: 0;
+    border-radius: 3px;
+    background: rgba(107, 56, 103,0.7);
+    color:white;
+    padding: 8px;
+    margin:5px;
+}
+
+.goReset:hover {
+    background: rgb(107, 56, 103);
+    cursor: pointer;
 }
