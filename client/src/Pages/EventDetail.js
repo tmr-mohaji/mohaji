@@ -5,8 +5,9 @@ import Modal from '../components/Modal/Modal';
 import ReviewForm from '../components/ReviewForm/ReviewForm';
 import Review from '../components/Review/Review';
 import axios from 'axios';
-
-import { FaHeart } from 'react-icons/fa'
+import { BsShare } from 'react-icons/bs';
+import { FaHeart } from 'react-icons/fa';
+import KakaoShareButton from './KakaoShareButton';
 
 const EVENT_URL = "http://localhost:8000/event/";
 const SCHEDULE_URL = "http://localhost:8000/schedule/addEvent";
@@ -172,6 +173,20 @@ const EventDetail = (props) => {
         modal.current.classList.add("d-none");
     }
 
+
+    // 카카오 공유하기
+    // useEffect(() => {
+    //     const script = document.createElement('script')
+    //     script.src = 'https://developers.kakao.com/sdk/js/kakao.js'
+    //     script.async = true
+
+    //     document.body.appendChild(script)
+    //     return () => { document.body.removeChild(script)}
+    // },[])
+
+
+    
+
     useEffect(() => {
         getData();
         findReview();
@@ -202,6 +217,7 @@ const EventDetail = (props) => {
                             </div>
 
                             <div className='d_like'>
+                                <div><KakaoShareButton id={data.id} title={data.title} detail={data.detail} filename={data.filename}/></div>
                                 <button className='like_btn' onClick={like}>
                                     {likeStatus ? <FaHeart /> : <FaHeart style={{ color: "lightgray" }} />}
                                 </button>
