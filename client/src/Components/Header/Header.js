@@ -32,7 +32,7 @@ const Header = (props) => {
                         </li>
 
                         <li>
-                            <Link className='bt_line' to='/event'> 채팅 </Link>
+                            <Link className='bt_line' to='/chat'> 채팅 </Link>
                         </li>
 
                         <li>
@@ -70,7 +70,7 @@ const Header = (props) => {
                                 </li>
 
                                 <li className='mob_li'>
-                                    <Link className='arrow' to='/'> 채팅 </Link>
+                                    <Link className='arrow' to='/chat'> 채팅 </Link>
                                 </li>
 
                                 <li className='mob_li'>

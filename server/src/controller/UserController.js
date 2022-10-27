@@ -88,7 +88,7 @@ exports.resetPW = async (req, res) => {
     let result = await models.User.update(obj, {
         where: {id : req.body.id}
     });
-
+    console.log(result);
     res.send(result);
 }
 
