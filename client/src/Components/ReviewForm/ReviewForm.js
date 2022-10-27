@@ -1,8 +1,6 @@
 import { useRef, useState } from 'react';
 import './ReviewForm.scss';
 
-import down_arrow from './img/down_ar.png';
-
 const ReviewForm = (props) => {
 
     const score = useRef();
