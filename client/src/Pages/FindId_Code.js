@@ -2,20 +2,20 @@ import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const BACK_SERVER = "http://localhost:8000";
-
 function FindId_Code (props) {
 
     const [ userId , setUserId ] = useState();
     const [ userEmail, setUserEmail ] = useState();
     const [ find , setFind ] = useState(false);
+
     const navigate = useNavigate();
+
     const codeInput = useRef();
 
     const findId = async () => {
 
         if (codeInput.current.value == props.code) {
-            const idResult = await axios.post(BACK_SERVER + "/user/findId", {email: props.input.current.value});
+            const idResult = await axios.post(process.env.REACT_APP_USER_URL + "/findId", {email: props.input.current.value});
             const id = idResult.data.id;
 
             if (id == null) {
@@ -23,10 +23,10 @@ function FindId_Code (props) {
 
             } else {
                 console.log(id.id);
-                setFind(true)
+                setFind(true);
                 setUserEmail(props.input.current.value);
                 setUserId(id.id);
-                props.setText('인증 완료!')
+                props.setText('인증 완료!');
             }
 
         } else {
