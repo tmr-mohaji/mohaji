@@ -75,10 +75,12 @@ const EventDetail = (props) => {
             params : {event_id : id}
         })
 
-        let dic = {};
-        for (let i=0; i < result.data.result.length; i++) {
-            result.data.result[i]['filename'] = result.data.filename[i];
+        if (result.data.filename != undefined) {
+            for (let i=0; i < result.data.result.length; i++) {
+                result.data.result[i]['filename'] = result.data.filename[i];
+            }
         }
+
         setAllReview(result.data.result);
 
         // 별점 계산
@@ -87,8 +89,10 @@ const EventDetail = (props) => {
             sum += parseFloat(result.data.result[i].score);
         }
         let avg = sum / result.data.result.length;
+        if (isNaN(avg)) {
+            return false;
+        }
         setScore(avg);
-
     }
 
     // 리뷰 가져오기
@@ -131,6 +135,7 @@ const EventDetail = (props) => {
                         "Contest-Type": "multipart/form-data"
                     }
                 }).then(() => {
+                    findReview();
                     navigate("/event/" + id);
                 })
             });
