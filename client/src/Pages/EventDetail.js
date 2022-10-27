@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import './EventDetail.scss';
 import Modal from '../components/Modal/Modal';
 import ReviewForm from '../components/ReviewForm/ReviewForm';
+import Review from '../components/Review/Review';
 import axios from 'axios';
 
 import { FaHeart } from 'react-icons/fa'
@@ -21,9 +22,13 @@ const EventDetail = (props) => {
         score: 0,
         comment: ''
     });
+    const [allReview, setAllReview] = useState([]);
+    const [score, setScore] = useState(0);
+
     const modal = useRef();
     const navigate = useNavigate();
 
+    // 이벤트 & 좋아요 정보
     const getData = async () => {
         const response = await axios.get(EVENT_URL + id, {
             params: { id: id }
@@ -62,6 +67,28 @@ const EventDetail = (props) => {
         } else {
             alert("로그인 후 이용가능");
         }
+    }
+
+    // 리뷰 데이터
+    const findReview = async () => {
+        const result = await axios.get(REVIEW_URL + "getComment", {
+            params : {event_id : id}
+        })
+
+        let dic = {};
+        for (let i=0; i < result.data.result.length; i++) {
+            result.data.result[i]['filename'] = result.data.filename[i];
+        }
+        setAllReview(result.data.result);
+
+        // 별점 계산
+        let sum = 0
+        for (let i=0; i < result.data.result.length; i++) {
+            sum += parseFloat(result.data.result[i].score);
+        }
+        let avg = sum / result.data.result.length;
+        setScore(avg);
+
     }
 
     // 리뷰 가져오기
@@ -142,6 +169,7 @@ const EventDetail = (props) => {
 
     useEffect(() => {
         getData();
+        findReview();
     }, [likeStatus])
 
     return (
@@ -206,8 +234,16 @@ const EventDetail = (props) => {
                 <div className='line_box'></div>
 
                 <div className='d_box2'>
+                    <p>★ {score}</p>
                     <ReviewForm onChange={getReview} fileUpload={fileUpload} onClick={writeComment}/>
                 </div>
+                {allReview.map((data) => {
+                    return (
+                        <div key={data.id}>
+                            <Review id={data.user_id} score={data.score} review={data.content} date={data.createdAt} file={data.filename}/>
+                        </div>
+                    )
+                })}
             </div>
         </section>
     )
