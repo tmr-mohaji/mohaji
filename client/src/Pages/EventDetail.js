@@ -151,6 +151,7 @@ const EventDetail = (props) => {
             modal.current.classList.remove("d-none");
         } else {
             alert("로그인 후 이용가능");
+            navigate("/user/login");
         }
     }
 

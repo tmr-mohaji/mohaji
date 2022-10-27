@@ -3,10 +3,6 @@ import axios from 'axios';
 
 import Button from "../components/Button";
 
-const USER_URL = "http://localhost:8000/user/";
-const EVENT_URL = "http://localhost:8000/event/";
-const SCHEDULE_URL = "http://localhost:8000/schedule/";
-
 const MyPage = (props) => {
 
     const [data, setData] = useState([]);
@@ -16,7 +12,7 @@ const MyPage = (props) => {
     const getData = async () => {
         // 로그인 상태
         if (props.id != "") {
-            let result = await axios.get(USER_URL + "info", {
+            let result = await axios.get(process.env.REACT_APP_USER_URL + "/info", {
                 params: {id : props.id}
             })
             setData(result.data);
@@ -25,14 +21,14 @@ const MyPage = (props) => {
 
     const getLikes = async () => {
         if (props.id != "") {
-            let result = await axios.post(EVENT_URL + "likeInfo", {user_id : props.id});
+            let result = await axios.post(process.env.REACT_APP_EVENT_URL + "/likeInfo", {user_id : props.id});
             setEvent(result.data);
         }
     }
 
     const getSchedule = async () => {
         if (props.id != "") {
-            let result = await axios.get(SCHEDULE_URL + "getEvent", {
+            let result = await axios.get(process.env.REACT_APP_SCHEDULE_URL + "/getEvent", {
                 params : {user_id : props.id}
             });
             setSchedule(result.data);
@@ -41,7 +37,7 @@ const MyPage = (props) => {
 
     const deleteSchedule = async (id) => {
         if ( props.id != "") {
-            let result = await axios.get(SCHEDULE_URL + "deleteEvent", {
+            let result = await axios.get(process.env.REACT_APP_SCHEDULE_URL + "/deleteEvent", {
                 params : {id : id}
             });
             getSchedule();

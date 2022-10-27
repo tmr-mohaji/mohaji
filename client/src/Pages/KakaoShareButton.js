@@ -27,8 +27,8 @@ const KakaoShareButton = (props) => {
                     description: '내일뭐하지 이벤트 공유',
                     imageUrl : 'https://ifh.cc/g/ClpKtN.jpg',
                     link: {
-                        mobileWebUrl : 'http://localhost:8000/event/'+ props.id,
-                        webUrl: 'http://localhost:8000/event/'+ props.id,
+                        mobileWebUrl : process.env.REACT_APP_EVENT_URL + '/' + props.id,
+                        webUrl: process.env.REACT_APP_EVENT_URL + '/' + props.id,
                     },
                 },
                 social: {
@@ -40,8 +40,8 @@ const KakaoShareButton = (props) => {
                     {
                         title: '같이 참여하기',
                         link: {
-                            mobileWebUrl : 'http://localhost:8000/event/'+ props.id,
-                            webUrl: 'http://localhost:8000/event/'+ props.id,
+                            mobileWebUrl :  process.env.REACT_APP_EVENT_URL + '/' + props.id,
+                            webUrl:  process.env.REACT_APP_EVENT_URL + '/' + props.id,
                         },
                     },
                 ],

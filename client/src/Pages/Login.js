@@ -1,18 +1,19 @@
-import { useState,useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
-import './Login.scss';
 import axios from 'axios';
 
-const USER_URL = "http://localhost:8000/user/login"
+// import 'react-toastify/dist/ReactToastify.css';
+import './Login.scss';
 
 const Login = ( props ) => {
 
     const [warning, setWarning] = useState('');
+
     const form = useRef();
     const Id = useRef();
     const PW = useRef();
+
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -27,7 +28,7 @@ const Login = ( props ) => {
             return false;
         }
 
-        const response = await axios.post(USER_URL, {
+        const response = await axios.post(process.env.REACT_APP_USER_URL + "/login", {
             id : form.current.id.value,
             password : form.current.password.value
         })
