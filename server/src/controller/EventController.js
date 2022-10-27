@@ -9,7 +9,7 @@ exports.getMain = async (req, res) => {
         let result = await models.Event.findAll();
         res.send(result);
     } else {
-        let query = `select * from event where type like '%${type}%'`;
+        let query = `select * from event where type like '%${type}%' order by id desc`;
         let result = await models.Event.sequelize.query(query);
         res.send(result[0]);
     }
@@ -24,11 +24,11 @@ exports.getEvent = async (req, res) => {
     if (type == "전체") type='';
 
     if (date == '') {
-        let query = `select * from event where address like '%${city}%' and type like '%${type}%'`;
+        let query = `select * from event where address like '%${city}%' and type like '%${type}%' ORDER BY id DESC`;
         let result = await models.Event.sequelize.query(query);
         res.send(result[0]);
     } else {
-        let query = `select * from event where address like '%${city}%' and type like '%${type}%' and start_date <= '${date}' and end_date >= '${date}'`;
+        let query = `select * from event where address like '%${city}%' and type like '%${type}%' and start_date <= '${date}' and end_date >= '${date}' ORDER BY id desc`;
         let result = await models.Event.sequelize.query(query);
         res.send(result[0]);
     }
