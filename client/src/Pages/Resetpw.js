@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Resetpw.scss';
 import axios from 'axios';
 
@@ -27,12 +27,16 @@ function Resetpw() {
     }else {
       setResetWarning('reset_checking');
       setResetText('비밀번호가 같습니다.');
+      button_click.disabled = false;
       button_click.style.cursor = 'pointer';
     }
   }
   
+  const navigate = useNavigate();
   const changePW = async () => {
         const result = await axios.post(USER_URL, {id: id, password: resetPW.current.value});
+
+        if ( result.status == 200 ) { navigate('/') }
     }
 
   return(
