@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 
+import Button from "../components/Button";
+
 const USER_URL = "http://localhost:8000/user/";
 const EVENT_URL = "http://localhost:8000/event/";
 const SCHEDULE_URL = "http://localhost:8000/schedule/";
@@ -54,6 +56,9 @@ const MyPage = (props) => {
 
     return (
         <div style={{paddingTop: "100px"}}>
+            <Button name="회원 정보" />
+            <Button name="즐겨찾기" />
+            <Button name="일정"  />
             <h1>유저 정보</h1>
             {data.id} <br />
             {data.nickname} <br />
