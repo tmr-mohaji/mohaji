@@ -37,7 +37,8 @@ const ReviewForm = (props) => {
                 <div className='rt_box'>
                     <textarea name="comment" className="tf_write" onChange={props.onChange}></textarea>
                     <label className='tf_label' for="img">
-                        <img src="/img/no_image.png" style={{ width: "100px", height: "116px" }} ref={img} />
+                        <img src="/img/no_image3.png" style={{ width: "40px", height: "33px" }} ref={img} alt='' />
+                        <p className='img_p'>+ 사진추가</p>
                     </label>
                     <input type="file" id="img" onChange={() => { imgPreview(); props.fileUpload() }} hidden ref={file} />
                 </div>
