@@ -33,6 +33,8 @@ const ReviewForm = (props) => {
         }
     }
 
+
+
     return (
         <div className='review_Container'>
             <div className='reviewBox1'>
@@ -42,7 +44,7 @@ const ReviewForm = (props) => {
                 <div className='rt_box'>
                     <textarea name="comment" className="tf_write" onChange={props.onChange}></textarea>
                     <label className='tf_label' for="img">
-                        <img src="/img/no_image3.png" style={{ width: "40px", height: "33px" }} ref={img} />
+                        <img src="/img/no_image3.png" style={{ width: "40px", height: "33px" }} ref={img} alt='' />
                         <p className='img_p'>+ 사진추가</p>
                     </label>
                     <input type="file" id="img" onChange={() => { imgPreview(); props.fileUpload() }} hidden ref={file} />
@@ -65,7 +67,7 @@ const ReviewForm = (props) => {
                     </button>
                     <Dropdown visibility={dropdownVisibility}>
                         <ul className='drop_ul'>
-                            <li>
+                            <li>                               
                                 <span className="star">
                                     ★★★★★ <span className='one'>★★★★★</span>
                                 </span>
