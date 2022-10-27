@@ -1,41 +1,41 @@
 import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import './EventDetail.scss';
+import axios from 'axios';
+
 import Modal from '../components/Modal/Modal';
 import ReviewForm from '../components/ReviewForm/ReviewForm';
 import Review from '../components/Review/Review';
-import axios from 'axios';
+import KakaoShareButton from './KakaoShareButton';
+import './EventDetail.scss';
+
 import { BsShare } from 'react-icons/bs';
 import { FaHeart } from 'react-icons/fa';
-import KakaoShareButton from './KakaoShareButton';
-
-const EVENT_URL = "http://localhost:8000/event/";
-const SCHEDULE_URL = "http://localhost:8000/schedule/addEvent";
-const REVIEW_URL = "http://localhost:8000/review/";
 
 const EventDetail = (props) => {
 
     const { id } = useParams();
+
     const [data, setData] = useState([]);
     const [date, setDate] = useState("");
     const [likeStatus, setLikeStatus] = useState("");
+    const [allReview, setAllReview] = useState([]);
+    const [score, setScore] = useState(0);
     const [reviewData, setReviewData] = useState({
         score: 0,
         comment: ''
     });
-    const [allReview, setAllReview] = useState([]);
-    const [score, setScore] = useState(0);
 
     const modal = useRef();
+
     const navigate = useNavigate();
 
     // 이벤트 & 좋아요 정보
     const getData = async () => {
-        const response = await axios.get(EVENT_URL + id, {
+        const response = await axios.get(process.env.REACT_APP_EVENT_URL + '/' + id, {
             params: { id: id }
         });
         setData(response.data);
-        const likeResult = await axios.post(EVENT_URL + "likeInfo", { user_id: props.user_id, event_id: id });
+        const likeResult = await axios.post(process.env.REACT_APP_EVENT_URL + "/likeInfo", { user_id: props.user_id, event_id: id });
         if (likeResult.data == "") {
             setLikeStatus(false);
         } else {
@@ -48,7 +48,7 @@ const EventDetail = (props) => {
         if (localStorage.getItem("access_token") != undefined) {
 
             axios({
-                url: 'http://localhost:8000/user/auth',
+                url: process.env.REACT_APP_USER_URL + '/auth',
                 headers: {
                     'Authorization': localStorage.getItem("access_token")
                 }
@@ -57,11 +57,11 @@ const EventDetail = (props) => {
                 // 좋아요 안 된 상태
                 if (!likeStatus) {
                     console.log('like');
-                    axios.post(EVENT_URL + "like", { user_id: result.data.id, event_id: id });
+                    axios.post(process.env.REACT_APP_EVENT_URL + "/like", { user_id: result.data.id, event_id: id });
                     setLikeStatus(true);
                 } else {
                     console.log("dislike");
-                    axios.post(EVENT_URL + "dislike", { user_id: result.data.id, event_id: id });
+                    axios.post(process.env.REACT_APP_EVENT_URL + "/dislike", { user_id: result.data.id, event_id: id });
                     setLikeStatus(false);
                 }
             });
@@ -72,11 +72,11 @@ const EventDetail = (props) => {
 
     // 리뷰 데이터
     const findReview = async () => {
-        const result = await axios.get(REVIEW_URL + "getComment", {
+        const result = await axios.get(process.env.REACT_APP_REVIEW_URL + "/getComment", {
             params : {event_id : id}
         })
 
-        if (result.data.filename != undefined) {
+        if (result.data.filename != false) {
             for (let i=0; i < result.data.result.length; i++) {
                 result.data.result[i]['filename'] = result.data.filename[i];
             }
@@ -117,7 +117,7 @@ const EventDetail = (props) => {
         if (localStorage.getItem("access_token") != undefined) {
 
             axios({
-                url: 'http://localhost:8000/user/auth',
+                url: process.env.REACT_APP_USER_URL + '/auth',
                 headers: {
                     'Authorization': localStorage.getItem("access_token")
                 }
@@ -131,13 +131,18 @@ const EventDetail = (props) => {
                     console.log(key, ":", formData.get(key));
                 }
 
-                axios.post(REVIEW_URL + "writeComment", formData, {
+                axios.post(process.env.REACT_APP_REVIEW_URL + "/writeComment", formData, {
                     headers: {
                         "Contest-Type": "multipart/form-data"
                     }
                 }).then(() => {
                     findReview();
-                    navigate("/event/" + id);
+
+                    // 창 비우기
+                    let textarea = document.querySelector(".rt_box textarea");
+                    let fileUpload = document.getElementById("img");
+                    textarea.value = "";
+                    fileUpload.value = "";
                 })
             });
         } else {
@@ -164,7 +169,7 @@ const EventDetail = (props) => {
         if (date == "") {
             alert("날짜 선택 안됨");
         } else {
-            let result = await axios.post(SCHEDULE_URL, { user_id: props.user_id, event_id: id, date: date });
+            let result = await axios.post(process.env.REACT_APP_SCHEDULE_URL + "/addEvent", { user_id: props.user_id, event_id: id, date: date });
             alert(result.data);
             closeBtn();
         }

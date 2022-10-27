@@ -3,7 +3,7 @@ import './ReviewForm.scss';
 
 const ReviewForm = (props) => {
 
-    const score = useRef();
+    // const score = useRef();
     const file = useRef();
     const img = useRef();
 
@@ -60,7 +60,6 @@ const ReviewForm = (props) => {
     return (
         <div className='review_Container'>
             <div className='reviewBox1'>
-                {/* <textarea name="comment" onChange={props.onChange}></textarea> */}
                 <p className='review_tit'>리뷰 <span className='review_line'>|</span> <span className='review_tit2'>공연 후기를 작성하실 수 있습니다.</span></p>
 
                 <div className='rt_box'>
