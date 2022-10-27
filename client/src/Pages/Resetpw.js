@@ -1,6 +1,9 @@
 import { useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './Resetpw.scss';
+import axios from 'axios';
+
+const USER_URL = "http://localhost:8000/user/resetPW"
 
 function Resetpw() {
 
@@ -15,12 +18,16 @@ function Resetpw() {
   const email = location.state.email;
 
   const ResetOnChange = (e) => {
+    const button_click = document.querySelector('.reset_btn');
     if (resetPW.current.value != e.target.value ) {
       setResetWarning('reset_warning');
       setResetText('비밀번호가 다릅니다.');
+      button_click.disabled = true;
+      button_click.style.cursor = 'not-allowed';
     }else {
       setResetWarning('reset_checking');
       setResetText('비밀번호가 같습니다.');
+      button_click.style.cursor = 'pointer';
     }
   }
   
