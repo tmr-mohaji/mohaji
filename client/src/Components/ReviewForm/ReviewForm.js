@@ -50,13 +50,14 @@ const ReviewForm = (props) => {
                     <input type="range" name="score" value="3" min="0" max="5" step="0.5" onInput={drawStar} ref={score} onChange={props.onChange} />
                 </span>
 
-
-                {/* <select name="select">
-                    <option value="1" selected>
-                        <span className='r_star'>★</span> ★★★★
-                    </option>
-                </select> */}
-
+                <div>
+                    <ul>
+                        <li>item 1</li>
+                        <li>item 2</li>
+                        <li>item 3</li>
+                        <li>item 4</li>
+                    </ul>
+                </div>
 
 
                 <button onClick={props.onClick}>등록</button>
