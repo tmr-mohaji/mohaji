@@ -13,6 +13,7 @@ import Login from '../pages/Login';
 import FindId from '../pages/FindId';
 import Resetpw from '../pages/Resetpw';
 import MyPage from '../pages/MyPage';
+import Chat from '../pages/Chat';
 
 import ScrollToTop from '../components/ScrollToTop';
 
@@ -54,6 +55,7 @@ const Router = () => {
                     <Route path="/user/findid" element={<FindId />} />
                     <Route path='/user/resetpw' element={<Resetpw />} />
                     <Route path="/mypage" element={<MyPage id={id}/>} />
+                    <Route path="/chat" element={<Chat />} />
                 </Routes>
                 <Footer />
             </BrowserRouter>
