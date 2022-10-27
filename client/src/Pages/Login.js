@@ -55,6 +55,7 @@ const Login = ( props ) => {
 
 
     return(
+        <>
         <div className='login_entire_layout'>
             <div className='login_section'>
                 <form ref={form} className='login_form'>
@@ -77,6 +78,7 @@ const Login = ( props ) => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

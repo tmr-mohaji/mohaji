@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef, createRef } from "react";
-import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './Map.scss';
 
@@ -86,22 +85,6 @@ function MapComponent(props) {
         })
         .then((req) => { return req.data;})
         .then((addressData) => {
-
-        // console.log(addressData);
-        // console.log("props :", props.address);
-
-            // 1. 주소 >> 좌표 전환
-
-            // 🤔 
-            //1)여기 전체 데이터에서 Event.js에서 버튼 클릭해서 받은 주소와 비교 해서 데이터가 일치할 경우 그 데이터만 담아서 .then에 보내줌. 
-
-            //2) 1)이 아닐경우 전체 데이터를 .then에 보내줌.
-                // if (props.address != "") {
-                //     const result = addressData.filter((data) => { return data.address === props.address });
-                //     setEvent(props.address);
-                //     console.log(result);
-                //     return result;
-                // } 
                 
                 if (props.clickData != "") {
                     const result = addressData.filter((data) => { return data.address === props.address });
@@ -139,7 +122,8 @@ function MapComponent(props) {
                                 size: new naver.maps.Size(50, 52),
                                 origin: new naver.maps.Point(0,0),
                                 anchor: new naver.maps.Point(25, 26),
-                            }
+                            },
+                            
                         });
 
                     // 3. 각 마커별 정보창 표시
@@ -148,13 +132,12 @@ function MapComponent(props) {
                             `<div className='infoText' style='padding:20px; background-color:white; color:black; border-radius:20px; opcity:75%; display:flex; align-items:center;'>
                             <div style='margin-right:30px;'>
                                 <div style='font-weight:normal; text-align:center; font-size:11px; margin-top:3px; width:50px; background-color:#FFE6E6; border-radius:4px;'>${aData.type}</div>    
-                                <div style='font-weight:bold; font-size:15px; cursor:pointer;'>${aData.title}<span><img src=${require('./img/arrow.png')} style='width:12px; height:12px; margin-left:5px; margin-bottom:4px;' alt='상세보기'></span></div>
+                                <div style='font-weight:bold; font-size:15px; cursor:pointer;'>${aData.title}<a href='/event/${aData.id}'><img src=${require('./img/arrow.png')} style='width:12px; height:12px; margin-left:5px; margin-bottom:4px;' alt='상세보기'></a></div>
                                 <div>
-                                    <span style='font-size:11px; border-right: 1px solid #dcdcdc;'>⭐⭐⭐</span>
-                                    <span style='font-size:11px;' >리뷰 (5)</span>
+                                    <span style='font-size:11px;'>⭐⭐⭐</span>
                                 </div>
                                 <div style='margin-top:10px;'>
-                                <span style='font-size:12px; font-weight:bold;padding:5px; border-radius:3px;background-color:#5AD2FF; color:white;'><img src=${require('./img/detour.png')} style='width:15px; height:15px;' />길찾기</span>
+                                <span style='font-size:12px; font-weight:bold;padding:5px; border-radius:3px;background-color:#5AD2FF; color:white;'><img src=${require('./img/detour.png')} style='width:15px; height:15px;'/>길찾기</span>
                                 </div>
                             </div>
                             <div>
@@ -166,10 +149,9 @@ function MapComponent(props) {
                             `<div className='infoText' style='padding:20px; background-color:white; color:black; border-radius:20px; opcity:75%; display:flex; align-items:center;'>
                             <div style='margin-right:30px;'>
                                 <div style='font-weight:normal; text-align:center; font-size:11px; margin-top:3px; width:50px; background-color:#FFE6E6; border-radius:4px;'>${props.clickData.type}</div>    
-                                <div style='font-weight:bold; font-size:15px; cursor:pointer;'>${props.clickData.title}<span><img src=${require('./img/arrow.png')} style='width:12px; height:12px; margin-left:5px; margin-bottom:4px;' alt='상세보기'></span></div>
+                                <div style='font-weight:bold; font-size:15px; cursor:pointer;'>${props.clickData.title}<a href='/event/${props.clickData.id}'><img src=${require('./img/arrow.png')} style='width:12px; height:12px; margin-left:5px; margin-bottom:4px;' alt='상세보기'></a></div>
                                 <div>
-                                    <span style='font-size:11px; border-right: 1px solid #dcdcdc;'>⭐⭐⭐</span>
-                                    <span style='font-size:11px;' >리뷰 (5)</span>
+                                    <span style='font-size:11px;'>⭐⭐⭐</span>
                                 </div>
                                 <div style='margin-top:10px;'>
                                 <span style='font-size:12px; font-weight:bold;padding:5px; border-radius:3px;background-color:#5AD2FF; color:white;'><img src=${require('./img/detour.png')} style='width:15px; height:15px;' />길찾기</span>
@@ -189,7 +171,7 @@ function MapComponent(props) {
                             anchorSize: {
                                 width: 15,
                                 height: 15
-                            },                            
+                            },                       
                         });
 
                         const infowindow2 = new naver.maps.InfoWindow({
@@ -203,21 +185,39 @@ function MapComponent(props) {
                                 height: 15
                             },                            
                         });
+
+                        const infoText3 = 
+                            `<div className='infoText' style='padding:20px; background-color:white; color:black; border-radius:20px; opcity:75%; display:flex; align-items:center;'>
+                            <div style='margin-right:30px;'>   
+                                <div style='font-weight:bold; font-size:15px;'>현재위치입니다.</div>
+                            </div>`;
                         
+                        const infowindow3 = new naver.maps.InfoWindow({
+                            content: infoText3,
+                            borderWidth:0,
+                            maxWidth:500,
+                            backgroundColor:'transparent',
+                            anchorColor: '#fff',
+                            anchorSize: {
+                                width: 15,
+                                height: 15
+                            },                       
+                        });
 
                             naver.maps.Event.addListener(event_marker, 'click', function(e) {
                                 map.panTo(e.coord);
                                 map.setZoom(14);
 
-                                if (event_marker.getAnimation() != null) {
-                                    event_marker.setAnimation(null);
-                                } else {
-                                    event_marker.setAnimation(naver.maps.Animation.BOUNCE)
-                                }
                                 if (infowindow.getMap()) {
+                                    console.log('열려있음.')
                                     infowindow.close();
                                 } else {
                                     infowindow.open(map, event_marker);
+                                    if (event_marker.getAnimation() != null) {
+                                        event_marker.setAnimation(null);
+                                    } else {
+                                        event_marker.setAnimation(naver.maps.Animation.BOUNCE)
+                                    }
                                 }
 
                                 if(props.clickData != "") {
@@ -225,16 +225,18 @@ function MapComponent(props) {
                                         infowindow2.close();
                                     } else {
                                         infowindow2.open(map, event_marker);
+                                        if (event_marker.getAnimation() != null) {
+                                            event_marker.setAnimation(null);
+                                        } else {
+                                            event_marker.setAnimation(naver.maps.Animation.BOUNCE)
+                                        }
                                     }
                                 }
-
                             });
                             infowindow.open(map,event_marker);
                             infowindow2.open(map,event_marker);
                             }
-
                     )
-
                 })
             
             })  
@@ -244,14 +246,9 @@ function MapComponent(props) {
         initMap();
     }, [props.city, props.address, props.clickData]); 
 
-
     return (
     <div className="mapPart">
         <div ref={container} style={{width: '100%', height: '90vh'}}></div><br />
-        {/* <div> */}
-        {/* <input ref={addressInput} value={props.address || ''} readOnly style={{display:'none'}} /> */}
-        {/* <button type='button' onClick={reset}>초기화</button> */}
-        {/* </div> */}
     </div>);
 }
 
