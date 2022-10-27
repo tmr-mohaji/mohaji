@@ -59,7 +59,9 @@ textarea:focus {
 }
 
 
-
+/*=========================================================
+    사진 추가 관련 정의
+=========================================================*/
 .tf_label{
     border:1px solid #dadada;
     border-left:0;
@@ -178,11 +180,56 @@ textarea:focus {
 /*=========================================================
     세부 내용 관련 정의
 =========================================================*/
+.select {
+    width: 300px;
+    height:35px;
+    border: 1px solid #dadada;
+    box-sizing: border-box;
+}
+
+.selected-value{
+    font-size:12px;
+    font-family: "Elice Digital Baeum", sans-serif;
+}
+
+.select .selected {
+    width: 300px;
+    height:35px;
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 10px;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+
+.select .selected .arrow {
+    width: 24px;
+    height:24px;
+    background: url(./img/down_ar.png) no-repeat 70% 50%;
+    background-size: 50% 50%;
+}
+
+
+/*=========================================================
+    셀렉트 박스 오픈 되어 있을 때 클릭 시 숨김 
+=========================================================*/
+.select.active .drop_ul {
+    display: none;
+}
+
+/*=========================================================
+    드랍다운 정의
+=========================================================*/
 .drop_ul{
+    width:300px;
     max-height:200px;
+    box-sizing: border-box;
     padding:4px 10px;
     margin:0 0 4px 0;
     position: relative;
+    left:-1px;
+    top:-1px;
     overflow-x: hidden;
     overflow-y: auto;
     border:1px solid #dadada;
@@ -190,15 +237,19 @@ textarea:focus {
 }
 
 .drop_ul li{
+    line-height: 30px;
+}
+
+
+.option_box{
     display:flex;
     justify-content: space-between;
-    align-items: center;
-    line-height: 30px;
 }
 
 .start_txt{
     display:inline-block;
     font-size:12px;
+    text-align: right;
 }
 
 

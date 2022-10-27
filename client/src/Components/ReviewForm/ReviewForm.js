@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import Dropdown from '../Dropdown/Dropdown';
 import './ReviewForm.scss';
 
 import down_arrow from './img/down_ar.png';
@@ -10,7 +9,12 @@ const ReviewForm = (props) => {
     const file = useRef();
     const img = useRef();
 
-    const [dropdownVisibility, setDropdownVisibility] = useState(false);
+    const [isDrop, setIsDrop] = useState(false);
+
+    const dropBtn = () => {
+        setIsDrop(isDrop => !isDrop);
+    }
+
 
     // const drawStar = () => {
     //     document.querySelector('.star span').style.width = `${score.current.value * 20}%`;
@@ -32,6 +36,26 @@ const ReviewForm = (props) => {
             img_tag.src = "/img/no_image3.png";
         }
     }
+
+    // 선택한 평점을 화면에 보여주기 위해 정의
+    const selectBoxElements = document.querySelectorAll(".select");
+
+    function selectOption(optionElement) {
+        const selectedElement = document.querySelector(".selected-value");
+        selectedElement.innerHTML = optionElement.innerHTML;
+    }
+
+    // 임시로 addEventListener 사용... React에서는 최대한 사용 자제 해야함
+    selectBoxElements.forEach(selectBoxElement => {
+        selectBoxElement.addEventListener("click", function (e) {
+            const targetElement = e.target;
+            const isOptionElement = targetElement.classList.contains("option_box");
+
+            if (isOptionElement) {
+                selectOption(targetElement);
+            }
+        });
+    });
 
 
 
@@ -57,53 +81,58 @@ const ReviewForm = (props) => {
                     <input type="range" name="score" value="3" min="0" max="5" step="0.5" onInput={drawStar} ref={score} onChange={props.onChange} />
                 </span> */}
 
-                <div className='drop_box'>
-                    <button className='review_star' onClick={e => setDropdownVisibility(!dropdownVisibility)}>
-                        {
-                            dropdownVisibility ? '리뷰' : '리뷰'
-                        }
-
-                        <img src={down_arrow} alt='' />
-                    </button>
-                    <Dropdown visibility={dropdownVisibility}>
-                        <ul className='drop_ul'>
-                            <li>                               
+                <div className={isDrop ? 'select' : 'select active'} onClick={dropBtn}>
+                    <div className="selected">
+                        <div className="selected-value">리뷰</div>
+                        <div className="arrow"></div>
+                    </div>
+                    <ul className='drop_ul'>
+                        <li>
+                            <div className='option_box'>
                                 <span className="star">
                                     ★★★★★ <span className='one'>★★★★★</span>
                                 </span>
                                 <p className='start_txt'>아주 좋아요</p>
-                            </li>
+                            </div>
+                        </li>
 
-                            <li>
+                        <li>
+                            <div className='option_box'>
                                 <span className="star">
                                     ★★★★★ <span className='two'>★★★★★</span>
                                 </span>
                                 <p className='start_txt'>맘에 들어요</p>
-                            </li>
+                            </div>
+                        </li>
 
-                            <li>
+                        <li>
+                            <div className='option_box'>
                                 <span className="star">
                                     ★★★★★ <span className='three'>★★★★★</span>
                                 </span>
                                 <p className='start_txt'>보통 이에요</p>
-                            </li>
+                            </div>
+                        </li>
 
-                            <li>
+                        <li>
+                            <div className='option_box'>
                                 <span className="star">
                                     ★★★★★ <span className='four'>★★★★★</span>
                                 </span>
                                 <p className='start_txt'>그냥 그래요</p>
-                            </li>
+                            </div>
+                        </li>
 
-                            <li>
+                        <li>
+                            <div className='option_box'>
                                 <span className="star">
                                     ★★★★★ <span className='five'>★★★★★</span>
                                 </span>
                                 <p className='start_txt'>별로에요</p>
-                            </li>
+                            </div>
+                        </li>
 
-                        </ul>
-                    </Dropdown>
+                    </ul>
                 </div>
 
 
