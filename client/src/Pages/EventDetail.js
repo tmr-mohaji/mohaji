@@ -224,7 +224,7 @@ const EventDetail = (props) => {
                             </button> */}
 
                             <button type="button" className="bg-black w2" onClick={showModal}>
-                                <span className='ico-stars2'>마이페이지</span>
+                                <span className='ico-stars2'>일정 등록</span>
                             </button>
 
                             <div ref={modal} className="d-none">
