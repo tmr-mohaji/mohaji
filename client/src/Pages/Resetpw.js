@@ -23,6 +23,10 @@ function Resetpw() {
       setResetText('비밀번호가 같습니다.');
     }
   }
+  
+  const changePW = async () => {
+        const result = await axios.post(USER_URL, {id: id, password: resetPW.current.value});
+    }
 
   return(
     <>
@@ -35,7 +39,7 @@ function Resetpw() {
             <input className='reset_id' style={{fontWeight:'700'}} value={id} readOnly></input><br />
             <input className='reset_pw' type='password' placeholder='비밀번호' name="password" ref={resetPW} required></input><br />
             <input className='reset_pw_check' type='password' placeholder='비밀번호 확인' name="password" onChange={ResetOnChange} ref={resetPWCheck} required></input><br />
-            <button className='reset_btn' type='button'>비밀번호 변경</button>     
+            <button className='reset_btn' type='button' onClick={changePW}>비밀번호 변경</button>     
           </form>
         </div>          
       </div>

@@ -70,16 +70,26 @@ exports.findId = async (req, res) => {
 // 비밀번호 재설정
 exports.resetPW = async (req, res) => {
 
+    console.log(req.body);
+
+    const doBcrypt = (password) => {
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(password, salt);
+        return hash
+    }
+
+    const hashedPassword = doBcrypt(req.body.password);
+
     let obj = {
         id : req.body.id,
-        password : req.body.password
+        password : hashedPassword
     };
 
     let result = await models.User.update(obj, {
         where: {id : req.body.id}
     });
 
-    res.send(result)
+    res.send(result);
 }
 
 // 로그인

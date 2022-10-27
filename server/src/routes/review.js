@@ -17,6 +17,7 @@ const upload = multer({
     limits: {fileSize : 5*1024*1024},
 })
 
+router.get("/getComment", review.getComment);
 router.post("/writeComment", upload.single("userfile"), review.writeComment);
 
 module.exports = router;
