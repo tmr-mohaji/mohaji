@@ -24,7 +24,7 @@ const Signup = () => {
         if (e.target.value != "") {
             if (validId == true) {
                 console.log("유효한 아이디");
-                setWarning('sign_warning');
+                setWarning('sign_checking');
                 setText('사용가능한 아이디입니다.');
                 // setWarningText('유효한 아이디입니다.');
             } else {
@@ -42,7 +42,7 @@ const Signup = () => {
             setWarning('sign_warning');
             setText('비밀번호가 다릅니다.');
         } else {
-            setWarning('sign_warning');
+            setWarning('sign_checking');
             setText('비밀번호가 같습니다.');
         }
     }
