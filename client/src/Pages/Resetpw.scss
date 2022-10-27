@@ -1,0 +1,112 @@
+@import '../components/Commons/Commons.scss';
+@import '~include-media/dist/include-media';
+
+.reset_entire_layout {
+    min-height: 100vh;
+    margin-top: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+
+    .reset_section {
+        position: relative;
+        box-sizing: border-box;
+        border: 0.5px solid #f2f4f5;
+        width:500px;
+        height: 600px;
+        padding: 60px 50px;
+        box-shadow: 3px 3px 3px 3px rgba(170, 170, 170,0.5);
+    }
+}
+
+.reset_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin:0;
+    padding: 0;   
+
+    .reset_warning {
+        font-family: "Elice Digital Baeum";
+        height: 40px;
+        font-size:13px;
+        font-weight: 600;
+        background-color: rgba(255, 255, 0, 0.5);
+        border-radius: 20px;
+        max-width: 320px;
+        padding: 10px;
+        padding-left: 30px;
+        position: relative;
+        color:red;
+    }
+
+    .reset_warning:after {
+        border-top: 10px solid  rgba(255, 255, 0, 0.5);
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 0px solid transparent;
+        content: "";
+        position: relative;
+        top:38px;
+        left:-50%;
+      }
+
+      .reset_checking {
+        font-family: "Elice Digital Baeum";
+        font-size: 13px;
+        font-weight: 600;
+        background-color: rgba(255, 255, 0, 0.5);
+        border-radius: 20px;
+        max-width: 320px;
+        padding:10px;
+        padding-left: 30px;
+        position: relative;
+        color:blue;
+      }
+      
+      .reset_checking:after {
+        border-top: 10px solid  rgba(255, 255, 0, 0.5);
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 0px solid transparent;
+        content: "";
+        position: relative;
+        top:38px;
+        left:-50%;
+      }
+
+    .reset_email, .reset_id, .reset_pw, .reset_pw_check {
+        text-align: center;
+        position:relative;
+        width: 250px;
+        height: 48px;
+        padding: 16px;
+        border: 0.5px solid #aaa;
+    }
+
+    .reset_email:focus, .reset_id:focus, .reset_pw:focus, .reset_pw_check:focus {
+        color:#A24F63;
+        font-size: 14px;
+        font-weight: 600;   
+    } 
+
+    .reset_email::placeholder, .reset_id::placeholder, .reset_pw::placeholder, .reset_pw_check::placeholder {
+        text-align: center;  
+    } 
+
+    .reset_btn {
+        position:relative;
+        width: 250px;
+        height: 48px;
+        padding: 16px;
+        border: 0.5px solid #A24F63;
+        background-color: #A24F63;
+        color: white;
+        margin: 5px 0;
+    }
+    .reset_btn:hover {
+        cursor: pointer;
+    }
+}
