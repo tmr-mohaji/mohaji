@@ -4,11 +4,7 @@ import './Mypage.scss';
 import { Nav } from 'react-bootstrap'
 import Favorites from './Favorites';
 import Plan from './Plan';
-
-
-const USER_URL = "http://localhost:8000/user/";
-const EVENT_URL = "http://localhost:8000/event/";
-const SCHEDULE_URL = "http://localhost:8000/schedule/";
+import Reply from "./Reply";
 
 const MyPage = (props) => {
 
@@ -17,11 +13,12 @@ const MyPage = (props) => {
     const [color, setColor] =useState();
     const [event, setEvent] = useState([]);
     const [schedule, setSchedule] = useState([]);
+    const [reply, setReply] = useState([]);
 
     const getData = async () => {
         // 로그인 상태
         if (props.id != "") {
-            let result = await axios.get(USER_URL + "info", {
+            let result = await axios.get(process.env.REACT_APP_USER_URL + "/info", {
                 params: {id : props.id}
             })
             setData(result.data);
@@ -30,28 +27,35 @@ const MyPage = (props) => {
 
     const getLikes = async () => {
         if (props.id != "") {
-            let result = await axios.post(EVENT_URL + "likeInfo", {user_id : props.id});
+            let result = await axios.post(process.env.REACT_APP_EVENT_URL + "/likeInfo", {user_id : props.id});
             setEvent(result.data);
         }
     }
 
     const getSchedule = async () => {
         if (props.id != "") {
-            let result = await axios.get(SCHEDULE_URL + "getEvent", {
+            let result = await axios.get(process.env.REACT_APP_SCHEDULE_URL + "/getEvent", {
                 params : {user_id : props.id}
             });
             setSchedule(result.data);
         }
     }
 
-    const deleteSchedule = async (id) => {
-        if ( props.id != "") {
-            let result = await axios.get(SCHEDULE_URL + "deleteEvent", {
-                params : {id : id}
-            });
-            getSchedule();
+    const getReply = async () => {
+        if (props.id != "") {
+            let result = await axios.get(process.env.REACT_APP_REVIEW_URL + "/getReply", {user_id : props.id});
+            setReply(result.data);
         }
     }
+
+    // const deleteSchedule = async (id) => {
+    //     if ( props.id != "") {
+    //         let result = await axios.get(process.env.REACT_APP_SCHEDULE_URL + "/deleteEvent", {
+    //             params : {id : id}
+    //         });
+    //         getSchedule();
+    //     }
+    // }
 
     useEffect(() => {
         getData();
@@ -71,10 +75,11 @@ const MyPage = (props) => {
                 <Nav.Item>
                     <Nav.Link eventKey="link1" onClick={() => setTab(1)}>즐겨찾기</Nav.Link>
                 </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link eventKey="link2" onClick={() => setTab(2)}>내 댓글</Nav.Link>
+                </Nav.Item>
                 </div>
-                {/* <Nav.Item>
-                    <Nav.Link eventKey="link2" onClick={() => setTab(2)}>버튼2</Nav.Link>
-                </Nav.Item> */}
+
             </Nav>
             </div>
             <div className='mypage_entire_layout'>
@@ -90,7 +95,7 @@ const MyPage = (props) => {
                     </div>
                     <div className='tabpart'>
                         <div style={{border:'3px solid green',height:'100%'}}>
-                            <TabContent tab={tab} event={event} schedule={schedule} id={props.id}/>
+                            <TabContent tab={tab} event={event} schedule={schedule} reply={reply} id={props.id}/>
                         </div>
                     </div>
                 </div>
@@ -104,33 +109,5 @@ export default MyPage;
 
 function TabContent(props) {
     const id = props.id;
-    return [<Favorites event={props.event}/>, <Plan schedule={props.schedule} id={id}/>][props.tab] 
-  }
-
-// 회원정보, 즐겨찾기 , 일정
-{/* <h1>유저 정보</h1>
-            {data.id} <br />
-            {data.nickname} <br />
-            {data.email}
-            <hr /> */}
-
-{/* <h1>좋아요 정보</h1>
-            {event.map((value) => {
-                return (
-                    <div>
-                        <p>{value.title}</p>
-                        <img src={"/img/" + value.filename} style={{width: "200px"}} />
-                    </div>
-                )
-            })}
-            <hr />
-            <h1>스케줄</h1>
-            {schedule.map((value) => {
-                return (
-                    <div>
-                        <p>{value.title}</p>
-                        <p>{value.date}</p>
-                        <p onClick={() => {deleteSchedule(value.id)}}>x</p>
-                    </div>
-                )
-            })} */}
+    return [<Plan schedule={props.schedule} id={id}/>, <Favorites event={props.event}/>,<Reply reply={props.reply} />][props.tab] 
+}
