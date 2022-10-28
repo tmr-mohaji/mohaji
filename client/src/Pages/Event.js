@@ -67,6 +67,7 @@ const Event = (props) => {
         const response = await axios.get(process.env.REACT_APP_EVENT_URL, {
             params: {city: filter.city, type: filter.type, date: filter.date}
         })
+        console.log(response.data);
         // 로그인 상태
         if ( props.id != "" ) {
             let ls = [];
@@ -105,12 +106,16 @@ const Event = (props) => {
 
     // 정렬
     const sortEvent = (mode) => {
+        console.log( "sortEvent" );
+        console.log( "mode : ", mode );
         const sortable = Object.entries(eventData)
         .sort(([, a], [, b]) => {
             if ( mode == 'title' ) {
                 return a[mode].localeCompare(b[mode])
-            } else {
-                return a[mode] - b[mode];
+            } else if ( mode == 'avg' ) {
+                a[mode] = parseFloat(a[mode]);
+                b[mode] = parseFloat(b[mode]);
+                return b[mode] - a[mode];
             }
         })
         .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
@@ -125,8 +130,11 @@ const Event = (props) => {
 
         if ( orderType == "최신순") {
             getData();
-        } else {
+        } else if (orderType == "제목순") {
             sortEvent('title');
+        } else {
+            console.log("별점");
+            sortEvent('avg');
         }
     }
 
@@ -173,7 +181,7 @@ const Event = (props) => {
     return (
         <div className="totalSection">
             <div className='mapSection'>
-                <Map filter={filter} address={address} clickData={clickData}/>
+                <Map id={props.id} filter={filter} address={address} clickData={clickData}/>
             </div>
             <div className='descSection'>
                 <div className='searchControllSection'>
@@ -236,7 +244,7 @@ const Event = (props) => {
                                 <option value="" disabled selected>Order</option>
                                 <option value='최신순' className='option'>최신순</option>
                                 <option value='제목순' className='option'>제목순</option>
-                                
+                                <option value='별점순' className='option'>별점순</option>
                             </select>
                         
                             <div style={{width:'40%',margin:'0 10px'}} className='datepicker'>
@@ -262,6 +270,7 @@ const Event = (props) => {
                                             
                                             <div className='list_name_layout'>
                                                 <div className='list_name_title'>
+                                                    {data.avg == null ? 0.00 : data.avg}
                                                     <div className='title'>{data.title}</div>
                                                 </div>
                                                 <p className='list_name_detail'>{data.detail}</p>

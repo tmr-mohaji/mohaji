@@ -3,14 +3,21 @@ import './Review.scss';
 
 const Review = (props) => {
     return (
-        <div>
-            <p>{props.id}</p>
-            <p>{props.score}</p>
-            <p>{props.review == null ? "" : props.review}</p>
-            <p>{props.date.slice(0, 10)}</p>
-            {props.file != false && <img src={"/img/review_img/" + props.file} style={{width: "200px"}}/>}
-            {props.id == props.login_id && <div><button>수정</button><button onClick={props.deleteReview}>삭제</button></div>}
-            <hr style={{border: "1px solid black", width: "100%"}}/>
+        <div className='review_people'>            
+            <div className='people_one'>
+                <p className='po_score'><b style={{ color: 'red' }}>★</b> {props.score}</p>
+                <p className='po_txt'>{props.id}</p>
+                <p className='po_date'>{props.date.slice(0, 10)}</p>
+            </div>
+
+            <div className='people_two'>
+                <p>{props.review == null ? "" : props.review}</p>
+                {props.file != false && <img src={"/img/review_img/" + props.file} style={{ width: "120px" }} />}
+            </div>
+            {props.id == props.login_id && <div><button className='reset_btn_1'>수정</button><button className='delete_btn_2' onClick={props.deleteReview}>삭제</button></div>}
+
+
+            <hr className='r_hr' style={{ border: "0.5px solid #dadada", width: "100%" }} />
         </div>
     )
 }

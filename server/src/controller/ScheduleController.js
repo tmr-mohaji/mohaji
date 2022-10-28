@@ -11,7 +11,6 @@ exports.postEvent = async (req, res) => {
 
     let query = `select * from event where id = '${event_id}' and start_date <= '${date}' and end_date >= '${date}'`
     let event = await models.sequelize.query(query);
-    console.log(event[0].length);
     
     if (event[0].length > 0) {
         await models.Schedule.create(obj);

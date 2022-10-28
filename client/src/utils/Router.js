@@ -39,7 +39,7 @@ const Router = () => {
 
     useEffect(() => {
         getAuth();
-    })
+    }, [])
 
     return (
         <div>

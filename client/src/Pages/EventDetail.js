@@ -21,7 +21,7 @@ const EventDetail = (props) => {
     const [allReview, setAllReview] = useState([]);
     const [score, setScore] = useState(0);
     const [reviewData, setReviewData] = useState({
-        score: 2,
+        score: 0,
         comment: ''
     });
 
@@ -87,7 +87,9 @@ const EventDetail = (props) => {
         // 별점 계산
         let sum = 0
         for (let i = 0; i < result.data.result.length; i++) {
-            console.log('sdsd', result.data.result[i].score)
+
+            console.log('사람', result.data.result[i]);
+
             sum += parseFloat(result.data.result[i].score);
         }
         let avg = sum / result.data.result.length;
@@ -113,7 +115,7 @@ const EventDetail = (props) => {
     }
 
     // 리뷰 등록
-    const writeComment = async () => {
+    const writeComment = async (score, content) => {
 
         if (localStorage.getItem("access_token") != undefined) {
 
@@ -125,8 +127,8 @@ const EventDetail = (props) => {
             }).then((result) => {
                 formData.append('user_id', result.data.id);
                 formData.append('event_id', id);
-                formData.append('score', reviewData.score);
-                formData.append('content', reviewData.comment);
+                formData.append('score', score);
+                formData.append('content', content);
 
                 for (let key of formData.keys()) {
                     console.log(key, ":", formData.get(key));
@@ -137,6 +139,8 @@ const EventDetail = (props) => {
                         "Contest-Type": "multipart/form-data"
                     }
                 }).then(() => {
+                    let newReview = { score, content };
+                    setReviewData({ ...reviewData, newReview });
                     findReview();
 
                     // 창 비우기
@@ -243,7 +247,7 @@ const EventDetail = (props) => {
                             <li><span className='d_dt'>시간</span> <span className='r_dt'>{data.time}</span></li>
                             <li><span className='d_dt'>장르</span> <span className='r_dt'>{data.type}</span></li>
                             <li><span className='d_dt'>연령</span> <span className='r_dt'>{data.people}</span></li>
-                            <li><span className='d_dt'>티켓</span> <span className='r_dt'>{data.price}</span></li>
+                            <li><span className='d_dt'>티켓</span> <span className='r_dt'>{(data.price || '').split('\\n').map((line) => { return (<span>{line}<br /></span>);})}</span></li>
                             <li><span className='d_dt'>소개</span> <span className='r_dt'>{data.detail}</span></li>
                         </ul>
 
@@ -268,13 +272,18 @@ const EventDetail = (props) => {
                 <div className='line_box'></div>
 
                 <div className='d_box2'>
-                    <p>★ {score}</p>
+                    <p className='all_box'><span className='all_txt'>사용자 총 평점</span> <b>{score.toFixed(1)}</b> <b style={{ margin: '0 2.5px' }}>/</b> <b>5.0</b></p>
                     <ReviewForm onChange={getReview} fileUpload={fileUpload} onClick={writeComment} />
                 </div>
 
-                <div className='line_box'></div>
+                <div className='line_box2'></div>
 
                 <div className='review_collector'>
+                    <div>
+                        <p className='r_re'>사용자 리뷰</p>
+                        <hr className='r_hr' style={{ border: "0.5px solid #dadada", width: "100%", marginTop : '10px'}} />
+                    </div>
+
                     {allReview.map((data) => {
                         return (
                             <div key={data.id}>
@@ -284,7 +293,7 @@ const EventDetail = (props) => {
                     })}
                 </div>
 
-                <div className='line_box'></div>
+                <div className='line_box2'></div>
             </div>
         </section>
     )

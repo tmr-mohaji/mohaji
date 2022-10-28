@@ -2,15 +2,18 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
 import './ReviewForm.scss';
+import noImage from './img/no_login4.png';
 
 const ReviewForm = (props) => {
 
     // const score = useRef();
     const file = useRef();
     const img = useRef();
+    const textarea = useRef();
 
     const [loginStatus, setLoginStatus] = useState(false);
     const [isDrop, setIsDrop] = useState(false);
+    const [score, setScore] = useState(0);
 
     const dropBtn = () => {
         setIsDrop(isDrop => !isDrop);
@@ -66,6 +69,8 @@ const ReviewForm = (props) => {
             const targetElement = e.target;
             const isOptionElement = targetElement.classList.contains("option_box");
 
+            setScore(targetElement.children[0].value);
+
             if (isOptionElement) {
                 selectOption(targetElement);
             }
@@ -85,7 +90,7 @@ const ReviewForm = (props) => {
                     <p className='review_tit'>리뷰 <span className='review_line'>|</span> <span className='review_tit2'>공연 후기를 작성하실 수 있습니다.</span></p>
 
                     <div className='rt_box'>
-                        <textarea name="comment" className="tf_write" onChange={props.onChange}></textarea>
+                        <textarea name="comment" className="tf_write" onChange={props.onChange} ref={textarea}></textarea>
                         <label className='tf_label' for="img">
                             <img src="/img/no_image3.png" style={{ width: "40px", height: "33px" }} ref={img} alt='' />
                             <p className='img_p'>+ 사진추가</p>
@@ -108,6 +113,7 @@ const ReviewForm = (props) => {
                         <ul className='drop_ul'>
                             <li>
                                 <div className='option_box'>
+                                <input type="hidden" value="5" />
                                     <span className="star">
                                         ★★★★★ <span className='one'>★★★★★</span>
                                     </span>
@@ -117,6 +123,7 @@ const ReviewForm = (props) => {
 
                             <li>
                                 <div className='option_box'>
+                                <input type="hidden" value="4" />
                                     <span className="star">
                                         ★★★★★ <span className='two'>★★★★★</span>
                                     </span>
@@ -126,6 +133,7 @@ const ReviewForm = (props) => {
 
                             <li>
                                 <div className='option_box'>
+                                <input type="hidden" value="3" />
                                     <span className="star">
                                         ★★★★★ <span className='three'>★★★★★</span>
                                     </span>
@@ -135,6 +143,7 @@ const ReviewForm = (props) => {
 
                             <li>
                                 <div className='option_box'>
+                                <input type="hidden" value="2" />
                                     <span className="star">
                                         ★★★★★ <span className='four'>★★★★★</span>
                                     </span>
@@ -144,6 +153,7 @@ const ReviewForm = (props) => {
 
                             <li>
                                 <div className='option_box'>
+                                <input type="hidden" value="1" />
                                     <span className="star">
                                         ★★★★★ <span className='five'>★★★★★</span>
                                     </span>
@@ -155,10 +165,11 @@ const ReviewForm = (props) => {
                     </div>
 
 
-                    <button className='review_submit' onClick={props.onClick}>등록</button>
+                    <button className='review_submit' onClick={() => {props.onClick( score, textarea.current.value );}}>등록</button>
                 </div>
             </div>
-        : <div>로그인 후 리뷰 작성 가능</div>}
+        : <div className='no_login'>
+            <div><img src={noImage} width='25px' alt='' /></div> <div> <span>로그인 후 리뷰 작성 가능합니다.</span></div></div>}
     </>)
 }
 

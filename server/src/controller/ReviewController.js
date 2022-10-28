@@ -23,23 +23,41 @@ exports.writeComment = async (req, res) => {
 
 exports.getComment = async (req, res) => {
 
-    const result = await models.Review.findAll({where : {event_id : req.query.event_id}});
+    if (req.query.user_id == undefined) {
 
-    let img = [];
-    for (let i=0; i < result.length; i++) {
-        const img_result = await models.ReviewImg.findOne({where : {review_id : result[i].id}});
-        if (img_result != undefined) {
-            img.push(img_result.filename);
-        } else {
-            img.push(false)
+        const result = await models.Review.findAll({where : {event_id : req.query.event_id}});
+
+        let img = [];
+        for (let i=0; i < result.length; i++) {
+            const img_result = await models.ReviewImg.findOne({where : {review_id : result[i].id}});
+            if (img_result != undefined) {
+                img.push(img_result.filename);
+            } else {
+                img.push(false)
+            }
         }
-    }
 
-    res.send({result : result, filename : img});
+        res.send({result : result, filename : img});
+
+    } else {
+
+        const result = await models.Review.findAll({where : {user_id : req.query.user_id}});
+
+        let img = [];
+        for (let i=0; i < result.length; i++) {
+            const img_result = await models.ReviewImg.findOne({where : {review_id : result[i].id}});
+            if (img_result != undefined) {
+                img.push(img_result.filename);
+            } else {
+                img.push(false)
+            }
+        }
+
+        res.send({result : result, filename : img});
+    }
 }
 
 exports.deleteComment = async (req, res) => {
-    console.log(req.body);
     const result = await models.Review.destroy({where : {id : req.body.id}});
     res.send(true);
 }

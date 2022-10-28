@@ -2,3 +2,81 @@
 @import '~include-media/dist/include-media';
 
 
+@font-face {
+    font-family: 'GmarketSans';
+    font-weight: 700;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.eot?#iefix') format('embedded-opentype'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.woff') format('woff'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.ttf') format("truetype");
+    font-display: swap;
+} 
+
+
+/*=========================================================
+    평점 & 아이디 정의
+=========================================================*/
+.review_people{
+
+}
+
+
+
+/*=========================================================
+    평점 & 아이디 정의
+=========================================================*/
+.people_one{
+    display:flex;
+}
+
+
+.po_score{
+    margin-right:10px;
+    font-family: 'GmarketSans';
+}
+
+.po_txt{
+    color:#999;
+    font-size:12px;
+    margin-right:10px;
+}
+
+.po_date{
+    color:#999;
+    font-size:12px;    
+}
+
+
+
+/*=========================================================
+    코멘트 & 올린 이미지 정의
+=========================================================*/
+.people_two{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100px;
+}
+
+
+
+.r_hr{
+    margin-top:30px;
+    margin-bottom:30px;
+}
+
+
+.reset_btn_1{
+    background:0;
+    border:0;
+    cursor: pointer;
+}
+
+
+.delete_btn_2{
+    background:0;
+    border:0;   
+    cursor: pointer;
+}
