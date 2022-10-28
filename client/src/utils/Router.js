@@ -12,9 +12,8 @@ import Signup from '../pages/Signup';
 import Login from '../pages/Login';
 import FindId from '../pages/FindId';
 import Resetpw from '../pages/Resetpw';
-import MyPage from '../pages/MyPage';
-import Chat from '../pages/Chat/Chat';
-import Schedule from '../pages/Schedule/Schedule';
+import MyPage from '../components/mypage/MyPage';
+import Chat from '../pages/Chat';
 
 import ScrollToTop from '../components/ScrollToTop';
 
