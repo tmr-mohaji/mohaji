@@ -43,24 +43,23 @@ const MyPage = (props) => {
 
     const getReply = async () => {
         if (props.id != "") {
-            let result = await axios.get(process.env.REACT_APP_REVIEW_URL + "/getReply", {user_id : props.id});
-            setReply(result.data);
+            let result = await axios.get(process.env.REACT_APP_REVIEW_URL + "/getComment", { params : {user_id : props.id}});
+
+            if (result.data.filename != false) {
+                for (let i = 0; i < result.data.result.length; i++) {
+                    result.data.result[i]['filename'] = result.data.filename[i];
+                }
+            }
+
+            setReply(result.data.result);
         }
     }
-
-    // const deleteSchedule = async (id) => {
-    //     if ( props.id != "") {
-    //         let result = await axios.get(process.env.REACT_APP_SCHEDULE_URL + "/deleteEvent", {
-    //             params : {id : id}
-    //         });
-    //         getSchedule();
-    //     }
-    // }
 
     useEffect(() => {
         getData();
         getLikes();
         getSchedule();
+        getReply();
     }, [props.id])
 
     return (
@@ -69,14 +68,14 @@ const MyPage = (props) => {
             <div style={{display:'flex', justifyContent:'center'}}>
             <Nav className='tab_section' variant="tabs" defaultActiveKey="link0">
                 <div className='item_layout'>
-                <Nav.Item>
-                    <Nav.Link eventKey="link0" onClick={() => setTab(0)}>일정</Nav.Link>
+                <Nav.Item onClick={() => setTab(0)}>
+                    <Nav.Link eventKey="link0">일정</Nav.Link>
                 </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="link1" onClick={() => setTab(1)}>즐겨찾기</Nav.Link>
+                <Nav.Item onClick={() => setTab(1)}>
+                    <Nav.Link eventKey="link1">즐겨찾기</Nav.Link>
                 </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="link2" onClick={() => setTab(2)}>내 댓글</Nav.Link>
+                <Nav.Item onClick={() => setTab(2)}>
+                    <Nav.Link eventKey="link2">내 댓글</Nav.Link>
                 </Nav.Item>
                 </div>
 

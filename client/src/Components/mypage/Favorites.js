@@ -7,7 +7,7 @@ const Favorites = (props) => {
             {
                 event.map((value) => {
                     return(
-                        <div>
+                        <div key={value.id}>
                             <p>{value.title}</p>
                             <img src={'/img/'+ value.filename} style={{width:'200px'}} />
                         </div>

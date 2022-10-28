@@ -69,7 +69,6 @@ exports.likeinfo = async (req, res) => {
         let ls = [];
         for (let i = 0; i<result.length; i++) {
             let event = await models.Event.findOne({where : {id : result[i].event_id}});
-            console.log(event);
             ls.push({'id' : event.id, 'title' : event.title, 'filename' : event.filename});
         }
         res.send(ls);
