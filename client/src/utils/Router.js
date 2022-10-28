@@ -56,6 +56,7 @@ const Router = () => {
                     <Route path='/user/resetpw' element={<Resetpw />} />
                     <Route path="/mypage" element={<MyPage id={id}/>} />
                     <Route path="/chat" element={<Chat />} />
+                    <Route path="/schedule" element={<Schedule />} />
                 </Routes>
                 <Footer />
             </BrowserRouter>

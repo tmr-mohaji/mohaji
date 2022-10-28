@@ -16,10 +16,10 @@ const Footer = () => {
                                 <Link className='f_line' to='/event'> 지역 검색 </Link>
                             </li>
                             <li>
-                                <Link className='f_line' to='/event'> 채팅 </Link>
+                                <Link className='f_line' to='/chat'> 채팅 </Link>
                             </li>
                             <li>
-                                <Link className='f_line' to='/event'> 일정 </Link>
+                                <Link className='f_line' to='/schedule'> 일정 </Link>
                             </li>
                         </ul>
                     </div>

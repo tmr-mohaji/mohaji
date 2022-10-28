@@ -9,10 +9,15 @@ exports.postEvent = async (req, res) => {
         date : date
     }
 
-    let result = await models.Schedule.create(obj);
+    let query = `select * from event where id = '${event_id}' and start_date <= '${date}' and end_date >= '${date}'`
+    let event = await models.sequelize.query(query);
+    console.log(event[0].length);
     
-    if (result) {
+    if (event[0].length > 0) {
+        await models.Schedule.create(obj);
         res.send("성공적으로 이벤트를 등록하였습니다.");
+    } else {
+        res.send("이벤트 일정을 다시 확인해주세요.");
     }
 }
 

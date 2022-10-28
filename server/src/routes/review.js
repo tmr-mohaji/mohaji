@@ -19,5 +19,6 @@ const upload = multer({
 
 router.get("/getComment", review.getComment);
 router.post("/writeComment", upload.single("userfile"), review.writeComment);
+router.delete("/deleteComment", review.deleteComment);
 
 module.exports = router;

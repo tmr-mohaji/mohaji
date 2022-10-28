@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import io from 'socket.io-client';
 
-const socket = io.connect("http://localhost:8000");
+const socket = io.connect(process.env.REACT_APP_BASE_URL);
 
 const Chat = () => {
 
@@ -16,7 +16,7 @@ const Chat = () => {
     const getName = () => {
         if ( localStorage.getItem("access_token") != undefined ) {
             axios({
-                url: 'http://localhost:8000/user/auth',
+                url: process.env.REACT_APP_USER_URL + '/auth',
                 headers: {
                     'Authorization': localStorage.getItem("access_token")
                 }

@@ -36,7 +36,7 @@ const Header = (props) => {
                         </li>
 
                         <li>
-                            <Link className='bt_line' to='/event'> 일정 </Link>
+                            <Link className='bt_line' to='/schedule'> 일정 </Link>
                         </li>
                     </ul>
 
@@ -74,7 +74,7 @@ const Header = (props) => {
                                 </li>
 
                                 <li className='mob_li'>
-                                    <Link className='arrow' to='/'> 일정 </Link>
+                                    <Link className='arrow' to='/schedule'> 일정 </Link>
                                 </li>
                             </ul>
                         </div>

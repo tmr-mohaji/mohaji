@@ -30,12 +30,16 @@ exports.getComment = async (req, res) => {
         const img_result = await models.ReviewImg.findOne({where : {review_id : result[i].id}});
         if (img_result != undefined) {
             img.push(img_result.filename);
+        } else {
+            img.push(false)
         }
     }
 
-    if (img.length > 0) {
-        res.send({result : result, filename : img});
-    } else {
-        res.send({result : result});
-    }
+    res.send({result : result, filename : img});
+}
+
+exports.deleteComment = async (req, res) => {
+    console.log(req.body);
+    const result = await models.Review.destroy({where : {id : req.body.id}});
+    res.send(true);
 }
