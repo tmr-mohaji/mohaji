@@ -15,8 +15,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import GPS from './img/gps.png';
 
-const EVENT_PAGE = "http://localhost:8000/event";
-
 const Event = (props) => {
 
     const navigate = useNavigate();
@@ -66,16 +64,15 @@ const Event = (props) => {
     // 필터 정보로 데이터 가져오기
     const getData = async () => {
 
-        const response = await axios.get(EVENT_PAGE, {
+        const response = await axios.get(process.env.REACT_APP_EVENT_URL, {
             params: {city: filter.city, type: filter.type, date: filter.date}
         })
-
         // 로그인 상태
         if ( props.id != "" ) {
             let ls = [];
             for(let i=0; i<response.data.length; i++) {
 
-                let result = await axios.post(EVENT_PAGE + "/likeInfo", {user_id: props.id, event_id: response.data[i].id});
+                let result = await axios.post(process.env.REACT_APP_EVENT_URL + "/likeInfo", {user_id: props.id, event_id: response.data[i].id});
 
                 if (result.data != "") {
                     ls.push(true);
@@ -83,12 +80,14 @@ const Event = (props) => {
                     ls.push(false);
                 }
             }
+            
             let event = {};
             for (let i=0; i<response.data.length; i++) {
                 response.data[i]['like'] = ls[i];
-                event[response.data[i].id] = response.data[i];
+                event[`id_${response.data[i].id}`] = response.data[i];
             }
             setEventData(event);
+
         // 비로그인 상태
         } else {
             let ls = [];
@@ -98,15 +97,42 @@ const Event = (props) => {
             let event = {};
             for (let i=0; i<response.data.length; i++) {
                 response.data[i]['like'] = ls[i];
-                event[response.data[i].id] = response.data[i];
+                event[`id_${response.data[i].id}`] = response.data[i];
             }
             setEventData(event);
         }
     }
 
+    // 정렬
+    const sortEvent = (mode) => {
+        const sortable = Object.entries(eventData)
+        .sort(([, a], [, b]) => {
+            if ( mode == 'title' ) {
+                return a[mode].localeCompare(b[mode])
+            } else {
+                return a[mode] - b[mode];
+            }
+        })
+        .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
+        
+        setEventData(sortable);
+    }
+
+    // 정렬 select box
+    const orderBy = () => {
+        const orderType = select_order.current.value;
+        console.log(orderType);
+
+        if ( orderType == "최신순") {
+            getData();
+        } else {
+            sortEvent('title');
+        }
+    }
+
     // 클릭한 이벤트 주소 받아오기
     const getAddress = async (id) => {
-        let response = await axios.get(EVENT_PAGE + "/address", {
+        let response = await axios.get(process.env.REACT_APP_EVENT_URL + "/address", {
             params: {id : id}
         })
         setAddress(response.data.address);
@@ -118,20 +144,20 @@ const Event = (props) => {
         if ( localStorage.getItem("access_token") != undefined ) {
             const datas = JSON.parse(JSON.stringify(eventData));
             axios({
-                url: 'http://localhost:8000/user/auth',
+                url: process.env.REACT_APP_USER_URL + '/auth',
                 headers: {
                     'Authorization': localStorage.getItem("access_token")
                 }
             }).then( (result) => {
                 // 좋아요 안 된 상태
-                if (!datas[id].like) {
+                if (!datas[`id_${id}`].like) {
                     console.log('like');
-                    axios.post(EVENT_PAGE + "/like", {user_id : result.data.id, event_id : id});
-                    datas[id].like = true;
+                    axios.post(process.env.REACT_APP_EVENT_URL + "/like", {user_id : result.data.id, event_id : id});
+                    datas[`id_${id}`].like = true;
                 } else {
                     console.log("dislike");
-                    axios.post(EVENT_PAGE + "/dislike", {user_id : result.data.id, event_id : id});
-                    datas[id].like = false;
+                    axios.post(process.env.REACT_APP_EVENT_URL + "/dislike", {user_id : result.data.id, event_id : id});
+                    datas[`id_${id}`].like = false;
                 }
                 setEventData(datas);
             });
@@ -206,10 +232,10 @@ const Event = (props) => {
                                 <option value='전시' className='option'>전시</option>
                             </select>
 
-                            <select label="order" ref={select_order} name="order" className="SelectType">
+                            <select label="order" ref={select_order} name="order" className="SelectType" onChange={orderBy}>
                                 <option value="" disabled selected>Order</option>
                                 <option value='최신순' className='option'>최신순</option>
-                                <option value='별점순' className='option'>별점순</option>
+                                <option value='제목순' className='option'>제목순</option>
                                 
                             </select>
                         
