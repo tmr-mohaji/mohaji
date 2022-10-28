@@ -223,7 +223,8 @@ const Event = (props) => {
                 
 
                 <div className='listSection'>
-                    {Object.entries(eventData).length == 0 ? <p>조건에 맞는 결과가 없습니다</p> : <>                        {Object.entries(eventData).map((value) => {
+                    {Object.entries(eventData).length == 0 ? <p>조건에 맞는 결과가 없습니다</p> : <>                        
+                        {Object.entries(eventData).map((value) => {
 
                             let data = value[1];
                             let time = value[1].time.replaceAll('\\n','  ');

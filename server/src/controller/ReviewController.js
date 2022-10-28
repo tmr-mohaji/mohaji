@@ -37,3 +37,9 @@ exports.getComment = async (req, res) => {
 
     res.send({result : result, filename : img});
 }
+
+exports.deleteComment = async (req, res) => {
+    console.log(req.body);
+    const result = await models.Review.destroy({where : {id : req.body.id}});
+    res.send(true);
+}

@@ -150,6 +150,12 @@ const EventDetail = (props) => {
         }
     }
 
+    const deleteReview = async (review_id) => {
+        console.log(review_id);
+        await axios.delete(process.env.REACT_APP_REVIEW_URL + "/deleteComment", {data : {id : review_id}});
+        findReview();
+    }
+
     // 마이페이지 클릭 시 모달 창 설정(비로그인 시)
     const showModal = () => {
         if (props.user_id != "") {
@@ -267,7 +273,7 @@ const EventDetail = (props) => {
                 {allReview.map((data) => {
                     return (
                         <div key={data.id}>
-                            <Review id={data.user_id} score={data.score} review={data.content} date={data.createdAt} file={data.filename}/>
+                            <Review id={data.user_id} score={data.score} review={data.content} date={data.createdAt} file={data.filename} login_id={props.user_id} deleteReview={() => {deleteReview(data.id)}}/>
                         </div>
                     )
                 })}
