@@ -1,24 +1,26 @@
-import { useEffect, useRef, useState } from 'react';
-import axios from 'axios';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
-import './Signup.scss';
+import axios from 'axios';
 
-const USER_URL = "http://localhost:8000/user/"
+import { toast, ToastContainer } from 'react-toastify';
+
+import './Signup.scss';
 
 const Signup = () => {
 
     const [text, setText] = useState();
     const [ warning, setWarning ] = useState();
+
     const pw = useRef();
     const check_pw = useRef();
     const form = useRef();
+
     const navigate = useNavigate();
 
     // 아이디 중복 확인
     const idCheck = async (e) => {
 
-        const response = await axios.post(USER_URL + "idCheck", {id : e.target.value});
+        const response = await axios.post(process.env.REACT_APP_USER_URL + "/idCheck", {id : e.target.value});
         const validId = response.data.valid;
 
         if (e.target.value != "") {
@@ -58,7 +60,7 @@ const Signup = () => {
             return false;
         }
 
-        const emailCheck = await axios.post(USER_URL + "emailCheck", {
+        const emailCheck = await axios.post(process.env.REACT_APP_USER_URL + "/emailCheck", {
             email : form.current.email.value
         })
 
@@ -66,7 +68,7 @@ const Signup = () => {
 
         if (validEmail == true) {
 
-            const response = await axios.post(USER_URL + "signup", {
+            const response = await axios.post(process.env.REACT_APP_USER_URL + "/signup", {
                 id : form.current.id.value, 
                 password : form.current.password.value,
                 nickname : form.current.nickname.value, 
@@ -95,11 +97,10 @@ const Signup = () => {
                     <input className='signup_email' type="email" placeholder="이메일" name="email" required/>
                     <button className='signup_btn' type="button" onClick={signup}>회원가입</button>
                     <div style={{marginTop:'20px'}}>
-                    <button className='goLogin' onClick={() => navigate('/user/login')}>로그인하러가기</button>
-                    <button className='goFind' onClick={() => navigate('/user/findid')}>아이디찾기</button>
-                </div>
+                        <button className='goLogin' onClick={() => navigate('/user/login')}>로그인하러가기</button>
+                        <button className='goFind' onClick={() => navigate('/user/findid')}>아이디찾기</button>
+                    </div>
                 </form>
-
             </div>
         </div>
     )

@@ -1,7 +1,6 @@
 import Banner from '../components/Banner/Banner';
 import Gallery from '../components/MainGallery/Gallery'
 import Mypage from '../components/MainMyPage/Mypage';
-import axios from 'axios';
 
 import {gsap, Power3} from 'gsap';
 
