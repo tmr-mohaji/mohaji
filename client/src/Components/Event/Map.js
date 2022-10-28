@@ -83,9 +83,29 @@ function MapComponent(props) {
         axios.get(EVENT_PAGE, {
             params: {city: city, type: type, date: date}
         })
-        .then((req) => { return req.data;})
-        .then((addressData) => {
-                
+        .then((req) => {
+
+            let ls = [];
+            for(let i=0; i<req.data.length; i++) {
+
+                axios.post(process.env.REACT_APP_EVENT_URL + "/likeInfo", {user_id: props.id, event_id: req.data[i].id})
+                .then((result) => {
+                    if (result.data != "") {
+                        ls.push(true);
+                    } else {
+                        ls.push(false);
+                    }
+                })
+            }
+            
+            let event = {};
+            for (let i=0; i<req.data.length; i++) {
+                req.data[i]['like'] = ls[i];
+                event[`id_${req.data[i].id}`] = req.data[i];
+            }
+            return req.data;
+
+        }).then((addressData) => {
                 if (props.clickData != "") {
                     const result = addressData.filter((data) => { return data.address === props.address });
                     setEvent(props.address);
@@ -93,8 +113,6 @@ function MapComponent(props) {
                 } else {
                     return addressData;
                 }
-            
-
         })
         .then((data) => {
                 

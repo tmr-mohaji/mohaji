@@ -31,10 +31,9 @@ app.get("/", event.getMain);
 let list = {};
 
 io.on("connection", (socket) => {
-
     socket.emit("send_id", {id : socket.id});
-
     socket.on("send_name", (data) => {
+        console.log( "send_name" );
         list[socket.id] = data.username;
         io.emit("notice", {msg : data.name + "님이 입장하였습니다."});
     })
@@ -58,10 +57,10 @@ io.on("connection", (socket) => {
     //     done();
     // })
 
-    socket.on("disconnect", () => {
-        io.emit("notice", {msg : list[socket.id] + "님이 퇴장하였습니다."});
+    socket.on("disconnect", function() {
+        io.emit("notice", list[socket.id] + "님이 퇴장하셨습니다.");
+        delete list[socket.id];
     })
-
     // io.emit("notice", socket.id + "입장");
 
     // socket.on("disconnect", () => {

@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 const socket = io.connect(process.env.REACT_APP_BASE_URL);
 
 const Chat = () => {
-
+    console.log( "Chat" );
     const div = useRef();
     const msg = useRef();
     const [name, setName] = useState("");
@@ -22,6 +22,9 @@ const Chat = () => {
                 }
             }).then((result) => {
                 setName(result.data.nickname);
+
+                console.log( "send_name");
+                socket.emit("send_name", {name : result.data.nickname});
             })
         } else {
             navigate("/user/login");
@@ -51,9 +54,9 @@ const Chat = () => {
         setSocketId(data.id);
     })
 
-    socket.emit("send_name", {name : name});
 
     socket.on("notice", (data) => {
+        console.log( "notice ");
         addNotice(data.msg);
     })
 
@@ -64,6 +67,10 @@ const Chat = () => {
     const sendMsg = () => {
         socket.emit("send", {msg : msg.current.value});
     }
+    socket.on("disconnect", (r) => {
+        console.log( "r : ", r );
+        console.log( "socket disconnected" );
+    })
 
     return (
         <div style={{paddingTop: "100px"}}>

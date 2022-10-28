@@ -24,7 +24,8 @@ exports.getEvent = async (req, res) => {
     if (type == "전체") type='';
 
     if (date == '') {
-        let query = `select * from event where address like '%${city}%' and type like '%${type}%' ORDER BY id DESC`;
+        // let query = `select * from event where address like '%${city}%' and type like '%${type}%' ORDER BY id DESC`;
+        let query = `select event.*, coalesce(avg(review.score), '0') as avg from event left join review on event.id = review.event_id where address like '%${city}%' and type like '%${type}%' GROUP BY event.id ORDER BY id DESC`;
         let result = await models.sequelize.query(query);
         res.send(result[0]);
     } else {
