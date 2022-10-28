@@ -115,7 +115,7 @@ function MapComponent(props) {
                 }
         })
         .then((data) => {
-                
+                    // console.log(data);
                     data.map(function(aData) {                   
 
                     naver.maps.Service.geocode({
@@ -132,6 +132,7 @@ function MapComponent(props) {
                         var data_lng = item[0].x;
                     
                     // 2. 각 이벤트별 마커 표시
+
                         const event_marker = new naver.maps.Marker({
                             map: map,
                             position: new naver.maps.LatLng(data_lat,data_lng),

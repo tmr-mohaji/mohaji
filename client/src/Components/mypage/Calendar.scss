@@ -1,0 +1,29 @@
+@import '../Commons/Commons.scss';
+@import '~include-media/dist/include-media';
+
+.c_entire_layout {
+  width: 100%;
+  height: 100%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.c_week_section {
+  display: flex;
+}
+
+.c_entire_layout .c_week_section .weekday {
+  width: calc(100% / 7);
+  text-align: center;
+}
+
+.c_day_section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.c_entire_layout .c_day_section .weekday {
+  width: calc(100%/ 7);
+  text-align: center;
+}
