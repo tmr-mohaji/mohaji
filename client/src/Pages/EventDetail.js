@@ -21,7 +21,7 @@ const EventDetail = (props) => {
     const [allReview, setAllReview] = useState([]);
     const [score, setScore] = useState(0);
     const [reviewData, setReviewData] = useState({
-        score: 2,
+        score: 0,
         comment: ''
     });
 
@@ -87,6 +87,9 @@ const EventDetail = (props) => {
         // 별점 계산
         let sum = 0
         for (let i = 0; i < result.data.result.length; i++) {
+
+            console.log('평점', result.data.result[i].score)
+
             sum += parseFloat(result.data.result[i].score);
         }
         let avg = sum / result.data.result.length;
@@ -112,7 +115,7 @@ const EventDetail = (props) => {
     }
 
     // 리뷰 등록
-    const writeComment = async () => {
+    const writeComment = async (score, content) => {
 
         if (localStorage.getItem("access_token") != undefined) {
 
@@ -124,8 +127,8 @@ const EventDetail = (props) => {
             }).then((result) => {
                 formData.append('user_id', result.data.id);
                 formData.append('event_id', id);
-                formData.append('score', reviewData.score);
-                formData.append('content', reviewData.comment);
+                formData.append('score', score);
+                formData.append('content', content);
 
                 for (let key of formData.keys()) {
                     console.log(key, ":", formData.get(key));
@@ -136,6 +139,8 @@ const EventDetail = (props) => {
                         "Contest-Type": "multipart/form-data"
                     }
                 }).then(() => {
+                    let newReview = { score, content };
+                    setReviewData({ ...reviewData, newReview });
                     findReview();
 
                     // 창 비우기
