@@ -272,13 +272,18 @@ const EventDetail = (props) => {
                 <div className='line_box'></div>
 
                 <div className='d_box2'>
-                    <p>★ {score}</p>
+                    <p className='all_box'><span className='all_txt'>사용자 총 평점</span> <b>{score.toFixed(1)}</b> <b style={{ margin: '0 2.5px' }}>/</b> <b>5.0</b></p>
                     <ReviewForm onChange={getReview} fileUpload={fileUpload} onClick={writeComment} />
                 </div>
 
-                <div className='line_box'></div>
+                <div className='line_box2'></div>
 
                 <div className='review_collector'>
+                    <div>
+                        <p className='r_re'>사용자 리뷰</p>
+                        <hr className='r_hr' style={{ border: "0.5px solid #dadada", width: "100%", marginTop : '10px'}} />
+                    </div>
+
                     {allReview.map((data) => {
                         return (
                             <div key={data.id}>
@@ -288,7 +293,7 @@ const EventDetail = (props) => {
                     })}
                 </div>
 
-                <div className='line_box'></div>
+                <div className='line_box2'></div>
             </div>
         </section>
     )
