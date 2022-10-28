@@ -163,8 +163,7 @@ const ReviewForm = (props) => {
 
                         </ul>
                     </div>
-                    {props.write}
-                    {props.write ? <button className='review_submit' onClick={() => {props.onClick( score, textarea.current.value );}}>등록</button> :  <button className='review_submit' onClick={() => {props.onClick( score, textarea.current.value );}}>수정</button> }
+                    <button className='review_submit' onClick={() => {props.onClick( score, textarea.current.value );}}>등록</button>
                 </div>
             </div>
         : <div className='no_login'>

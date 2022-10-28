@@ -14,7 +14,7 @@ const Review = (props) => {
                 <p>{props.review == null ? "" : props.review}</p>
                 {props.file != false && <img src={"/img/review_img/" + props.file} style={{ width: "120px" }} />}
             </div>
-            {props.id == props.login_id && <div><button className='reset_btn_1' onClick={props.editReview}>수정</button><button className='delete_btn_2' onClick={props.deleteReview}>삭제</button></div>}
+            {props.id == props.login_id && <button className='delete_btn_2' onClick={props.deleteReview}>삭제</button>}
 
 
             <hr className='r_hr' style={{ border: "0.5px solid #dadada", width: "100%" }} />
