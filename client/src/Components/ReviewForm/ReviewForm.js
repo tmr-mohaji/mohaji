@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
 import './ReviewForm.scss';
+import noImage from './img/no_login4.png';
 
 const ReviewForm = (props) => {
 
@@ -167,7 +168,8 @@ const ReviewForm = (props) => {
                     <button className='review_submit' onClick={() => {props.onClick( score, textarea.current.value );}}>등록</button>
                 </div>
             </div>
-        : <div>로그인 후 리뷰 작성 가능</div>}
+        : <div className='no_login'>
+            <div><img src={noImage} width='25px' alt='' /></div> <div> <span>로그인 후 리뷰 작성 가능합니다.</span></div></div>}
     </>)
 }
 
