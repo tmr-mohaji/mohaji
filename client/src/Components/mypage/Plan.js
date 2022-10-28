@@ -1,11 +1,7 @@
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useState } from 'react';
-
-// const SCHEDULE_URL = "http://localhost:8000/schedule/";
 
 const Plan = (props) => {
-    const id = props.id;
-    const scheduleData = props.schedule;
 
     const [schedule, setSchedule] = useState([]);
 
@@ -27,15 +23,19 @@ const Plan = (props) => {
         }
     }
 
+    useEffect(() => {
+        getSchedule();
+    }, [props.id]);
+
     return (
         <div>
             {
-                scheduleData.map((value) => {
+                schedule.map((value) => {
                     return(
-                        <div>
+                        <div key={value.id}>
                             <p>{value.title}</p>
                             <p>{value.date}</p>
-                            <p onClick={() => {deleteSchedule(value.id)}}></p>
+                            <p onClick={() => {deleteSchedule(value.id)}}>x</p>
                         </div>
                     )
                 })

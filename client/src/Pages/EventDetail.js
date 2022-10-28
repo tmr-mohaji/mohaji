@@ -87,7 +87,9 @@ const EventDetail = (props) => {
         // 별점 계산
         let sum = 0
         for (let i = 0; i < result.data.result.length; i++) {
+
             console.log('평점', result.data.result[i].score)
+
             sum += parseFloat(result.data.result[i].score);
         }
         let avg = sum / result.data.result.length;

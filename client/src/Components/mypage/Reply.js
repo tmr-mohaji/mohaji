@@ -3,10 +3,11 @@ import { useState } from 'react';
 
 const Reply = (props) => {
 
-  return(
-    <>
-    </>
-  )
+	return(
+		<>
+			{console.log(props.reply)}
+		</>
+	)
 }
 
 export default Reply;
