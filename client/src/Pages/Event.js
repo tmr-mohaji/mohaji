@@ -33,6 +33,7 @@ const Event = (props) => {
 
     const select_city = useRef();
     const select_type = useRef();
+    const select_order = useRef();
     const select_date = useRef();
     const heart = useRef();
 
@@ -46,13 +47,11 @@ const Event = (props) => {
     const handleChange_city = (event) => {
         setCity(event.target.value);
         setFilter({...filter, [event.target.name]: event.target.value,});
-        // console.log(filter);
     };
 
     const handleChange_type = (event) => {
         setType(event.target.value);
         setFilter({...filter, [event.target.name]: event.target.value,});
-        // console.log(filter);
     };
     
     const handleChange_date = (event) => {
@@ -164,8 +163,30 @@ const Event = (props) => {
                                 <option value="" disabled selected>Region</option>
                                 <option value='전체' className='option'>전체</option>
                                 <option value='강남구' className='option'>강남구</option>
+                                <option value='강동구' className='option'>강동구</option>
+                                <option value='강북구' className='option'>강북구</option>
+                                <option value='강서구' className='option'>강서구</option>
+                                <option value='관악구' className='option'>관악구</option>
+                                <option value='광진구' className='option'>광진구</option>
+                                <option value='구로구' className='option'>구로구</option>
+                                <option value='금천구' className='option'>금천구</option>
+                                <option value='노원구' className='option'>노원구</option>
+                                <option value='도봉구' className='option'>도봉구</option>
+                                <option value='동대문구' className='option'>동대문구</option>
+                                <option value='동작구' className='option'>동작구</option>
+                                <option value='마포구' className='option'>마포구</option>
+                                <option value='서대문구' className='option'>서대문구</option>
+                                <option value='서초구' className='option'>서초구</option>
+                                <option value='성동구' className='option'>성동구</option>
+                                <option value='성북구' className='option'>성북구</option>
+                                <option value='송파구' className='option'>송파구</option>
+                                <option value='용산구' className='option'>용산구</option>
+                                <option value='은평구' className='option'>은평구</option>
                                 <option value='종로구' className='option'>종로구</option>
+                                <option value='중구' className='option'>중구</option>
+                                <option value='중랑구' className='option'>중랑구</option>
                                 <option value='영등포구' className='option'>영등포구</option>
+                                <option value='양천구' className='option'>양천구</option>
                             </select>
 
                             <select
@@ -184,78 +205,81 @@ const Event = (props) => {
                                 <option value='박람회' className='option'>박람회</option>
                                 <option value='전시' className='option'>전시</option>
                             </select>
+
+                            <select label="order" ref={select_order} name="order" className="SelectType">
+                                <option value="" disabled selected>Order</option>
+                                <option value='최신순' className='option'>최신순</option>
+                                <option value='별점순' className='option'>별점순</option>
+                                
+                            </select>
                         
-                        <div style={{width:'40%',margin:'0 10px'}} className='datepicker'>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker
-                                value={calendar}
-                                onChange={handleChange_date}
-                                ref={select_date}
-                                renderInput={(params) => <TextField {...params} />}
-                            />
-                            </LocalizationProvider>
-                        </div><br />
+                            <div style={{width:'40%',margin:'0 10px'}} className='datepicker'>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DatePicker value={calendar} onChange={handleChange_date} ref={select_date} renderInput={(params) => <TextField {...params} />} />
+                                </LocalizationProvider>
+                            </div>
                         </div>
                     </div>
                 
 
                 <div className='listSection'>
+                    {Object.entries(eventData).length == 0 ? <p>조건에 맞는 결과가 없습니다</p> : <>                        {Object.entries(eventData).map((value) => {
 
-                {Object.entries(eventData).map((value) =>{
+                            let data = value[1];
+                            let time = value[1].time.replaceAll('\\n','  ');
 
-                    let data = value[1];
-                    let time = value[1].time.replaceAll('\\n','  ');
-                    return (
-                        <div key={data.id} className='list_entire_section'>
-                            <div className='list_entire_layout'>
-                                <div className='list_desc_layout'>
-                                    
-                                    <div className='list_name_layout'>
-                                        <div className='list_name_title'>
-                                            <div className='title'>{data.title}</div>
-                                        </div>
-                                        <p className='list_name_detail'>{data.detail}</p>
-                                    </div>
-                                    <div className='eventInfo'>
-                                        <div style={{width:'100%',marginTop:'15px'}}>
-                                            <p className='list_place'><MdPlace style={{color:'red', marginRight:'5px'}}/>{data.place}</p>
-                                            <div className='list_period_layout'>
-                                                <div><FcCalendar style={{marginRight: '5px'}}/></div>
-                                                <div className='list_period_start'>{data.start_date} </div>
-                                                <div> ~ </div>
-                                                <div className='list_period_end'> {data.end_date}</div>
+                            return (
+                                <div key={data.id} className='list_entire_section'>
+                                    <div className='list_entire_layout'>
+                                        <div className='list_desc_layout'>
+                                            
+                                            <div className='list_name_layout'>
+                                                <div className='list_name_title'>
+                                                    <div className='title'>{data.title}</div>
+                                                </div>
+                                                <p className='list_name_detail'>{data.detail}</p>
                                             </div>
-                                            <div className='list_time_layout'>
-                                                <div><FcClock style={{marginRight: '5px'}}/></div>
-                                                <div className='list_period_time'>{time}</div>
+                                            <div className='eventInfo'>
+                                                <div style={{width:'100%',marginTop:'15px'}}>
+                                                    <p className='list_place'><MdPlace style={{color:'red', marginRight:'5px'}}/>{data.place}</p>
+                                                    <div className='list_period_layout'>
+                                                        <div><FcCalendar style={{marginRight: '5px'}}/></div>
+                                                        <div className='list_period_start'>{data.start_date} </div>
+                                                        <div> ~ </div>
+                                                        <div className='list_period_end'> {data.end_date}</div>
+                                                    </div>
+                                                    <div className='list_time_layout'>
+                                                        <div><FcClock style={{marginRight: '5px'}}/></div>
+                                                        <div className='list_period_time'>{time}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className='Btns'>
+                                                {/* <div style={{textAlign:'right',marginBottom:'10px'}}>
+                                                        <button className='goMap' type="button" onClick={() => {getAddress(data.id)}}><img src={GPS} style={{width:'30px',height:'30px'}}/></button> */}
+                                                
+                                                <button className='goView' type="button" onClick={() => { navigate('/event/'+ data.id); }}>상세보기</button>
+                                                <button className='likes' onClick={() => {LikeIt(data.id)}} ref={heart}>
+                                                    {data.like ? <FaHeart /> : <FaHeart style={{color: "lightgray"}}/>}
+                                                </button>
+                                                <button className='goMap' type="button" onClick={() => {getAddress(data.id)}}><img src={GPS} style={{width:'30px',height:'30px'}}/></button>
+                                            </div>
+                                            
+                                        </div>
+
+                                        <div className='list_img_layout'>
+                                            <div style={{width:'100%'}}>
+                                                <p className='list_img_type'><span>{data.type}</span></p>
+                                                {data.price == '무료' ? <p className='list_price_free'>무료</p> : null }
+                                                <img src={"./img/" + data.filename} />
                                             </div>
                                         </div>
                                     </div>
-                                    <div className='Btns'>
-                                        {/* <div style={{textAlign:'right',marginBottom:'10px'}}>
-                                                <button className='goMap' type="button" onClick={() => {getAddress(data.id)}}><img src={GPS} style={{width:'30px',height:'30px'}}/></button> */}
-                                        
-                                        <button className='goView' type="button" onClick={() => { navigate('/event/'+ data.id); }}>상세보기</button>
-                                        <button className='likes' onClick={() => {LikeIt(data.id)}} ref={heart}>
-                                            {data.like ? <FaHeart /> : <FaHeart style={{color: "lightgray"}}/>}
-                                        </button>
-                                        <button className='goMap' type="button" onClick={() => {getAddress(data.id)}}><img src={GPS} style={{width:'30px',height:'30px'}}/></button>
-                                    </div>
-                                    
-                                </div>
 
-                                <div className='list_img_layout'>
-                                    <div style={{width:'100%'}}>
-                                        <p className='list_img_type'><span>{data.type}</span></p>
-                                        {data.price == '무료' ? <p className='list_price_free'>무료</p> : null }
-                                        <img src={"./img/" + data.filename} />
-                                    </div>
                                 </div>
-                            </div>
-
-                        </div>
-                    )
-                })}
+                            )
+                        })}
+                    </>}
                 </div>
             </div>
         </div>
