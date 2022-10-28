@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+import './Plan.scss';
+import Calendar from './Calendar';
 
 // const SCHEDULE_URL = "http://localhost:8000/schedule/";
 
@@ -27,19 +29,26 @@ const Plan = (props) => {
         }
     }
 
+    useEffect(() => {
+        getSchedule();
+    }, [props.id])
+
     return (
-        <div>
+        <div style={{width:'100%',height:'100%'}}>
             {
-                scheduleData.map((value) => {
+                schedule.map((value) => {
                     return(
                         <div>
                             <p>{value.title}</p>
                             <p>{value.date}</p>
-                            <p onClick={() => {deleteSchedule(value.id)}}></p>
+                            <p onClick={() => {deleteSchedule(value.id)}}>삭제</p>
                         </div>
                     )
                 })
             }
+
+            <Calendar schedule={schedule}/>
+            
         </div>
     )
 }
