@@ -14,7 +14,6 @@ const Schedule = () => {
                     'Authorization': localStorage.getItem("access_token")
                 }
             }).then((result) => {
-                console.log(result);
             })
         } else {
             navigate("/user/login");

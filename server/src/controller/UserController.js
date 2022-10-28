@@ -34,8 +34,6 @@ exports.idCheck = async (req, res) => {
         where: {id : req.body.id}
     });
 
-    console.log(result);
-
     if (result == null) {
         res.send({valid: true});
     } else {
