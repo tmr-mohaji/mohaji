@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useEffect, useState, useCallback } from 'react';
 import './Plan.scss';
 import Calendar from './Calendar';
-
-// const SCHEDULE_URL = "http://localhost:8000/schedule/";
-
 
 const Plan = (props) => {
 
