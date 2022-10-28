@@ -88,7 +88,7 @@ const EventDetail = (props) => {
         let sum = 0
         for (let i = 0; i < result.data.result.length; i++) {
 
-            console.log('평점', result.data.result[i].score)
+            console.log('사람', result.data.result[i]);
 
             sum += parseFloat(result.data.result[i].score);
         }
@@ -247,7 +247,7 @@ const EventDetail = (props) => {
                             <li><span className='d_dt'>시간</span> <span className='r_dt'>{data.time}</span></li>
                             <li><span className='d_dt'>장르</span> <span className='r_dt'>{data.type}</span></li>
                             <li><span className='d_dt'>연령</span> <span className='r_dt'>{data.people}</span></li>
-                            <li><span className='d_dt'>티켓</span> <span className='r_dt'>{data.price}</span></li>
+                            <li><span className='d_dt'>티켓</span> <span className='r_dt'>{(data.price || '').split('\\n').map((line) => { return (<span>{line}<br /></span>);})}</span></li>
                             <li><span className='d_dt'>소개</span> <span className='r_dt'>{data.detail}</span></li>
                         </ul>
 

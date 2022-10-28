@@ -264,3 +264,20 @@ textarea:focus {
     color:#fff;
     border:1px solid #A24F63;    
 }
+
+
+
+
+/*=========================================================
+    로그인 안되었을 시 페이지 관련 정의
+=========================================================*/
+.no_login{
+    display:flex;
+    align-items: center;
+    // flex-direction: column;
+}
+
+.no_login span{
+    margin-left:7px;
+    font-size:16px;
+}
