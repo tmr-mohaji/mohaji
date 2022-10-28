@@ -73,11 +73,11 @@ const EventDetail = (props) => {
     // 리뷰 데이터
     const findReview = async () => {
         const result = await axios.get(process.env.REACT_APP_REVIEW_URL + "/getComment", {
-            params : {event_id : id}
+            params: { event_id: id }
         })
 
         if (result.data.filename != false) {
-            for (let i=0; i < result.data.result.length; i++) {
+            for (let i = 0; i < result.data.result.length; i++) {
                 result.data.result[i]['filename'] = result.data.filename[i];
             }
         }
@@ -86,7 +86,7 @@ const EventDetail = (props) => {
 
         // 별점 계산
         let sum = 0
-        for (let i=0; i < result.data.result.length; i++) {
+        for (let i = 0; i < result.data.result.length; i++) {
             sum += parseFloat(result.data.result[i].score);
         }
         let avg = sum / result.data.result.length;
@@ -106,7 +106,7 @@ const EventDetail = (props) => {
     const fileUpload = () => {
         let fileUpload = document.getElementById("img");
 
-        for (let i=0; i<fileUpload.files.length; i++) {
+        for (let i = 0; i < fileUpload.files.length; i++) {
             formData.append("userfile", fileUpload.files[i]);
         }
     }
@@ -152,7 +152,7 @@ const EventDetail = (props) => {
 
     const deleteReview = async (review_id) => {
         console.log(review_id);
-        await axios.delete(process.env.REACT_APP_REVIEW_URL + "/deleteComment", {data : {id : review_id}});
+        await axios.delete(process.env.REACT_APP_REVIEW_URL + "/deleteComment", { data: { id: review_id } });
         findReview();
     }
 
@@ -197,7 +197,7 @@ const EventDetail = (props) => {
     // },[])
 
 
-    
+
 
     useEffect(() => {
         getData();
@@ -229,7 +229,7 @@ const EventDetail = (props) => {
                             </div>
 
                             <div className='d_like'>
-                                <div><KakaoShareButton id={data.id} title={data.title} detail={data.detail} filename={data.filename}/></div>
+                                <div><KakaoShareButton id={data.id} title={data.title} detail={data.detail} filename={data.filename} /></div>
                                 <button className='like_btn' onClick={like}>
                                     {likeStatus ? <FaHeart /> : <FaHeart style={{ color: "lightgray" }} />}
                                 </button>
@@ -268,15 +268,22 @@ const EventDetail = (props) => {
 
                 <div className='d_box2'>
                     <p>★ {score}</p>
-                    <ReviewForm onChange={getReview} fileUpload={fileUpload} onClick={writeComment}/>
+                    <ReviewForm onChange={getReview} fileUpload={fileUpload} onClick={writeComment} />
                 </div>
-                {allReview.map((data) => {
-                    return (
-                        <div key={data.id}>
-                            <Review id={data.user_id} score={data.score} review={data.content} date={data.createdAt} file={data.filename} login_id={props.user_id} deleteReview={() => {deleteReview(data.id)}}/>
-                        </div>
-                    )
-                })}
+
+                <div className='line_box'></div>
+
+                <div className='review_collector'>
+                    {allReview.map((data) => {
+                        return (
+                            <div key={data.id}>
+                                <Review id={data.user_id} score={data.score} review={data.content} date={data.createdAt} file={data.filename} login_id={props.user_id} deleteReview={() => { deleteReview(data.id) }} />
+                            </div>
+                        )
+                    })}
+                </div>
+
+                <div className='line_box'></div>
             </div>
         </section>
     )

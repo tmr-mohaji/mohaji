@@ -1,3 +1,6 @@
+import './Review.scss';
+
+
 const Review = (props) => {
     return (
         <div>
