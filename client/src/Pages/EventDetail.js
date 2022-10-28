@@ -20,6 +20,7 @@ const EventDetail = (props) => {
     const [likeStatus, setLikeStatus] = useState("");
     const [allReview, setAllReview] = useState([]);
     const [score, setScore] = useState(0);
+    const [write, setWrite] = useState(true);
     const [reviewData, setReviewData] = useState({
         score: 0,
         comment: ''
@@ -87,9 +88,7 @@ const EventDetail = (props) => {
         // 별점 계산
         let sum = 0
         for (let i = 0; i < result.data.result.length; i++) {
-
-            console.log('사람', result.data.result[i]);
-
+            // console.log('사람', result.data.result[i]);
             sum += parseFloat(result.data.result[i].score);
         }
         let avg = sum / result.data.result.length;
@@ -155,10 +154,26 @@ const EventDetail = (props) => {
         }
     }
 
+    // 리뷰 삭제
     const deleteReview = async (review_id) => {
-        console.log(review_id);
         await axios.delete(process.env.REACT_APP_REVIEW_URL + "/deleteComment", { data: { id: review_id } });
         findReview();
+    }
+
+    // 리뷰 수정 버튼 눌렀을 때
+    const editReview = async (review_id) => {
+        console.log(review_id);
+        let button_box = document.getElementById("button_box");
+        let textarea = document.querySelector(".rt_box textarea");
+        let img_tag = document.getElementById("img_tag");
+        button_box.innerHTML = "<button className='review_submit' onClick={props.editComment}>수정</button>";
+        textarea.value = "수정";
+        img_tag.src = '/img/review_img/dog.jpeg';
+        // await axios.patch(process.env.REACT_APP_REVIEW_URL + "/editComment", {data : {id: review_id}});
+    }
+
+    const editComment = async () => {
+        console.log("work");
     }
 
     // 마이페이지 클릭 시 모달 창 설정(비로그인 시)
@@ -273,7 +288,7 @@ const EventDetail = (props) => {
 
                 <div className='d_box2'>
                     <p className='all_box'><span className='all_txt'>사용자 총 평점</span> <b>{score.toFixed(1)}</b> <b style={{ margin: '0 2.5px' }}>/</b> <b>5.0</b></p>
-                    <ReviewForm onChange={getReview} fileUpload={fileUpload} onClick={writeComment} />
+                    <ReviewForm onChange={getReview} fileUpload={fileUpload} onClick={writeComment} editComment={editComment} />
                 </div>
 
                 <div className='line_box2'></div>
@@ -287,7 +302,7 @@ const EventDetail = (props) => {
                     {allReview.map((data) => {
                         return (
                             <div key={data.id}>
-                                <Review id={data.user_id} score={data.score} review={data.content} date={data.createdAt} file={data.filename} login_id={props.user_id} deleteReview={() => { deleteReview(data.id) }} />
+                                <Review id={data.user_id} score={data.score} review={data.content} date={data.createdAt} file={data.filename} login_id={props.user_id} editComment={editComment} isWrite={write} deleteReview={() => { deleteReview(data.id) }} />
                             </div>
                         )
                     })}
