@@ -15,7 +15,6 @@ import Resetpw from '../pages/Resetpw';
 import MyPage from '../components/mypage/MyPage';
 import Chat from '../pages/Chat/Chat';
 import Schedule from '../pages/Schedule/Schedule';
-
 import ScrollToTop from '../components/ScrollToTop';
 
 

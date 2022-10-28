@@ -9,7 +9,7 @@ const Favorites = (props) => {
                     return(
                         <div>
                             <p>{value.title}</p>
-                            <img src={'/img'+ value.filename} style={{width:'200px'}} />
+                            <img src={'/img/'+ value.filename} style={{width:'200px'}} />
                         </div>
                     )
                 })

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 
-const SCHEDULE_URL = "http://localhost:8000/schedule/";
+// const SCHEDULE_URL = "http://localhost:8000/schedule/";
 
 const Plan = (props) => {
     const id = props.id;
@@ -11,7 +11,7 @@ const Plan = (props) => {
 
     const getSchedule = async () => {
         if (props.id != "") {
-            let result = await axios.get(SCHEDULE_URL + "getEvent", {
+            let result = await axios.get(process.env.REACT_APP_SCHEDULE_URL + "/getEvent", {
                 params : {user_id : props.id}
             });
             setSchedule(result.data);
@@ -20,7 +20,7 @@ const Plan = (props) => {
 
     const deleteSchedule = async (id) => {
         if ( props.id != "") {
-            let result = await axios.get(SCHEDULE_URL + "deleteEvent", {
+            let result = await axios.get(process.env.REACT_APP_SCHEDULE_URL + "/deleteEvent", {
                 params : {id : id}
             });
             getSchedule();
