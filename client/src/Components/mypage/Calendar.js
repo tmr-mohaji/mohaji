@@ -20,24 +20,28 @@ function Calendar(props) {
     setData(ls);
   }
 console.log('Data:',data);
+// console.log(data.length);
+
+function checkEvent () {
+  if ( data != null ) {
+    console.log('sch- length:', schedule.length);
+    for (let i=0; i<schedule.length; i++ ) {
+      const selectDate = document.querySelector(`div[date='${schedule[i].date}']`)
+      console.log('selectDate:',selectDate);
+      // 여기서 첫번째 배열의 값은 null이 들어옴.... 이걸 해야할 것 같음. 
+
+
+      // selectDate.style.color = 'red';
+      // selectDate.classList.add('colorChange')
+      // document.querySelector(`div[date='${data[i]}']`).style.color ='red'
+    }
+  }
+}
 
 useEffect(() => {
   test()
+  checkEvent()
 },[props.schedule]);
-
-// 이 아래부분 수정해야함!!
-// data.map((test) => {
-//   console.log(test)
-  // console.log(document.querySelector('div[date=' + {test} +']'))
-// })
-
-
-
-  // for ( let i=0; i < data.length; i++ ) {
-  //   console.log(data[i]);
-  //   console.log(document.querySelector(`div[date='${data[i]}']`));
-    // document.querySelector(`div[date='${data[i]}']`).style.color = 'red';
-  // }
 
 
   const today = {
@@ -166,6 +170,7 @@ useEffect(() => {
     </div>
     </>
   )
+
 }
 
 export default Calendar;
