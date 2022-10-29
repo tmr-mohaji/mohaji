@@ -9,6 +9,7 @@ import dateData from './Date.json';
 import { MdPlace } from 'react-icons/md';
 import { FcCalendar,FcClock } from 'react-icons/fc'
 import {FaHeart} from 'react-icons/fa'
+import {BsStarFill} from 'react-icons/bs'
 import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -262,6 +263,7 @@ const Event = (props) => {
 
                             let data = value[1];
                             let time = value[1].time.replaceAll('\\n','  ');
+                            let num = Number(data.avg);
 
                             return (
                                 <div key={data.id} className='list_entire_section'>
@@ -270,7 +272,6 @@ const Event = (props) => {
                                             
                                             <div className='list_name_layout'>
                                                 <div className='list_name_title'>
-                                                    {data.avg == null ? 0.00 : data.avg}
                                                     <div className='title'>{data.title}</div>
                                                 </div>
                                                 <p className='list_name_detail'>{data.detail}</p>
@@ -287,6 +288,9 @@ const Event = (props) => {
                                                     <div className='list_time_layout'>
                                                         <div><FcClock style={{marginRight: '5px'}}/></div>
                                                         <div className='list_period_time'>{time}</div>
+                                                    </div>
+                                                    <div className='list_review_section'>
+                                                        {data.avg == null ? <div>0.00</div> : <div className='list_review'><div style={{color:'yellow'}}><BsStarFill /></div><div style={{marginBottom:'2px', marginLeft:'5px'}}>{num.toFixed(1)}</div></div>}
                                                     </div>
                                                 </div>
                                             </div>

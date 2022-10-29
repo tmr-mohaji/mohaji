@@ -242,6 +242,24 @@ $mobile : 600px;
   }
 }
 
+.list_review_section {
+  font-size: 14px;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  @include media('<1300px') {
+    font-size: 12px;
+  }
+
+  .list_review {
+    display: flex;
+    align-items: center;
+    font-family: 'EliceDigitalBaeum';
+    font-weight: 500;
+  }
+}
+
+
 // 이벤트 발생 비용
 .list_price_free {
   position: absolute;
