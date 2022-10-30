@@ -1,3 +1,5 @@
+import "./Favorites.scss";
+
 
 const Favorites = (props) => {
     
@@ -9,7 +11,7 @@ const Favorites = (props) => {
                     return(
                         <div key={value.id}>
                             <p>{value.title}</p>
-                            <img src={'/img/'+ value.filename} style={{width:'200px'}} />
+                            <img src={'/img/'+ value.filename} style={{width:'200px'}} alt='' />
                         </div>
                     )
                 })
