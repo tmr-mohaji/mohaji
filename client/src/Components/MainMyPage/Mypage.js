@@ -88,7 +88,7 @@ const Mypage = () => {
             <div className='mypageBox'>
                 <div className='mypage_back'>
                     <div className='mypage_box1'>
-                        <h1 className='box1_h1'>축제와 전시회의 일정을 한 눈에 볼 수 있는 <br /> 내일뭐하지에서 원하는 일정들을 등록해보세요.</h1>
+                        <h1 className='box1_h1'>축제와 전시회의 일정을 한 눈에 볼 수 있는 <br className='mob_myp' /> 내일뭐하지에서 원하는 일정들을 등록해보세요.</h1>
                         
                         <div className='box1_a'>
                             <p className='box1_p'>마이 페이지

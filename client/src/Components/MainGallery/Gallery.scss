@@ -323,3 +323,38 @@
         font-size:12px;
     }
 }
+
+
+@include media('<501px'){
+    /* 공연 일정 카테고리 */
+    .buttonBox button{
+        padding:10px;
+    }
+
+    .g_tit{
+        font-size:32px;
+    }
+
+    .g_tit_h4{
+        display:none;
+    }
+
+    .g_img{
+        height:280px;
+    }
+
+    .g_hover{
+        height:280px;
+    }
+
+    .listBox{
+        padding-bottom:80px;
+    }
+
+
+    /* 호버 시 */
+    .g_tit_h1, .g_tit_h2, .g_tit_h3{
+        display:flex;
+        align-items: center;
+    }
+}

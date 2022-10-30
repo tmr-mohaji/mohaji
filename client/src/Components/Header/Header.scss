@@ -153,17 +153,25 @@
 
 
 @include media('<800px'){
+    .logo{
+        font-size:24px;
+    }
+
     // 서브 메뉴 숨김
     .navbar_1{
         display:none;
     }
 
     .navbar_2{
-        padding-right:50px;
+        padding-right:40px;
     }
 
     .navbar_2 li{
-        width:80px;
+        width:60px;
+    }
+
+    .navbar_2 li{
+        font-size:12px;
     }
 
     // 햄버거 아이콘 보임
