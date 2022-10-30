@@ -29,6 +29,7 @@ const MyPage = (props) => {
         if (props.id != "") {
             let result = await axios.post(process.env.REACT_APP_EVENT_URL + "/likeInfo", { user_id: props.id });
             setEvent(result.data);
+            console.log('231212313', result.data);
         }
     }
 
@@ -97,7 +98,7 @@ const MyPage = (props) => {
                             </div>
                         </div>
                         <div className='tabpart'>
-                            <div style={{ border: '3px solid green', height: '100%' }}>
+                            <div style={{height: '100%' }}>
                                 <TabContent tab={tab} event={event} schedule={schedule} reply={reply} id={props.id} />
                             </div>
                         </div>
