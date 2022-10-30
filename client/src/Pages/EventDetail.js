@@ -242,7 +242,7 @@ const EventDetail = (props) => {
                         <ul className='d_ul'>
                             <li><span className='d_dt'>기간</span> <span className='r_dt'>{data.start_date} ~ {data.end_date}</span></li>
                             <li><span className='d_dt'>장소</span> <span className='r_dt'>{data.address}, {data.place}</span></li>
-                            <li><span className='d_dt'>시간</span> <span className='r_dt'>{data.time}</span></li>
+                            <li><span className='d_dt'>시간</span> <span className='r_dt'>{(data.time || '').split('\\n').map((line) => { return (<span>{line}<br /></span>);})}</span></li>
                             <li><span className='d_dt'>장르</span> <span className='r_dt'>{data.type}</span></li>
                             <li><span className='d_dt'>연령</span> <span className='r_dt'>{data.people}</span></li>
                             <li><span className='d_dt'>티켓</span> <span className='r_dt'>{(data.price || '').split('\\n').map((line) => { return (<span>{line}<br /></span>);})}</span></li>
