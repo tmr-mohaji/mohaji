@@ -63,20 +63,37 @@
 
         .userInfo_section {
             /* 2022-10-30 추가 */
-            // width: 30%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            width: 20%;
+            background:  rgba(242, 215, 255, 0.2);
+            border-radius: 10px;
 
             .left_info{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                // justify-content: center;
                 width:100%;
                 min-width: 200px;
+                margin-top:100px;
+
+                .logout_btn {
+                    cursor: pointer;
+                    margin-top: 30px;
+                    width: 80%;
+                    height: 30px;
+                    background-color: $sub_color1;
+                    color:white;
+                    border: 0;
+                    
+                }
+
+                .logout_btn:hover {
+                    background-color: $sub_color1;
+                }
             }
         }
 
         .tabpart {
-            // width: 70%;
-
             /* 2022-10-30 추가 */
             width:100%;
         }

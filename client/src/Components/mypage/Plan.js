@@ -30,23 +30,13 @@ const Plan = (props) => {
     }, [props.id]);
 
     return (
-        <div style={{width:'100%',height:'100%'}}>
-            {
-                schedule.map((value) => {
-                    return(
-                        <div key={value.id}>
-                            <p>{value.title}</p>
-                            <p>{value.date}</p>
-                            <p onClick={() => {deleteSchedule(value.id)}}>삭제</p>
-
-                        </div>
-                    )
-                })
-            }
-
-            <Calendar schedule={schedule} deleteSchedule={deleteSchedule}/>
-            
-        </div>
+        <>
+            <h1 className='planText'>나의 일정을 확인해보세요!😊</h1>
+            <div style={{width:'100%',height:'100%', marginTop:'50px'}}>
+                <Calendar schedule={schedule} deleteSchedule={deleteSchedule}/>
+                
+            </div>
+        </>
     )
 }
 

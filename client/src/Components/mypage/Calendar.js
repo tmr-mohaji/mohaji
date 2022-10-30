@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import classNames from "classnames/bind";
 import style from "./Calendar.scss";
 import { useRef } from 'react';
@@ -10,8 +10,9 @@ const cnb = classNames.bind(style);
 function Calendar(props) {
 
   const [modal , setModal] = useState(false);
-  const [ planData, setPlanData ] = useState([]);
+  const [modalData , setModalData] = useState();
   const [data, setData] = useState();
+  const [scheduleContent , setScheduleContent] = useState([]);
   const schedule = props.schedule;
   console.log('sch-:',schedule);
 
@@ -132,42 +133,50 @@ useEffect(() => {
           );
         }
       } else {
-        dayArr.push(<div className="weekday"></div>);
+        dayArr.push(<div className="weekday"><div></div></div>);
       }
     }
     return dayArr;
   }, [selectYear, selectMonth, dateTotal]);
 
   // function MyPlan(e) {
-  //   // alert('하이');
-  //   // setModal(true);
+  //   alert('하이');
+  //   setModal(true);
   // }
 
 const checkEvent = useEffect(() => {
+
   if ( data != null ) {
-    console.log('sch- length:', schedule.length);
-    const result = schedule.map((value) => {
-      return document.querySelector(`div[date='${value.date}']`);
-    })
-    console.log('result:' ,result);
-    for (let i=0; i<result.length; i++) {
-      if (result[i] != null) {
-        result[i].classList.add('colorChange');
-        // result[i].onclick = MyPlan;
-      }
+
+    // 스케쥴 데이터가 div date값을 돌면서 서로 일치하는 div만 가져옴
+    // 그 div에 각 데이터 타이틀을 넣어준다. 
+    schedule.filter((value) => {
+      const a = document.getElementsByClassName('weekday');
+      for ( let i =0; i<a.length; i++) {
+        if ( value.date == a[i].getAttribute('date')) {
+          a[i].classList.add('colorChange');
+          a[i].onclick = function () { 
+              setModal(true); 
+              setModalData(value);
+            }
+          }
+        }
+      });
     }
-  }
 },[props.schedule, selectMonth,props.deleteSchedule])
-  
+
 
   return(
-    <>
+    <div style={{display:'flex',justifyContent:'center'}}>
     <div className='c_entire_layout'>
       <div className='c_header' style={{display:'flex'}}>
-        <button type='button' onClick={prevMonth}> ◀ </button>
-        <div className='c_title_section'>{ selectYear } 년 {selectMonth}월</div>
-        <button type='button' onClick={nextMonth}> ▶ </button>
-        <button type='button' onClick={MoveToday}> 오늘 </button>
+        <button className='prevNext' type='button' onClick={prevMonth}> ◀ </button>
+        <div className='c_title_section'>
+          <span style={{fontSize:'20px', fontWeight:'700',marginRight:'10px'}}>{ selectYear }</span>년 
+          <span style={{fontSize:'20px', fontWeight:'700',margin:'0 10px'}}>{selectMonth}</span>월
+        </div>
+        <button className='prevNext' type='button' onClick={nextMonth}> ▶ </button>
+        <button className='movetoday' type='button' onClick={MoveToday}> 오늘 </button>
         
       </div>
       <div className='c_body'>
@@ -175,9 +184,9 @@ const checkEvent = useEffect(() => {
         <div className='c_day_section'>{returnDay()}</div>
       </div>
       
-      {/* { modal && <div><MyPlanModal schedule={schedule}/></div> } */}
+      { modal && <div><MyPlanModal modalData={modalData} setModal={setModal}/></div> }
     </div>
-    </>
+    </div>
   )
 
 }

@@ -1,2 +1,9 @@
 @import '../Commons/Commons.scss';
 @import '~include-media/dist/include-media';
+
+.planText {
+    text-align: center;
+    font-family: "Elice Digital Baeum", sans-serif;
+    font-size: 18px;
+    margin-top: 80px;
+}
