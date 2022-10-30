@@ -60,6 +60,7 @@ const Event = (props) => {
 
         setCalendar(pickDate[3]+ '-' + month + '-' + pickDate[2]);
         setFilter({...filter, date : pickDate[3]+ '-' + month + '-' + pickDate[2] });
+
     };
 
     // 필터 정보로 데이터 가져오기
@@ -250,7 +251,8 @@ const Event = (props) => {
                         
                             <div style={{width:'40%',margin:'0 10px'}} className='datepicker'>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker value={calendar} onChange={handleChange_date} ref={select_date} renderInput={(params) => <TextField {...params} />} />
+                                    <DatePicker value={calendar} onChange={handleChange_date} ref={select_date} renderInput={(params) => <TextField  {...params} />} 
+                                    componentsProps={{actionBar : { actions: ['clear'] }, }} />
                                 </LocalizationProvider>
                             </div>
                         </div>

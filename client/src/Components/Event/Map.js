@@ -115,9 +115,10 @@ function MapComponent(props) {
                 }
         })
         .then((data) => {
-                    // console.log(data);
-                    data.map(function(aData) {                   
 
+                    data.map(function(aData) {                   
+                        // console.log('adata:',aData.like);
+                        
                     naver.maps.Service.geocode({
                         query: aData.address
                     }, function(status,response) {
@@ -132,32 +133,29 @@ function MapComponent(props) {
                         var data_lng = item[0].x;
                     
                     // // 2. 각 이벤트별 마커 표시
-                         const event_marker = new naver.maps.Marker({
-                             map: map,
-                             position: new naver.maps.LatLng(data_lat,data_lng),
-                             icon : {
-                                 content: `<img src=${require('./img/marker.png')} width='30px' height='30px'/>`,
-                                 size: new naver.maps.Size(50, 52),
-                                 origin: new naver.maps.Point(0,0),
-                                 anchor: new naver.maps.Point(25, 26),
-                             },
-                            
 
-                        });
-                    // 2-2. 좋아요한 이벤트 마커 표시
-                    //     const like_marker = new naver.maps.Marker({
-                    //         map: map,
-                    //         position: new naver.maps.LatLng(data_lat,data_lng),
-                    //         icon : {
-                    //             content: `<img src=${require('./img/heart.png')} width='30px' height='30px'/>`,
-                    //             size: new naver.maps.Size(50, 52),
-                    //             origin: new naver.maps.Point(0,0),
-                    //             anchor: new naver.maps.Point(25, 26),
-                    //         }
-                    // });
+                    if ( aData.like == 'undefined' ) {
+                        var event_marker = new naver.maps.Marker({
+                            map: map,
+                            position: new naver.maps.LatLng(data_lat,data_lng),
+                            icon : {
+                            content: `<img src=${require('./img/marker.png')} width='30px' height='30px'/>`,
+                                },
+                            });
+                        } else {
+                            //2-2. 좋아요한 이벤트 마커 표시
+                        var event_marker = new naver.maps.Marker({
+                            map: map,
+                            position: new naver.maps.LatLng(data_lat,data_lng),
+                            icon : {
+                                content: `<img src=${require('./img/heart.png')} width='30px' height='30px'/>`,
+                                }
+                            });
+                        }
                 
 
                     // 3. 각 마커별 정보창 표시
+
 
                         const infoText = 
                             `<div className='infoText' style='padding:20px; background-color:white; color:black; border-radius:20px; opcity:75%; display:flex; align-items:center;'>
@@ -165,7 +163,7 @@ function MapComponent(props) {
                                 <div style='font-weight:normal; text-align:center; font-size:11px; margin-top:3px; width:50px; background-color:#FFE6E6; border-radius:4px;'>${aData.type}</div>    
                                 <div style='font-weight:bold; font-size:15px; cursor:pointer;'>${aData.title}<a href='/event/${aData.id}'><img src=${require('./img/arrow.png')} style='width:12px; height:12px; margin-left:5px; margin-bottom:4px;' alt='상세보기'></a></div>
                                 <div>
-                                    <span style='font-size:11px;'>⭐⭐⭐</span>
+                                    <span style='font-size:10px; color:lightgrey;'>평점 : ${Math.ceil(aData.avg)}</span>
                                 </div>
                                 <div style='margin-top:10px;'>
                                 <span style='font-size:12px; font-weight:bold;padding:5px; border-radius:3px;background-color:#5AD2FF; color:white;'><img src=${require('./img/detour.png')} style='width:15px; height:15px;'/>길찾기</span>
@@ -182,7 +180,7 @@ function MapComponent(props) {
                                 <div style='font-weight:normal; text-align:center; font-size:11px; margin-top:3px; width:50px; background-color:#FFE6E6; border-radius:4px;'>${props.clickData.type}</div>    
                                 <div style='font-weight:bold; font-size:15px; cursor:pointer;'>${props.clickData.title}<a href='/event/${props.clickData.id}'><img src=${require('./img/arrow.png')} style='width:12px; height:12px; margin-left:5px; margin-bottom:4px;' alt='상세보기'></a></div>
                                 <div>
-                                    <span style='font-size:11px;'>⭐⭐⭐</span>
+                                    <span style='font-size:10px; color:lightgrey;'>평점 : ${Math.ceil(aData.avg)}</span>
                                 </div>
                                 <div style='margin-top:10px;'>
                                 <span style='font-size:12px; font-weight:bold;padding:5px; border-radius:3px;background-color:#5AD2FF; color:white;'><img src=${require('./img/detour.png')} style='width:15px; height:15px;' />길찾기</span>
@@ -264,8 +262,9 @@ function MapComponent(props) {
                                     }
                                 }
                             });
-                            infowindow.open(map,event_marker);
-                            infowindow2.open(map,event_marker);
+                            // infowindow3.open(map, marker);           ///////////// 에러.. 이렇게 할경우 현재위치, 지도상 마커 클릭시 정보창이 나타남. but , 이벤트에서 지도버튼 누르면 안나옴.
+                            infowindow.open(map,event_marker);          //////////// 에러.. 겹치는 장소의 한가지만 나옴.
+                            // infowindow2.open(map,event_marker);      //////////// 에러 .. 활성화하면 처음 로딩될때 undefined가 뜸
                             }
                     )
                 })
