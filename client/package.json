@@ -15,6 +15,7 @@
     "classnames": "^2.3.2",
     "dayjs": "^1.11.6",
     "dotenv": "^16.0.3",
+    "emoji-picker-react": "^4.4.4",
     "gsap": "^3.11.3",
     "include-media": "^1.4.10",
     "node-sass": "^7.0.3",
