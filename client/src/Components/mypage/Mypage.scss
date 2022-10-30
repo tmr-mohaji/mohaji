@@ -2,63 +2,6 @@
 @import '~include-media/dist/include-media';
 
 
-/*=========================================================
-    배너 정의
-=========================================================*/
-.sub_visual2{
-    margin-top:92px;
-    box-sizing: border-box;
-    padding:100px 0 100px 0;
-    position: relative;
-    color:#fff;
-}
-
-.sub_visual2 .bg_w2{
-    position: absolute;
-    overflow: hidden;
-    width: 100%;
-    height:100%;
-    top:0;
-    left:0;
-}
-
-.sub_visual2 .bg2{
-    background:url(./img/back.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    position: absolute;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-}
-
-.sub_visual2 .sub-t2{
-    position: relative;
-    z-index: 1;
-}
-
-.sub-t2{
-    font-size:45px;
-    color:#fff;
-    text-align: center;
-    line-height: 1.5;
-}
-
-
-
-.myPageBox{
-    min-height:100vh;
-    margin-top: 92px;
-    box-sizing: border-box;
-    position: relative;    
-}
-
-
-
-
-
 
 .tab_section {
     font-family: "Elice Digital Baeum", sans-serif;
