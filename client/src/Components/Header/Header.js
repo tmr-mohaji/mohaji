@@ -23,7 +23,7 @@ const Header = (props) => {
             <div className='headerArea'>
                 <div className='head_wrap'>
                     <h1 className='logo'>
-                        <Link to='/'>로고</Link>
+                        <Link to='/'>내일뭐하지?</Link>
                     </h1>
 
                     <ul className="navbar_1 navbar_pc">
@@ -32,11 +32,11 @@ const Header = (props) => {
                         </li>
 
                         <li>
-                            <Link className='bt_line' to='/chat'> 채팅 </Link>
+                            <Link className='bt_line two_line' to='/chat'> 채팅 </Link>
                         </li>
 
                         <li>
-                            <Link className='bt_line' to='/schedule'> 일정 </Link>
+                            <Link className='bt_line two_line' to='/schedule'> 일정 </Link>
                         </li>
                     </ul>
 

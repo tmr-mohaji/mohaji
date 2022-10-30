@@ -39,13 +39,19 @@
     text-align: center;
 }
 
+
+/*=========================================================
+    네비 호버 시 라인 정의
+=========================================================*/
 .bt_line{
     position: relative;
 }
 
+
 .bt_line:hover{
     color:#7a266d;
     font-weight: 600;
+    transition: all 0.3s;
 }
 
 .bt_line:hover:after{
@@ -53,6 +59,16 @@
     background:#7a266d;
     height:3.5px;
     width:90px;
+    position:absolute;
+    bottom:-34px;
+    left:-12px;
+}
+
+.two_line:hover:after{
+    content:'';
+    background:#7a266d;
+    height:3.5px;
+    width:50px;
     position:absolute;
     bottom:-34px;
     left:-8px;
