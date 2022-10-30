@@ -56,6 +56,11 @@ const MyPage = (props) => {
         }
     }
 
+    const LogOut = () => {
+        window.localStorage.clear();
+        window.location.replace('/');
+    }
+
     useEffect(() => {
         getData();
         getLikes();
@@ -89,16 +94,19 @@ const MyPage = (props) => {
                 <div className='mypage_entire_layout'>
                     <div className='mypage_entire_section'>
                         <div className='userInfo_section'>
-                            <div className='left_info' style={{ border: '3px solid yellow', height: '100%' }}>
-                                <img src='/img/userinfo.png' style={{ width: '130px', height: '130px' }} alt='' />
-                                <div>{data.id}</div>
-                                <div>{data.nickname}</div>
-                                <div>{data.email}</div>
-                                <button type='button'>로그아웃</button>
+                            <div className='left_info'>
+                                <img src='/img/userinfo.png' style={{ width: '120px', height: '120px' }} />
+                                <div style={{fontSize:'14px', fontWeight:'600'}}>{data.id}</div>
+                                <div style={{fontSize:'14px', fontWeight:'600'}}> {data.nickname}</div>
+                                <div style={{fontSize:'14px', fontWeight:'600'}}>{data.email}</div>
+                                <button className='logout_btn' type='button' onClick={LogOut}>로그아웃</button>
                             </div>
                         </div>
                         <div className='tabpart'>
-                                <TabContent tab={tab} event={event} schedule={schedule} reply={reply} id={props.id} />
+                            <div style={{height: '100%' }}>
+                                <TabContent tab={tab} event={event} schedule={schedule} reply={reply} id={props.id}/>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -112,5 +120,5 @@ export default MyPage;
 
 function TabContent(props) {
     const id = props.id;
-    return [<Plan schedule={props.schedule} id={id} />, <Favorites event={props.event} />, <Reply reply={props.reply} />][props.tab]
+    return [<Plan schedule={props.schedule} id={id}/>, <Favorites event={props.event} />, <Reply reply={props.reply} />][props.tab]
 }
