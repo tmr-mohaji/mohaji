@@ -72,7 +72,7 @@ const MyPage = (props) => {
         <section>
             <div className='myPageBox'>
                 <div>
-                    <img src='/img/back.jpg' style={{ width: '100%', height: '250px' }} />
+                    <img src='/img/back.jpg' style={{ width: '100%', height: '250px' }} alt='' />
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -106,6 +106,7 @@ const MyPage = (props) => {
                             <div style={{height: '100%' }}>
                                 <TabContent tab={tab} event={event} schedule={schedule} reply={reply} id={props.id}/>
                             </div>
+
                         </div>
                     </div>
                 </div>

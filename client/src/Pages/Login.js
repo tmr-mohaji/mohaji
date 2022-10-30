@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import axios from 'axios';
 
@@ -15,7 +15,6 @@ const Login = ( props ) => {
     const PW = useRef();
 
     const navigate = useNavigate();
-    const location = useLocation();
 
     const error = () => toast('아이디 또는 비밀번호를 확인해주세요!', { autoClose:3000, hideProgressBar:true, progress:undefined});
 
@@ -67,7 +66,7 @@ const Login = ( props ) => {
                     <button className='login_btn' type="button" onClick={login}>로그인</button>
 
                     <hr />
-                    <div className='kakaoLogin'><img src='/img/kakao_login.png' style={{width:'130px', cursor:'pointer'}}></img></div>
+                    <div className='kakaoLogin'><a href="http://localhost:8000/auth/kakao"><img src='/img/kakao_login.png' style={{width:'130px', cursor:'pointer'}}></img></a></div>
                 </form>
                 
                 <div className='login_etc'>
