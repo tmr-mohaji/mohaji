@@ -1,9 +1,6 @@
 CREATE DATABASE mohaji;
 use mohaji;
 
-drop table event;
-drop table user;
-
 CREATE TABLE event (
 	id int not null primary key auto_increment,
     title varchar(255) not null,
@@ -61,6 +58,16 @@ CREATE TABLE schedule (
     event_id int not null,
     FOREIGN KEY ( event_id ) REFERENCES event(id) ON DELETE CASCADE,
     date date not null
+);
+
+CREATE TABLE socket (
+	id int not null primary key auto_increment,
+    nickname varchar(255) not null,
+    user_id varchar(255) not null,
+    FOREIGN KEY ( user_id ) REFERENCES user(id) ON DELETE CASCADE,
+	message mediumtext not null,
+    createdAt TIMESTAMP,
+    updatedAt TIMESTAMP
 );
 
 select * from event;

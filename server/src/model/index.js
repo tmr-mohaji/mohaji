@@ -18,6 +18,7 @@ db.Like = require("./Like")(sequelize, Sequelize);
 db.Schedule = require("./Schedule")(sequelize, Sequelize);
 db.Review = require("./Review")(sequelize, Sequelize);
 db.ReviewImg = require("./ReviewImg")(sequelize, Sequelize);
+db.Socket = require("./Socket")(sequelize, Sequelize);
 
 // user(id) -> like(user_id)
 db.User.hasMany(db.Like, {
@@ -99,6 +100,18 @@ db.Review.hasMany(db.ReviewImg, {
 });
 db.ReviewImg.belongsTo(db.Review, {
     foreignKey: "review_id",
+    sourceKey: "id",
+    onDelete: "cascade",
+});
+
+// user(id) -> socket(user_id)
+db.User.hasMany(db.Socket, {
+    foreignKey: "user_id",
+    sourceKey: "id",
+    onDelete: "cascade",
+});
+db.Socket.belongsTo(db.User, {
+    foreignKey: "user_id",
     sourceKey: "id",
     onDelete: "cascade",
 });
