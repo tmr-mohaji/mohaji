@@ -2,11 +2,15 @@ import { useState, useCallback, useEffect } from 'react';
 import classNames from "classnames/bind";
 import style from "./Calendar.scss";
 import { useRef } from 'react';
+import MyPlanModal from './MyPlan';
+
 
 const cnb = classNames.bind(style);
 
 function Calendar(props) {
 
+  const [modal , setModal] = useState(false);
+  const [ planData, setPlanData ] = useState([]);
   const [data, setData] = useState();
   const schedule = props.schedule;
   console.log('sch-:',schedule);
@@ -14,33 +18,14 @@ function Calendar(props) {
   const test =() => {
     let ls = [];
     schedule.map((data) => {
-      // console.log(data.date);
       return ls.push(data.date);
     })
     setData(ls);
   }
 console.log('Data:',data);
-// console.log(data.length);
-
-function checkEvent () {
-  if ( data != null ) {
-    console.log('sch- length:', schedule.length);
-    for (let i=0; i<schedule.length; i++ ) {
-      const selectDate = document.querySelector(`div[date='${schedule[i].date}']`)
-      console.log('selectDate:',selectDate);
-      // 여기서 첫번째 배열의 값은 null이 들어옴.... 이걸 해야할 것 같음. 
-
-
-      // selectDate.style.color = 'red';
-      // selectDate.classList.add('colorChange')
-      // document.querySelector(`div[date='${data[i]}']`).style.color ='red'
-    }
-  }
-}
 
 useEffect(() => {
   test()
-  checkEvent()
 },[props.schedule]);
 
 
@@ -153,13 +138,35 @@ useEffect(() => {
     return dayArr;
   }, [selectYear, selectMonth, dateTotal]);
 
+  // function MyPlan(e) {
+  //   // alert('하이');
+  //   // setModal(true);
+  // }
+
+const checkEvent = useEffect(() => {
+  if ( data != null ) {
+    console.log('sch- length:', schedule.length);
+    const result = schedule.map((value) => {
+      return document.querySelector(`div[date='${value.date}']`);
+    })
+    console.log('result:' ,result);
+    for (let i=0; i<result.length; i++) {
+      if (result[i] != null) {
+        result[i].classList.add('colorChange');
+        // result[i].onclick = MyPlan;
+      }
+    }
+  }
+},[props.schedule, selectMonth,props.deleteSchedule])
+  
+
   return(
     <>
     <div className='c_entire_layout'>
       <div className='c_header' style={{display:'flex'}}>
-        <button type='button' onClick={prevMonth}> 이전달 </button>
+        <button type='button' onClick={prevMonth}> ◀ </button>
         <div className='c_title_section'>{ selectYear } 년 {selectMonth}월</div>
-        <button type='button' onClick={nextMonth}> 다음달 </button>
+        <button type='button' onClick={nextMonth}> ▶ </button>
         <button type='button' onClick={MoveToday}> 오늘 </button>
         
       </div>
@@ -167,6 +174,8 @@ useEffect(() => {
         <div className='c_week_section' style={{display:'flex'}}>{returnWeek()}</div>
         <div className='c_day_section'>{returnDay()}</div>
       </div>
+      
+      {/* { modal && <div><MyPlanModal schedule={schedule}/></div> } */}
     </div>
     </>
   )

@@ -242,3 +242,38 @@
         transform: translate3D(-50%, 0, 0) scaleY(1);
     }
 }
+
+
+
+@include media('<800px'){
+    .bannerBox{
+        height:calc(var(--var, 1vh) * 100);
+    }
+
+    .bannerBox .tbx .im1 h1{
+        font-size:80px;
+    }
+}
+
+@include media('<501px'){
+    .bannerBox{
+        height:calc(var(--var, 1vh) * 80);
+    }
+
+    .bannerBox .tbx{
+        margin-top:150px;
+    }
+
+    .bannerBox .tbx .im1 h1{
+        font-size:70px;
+    }    
+
+    .bannerBox .tbx .im2 p{
+        font-size:14px;
+    }
+
+    /* 웨이브 */
+    .waveBox{
+        padding-bottom:50px;
+    }
+}

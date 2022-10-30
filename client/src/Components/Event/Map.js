@@ -132,18 +132,30 @@ function MapComponent(props) {
                         var data_lng = item[0].x;
                     
                     // // 2. 각 이벤트별 마커 표시
-
-                        const event_marker = new naver.maps.Marker({
-                            map: map,
-                            position: new naver.maps.LatLng(data_lat,data_lng),
-                            icon : {
-                                content: `<img src=${require('./img/marker.png')} width='30px' height='30px'/>`,
-                                size: new naver.maps.Size(50, 52),
-                                origin: new naver.maps.Point(0,0),
-                                anchor: new naver.maps.Point(25, 26),
-                            },
+                         const event_marker = new naver.maps.Marker({
+                             map: map,
+                             position: new naver.maps.LatLng(data_lat,data_lng),
+                             icon : {
+                                 content: `<img src=${require('./img/marker.png')} width='30px' height='30px'/>`,
+                                 size: new naver.maps.Size(50, 52),
+                                 origin: new naver.maps.Point(0,0),
+                                 anchor: new naver.maps.Point(25, 26),
+                             },
                             
+
                         });
+                    // 2-2. 좋아요한 이벤트 마커 표시
+                    //     const like_marker = new naver.maps.Marker({
+                    //         map: map,
+                    //         position: new naver.maps.LatLng(data_lat,data_lng),
+                    //         icon : {
+                    //             content: `<img src=${require('./img/heart.png')} width='30px' height='30px'/>`,
+                    //             size: new naver.maps.Size(50, 52),
+                    //             origin: new naver.maps.Point(0,0),
+                    //             anchor: new naver.maps.Point(25, 26),
+                    //         }
+                    // });
+                
 
                     // 3. 각 마커별 정보창 표시
 

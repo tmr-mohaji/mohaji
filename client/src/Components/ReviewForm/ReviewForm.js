@@ -108,7 +108,7 @@ const ReviewForm = (props) => {
                     <div className={isDrop ? 'select' : 'select active'} onClick={dropBtn}>
                         <div className="selected">
                             <div className="selected-value">리뷰</div>
-                            <div className="arrow"></div>
+                            <div className="arrow_2"></div>
                         </div>
                         <ul className='drop_ul'>
                             <li>

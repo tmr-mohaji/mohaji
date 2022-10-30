@@ -205,3 +205,65 @@
     transform: translateY(0);    
     transition-delay: 0.3s;   
 }
+
+
+
+
+
+
+
+@include media('<501px'){
+    .mypageBox{
+        padding-bottom:0;
+    }
+
+    .mypage_back{
+        padding:50px 35px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .mypage_box1{
+        width:100%;
+    }
+
+    .box1_h1{
+        font-size:24px;
+    }
+
+    .mob_myp{
+        display:none;
+    }
+
+    .box1_p{
+        font-size:12px;
+    }
+
+    .box1_span{
+        font-size:10px;
+    }
+
+    /* 즐겨찾기 & 이벤트 텍스트 */
+    .b_list{
+        width:60px;
+        font-size: 10px;
+    }
+
+    .b_list2{
+        font-size:10px;
+        letter-spacing: -0.5px;
+    }
+
+    /* 이미지 숨김 */
+    .box2_img{
+        display:none;
+    }
+
+    /* 이동 버튼 */
+    .box2_btn{
+        width:100%;
+        top:30px;
+        font-size:14px;
+        left:0;
+    }
+}
