@@ -44,7 +44,7 @@ const Plan = (props) => {
                 })
             }
 
-            <Calendar schedule={schedule}/>
+            <Calendar schedule={schedule} deleteSchedule={deleteSchedule}/>
             
         </div>
     )
