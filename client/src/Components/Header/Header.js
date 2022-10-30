@@ -36,7 +36,7 @@ const Header = (props) => {
                         </li>
 
                         <li>
-                            <Link className='bt_line two_line' to='/schedule'> 일정 </Link>
+                            <Link className='bt_line two_line' to='/mypage'> 일정 </Link>
                         </li>
                     </ul>
 
