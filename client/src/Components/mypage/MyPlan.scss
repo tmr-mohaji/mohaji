@@ -26,11 +26,12 @@
 }
 
 .myplan_btn {
-    margin-top: 20px;
+    position: absolute;
+    bottom: 0;
     cursor: pointer;
 
     button {
-        margin:10px;
+        margin:10px 5px;
         // background: $primary-color;
         background: transparent;
         border-radius: 5px;
@@ -40,5 +41,6 @@
     button:hover {
         cursor: pointer;
         background: $primary-color;
+        color:white;
     }
 }
