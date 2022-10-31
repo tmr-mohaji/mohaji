@@ -13,20 +13,20 @@ router.all('/*', function( req, res, next) {
 router.get('/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 
 router.get('/google/callback', passport.authenticate('google', {failureRedirect: '/failed'}), function(req, res) {
-    res.redirect(`http://localhost:3000?token=${setUserToken(req.user)}`);
+    res.redirect(`${process.env.CLIENT_URL}?token=${setUserToken(req.user)}`);
 })
 
 router.get('/kakao', passport.authenticate('kakao'));
 
 router.get('/kakao/callback', passport.authenticate('kakao', {failureRedirect: '/auth',}), (req,res) => {
-    res.redirect(`http://localhost:3000?token=${setUserToken(req.user)}`);
+    res.redirect(`${process.env.CLIENT_URL}?token=${setUserToken(req.user)}`);
   }
 );
 
 function setUserToken(user) {
     console.log("user", user);
     const token = jwt.sign({id: user.id, nickname: user.nickname}, process.env.secret, {
-        expiresIn: '15m', // 만료시간 15분
+        expiresIn: '60m', // 만료시간 15분
         issuer: '토큰발급자',
     });
     return token;
