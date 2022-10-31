@@ -16,10 +16,10 @@ const ChatInput = (props) => {
     }, []);
 
     return (
-        <div>
+        <div className='chat_write'>
             <form>
-                <input type="text" onChange={props.onChange} ref={input}/>
-                <button type="button" onClick={props.sendMsg}>전송</button>
+                <input className='chat_input' type="text" onChange={props.onChange} ref={input}/>
+                <button className='chat_btn' type="button" onClick={props.sendMsg}>전송</button>
             </form>
             {/* <EmojiPicker height={300} width={300} searchDisabled="true" onEmojiClick={emoji}/> */}
         </div>
