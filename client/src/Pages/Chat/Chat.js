@@ -114,9 +114,7 @@ const Chat = () => {
             <div ref={div}>
                 {history.map((data) => {
                     return (<>
-                        <p>닉네임 : {data.nickname}</p>
-                        <p>메세지 : {data.message}</p>
-                        <p>시간 : {data.createdAt}</p>
+                    {data.user_id == userId ? <div style={{color: "red"}}><p>닉네임 : {data.nickname}</p><p>메세지 : {data.message}</p><p>시간 : {data.createdAt}</p></div> : <div><p>닉네임 : {data.nickname}</p><p>메세지 : {data.message}</p><p>시간 : {data.createdAt}</p></div>}
                     </>)
                 })}
             </div>

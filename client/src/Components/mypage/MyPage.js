@@ -59,7 +59,8 @@ const MyPage = (props) => {
         }
     }
 
-    const LogOut = () => {
+    const LogOut = async () => {
+        await axios.get(process.env.REACT_APP_BASE_URL + "/auth/logout");
         window.localStorage.clear();
         window.location.replace('/');
     }
