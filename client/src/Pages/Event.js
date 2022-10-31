@@ -263,7 +263,8 @@ const Event = (props) => {
                 
 
                 <div className='listSection'>
-                    {Object.entries(eventData).length == 0 ? <p>조건에 맞는 결과가 없습니다</p> : <>                        
+                    
+                    {Object.entries(eventData).length == 0 ? <div style={{display:'flex', alignItems:'center', justifyContent:'center', margin:'auto', background:'lightgrey', padding:'20px',borderRadius:'30px'}}><p style={{fontWeight:'700'}}>조건에 맞는 결과가 없습니다</p></div> : <>                        
                         {Object.entries(eventData).map((value) => {
 
                             let data = value[1];

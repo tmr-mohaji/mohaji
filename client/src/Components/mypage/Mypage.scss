@@ -67,6 +67,10 @@
             background:  rgba(242, 215, 255, 0.2);
             border-radius: 10px;
 
+            @include media ('<1200px') {
+                display: none;
+            }
+
             .left_info{
                 display: flex;
                 flex-direction: column;
