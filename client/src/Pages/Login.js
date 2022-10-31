@@ -53,7 +53,6 @@ const Login = ( props ) => {
     
     }
 
-
     return(
         <>
         <div className='login_entire_layout'>
