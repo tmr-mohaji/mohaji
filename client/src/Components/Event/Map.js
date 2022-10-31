@@ -12,11 +12,8 @@ function MapComponent(props) {
     const container = useRef();
     const addressInput = createRef();
     const {city, type, date} = props.filter;
-    // const location = useLocation();
-
-    // 🤔 Event.js에서 button 누르면 누른 데이터 address 가져오게 함. 
     const [ event , setEvent ] = useState('');
-    // const [animation, setAnimation ] = useState(null);
+
 
     const initMap = async () => {
 
@@ -43,7 +40,6 @@ function MapComponent(props) {
         }
 
         if (typeof myLocation.latitude == "number") {
-            // console.log("위치", myLocation);
             // LatLng : 위/경도 좌표를 정의함.
             mapOption.center = new naver.maps.LatLng(myLocation.latitude, myLocation.longitude); // 지도 시작 지점
         } else {
@@ -90,18 +86,14 @@ function MapComponent(props) {
 
                 axios.post(process.env.REACT_APP_EVENT_URL + "/likeInfo", {user_id: props.id, event_id: req.data[i].id})
                 .then((result) => {
-                    console.log("data", result.data);
                     if (result.data != "") {
-                        console.log("true");
                         ls.push(true);
                     } else {
-                        console.log("false");
                         ls.push(false);
                     }
                 })
             }
 
-            console.log("ls", ls);
             
             let event = {};
             for (let i=0; i<req.data.length; i++) {
@@ -122,7 +114,6 @@ function MapComponent(props) {
         .then((data) => {
 
                     data.map(function(aData) {                   
-                        // console.log('adata:',aData.like);
                         
                     naver.maps.Service.geocode({
                         query: aData.address
@@ -243,7 +234,6 @@ function MapComponent(props) {
                                 map.setZoom(14);
 
                                 if (infowindow.getMap()) {
-                                    console.log('열려있음.')
                                     infowindow.close();
                                 } else {
                                     infowindow.open(map, event_marker);
@@ -279,7 +269,7 @@ function MapComponent(props) {
 
     useEffect(() => {
         initMap();
-    }, [props.city, props.address, props.clickData]); 
+    }, [props.city, props.address, props.clickData, props.id]); 
 
     return (
     <div className="mapPart">

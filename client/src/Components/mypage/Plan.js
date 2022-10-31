@@ -42,7 +42,7 @@ const Plan = (props) => {
         <>
             <h1 className='planText'>나의 일정을 확인해보세요!😊</h1>
             <div style={{width:'100%',height:'100%', marginTop:'50px'}}>
-                <Calendar schedule={schedule} deleteSchedule={deleteSchedule}/>
+                <Calendar schedule={schedule} deleteSchedule={deleteSchedule} id={props.id}/>
                 
             </div>
         </>

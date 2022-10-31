@@ -29,7 +29,6 @@ const MyPage = (props) => {
         if (props.id != "") {
             let result = await axios.post(process.env.REACT_APP_EVENT_URL + "/likeInfo", { user_id: props.id });
             setEvent(result.data);
-            console.log('231212313', result.data);
         }
     }
 
@@ -51,8 +50,6 @@ const MyPage = (props) => {
                     result.data.result[i]['filename'] = result.data.filename[i];
                 }
             }
-
-            console.log(result.data);
 
             for ( let i=0; i<result.data.result.length; i++ ) {
                 result.data.result[i]['title'] = result.data.title[i];
