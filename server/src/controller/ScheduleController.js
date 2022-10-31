@@ -22,6 +22,7 @@ exports.postEvent = async (req, res) => {
 
 exports.getEvent = async (req, res) => {
     let result = await models.Schedule.findAll({where: {user_id : req.query.user_id}});
+    console.log(result);
     let ls = [];
     for (let i = 0; i<result.length; i++) {
         let event = await models.Event.findOne({where : {id : result[i].event_id}});

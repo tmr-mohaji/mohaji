@@ -79,12 +79,12 @@ function MapComponent(props) {
         axios.get(EVENT_PAGE, {
             params: {city: city, type: type, date: date}
         })
-        .then((req) => {
+        .then(async (req) => {
 
             let ls = [];
             for(let i=0; i<req.data.length; i++) {
 
-                axios.post(process.env.REACT_APP_EVENT_URL + "/likeInfo", {user_id: props.id, event_id: req.data[i].id})
+                await axios.post(process.env.REACT_APP_EVENT_URL + "/likeInfo", {user_id: props.id, event_id: req.data[i].id})
                 .then((result) => {
                     if (result.data != "") {
                         ls.push(true);
@@ -100,16 +100,18 @@ function MapComponent(props) {
                 req.data[i]['like'] = ls[i];
                 event[`id_${req.data[i].id}`] = req.data[i];
             }
-            return req.data;
+            console.log("event", event);
+            return event;
 
         }).then((addressData) => {
-                if (props.clickData != "") {
-                    const result = addressData.filter((data) => { return data.address === props.address });
-                    setEvent(props.address);
-                    return result;
-                } else {
-                    return addressData;
-                }
+            console.log("addressData", addressData);
+            if (props.clickData != "") {
+                const result = addressData.filter((data) => { return data.address === props.address });
+                setEvent(props.address);
+                return result;
+            } else {
+                return addressData;
+            }
         })
         .then((data) => {
 

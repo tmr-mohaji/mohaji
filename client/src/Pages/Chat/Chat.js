@@ -35,7 +35,6 @@ const Chat = () => {
 
     const getData = async () => {
         const result = await axios.get(process.env.REACT_APP_SOCKET_URL + "/get");
-        console.log(result.data);
         setHistory(result.data);
     }
 
@@ -111,7 +110,15 @@ const Chat = () => {
         <div style={{paddingTop: "100px"}}>
             <h1>채팅</h1>
 
-            <div ref={div}></div>
+            <div ref={div}>
+                {history.map((data) => {
+                    return (<>
+                        <p>닉네임 : {data.nickname}</p>
+                        <p>메세지 : {data.message}</p>
+                        <p>시간 : {data.createdAt}</p>
+                    </>)
+                })}
+            </div>
 
             <ChatInput sendMsg={sendMsg} onChange={onChange} />
         </div>
