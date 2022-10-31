@@ -1,6 +1,8 @@
 
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
+
 import './Header.scss';
 
 const Header = (props) => {
@@ -12,8 +14,9 @@ const Header = (props) => {
         setMenu(isMenu => !isMenu);
     }
     
-    const LogOut = () => {
+    const LogOut = async () => {
         // props.setNickname();
+        await axios.get(process.env.REACT_APP_BASE_URL + "/auth/logout");
         window.localStorage.clear();
         window.location.replace('/');
     }

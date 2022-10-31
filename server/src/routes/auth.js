@@ -19,22 +19,22 @@ router.get('/google/callback', passport.authenticate('google', {failureRedirect:
 router.get('/kakao', passport.authenticate('kakao'));
 
 router.get('/kakao/callback', passport.authenticate('kakao', {failureRedirect: '/auth',}), (req,res) => {
-    setUserToken(res, req.user);
-    res.redirect('/sucess');
+    res.redirect(`http://localhost:3000?token=${setUserToken(req.user)}`);
   }
 );
 
 function setUserToken(user) {
-    const token = jwt.sign({id: user.id}, process.env.secret, {
+    console.log("user", user);
+    const token = jwt.sign({id: user.id, nickname: user.nickname}, process.env.secret, {
         expiresIn: '15m', // 만료시간 15분
         issuer: '토큰발급자',
     });
     return token;
-    // res.cookie('token', token);
 }
 
-router.get('/success', (req, res) => {
-    res.send("success");
-})
+router.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.send(true);
+});
 
 module.exports = router;

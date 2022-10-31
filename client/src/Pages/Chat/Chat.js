@@ -102,7 +102,8 @@ const Chat = () => {
         })
 
         socket.on("newMsg", (data) => {
-            addMsg(data.nickname, data.msg);
+            // addMsg(data.nickname, data.msg);
+            getData();
         })
     }, [])
 
