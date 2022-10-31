@@ -90,13 +90,18 @@ function MapComponent(props) {
 
                 axios.post(process.env.REACT_APP_EVENT_URL + "/likeInfo", {user_id: props.id, event_id: req.data[i].id})
                 .then((result) => {
+                    console.log("data", result.data);
                     if (result.data != "") {
+                        console.log("true");
                         ls.push(true);
                     } else {
+                        console.log("false");
                         ls.push(false);
                     }
                 })
             }
+
+            console.log("ls", ls);
             
             let event = {};
             for (let i=0; i<req.data.length; i++) {

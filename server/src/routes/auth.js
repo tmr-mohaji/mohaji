@@ -1,4 +1,5 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 require('../passport/GoogleStrategy.js');
@@ -20,8 +21,7 @@ router.get('/kakao/callback', passport.authenticate('kakao', {failureRedirect: '
 );
 
 function setUserToken(res, user) {
-    user.type = 'JWT';
-    const token = jwt.sign(user, process.env.secret, {
+    const token = jwt.sign({id: user.id}, process.env.secret, {
         expiresIn: '15m', // 만료시간 15분
         issuer: '토큰발급자',
     });

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import io from 'socket.io-client';
-import ChantInput from '../../components/ChatInput/ChatInput';
+import ChatInput from '../../components/ChatInput/ChatInput';
 
 const socket = io.connect(process.env.REACT_APP_BASE_URL);
 
@@ -36,6 +36,7 @@ const Chat = () => {
     const getData = async () => {
         const result = await axios.get(process.env.REACT_APP_SOCKET_URL + "/get");
         console.log(result.data);
+        setHistory(result.data);
     }
 
     // 공지 등록
@@ -112,7 +113,7 @@ const Chat = () => {
 
             <div ref={div}></div>
 
-            <ChantInput sendMsg={sendMsg} onChange={onChange} />
+            <ChatInput sendMsg={sendMsg} onChange={onChange} />
         </div>
     )
 }
