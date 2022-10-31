@@ -18,6 +18,8 @@ import GPS from './img/gps.png';
 
 const Event = (props) => {
 
+    const [ pass , setPass ] = useState();
+
     const navigate = useNavigate();
 
     const [filter, setFilter] = useState({
@@ -29,6 +31,7 @@ const Event = (props) => {
     const [eventData, setEventData] = useState({});
     const [address, setAddress] = useState("");
     const [clickData, setClickData] = useState([]);
+
 
     const select_city = useRef();
     const select_type = useRef();
@@ -69,7 +72,7 @@ const Event = (props) => {
         const response = await axios.get(process.env.REACT_APP_EVENT_URL, {
             params: {city: filter.city, type: filter.type, date: filter.date}
         })
-        console.log(response.data);
+        // console.log(response.data);
         // 로그인 상태
         if ( props.id != "" ) {
             let ls = [];
@@ -183,7 +186,7 @@ const Event = (props) => {
     return (
         <div className="totalSection">
             <div className='mapSection'>
-                <Map id={props.id} filter={filter} address={address} clickData={clickData}/>
+                <Map id={props.id} filter={filter} address={address} clickData={clickData} pass={pass}/>
             </div>
             <div className='descSection'>
                 <div className='searchControllSection'>
@@ -297,14 +300,12 @@ const Event = (props) => {
                                                 </div>
                                             </div>
                                             <div className='Btns'>
-                                                {/* <div style={{textAlign:'right',marginBottom:'10px'}}>
-                                                        <button className='goMap' type="button" onClick={() => {getAddress(data.id)}}><img src={GPS} style={{width:'30px',height:'30px'}}/></button> */}
                                                 
                                                 <button className='goView' type="button" onClick={() => { navigate('/event/'+ data.id); }}>상세보기</button>
                                                 <button className='likes' onClick={() => {LikeIt(data.id)}} ref={heart}>
                                                     {data.like ? <FaHeart /> : <FaHeart style={{color: "lightgray"}}/>}
                                                 </button>
-                                                <button className='goMap' type="button" onClick={() => {getAddress(data.id)}}><img src={GPS} style={{width:'30px',height:'30px'}}/></button>
+                                                <button className='goMap' type="button" onClick={() => { getAddress(data.id)}}><img src={GPS} style={{width:'30px',height:'30px'}}/></button>
                                             </div>
                                             
                                         </div>

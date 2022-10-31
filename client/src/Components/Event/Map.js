@@ -8,7 +8,7 @@ const EVENT_PAGE = "http://localhost:8000/event";
 function MapComponent(props) {
 
     const [myLocation, setMyLocation] = useState({latitude: 37.3724620, longitude: 127.1051714});
-    const [zoom, setZoom] = useState(12);
+    const [zoom, setZoom] = useState(11);
     const container = useRef();
     const addressInput = createRef();
     const {city, type, date} = props.filter;
@@ -23,7 +23,10 @@ function MapComponent(props) {
             minZoom: 1,
             disableKineticPan: false,
             mapTypeControl : true,
-            zoomControl: true,
+            scaleControl: false,
+            logoControl: false,
+            mapDataControl: false,
+            zoomControl: false,
             scrollWheel: true
         };
 
@@ -48,9 +51,6 @@ function MapComponent(props) {
         }
 
         const map = new naver.maps.Map(container.current, mapOption);
-
-        // 마커 애니메이션
-        // map.fitBounds(naver.maps.LatLngBounds.bounds(new naver.maps.LatLng(37.3724620, 127.1051714), new naver.maps.LatLng(37.3542795, 127.1174332)));
 
         //마커 속성
         const markerOptions = {
@@ -94,29 +94,41 @@ function MapComponent(props) {
                 })
             }
 
-            
-            let event = {};
+            // let event ={};
+            // for (let i=0; i<req.data.length; i++) {
+            //     req.data[i]['like'] = ls[i];
+            //     event[`id_${req.data[i].id}`] = req.data[i];
+            // }
+
+            let event =[];
             for (let i=0; i<req.data.length; i++) {
                 req.data[i]['like'] = ls[i];
-                event[`id_${req.data[i].id}`] = req.data[i];
+                event.push(req.data[i]);
             }
-            console.log("event", event);
+            // console.log("event", event);
             return event;
 
         }).then((addressData) => {
-            console.log("addressData", addressData);
+            console.log('clickData:', props.clickData);
+
             if (props.clickData != "") {
-                const result = addressData.filter((data) => { return data.address === props.address });
-                setEvent(props.address);
+                // const result = Object.entries(addressData).filter((value) => { 
+                //     let data = value[1];
+                //     return data.address === props.address
+                // });              
+                const result = addressData.filter((data) => { return data.address === props.address }); 
+                console.log(result);
                 return result;
+                
             } else {
                 return addressData;
             }
         })
         .then((data) => {
-
-                    data.map(function(aData) {                   
-                        
+            console.log('여기는 data:',data);
+            {data.map((aData) => {
+            // {Object.entries(data).map(function(value) { 
+                // let aData = value[1];        
                     naver.maps.Service.geocode({
                         query: aData.address
                     }, function(status,response) {
@@ -132,12 +144,12 @@ function MapComponent(props) {
                     
                     // // 2. 각 이벤트별 마커 표시
 
-                    if ( aData.like == 'undefined' ) {
+                    if ( aData.like == false ) {
                         var event_marker = new naver.maps.Marker({
                             map: map,
                             position: new naver.maps.LatLng(data_lat,data_lng),
                             icon : {
-                            content: `<img src=${require('./img/marker.png')} width='30px' height='30px'/>`,
+                            content: `<img src=${require('./img/marker2.png')} width='30px' height='30px'/>`,
                                 },
                             });
                         } else {
@@ -153,8 +165,6 @@ function MapComponent(props) {
                 
 
                     // 3. 각 마커별 정보창 표시
-
-
                         const infoText = 
                             `<div className='infoText' style='padding:20px; background-color:white; color:black; border-radius:20px; opcity:75%; display:flex; align-items:center;'>
                             <div style='margin-right:30px;'>
@@ -233,7 +243,7 @@ function MapComponent(props) {
 
                             naver.maps.Event.addListener(event_marker, 'click', function(e) {
                                 map.panTo(e.coord);
-                                map.setZoom(14);
+                                map.setZoom(13);
 
                                 if (infowindow.getMap()) {
                                     infowindow.close();
@@ -254,24 +264,31 @@ function MapComponent(props) {
                                         if (event_marker.getAnimation() != null) {
                                             event_marker.setAnimation(null);
                                         } else {
-                                            event_marker.setAnimation(naver.maps.Animation.BOUNCE)
+                                            event_marker.setAnimation(naver.maps.Animation.BOUNCE);
                                         }
                                     }
+                                } else {
+                                    // infowindow.close(map, event_marker);
+                                    infowindow2.close(map, event_marker);
+                                    infowindow3.close(map, event_marker);
                                 }
                             });
-                            // infowindow3.open(map, marker);           ///////////// 에러.. 이렇게 할경우 현재위치, 지도상 마커 클릭시 정보창이 나타남. but , 이벤트에서 지도버튼 누르면 안나옴.
-                            infowindow.open(map,event_marker);          //////////// 에러.. 겹치는 장소의 한가지만 나옴.
-                            // infowindow2.open(map,event_marker);      //////////// 에러 .. 활성화하면 처음 로딩될때 undefined가 뜸
+                            console.log(props.clickData);
+                            if ( props.clickData.length == 0) {
+                                infowindow2.close();
+                            } else  {
+                            infowindow.open(map,event_marker);        
+                            infowindow2.open(map,event_marker);}        
                             }
                     )
                 })
-            
+            }
             })  
     }
 
     useEffect(() => {
         initMap();
-    }, [props.city, props.address, props.clickData, props.id]); 
+    }, [props.filter, props.address, props.clickData, props.id]); 
 
     return (
     <div className="mapPart">
