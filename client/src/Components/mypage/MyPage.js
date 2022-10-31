@@ -109,7 +109,7 @@ const MyPage = (props) => {
                             </div>
                         </div>
                         <div className='tabpart'>
-                            <div style={{height: '100%' }}>
+                            <div style={{height: '100%'}}>
                                 <TabContent tab={tab} event={event} schedule={schedule} reply={reply} id={props.id}/>
                             </div>
 
