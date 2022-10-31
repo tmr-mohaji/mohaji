@@ -22,10 +22,11 @@ exports.postEvent = async (req, res) => {
 
 exports.getEvent = async (req, res) => {
     let result = await models.Schedule.findAll({where: {user_id : req.query.user_id}});
+    console.log(result);
     let ls = [];
     for (let i = 0; i<result.length; i++) {
         let event = await models.Event.findOne({where : {id : result[i].event_id}});
-        ls.push({'id' : result[i].id, 'title' : event.title, 'date' : result[i].date});
+        ls.push({'id' : event.id, 'title' : event.title, 'date' : result[i].date});
     }
     res.send(ls);
 }
