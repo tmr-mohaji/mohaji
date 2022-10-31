@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 
-const ChantInput = (props) => {
+const ChatInput = (props) => {
 
     const input = useRef();
 
@@ -21,9 +21,9 @@ const ChantInput = (props) => {
                 <input type="text" onChange={props.onChange} ref={input}/>
                 <button type="button" onClick={props.sendMsg}>전송</button>
             </form>
-            <EmojiPicker height={300} width={300} searchDisabled="true" onEmojiClick={emoji}/>
+            {/* <EmojiPicker height={300} width={300} searchDisabled="true" onEmojiClick={emoji}/> */}
         </div>
     )
 }
 
-export default ChantInput;
+export default ChatInput;

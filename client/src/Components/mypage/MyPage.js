@@ -52,6 +52,12 @@ const MyPage = (props) => {
                 }
             }
 
+            console.log(result.data);
+
+            for ( let i=0; i<result.data.result.length; i++ ) {
+                result.data.result[i]['title'] = result.data.title[i];
+            }
+
             setReply(result.data.result);
         }
     }

@@ -14,7 +14,6 @@ import FindId from '../pages/FindId';
 import Resetpw from '../pages/Resetpw';
 import MyPage from '../components/mypage/MyPage';
 import Chat from '../pages/Chat/Chat';
-import Schedule from '../pages/Schedule/Schedule';
 import ScrollToTop from '../components/ScrollToTop';
 
 
@@ -26,7 +25,7 @@ const Router = () => {
     const getAuth =  () => {
         if ( localStorage.getItem("access_token") != undefined ) {
             axios({
-                url: 'http://localhost:8000/user/auth',
+                url: process.env.REACT_APP_USER_URL + '/auth',
                 headers: {
                     'Authorization': localStorage.getItem("access_token")
                 }
@@ -56,7 +55,6 @@ const Router = () => {
                     <Route path='/user/resetpw' element={<Resetpw />} />
                     <Route path="/mypage" element={<MyPage id={id}/>} />
                     <Route path="/chat" element={<Chat />} />
-                    <Route path="/schedule" element={<Schedule />} />
                 </Routes>
                 <Footer />
             </BrowserRouter>

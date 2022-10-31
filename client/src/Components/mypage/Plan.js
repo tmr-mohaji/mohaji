@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Plan.scss';
 import Calendar from './Calendar';
@@ -6,6 +7,13 @@ import Calendar from './Calendar';
 const Plan = (props) => {
 
     const [schedule, setSchedule] = useState([]);
+    const navigate = useNavigate();
+    
+    const init = () => {
+        if ( localStorage.getItem("access_token") == undefined ) {
+            navigate("/user/login");
+        }
+    }
 
     const getSchedule = async () => {
         if (props.id != "") {
@@ -26,6 +34,7 @@ const Plan = (props) => {
     }
 
     useEffect(() => {
+        init();
         getSchedule();
     }, [props.id]);
 
