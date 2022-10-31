@@ -9,13 +9,16 @@ const cnb = classNames.bind(style);
 
 function Calendar(props) {
 
+
   const [modal , setModal] = useState(false);
   const [modalData , setModalData] = useState();
   const [data, setData] = useState();
-  const [scheduleContent , setScheduleContent] = useState([]);
-  const schedule = props.schedule;
-  console.log('sch-:',schedule);
+  const [ planId, setPlanId ] = useState();
 
+  // 부모 컴포넌트에서 내가 저장한 일정(schedule)이 들어옴.
+  const schedule = props.schedule;
+
+  // 들어온 일정데이터를 반복하면서 날짜만 꺼내서 배열에 담아줌.
   const test =() => {
     let ls = [];
     schedule.map((data) => {
@@ -23,7 +26,6 @@ function Calendar(props) {
     })
     setData(ls);
   }
-console.log('Data:',data);
 
 useEffect(() => {
   test()
@@ -139,31 +141,39 @@ useEffect(() => {
     return dayArr;
   }, [selectYear, selectMonth, dateTotal]);
 
-  // function MyPlan(e) {
-  //   alert('하이');
-  //   setModal(true);
-  // }
+const removeClass = useEffect(() => {
+  if ( data != null ) {
+    const a = document.getElementsByClassName('weekday');
+      for ( let i =0; i<a.length; i++) {
+        if (a[i].classList.contains('colorChange')) {
+          a[i].classList.remove('colorChange');
+        }
+      }
+  }
+
+},[selectMonth]);
 
 const checkEvent = useEffect(() => {
-
   if ( data != null ) {
-
-    // 스케쥴 데이터가 div date값을 돌면서 서로 일치하는 div만 가져옴
-    // 그 div에 각 데이터 타이틀을 넣어준다. 
     schedule.filter((value) => {
       const a = document.getElementsByClassName('weekday');
       for ( let i =0; i<a.length; i++) {
-        if ( value.date == a[i].getAttribute('date')) {
+        if ( value.date === a[i].getAttribute('date')) {
+
           a[i].classList.add('colorChange');
           a[i].onclick = function () { 
               setModal(true); 
               setModalData(value);
+              setPlanId(value.id);
             }
+          } else {
+            setModal(false);
+            setModalData();
           }
         }
       });
     }
-},[props.schedule, selectMonth,props.deleteSchedule])
+},[props.schedule, selectMonth ,props.deleteSchedule])
 
 
   return(
@@ -184,7 +194,7 @@ const checkEvent = useEffect(() => {
         <div className='c_day_section'>{returnDay()}</div>
       </div>
       
-      { modal && <div><MyPlanModal modalData={modalData} setModal={setModal}/></div> }
+      { modal && <div><MyPlanModal modalData={modalData} setModal={setModal} deleteSchedule={props.deleteSchedule} id={planId}/></div> }
     </div>
     </div>
   )
