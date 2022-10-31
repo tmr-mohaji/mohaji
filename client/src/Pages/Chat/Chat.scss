@@ -1,9 +1,23 @@
 @import '~include-media/dist/include-media';
 
 
+.chat_container::-webkit-scrollbar{
+    width:12px;
+}
+
+.chat_container::-webkit-scrollbar-thumb{
+    background: linear-gradient(#6B3767, #A24F63);
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+
 
 .chatBox{
-    margin-top:92px;
+    // margin-top:92px;
+    margin-top:150px;
+    margin-bottom:75px;
     box-sizing: border-box;
     position: relative;
     width:100%;
@@ -59,6 +73,7 @@
     background:none;
     border:0;
     text-align: right;
+    cursor: pointer;
 }
 
 
@@ -100,6 +115,10 @@
 /*=========================================================
     내가 작성한 채팅 정의
 =========================================================*/
+.my-chat{
+    clear:both;
+}
+
 .message-data{
     margin-bottom:20px;
 }
@@ -123,7 +142,7 @@
     padding:18px 20px;
     line-height: 26px;
     font-size: 16px;
-    margin-bottom:30px;
+    margin-bottom:50px;
     width:40%;
     position: relative;
 }
@@ -172,4 +191,72 @@
 .other-message:after{
     border-bottom-color:#6B3767;
     left:97%;
+}
+
+
+
+
+
+
+@include media('<1800px'){
+    .chatBox{
+        padding-left:40px;
+        padding-right:40px;       
+    }
+}
+
+
+
+
+
+@include media('<901px'){
+    .welcome_box{
+        width:40%;
+    }
+
+    /* 내가 친 채팅 */
+    .message{
+        font-size:14px;
+        padding:10px 15px;
+    }
+
+    .message:after{
+        left:6%;
+    }
+
+    .message.other-message.float-right:after{
+        left:96%;
+    }
+}
+
+
+@include media('<501px'){
+    .message-data{
+        font-size:10px;
+    }
+
+    .message{
+        font-size:10px;
+        line-height: 15px;
+    }
+
+    .message:after{
+        left:10%;
+    }
+
+    .message-data{
+        margin-bottom:15px;
+    }
+
+    .message.other-message.float-right:after{
+        left:94%;
+    }    
+
+    .welcome_box{
+        width:70%;
+    }
+
+    .welcome_user{
+        font-size:10px;
+    }
 }
