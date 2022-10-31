@@ -261,9 +261,7 @@ const Event = (props) => {
                         </div>
                     </div>
                 
-
-                <div className='listSection'>
-                    {Object.entries(eventData).length == 0 ? <p>조건에 맞는 결과가 없습니다</p> : <>                        
+                    {Object.entries(eventData).length == 0 ? <p>조건에 맞는 결과가 없습니다</p> : <div className='listSection'>                        
                         {Object.entries(eventData).map((value) => {
 
                             let data = value[1];
@@ -322,10 +320,9 @@ const Event = (props) => {
                                 </div>
                             )
                         })}
-                    </>}
+                    </div>}
                 </div>
             </div>
-        </div>
     )
 }
 
