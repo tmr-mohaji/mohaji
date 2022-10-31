@@ -22,10 +22,12 @@
     height:800px;
     padding:30px;
     margin:0 auto;
-    background:#F2F5F8;
+    // background:#F2F5F8;
+    background:rgba(242, 215, 255, 0.2);
     overflow-y: scroll;
     border-bottom: 2px solid #fff;
 }
+
 
 
 
@@ -74,7 +76,8 @@
     max-width: 1400px;
     padding:30px;
     margin:0 auto;
-    background:#F2F5F8;
+    // background:#F2F5F8;
+    background:rgba(242, 215, 255, 0.2);
 }
 
 
@@ -95,10 +98,10 @@
 
 
 /*=========================================================
-    내가 작성한 정의
+    내가 작성한 채팅 정의
 =========================================================*/
 .message-data{
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 
 .message-data-name{
@@ -112,7 +115,7 @@
 
 
 .my-message{
-    background:#86BB71;
+    background:#A24F63;
 }
 
 .message{
@@ -121,7 +124,7 @@
     line-height: 26px;
     font-size: 16px;
     margin-bottom:30px;
-    width:90%;
+    width:40%;
     position: relative;
 }
 
@@ -129,14 +132,44 @@
 .message:after{
     bottom:100%;
     // left:7%;
-    left:2%;
+    left:4%;
     border:solid transparent;
     content:"";
     height:0;
     width:0;
     position: absolute;
     pointer-events: none;
-    border-bottom-color:#86bb71;
-    border-width:10px;
+    border-bottom-color:#A24F63;
+    border-width:7px;
     margin-left:-10px;
+}
+
+
+/*=========================================================
+    상대방이 작성한 채팅 정의
+=========================================================*/
+.other-chat{
+    clear:both;
+}
+
+.align-right{
+    text-align: right;
+}
+
+.other-message{
+    background:#6B3767;
+}
+
+.float-right{
+    float:right;
+}
+
+.other-message{
+    display:flex;
+    flex-direction:row-reverse;
+}
+
+.other-message:after{
+    border-bottom-color:#6B3767;
+    left:97%;
 }

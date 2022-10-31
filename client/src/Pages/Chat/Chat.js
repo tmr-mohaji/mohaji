@@ -125,13 +125,13 @@ const Chat = () => {
                         {history.map((data) => {
                             return (<>
                                 {data.user_id == userId ?
-                                    <div className='my-chat' style={{ color: "red" }}>
+                                    <div className='my-chat'>
                                         <ul>
-                                            <li class="clearfix">
-                                                <div class="message-data">
-                                                    <span class="message-data-name">{data.nickname}</span>
-                                                                    &nbsp; &nbsp; 
-                                                    <span class="message-data-time" >{data.createdAt}</span>
+                                            <li className="clearfix">
+                                                <div className="message-data">
+                                                    <span className="message-data-name">{data.nickname}</span>
+                                                    &nbsp; &nbsp;
+                                                    <span className="message-data-time" >{data.createdAt.slice(0, 10)}</span>
 
                                                 </div>
                                                 <div class="message my-message">
@@ -139,15 +139,21 @@ const Chat = () => {
                                                 </div>
                                             </li>
                                         </ul>
-
-                                        <p>닉네임 : {data.nickname}</p>
-                                        <p>시간 : {data.createdAt}</p>
-                                        <p>메세지 : {data.message}</p>
                                     </div> :
                                     <div className='other-chat'>
-                                        <p>닉네임 : {data.nickname}</p>
-                                        <p>메세지 : {data.message}</p>
-                                        <p>시간 : {data.createdAt}</p>
+                                        <ul >
+                                            <li className="clearfix">
+                                                <div className="message-data align-right">
+                                                    <span className="message-data-time">{data.createdAt.slice(0, 10)}</span>
+                                                    &nbsp; &nbsp;
+                                                    <span className="message-data-name">{data.nickname}</span>
+                                                </div>
+
+                                                <div className="message other-message float-right">
+                                                    {data.message}
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
                                 }
                             </>)
