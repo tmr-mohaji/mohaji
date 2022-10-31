@@ -1,7 +1,6 @@
 const models = require("../model");
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
-const secret = 'JWT-SECRET-KEY';
 
 // 회원가입
 exports.postSignup = async (req, res) => {
@@ -105,7 +104,9 @@ exports.postLogin = async (req, res) => {
                 type : 'JWT',
                 id : req.body.id,
                 nickname: idResult.nickname
-            }, secret);
+            }, process.env.secret, {
+                expiresIn: '60m',
+            });
             res.send({isLogin : true, token: token, nickname: idResult.nickname });
         } else {
             res.send({isLogin : false});

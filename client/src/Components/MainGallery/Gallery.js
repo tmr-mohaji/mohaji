@@ -9,8 +9,6 @@ import h_icon1 from './img/g_tit_01.png';
 import h_icon2 from './img/g_tit_02.png';
 import h_icon3 from './img/g_tit_03.png';
 
-const MAIN_PAGE = "http://localhost:8000/";
-
 const Gallery = () => {
 
     const [type, setType] = useState("전체");
@@ -51,7 +49,7 @@ const Gallery = () => {
 
 
     const getData = async () => {
-        const response = await axios.get(MAIN_PAGE, {
+        const response = await axios.get(process.env.REACT_APP_BASE_URL, {
             params: { type: type }
         })
         setData(response.data);

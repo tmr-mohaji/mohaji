@@ -3,7 +3,6 @@ import axios from 'axios';
 import './Map.scss';
 
 const { naver } = window;
-const EVENT_PAGE = "http://localhost:8000/event";
 
 function MapComponent(props) {
 
@@ -76,7 +75,7 @@ function MapComponent(props) {
 
 //-------------------------- DB event 주소 -> 좌표 전환 및 마커표시------------------------------------//
 
-        axios.get(EVENT_PAGE, {
+        axios.get(process.env.REACT_APP_EVENT_URL, {
             params: {city: city, type: type, date: date}
         })
         .then(async (req) => {
