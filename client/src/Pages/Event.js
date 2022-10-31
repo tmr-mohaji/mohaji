@@ -254,8 +254,8 @@ const Event = (props) => {
                         
                             <div style={{width:'40%',margin:'0 10px'}} className='datepicker'>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker value={calendar} onChange={handleChange_date} ref={select_date} renderInput={(params) => <TextField  {...params} />} 
-                                    componentsProps={{actionBar : { actions: ['clear'] }, }} />
+                                    <DatePicker value={calendar} onChange={handleChange_date} ref={select_date} componentsProps={{actionBar : { actions: ['clear'] }, }} renderInput={(params) => <TextField  {...params} />} 
+                                    />
                                 </LocalizationProvider>
                             </div>
                         </div>
