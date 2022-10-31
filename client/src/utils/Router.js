@@ -30,6 +30,7 @@ const Router = () => {
                     'Authorization': localStorage.getItem("access_token")
                 }
             }).then((result) => {
+                console.log(result.data);
                 setId(result.data.id);
                 setNickname(result.data.nickname);
             });

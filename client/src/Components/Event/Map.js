@@ -277,7 +277,7 @@ function MapComponent(props) {
 
     useEffect(() => {
         initMap();
-    }, [props.city, props.address, props.clickData]); 
+    }, [props.city, props.address, props.clickData, props.id]); 
 
     return (
     <div className="mapPart">
