@@ -257,7 +257,7 @@
 
 @include media('<501px'){
     .bannerBox{
-        height:calc(var(--var, 1vh) * 80);
+        height:calc(var(--var, 1vh) * 50);
     }
 
     .bannerBox .tbx{
