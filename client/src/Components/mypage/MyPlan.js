@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { FcCalendar } from 'react-icons/fc'
 import './MyPlan.scss';
-import { useState } from 'react';
+import axios from 'axios';
+
 
 function MyPlanModal (props) {
 
@@ -18,22 +19,30 @@ function MyPlanModal (props) {
         navigate('/event/' + data.id);
     }
 
-    const goRemove = (id) => {
-        props.deleteSchedule(id);
+    const deleteSchedule = async (id) => {
+        console.log('this:',props.id);
+        if ( props.id != "") {
+            let result = await axios.get(process.env.REACT_APP_SCHEDULE_URL + "/deleteEvent", {
+                params : {id : props.id}
+            });
+            props.getSchedule();
+            closeModal();
+        }
     }
+
+
     return(
         <div>
             <div className='myplan_container'>
                 <div className='myplan_top_section'></div>
                 <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
                     <div style={{display:'flex', flexDirection:'column', alignItems:'center',marginTop:'10%'}}>
-                        {/* <div>{data.id}</div> */}
                         <div style={{position:'relative', margin:'0 40px', fontWeight:'700'}}>{data.title}</div>
                         <div style={{marginTop:'10px',fontSize:'13px', display:'flex', alignItems:'center'}}><FcCalendar style={{marginRight: '5px'}}/>{data.date}</div>
                     </div>
                     <div className='myplan_btn'>
                         <button type='button' onClick={goPlan}>바로가기</button>
-                        <button type='button' onClick={goRemove}>삭제</button>
+                        <button type='button' onClick={deleteSchedule}>삭제</button>
                         <button type='button' onClick={closeModal} className='close'>닫기</button>
                     </div>
                 </div>
