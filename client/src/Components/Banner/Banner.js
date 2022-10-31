@@ -54,7 +54,7 @@ const Banner = ({timeline, ease}) => {
             transformOrigin: 'bottom center',
             ease: ease,
         });
-    });
+    }, []);
 
 
     // 텍스트 애니메이션 효과
