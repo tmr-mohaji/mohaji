@@ -32,7 +32,7 @@ exports.getEvent = async (req, res) => {
 }
 
 exports.deleteEvent = async (req, res) => {
-    let result = await models.Schedule.destroy({where: {id : req.query.id}});
+    let result = await models.Schedule.destroy({where: {event_id : req.query.id}});
     res.send(true);
 }
 

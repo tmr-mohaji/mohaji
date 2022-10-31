@@ -151,7 +151,7 @@ const removeClass = useEffect(() => {
       }
   }
 
-},[selectMonth]);
+},[selectMonth,props.getSchedule]);
 
 const checkEvent = useEffect(() => {
   if ( data != null ) {
@@ -173,7 +173,7 @@ const checkEvent = useEffect(() => {
         }
       });
     }
-},[props.schedule, selectMonth ,props.deleteSchedule])
+},[props.schedule, selectMonth ,props.deleteSchedule, props.getSchedule])
 
 
   return(
@@ -194,7 +194,7 @@ const checkEvent = useEffect(() => {
         <div className='c_day_section'>{returnDay()}</div>
       </div>
       
-      { modal && <div><MyPlanModal modalData={modalData} setModal={setModal} deleteSchedule={props.deleteSchedule} id={planId}/></div> }
+      { modal && <div><MyPlanModal modalData={modalData} setModal={setModal} getSchedule={props.getSchedule} id={planId}/></div> }
     </div>
     </div>
   )
