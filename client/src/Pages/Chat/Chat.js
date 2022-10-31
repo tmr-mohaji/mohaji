@@ -4,6 +4,8 @@ import axios from 'axios';
 import io from 'socket.io-client';
 import ChatInput from '../../components/ChatInput/ChatInput';
 
+import './Chat.scss';
+
 const socket = io.connect(process.env.REACT_APP_BASE_URL);
 
 const Chat = () => {
@@ -14,10 +16,10 @@ const Chat = () => {
     const [userId, setUserId] = useState("");
     const [history, setHistory] = useState([]);
     const navigate = useNavigate();
-    
+
     // 토큰 정보로 아이디와 닉네임 가져오기
     const getName = () => {
-        if ( localStorage.getItem("access_token") != undefined ) {
+        if (localStorage.getItem("access_token") != undefined) {
             axios({
                 url: process.env.REACT_APP_USER_URL + '/auth',
                 headers: {
@@ -26,7 +28,7 @@ const Chat = () => {
             }).then((result) => {
                 setName(result.data.nickname);
                 setUserId(result.data.id);
-                socket.emit("send_name", {name : result.data.nickname});
+                socket.emit("send_name", { name: result.data.nickname });
             })
         } else {
             navigate("/user/login");
@@ -38,11 +40,17 @@ const Chat = () => {
         setHistory(result.data);
     }
 
-    // 공지 등록
+    // 공지 등록 (~~~ 님이 입장하셨습니다.)
     const addNotice = (message) => {
+        let $div = document.createElement('div');
+        $div.className = 'welcome_box';
+
         let p = document.createElement("p");
+        p.className = 'welcome_user';
         p.innerText = message;
-        div.current.appendChild(p);
+
+        $div.appendChild(p);
+        div.current.appendChild($div);
     }
 
     // 메세지 전송
@@ -60,14 +68,16 @@ const Chat = () => {
             span.innerText = "오후 " + (date.getHours() - 12) + ":" + minute;
         } else if (date.getHours() < 12) {
             span.innerText = "오전 " + date.getHours() + ":" + minute;
-        } else {{
-            span.innerText = "오후 " + date.getHours() + ":" + minute;
-        }}
+        } else {
+            {
+                span.innerText = "오후 " + date.getHours() + ":" + minute;
+            }
+        }
 
         div.current.appendChild(name_span);
         div.current.appendChild(p);
         div.current.appendChild(span);
-        
+
         const form = document.querySelector("form");
         form.reset();
     }
@@ -83,9 +93,9 @@ const Chat = () => {
     // 전송 버튼
     const sendMsg = async () => {
         const result = await axios.post(process.env.REACT_APP_SOCKET_URL + "/send", {
-            user_id : userId, nickname : name, message : text
+            user_id: userId, nickname: name, message: text
         });
-        socket.emit("send", {msg : text, nickname : name});
+        socket.emit("send", { msg: text, nickname: name });
     }
 
     useEffect(() => {
@@ -108,19 +118,50 @@ const Chat = () => {
     }, [])
 
     return (
-        <div style={{paddingTop: "100px"}}>
-            <h1>채팅</h1>
+        <section>
+            <div className='chatBox'>
+                <div className='chat_container'>
+                    <div className='chat_row' ref={div}>
+                        {history.map((data) => {
+                            return (<>
+                                {data.user_id == userId ?
+                                    <div className='my-chat' style={{ color: "red" }}>
+                                        <ul>
+                                            <li class="clearfix">
+                                                <div class="message-data">
+                                                    <span class="message-data-name">{data.nickname}</span>
+                                                                    &nbsp; &nbsp; 
+                                                    <span class="message-data-time" >{data.createdAt}</span>
 
-            <div ref={div}>
-                {history.map((data) => {
-                    return (<>
-                    {data.user_id == userId ? <div style={{color: "red"}}><p>닉네임 : {data.nickname}</p><p>메세지 : {data.message}</p><p>시간 : {data.createdAt}</p></div> : <div><p>닉네임 : {data.nickname}</p><p>메세지 : {data.message}</p><p>시간 : {data.createdAt}</p></div>}
-                    </>)
-                })}
+                                                </div>
+                                                <div class="message my-message">
+                                                    {data.message}
+                                                </div>
+                                            </li>
+                                        </ul>
+
+                                        <p>닉네임 : {data.nickname}</p>
+                                        <p>시간 : {data.createdAt}</p>
+                                        <p>메세지 : {data.message}</p>
+                                    </div> :
+                                    <div className='other-chat'>
+                                        <p>닉네임 : {data.nickname}</p>
+                                        <p>메세지 : {data.message}</p>
+                                        <p>시간 : {data.createdAt}</p>
+                                    </div>
+                                }
+                            </>)
+                        })}
+                    </div>
+                </div>
+
+                <div className="chat-message">
+                    <ChatInput sendMsg={sendMsg} onChange={onChange} />
+                </div>
+
+
             </div>
-
-            <ChatInput sendMsg={sendMsg} onChange={onChange} />
-        </div>
+        </section>
     )
 }
 

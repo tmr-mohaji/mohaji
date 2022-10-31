@@ -1,0 +1,142 @@
+@import '~include-media/dist/include-media';
+
+
+
+.chatBox{
+    margin-top:92px;
+    box-sizing: border-box;
+    position: relative;
+    width:100%;
+    min-height:80vh;
+
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.chat_container{
+    width:100%;
+    max-width: 1400px;
+    height:800px;
+    padding:30px;
+    margin:0 auto;
+    background:#F2F5F8;
+    overflow-y: scroll;
+    border-bottom: 2px solid #fff;
+}
+
+
+
+
+/*=========================================================
+    ~~~ 님이 입장하셨습니다. 정의
+=========================================================*/
+.welcome_box{
+    width: 25%;
+    max-width:100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+
+.welcome_user{
+    text-align: center;
+    margin: 20px 0 20px 0;
+    font-size: 12px;
+    background: rgba(0,0,0,0.2);
+    padding: 10px;
+    width: auto;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+
+.chat_btn{
+    background:none;
+    border:0;
+    text-align: right;
+}
+
+
+
+
+
+
+
+
+/*=========================================================
+    입력 정의
+=========================================================*/
+.chat-message{
+    width:100%;
+    max-width: 1400px;
+    padding:30px;
+    margin:0 auto;
+    background:#F2F5F8;
+}
+
+
+.chat-message form{
+    display:flex;
+    flex-direction: column;
+}
+
+.chat_input{
+    width:100%;
+    min-height:100px;
+    border:none;
+    padding:10px 20px;
+    margin-bottom:10px;
+    resize: none;
+}
+
+
+
+/*=========================================================
+    내가 작성한 정의
+=========================================================*/
+.message-data{
+    margin-bottom:25px;
+}
+
+.message-data-name{
+    color:#000;
+    padding-left:6px;
+}
+
+.message-data-time{
+    color:#a8aab1;
+}
+
+
+.my-message{
+    background:#86BB71;
+}
+
+.message{
+    color:#fff;
+    padding:18px 20px;
+    line-height: 26px;
+    font-size: 16px;
+    margin-bottom:30px;
+    width:90%;
+    position: relative;
+}
+
+
+.message:after{
+    bottom:100%;
+    // left:7%;
+    left:2%;
+    border:solid transparent;
+    content:"";
+    height:0;
+    width:0;
+    position: absolute;
+    pointer-events: none;
+    border-bottom-color:#86bb71;
+    border-width:10px;
+    margin-left:-10px;
+}
