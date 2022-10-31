@@ -21,6 +21,16 @@
     border:1px solid #000;
     padding:10px;
     box-sizing: border-box;
+
+    @include media('<1000px') {
+        width:25%;
+        margin:3%;
+    }
+
+    @include media('<700px') {
+        width:40%;
+        margin:5%;
+    }
 }
 
 .g_img2 {

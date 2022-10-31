@@ -24,6 +24,10 @@
       font-weight: 600;
       padding: 1px 10px;
       background-color: rgb(184, 184, 255);
+
+      @include media ('<650px') {
+        display: none;
+      }
     }
     
     button {
@@ -97,6 +101,7 @@
 
 .today {
   background-color: rgba(184, 184, 255,0.5);
+  
 }
 
 

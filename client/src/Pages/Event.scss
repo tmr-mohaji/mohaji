@@ -56,7 +56,7 @@ $mobile : 600px;
   flex-wrap: wrap;
   overflow-y: scroll;
   width: 100%;
-  height: 100vh;
+  height: 85vh;
   
   @include media('<1300px') {
     display: flex;
@@ -390,7 +390,7 @@ $mobile : 600px;
     display: flex;
     justify-content: center;
     border: 3px solid #A24F63;
-    width:450px;
+    width:500px;
     border-radius: 40px;
     padding:10px;
   }
