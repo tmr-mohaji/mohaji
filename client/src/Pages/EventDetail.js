@@ -216,12 +216,17 @@ const EventDetail = (props) => {
 
         } else {
             let result = await axios.post(process.env.REACT_APP_SCHEDULE_URL + "/addEvent", { user_id: props.user_id, event_id: id, date: date });
-            // alert(result.data);
-            Swal.fire({
+            
+            { result.data == true ? (Swal.fire({
                 text: '성공적으로 등록되었습니다.',
                 confirmButtonText: 'OK',
                 width: 300,
-              })
+              })) : (Swal.fire({
+                text: '이벤트 일정을 다시 확인해주세요.',
+                confirmButtonText: 'OK',
+                width: 400,
+              }))}
+
             closeBtn();
         }
     }
