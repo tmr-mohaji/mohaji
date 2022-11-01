@@ -61,7 +61,7 @@ const Login = ( props ) => {
                     <h1 style={{marginBottom:'30px', fontSize:'50px', cursor:'pointer'}} onClick={() => { navigate('/')}}>내일뭐하지?</h1>
                     <div className='warningText' style={{height:'40px', marginBottom:'20px'}}>{warning}</div>
                     <input ref={Id} className='login_id' type="text" placeholder="아이디" name="id" required/>
-                    <input ref={PW} className='login_pw' type="password" placeholder="비밀번호" name="password" required/>
+                    <input ref={PW} className='login_pw' type="password" placeholder="비밀번호" name="password" onKeyPress={(e) => { if ( e.key === 'Enter') { login();}}}required/>
                     <button className='login_btn' type="button" onClick={login}>로그인</button>
 
                     <hr />
