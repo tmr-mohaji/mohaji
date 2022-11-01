@@ -25,6 +25,7 @@ const Plan = (props) => {
             });
             console.log(result.data);
             setSchedule(result.data);
+            console.log('plan-result-data:',result.data);
         }
     }
 

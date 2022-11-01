@@ -16,9 +16,11 @@ function Calendar(props) {
   const [modalData , setModalData] = useState();
   const [data, setData] = useState();
   const [ planId, setPlanId ] = useState();
+  const [ numId , setNumId ] = useState();
 
   // 부모 컴포넌트에서 내가 저장한 일정(schedule)이 들어옴.
   const schedule = props.schedule;
+  console.log('calendar-schedule:',props.schedule);
 
   // 들어온 일정데이터를 반복하면서 날짜만 꺼내서 배열에 담아줌.
   const test =() => {
@@ -158,6 +160,7 @@ const removeClass = useEffect(() => {
 const checkEvent = useEffect(() => {
   if ( data != null ) {
     schedule.filter((value) => {
+      console.log('calendar:',value);
       const a = document.getElementsByClassName('weekday');
       for ( let i =0; i<a.length; i++) {
         if ( value.date === a[i].getAttribute('date')) {
@@ -167,6 +170,7 @@ const checkEvent = useEffect(() => {
               setModal(true); 
               setModalData(value);
               setPlanId(value.id);
+              setNumId(value.s_id);
             }
           } else {
             setModal(false);
@@ -196,7 +200,7 @@ const checkEvent = useEffect(() => {
         <div className='c_day_section'>{returnDay()}</div>
       </div>
       
-      { modal && <div><MyPlanModal modalData={modalData} setModal={setModal} getSchedule={props.getSchedule}/></div> }
+      { modal && <div><MyPlanModal modalData={modalData} setModal={setModal} getSchedule={props.getSchedule} id={planId} s_id={numId}/></div> }
     </div>
     </div>
   )

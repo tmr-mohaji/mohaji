@@ -69,15 +69,15 @@ const Header = (props) => {
                         <div className={isMenu ? 'mob_box' : 'hide_box'}>
                             <ul className="navbar_3 navbar_mobile">
                                 <li className='mob_li'>
-                                    <Link className='arrow' to='/'> 지역 검색 </Link>
+                                    <Link className='arrow' to='/event' onClick={hambugerBtn}> 지역 검색 </Link>
                                 </li>
 
                                 <li className='mob_li'>
-                                    <Link className='arrow' to='/chat'> 채팅 </Link>
+                                    <Link className='arrow' to='/chat' onClick={hambugerBtn}> 채팅 </Link>
                                 </li>
 
                                 <li className='mob_li'>
-                                    <Link className='arrow' to='/schedule'> 일정 </Link>
+                                    <Link className='arrow' to='/mypage' onClick={hambugerBtn}> 일정 </Link>
                                 </li>
                             </ul>
                         </div>

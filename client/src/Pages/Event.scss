@@ -7,12 +7,21 @@ $mobile : 600px;
 //지도 + 리스트 전체 구조 
 .totalSection {
   // width: 100%;
-  width: 1400px;
+  // width: 1400px;
   height: 100vh; 
   margin: 100px auto 0 auto;
   display: flex;
   gap: 50px;
   justify-content: center;
+
+  @include media ('>1413px') {
+    width: 1400px;
+  }
+
+
+  @include media ('<1413px') {
+    gap:0px;
+  }
 
   //221024
   @include media ('<1300px') {
@@ -39,6 +48,9 @@ $mobile : 600px;
   position:relative;
   text-align:center;
 
+  @include media ('<1413px') {
+    width:95%;
+  }
   //221024
   @include media ('<1300px') {
     position: fixed;
@@ -58,6 +70,11 @@ $mobile : 600px;
   width: 100%;
   height: 85vh;
   
+  @include media ('<1413px') {
+    width:95%;
+  }
+
+
   @include media('<1300px') {
     display: flex;
     flex-wrap: wrap;

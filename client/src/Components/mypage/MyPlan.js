@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 
 
 function MyPlanModal (props) {
+    console.log(props.s_id);
 
     // 세번째
 
@@ -13,6 +14,7 @@ function MyPlanModal (props) {
 
     let data = props.modalData;
     let id = props.id;
+    console.log(id);
 
     const closeModal = () => {
         props.setModal(false);
@@ -22,25 +24,17 @@ function MyPlanModal (props) {
         navigate('/event/' + data.id);
     }
 
-    const getSchedule = async () => {
-        let result = await axios.get(process.env.REACT_APP_SCHEDULE_URL + "/getEvent", {
-            params : {user_id : props.id}
-        });
-        console.log(result.data);
+    const deleteSchedule = async (id) => {
+
+        if ( props.id != "") {
+            let result = await axios.get(process.env.REACT_APP_SCHEDULE_URL + "/deleteEvent", {
+                params : {id : props.id, s_id : props.s_id}
+            });
+            props.getSchedule();
+            closeModal();
+            window.location.reload();
+        }
     }
-
-    const deleteSchedule = async () => {
-        console.log('this:',props.modalData.planId);
-        let result = await axios.post(process.env.REACT_APP_SCHEDULE_URL + "/deleteEvent", {id : props.modalData.planId});
-        console.log(result.data);
-        getSchedule();
-        closeModal();
-    }
-
-    useEffect(() => {
-        getSchedule();
-    }, [props.modalData])
-
 
     return(
         <div>
