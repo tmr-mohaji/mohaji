@@ -14,9 +14,9 @@ exports.postEvent = async (req, res) => {
     
     if (event[0].length > 0) {
         await models.Schedule.create(obj);
-        res.send("성공적으로 이벤트를 등록하였습니다.");
+        res.send(true);
     } else {
-        res.send("이벤트 일정을 다시 확인해주세요.");
+        res.send(false);
     }
 }
 
