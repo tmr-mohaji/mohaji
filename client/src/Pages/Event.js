@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import './Event.scss';
+import Swal from "sweetalert2";
 
 import Map from '../components/Event/Map';
 import dateData from './Date.json';
@@ -174,7 +175,19 @@ const Event = (props) => {
                 setEventData(datas);
             });
         } else {
-            alert("로그인 후 이용가능");
+            // alert("로그인 후 이용가능");
+
+            Swal.fire({
+                text: '로그인 후 이용가능',
+                confirmButtonText: 'OK',
+                width: 300,
+              })
+              .then((res)  => {
+                if (res.isConfirmed){
+                    navigate('/user/login');
+                }
+              })
+
         }
     }
 
@@ -260,7 +273,6 @@ const Event = (props) => {
                         </div>
                     </div>
     
-
                 <div className='listSection'>
                     
                     {Object.entries(eventData).length == 0 ? <div style={{display:'flex', alignItems:'center', justifyContent:'center', margin:'auto', background:'lightgrey', padding:'20px',borderRadius:'30px'}}><p style={{fontWeight:'700'}}>조건에 맞는 결과가 없습니다</p></div> : <>                        

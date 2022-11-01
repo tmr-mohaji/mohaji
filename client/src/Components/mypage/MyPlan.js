@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 
 
 function MyPlanModal (props) {
-    console.log(props.s_id);
 
     // 세번째
 
@@ -14,7 +13,6 @@ function MyPlanModal (props) {
 
     let data = props.modalData;
     let id = props.id;
-    console.log(id);
 
     const closeModal = () => {
         props.setModal(false);
