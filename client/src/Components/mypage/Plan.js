@@ -21,6 +21,7 @@ const Plan = (props) => {
                 params : {user_id : props.id}
             });
             setSchedule(result.data);
+            console.log('plan-result-data:',result.data);
         }
     }
 
