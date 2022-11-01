@@ -56,14 +56,13 @@ const Event = (props) => {
         setFilter({...filter, [event.target.name]: event.target.value,});
     };
     
-    const handleChange_date = (event) => {
-
-        let pickDate = String(event.$d).split(" ");
+    const handleChange_date = (newValue) => {
+        setCalendar(newValue);
+        let pickDate = String(newValue.$d).split(" ");
         let month = dateData.date[0][[pickDate[1]]];
 
         setCalendar(pickDate[3]+ '-' + month + '-' + pickDate[2]);
         setFilter({...filter, date : pickDate[3]+ '-' + month + '-' + pickDate[2] });
-
     };
 
     // 필터 정보로 데이터 가져오기
@@ -181,7 +180,7 @@ const Event = (props) => {
 
     useEffect(() => {
         getData();
-    }, [filter, address, props.id])
+    }, [filter, address, props.id, calendar])
 
     return (
         <div className="totalSection">
@@ -254,7 +253,7 @@ const Event = (props) => {
                         
                             <div style={{width:'40%',margin:'0 10px'}} className='datepicker'>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker value={calendar} onChange={handleChange_date} ref={select_date} componentsProps={{actionBar : { actions: ['clear'] }, }} renderInput={(params) => <TextField  {...params} />} 
+                                    <DatePicker value={calendar} onChange={handleChange_date} ref={select_date} componentsProps={{actionBar : { actions: ['today'] }, }} renderInput={(params) => <TextField  {...params} />} 
                                     />
                                 </LocalizationProvider>
                             </div>
