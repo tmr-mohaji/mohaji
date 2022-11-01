@@ -76,7 +76,7 @@ const Gallery = () => {
         root: null,
         rootMargin: "0px",
         // 0%가 viewport에 들어와 있어야 callback 실행
-        threshold: 0,
+        threshold: 0.0,
     }
 
     const observer = new IntersectionObserver(entries => {
@@ -112,7 +112,7 @@ const Gallery = () => {
 
 
     return (
-        <section>
+        <section className='all_box'>
             <div className='galleryTitle'>
                 <h1 className='g_tit'>공연 일정</h1>
             </div>

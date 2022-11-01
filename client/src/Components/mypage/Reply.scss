@@ -10,10 +10,25 @@
     margin:1%;
     justify-content: space-between;
     gap:10px 10px;
+
+    max-height: 680px;
+    overflow-y: scroll;
 }
 
 .r_Box{
     width:100%;
+}
+
+
+.replyBox::-webkit-scrollbar{
+    width:12px;
+}
+
+.replyBox::-webkit-scrollbar-thumb{
+    background: linear-gradient(#6B3767, #A24F63);
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
 }
 
 
@@ -25,7 +40,7 @@
     // background:#efefef;
     padding:20px;
     height:100%;
-    width:100%;
+    width:99%;
     border:1px solid #000;
 }
 
