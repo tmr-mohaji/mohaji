@@ -131,7 +131,7 @@ const Chat = () => {
                                                 <div className="message-data">
                                                     <span className="message-data-name">{data.nickname}</span>
                                                     &nbsp; &nbsp;
-                                                    <span className="message-data-time" >{data.createdAt.slice(0, 10)}</span>
+                                                    <span className="message-data-time" >{data.createdAt.slice(0, 10)} {Number(data.createdAt.slice(11, 13))+9}:{data.createdAt.slice(14, 16)}</span>
 
                                                 </div>
                                                 <div class="message my-message">
@@ -144,7 +144,7 @@ const Chat = () => {
                                         <ul >
                                             <li className="clearfix">
                                                 <div className="message-data align-right">
-                                                    <span className="message-data-time">{data.createdAt.slice(0, 10)}</span>
+                                                    <span className="message-data-time">{data.createdAt.slice(0, 10)} {Number(data.createdAt.slice(11, 13))+9}:{data.createdAt.slice(14, 16)}</span>
                                                     &nbsp; &nbsp;
                                                     <span className="message-data-name">{data.nickname}</span>
                                                 </div>
