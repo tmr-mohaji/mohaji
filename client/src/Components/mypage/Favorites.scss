@@ -3,12 +3,27 @@
 
 
 .myPageFavoritesBox{
-    width: 100%;
+    width: 99%;
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
+
+    margin:1% 0 0 0;
+    max-height: 690px;
+    overflow-y: scroll;
 }
 
+
+.myPageFavoritesBox::-webkit-scrollbar{
+    width:12px;
+}
+
+.myPageFavoritesBox::-webkit-scrollbar-thumb{
+    background: linear-gradient(#6B3767, #A24F63);
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
 
 /*=========================================================
     리스트 세부 정의
