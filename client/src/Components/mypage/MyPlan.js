@@ -2,10 +2,13 @@ import { useNavigate } from 'react-router-dom';
 import { FcCalendar } from 'react-icons/fc'
 import './MyPlan.scss';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 
 function MyPlanModal (props) {
     console.log(props.s_id);
+
+    // 세번째
 
     const navigate = useNavigate();
 
@@ -32,7 +35,6 @@ function MyPlanModal (props) {
             window.location.reload();
         }
     }
-
 
     return(
         <div>

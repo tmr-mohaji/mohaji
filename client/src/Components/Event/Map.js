@@ -272,7 +272,7 @@ function MapComponent(props) {
                                     infowindow3.close(map, event_marker);
                                 }
                             });
-                            console.log(props.clickData);
+                            // console.log(props.clickData);
                             if ( props.clickData.length == 0) {
                                 infowindow2.close();
                             } else  {
