@@ -47,6 +47,11 @@ hr {
     height: 600px;
     padding: 60px 50px;
     box-shadow: 3px 3px 3px 3px rgba(170, 170, 170,0.5);
+
+    @include media ('<600px') {
+      width:400px;
+      // min-width:400px;
+    }
   }
 }
 
@@ -92,8 +97,8 @@ hr {
   }
 }
 
-.kakaoLogin {
-  font-size: 13px;
+.kakaoLogin, .googleLogin {
+  margin:0 5px;
 }
 
 // 아이디 찾기, 비밀번호 재설정 부분

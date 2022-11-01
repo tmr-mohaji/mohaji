@@ -17,6 +17,10 @@
     height: 700px;
     padding: 60px 50px;
     box-shadow: 3px 3px 3px 3px rgba(170, 170, 170,0.5);
+
+    @include media ('<600px') {
+      width: 400px;
+    }
   }
 }
 

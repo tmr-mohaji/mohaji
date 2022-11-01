@@ -182,8 +182,8 @@ const checkEvent = useEffect(() => {
       <div className='c_header' style={{display:'flex'}}>
         <button className='prevNext' type='button' onClick={prevMonth}> ◀ </button>
         <div className='c_title_section'>
-          <span style={{fontSize:'20px', fontWeight:'700',marginRight:'10px'}}>{ selectYear }</span>년 
-          <span style={{fontSize:'20px', fontWeight:'700',margin:'0 10px'}}>{selectMonth}</span>월
+          <span className='c_title'>{ selectYear }</span>년 
+          <span className='c_title'>{selectMonth}</span>월
         </div>
         <button className='prevNext' type='button' onClick={nextMonth}> ▶ </button>
         <button className='movetoday' type='button' onClick={MoveToday}> 오늘 </button>
