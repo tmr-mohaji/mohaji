@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Swal from "sweetalert2";
 
 import Modal from '../components/Modal/Modal';
 import ReviewForm from '../components/ReviewForm/ReviewForm';
@@ -66,7 +67,17 @@ const EventDetail = (props) => {
                 }
             });
         } else {
-            alert("로그인 후 이용가능");
+            // alert("로그인 후 이용가능");
+            Swal.fire({
+                text: '로그인 후 이용가능',
+                confirmButtonText: 'OK',
+                width: 300,
+              })
+              .then((res)  => {
+                if (res.isConfirmed){
+                    navigate('/user/login');
+                }
+              })
         }
     }
 
@@ -164,8 +175,18 @@ const EventDetail = (props) => {
         if (props.user_id != "") {
             modal.current.classList.remove("d-none");
         } else {
-            alert("로그인 후 이용가능");
-            navigate("/user/login");
+            // alert("로그인 후 이용가능");
+            // navigate("/user/login");
+            Swal.fire({
+                text: '로그인 후 이용가능',
+                confirmButtonText: 'OK',
+                width: 300,
+              })
+              .then((res)  => {
+                if (res.isConfirmed){
+                    navigate('/user/login');
+                }
+              })
         }
     }
 

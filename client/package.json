@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
-    "@mui/material": "^5.10.10",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/joy": "^5.0.0-alpha.52",
+    "@mui/material": "^5.10.12",
     "@mui/x-date-pickers": "^5.0.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -29,6 +31,7 @@
     "react-toastify": "^9.0.8",
     "socket.io-client": "^4.5.3",
     "styled-components": "^5.3.6",
+    "sweetalert2": "^11.6.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -23,9 +23,7 @@ const Plan = (props) => {
             let result = await axios.get(process.env.REACT_APP_SCHEDULE_URL + "/getEvent", {
                 params : {user_id : props.id}
             });
-            console.log(result.data);
             setSchedule(result.data);
-            console.log('plan-result-data:',result.data);
         }
     }
 

@@ -9,9 +9,6 @@ const cnb = classNames.bind(style);
 
 function Calendar(props) {
 
-  // 두번째
-  // console.log("두번째", props);
-
   const [modal , setModal] = useState(false);
   const [modalData , setModalData] = useState();
   const [data, setData] = useState();
@@ -20,7 +17,6 @@ function Calendar(props) {
 
   // 부모 컴포넌트에서 내가 저장한 일정(schedule)이 들어옴.
   const schedule = props.schedule;
-  console.log('calendar-schedule:',props.schedule);
 
   // 들어온 일정데이터를 반복하면서 날짜만 꺼내서 배열에 담아줌.
   const test =() => {
@@ -160,7 +156,7 @@ const removeClass = useEffect(() => {
 const checkEvent = useEffect(() => {
   if ( data != null ) {
     schedule.filter((value) => {
-      console.log('calendar:',value);
+
       const a = document.getElementsByClassName('weekday');
       for ( let i =0; i<a.length; i++) {
         if ( value.date === a[i].getAttribute('date')) {
