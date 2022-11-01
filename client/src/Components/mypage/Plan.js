@@ -6,6 +6,9 @@ import Calendar from './Calendar';
 
 const Plan = (props) => {
 
+    // 1번째
+    // props.id = user id
+
     const [schedule, setSchedule] = useState([]);
     const navigate = useNavigate();
     
@@ -20,6 +23,7 @@ const Plan = (props) => {
             let result = await axios.get(process.env.REACT_APP_SCHEDULE_URL + "/getEvent", {
                 params : {user_id : props.id}
             });
+            console.log(result.data);
             setSchedule(result.data);
         }
     }
@@ -27,14 +31,13 @@ const Plan = (props) => {
     useEffect(() => {
         init();
         getSchedule();
-    }, [props.id],[schedule]);
+    }, [props.id, props.planId]);
 
     return (
         <>
             <h1 className='planText'>나의 일정을 확인해보세요!😊</h1>
             <div style={{width:'100%',height:'100%', marginTop:'50px'}}>
-                <Calendar schedule={schedule} setSchedule={setSchedule} getSchedule={getSchedule} id={props.id}/>
-                
+                <Calendar schedule={schedule} setSchedule={setSchedule} getSchedule={getSchedule} id={props.id}/> 
             </div>
         </>
     )

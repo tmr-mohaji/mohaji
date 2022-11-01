@@ -2,9 +2,12 @@ import { useNavigate } from 'react-router-dom';
 import { FcCalendar } from 'react-icons/fc'
 import './MyPlan.scss';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 
 function MyPlanModal (props) {
+
+    // 세번째
 
     const navigate = useNavigate();
 
@@ -19,16 +22,24 @@ function MyPlanModal (props) {
         navigate('/event/' + data.id);
     }
 
-    const deleteSchedule = async (id) => {
-        console.log('this:',props.id);
-        if ( props.id != "") {
-            let result = await axios.get(process.env.REACT_APP_SCHEDULE_URL + "/deleteEvent", {
-                params : {id : props.id}
-            });
-            props.getSchedule();
-            closeModal();
-        }
+    const getSchedule = async () => {
+        let result = await axios.get(process.env.REACT_APP_SCHEDULE_URL + "/getEvent", {
+            params : {user_id : props.id}
+        });
+        console.log(result.data);
     }
+
+    const deleteSchedule = async () => {
+        console.log('this:',props.modalData.planId);
+        let result = await axios.post(process.env.REACT_APP_SCHEDULE_URL + "/deleteEvent", {id : props.modalData.planId});
+        console.log(result.data);
+        getSchedule();
+        closeModal();
+    }
+
+    useEffect(() => {
+        getSchedule();
+    }, [props.modalData])
 
 
     return(

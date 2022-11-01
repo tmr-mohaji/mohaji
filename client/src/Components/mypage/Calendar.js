@@ -9,6 +9,8 @@ const cnb = classNames.bind(style);
 
 function Calendar(props) {
 
+  // 두번째
+  // console.log("두번째", props);
 
   const [modal , setModal] = useState(false);
   const [modalData , setModalData] = useState();
@@ -29,7 +31,7 @@ function Calendar(props) {
 
 useEffect(() => {
   test()
-},[props.schedule]);
+},[props.schedule, modalData]);
 
 
   const today = {
@@ -194,7 +196,7 @@ const checkEvent = useEffect(() => {
         <div className='c_day_section'>{returnDay()}</div>
       </div>
       
-      { modal && <div><MyPlanModal modalData={modalData} setModal={setModal} getSchedule={props.getSchedule} id={planId}/></div> }
+      { modal && <div><MyPlanModal modalData={modalData} setModal={setModal} getSchedule={props.getSchedule}/></div> }
     </div>
     </div>
   )

@@ -26,13 +26,15 @@ exports.getEvent = async (req, res) => {
     let ls = [];
     for (let i = 0; i<result.length; i++) {
         let event = await models.Event.findOne({where : {id : result[i].event_id}});
-        ls.push({'id' : event.id, 'title' : event.title, 'date' : result[i].date});
+        ls.push({'planId' : result[i].id, 'id' : event.id, 'title' : event.title, 'date' : result[i].date});
     }
     res.send(ls);
 }
 
 exports.deleteEvent = async (req, res) => {
-    let result = await models.Schedule.destroy({where: {event_id : req.query.id}});
-    res.send(true);
+    console.log(req.body);
+    let result = await models.Schedule.destroy({where: {id : req.body.id}});
+    console.log(result);
+    // res.send(result);
 }
 
