@@ -23,6 +23,7 @@ const Router = () => {
     const [id, setId] = useState('');
 
     const getAuth =  () => {
+        console.log("REACT_APP_MODE", process.env.REACT_APP_MODE );
         if ( localStorage.getItem("access_token") != undefined ) {
             axios({
                 url: process.env.REACT_APP_USER_URL + '/auth',
