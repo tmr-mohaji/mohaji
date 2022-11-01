@@ -45,6 +45,20 @@
     .c_title_section {
       font-size: 16px;
       margin: 10px;
+
+      @include media('<500px') {
+        margin: 0;
+      }
+
+      .c_title {
+        font-size: 20px;
+        font-weight: 700;
+        margin:0 10px;
+
+        @include media('<500px') {
+          font-size:16px;
+        }
+      }
     }
   }
 

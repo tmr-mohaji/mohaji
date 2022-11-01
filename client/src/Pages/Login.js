@@ -58,14 +58,17 @@ const Login = ( props ) => {
         <div className='login_entire_layout'>
             <div className='login_section'>
                 <form ref={form} className='login_form'>
-                    <h1 style={{marginBottom:'50px'}}>로고</h1>
+                    <h1 style={{marginBottom:'30px', fontSize:'50px', cursor:'pointer'}} onClick={() => { navigate('/')}}>내일뭐하지?</h1>
                     <div className='warningText' style={{height:'40px', marginBottom:'20px'}}>{warning}</div>
                     <input ref={Id} className='login_id' type="text" placeholder="아이디" name="id" required/>
                     <input ref={PW} className='login_pw' type="password" placeholder="비밀번호" name="password" required/>
                     <button className='login_btn' type="button" onClick={login}>로그인</button>
 
                     <hr />
-                    <div className='kakaoLogin'><a href="http://localhost:8000/auth/kakao"><img src='/img/kakao_login.png' style={{width:'130px', cursor:'pointer'}}></img></a></div>
+                    <div style={{display:'flex'}}>
+                    <div className='kakaoLogin'><a href="http://localhost:8000/auth/kakao"><img src='/img/kakao.png' style={{width:'30px', cursor:'pointer'}}></img></a></div>
+                    <div className='googleLogin'><a href="http://localhost:8000/auth/google"><img src='/img/google.png' style={{width:'30px', cursor:'pointer'}}></img></a></div>
+                    </div>
                 </form>
                 
                 <div className='login_etc'>

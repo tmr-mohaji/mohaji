@@ -3,10 +3,11 @@ import axios from 'axios';
 
 import FindId_Code from './FindId_Code';
 import './FindId.scss';
+import { useNavigate } from 'react-router-dom';
 
 const FindId = () => {
 
-
+    const navigate = useNavigate();
     const [ text, setText ] = useState('가입하신 이메일을 입력해주세요!');
     const [ codeModal, setCodeModal ] = useState(false);
     const [code, setCode] = useState('');
@@ -40,7 +41,7 @@ const FindId = () => {
         <div className='find_entire_layout'>
             <div className='find_section'>
                 <div className='find_logo_section'>
-                    <div style={{fontFamily: "Elice Digital Baeum", marginBottom:'30px'}}>로고</div>
+                    <div style={{fontFamily: 'WandohopeR', marginBottom:'50px', fontSize:'50px', fontWeight:'700',cursor:'pointer'}} onClick={() => { navigate('/')}}>내일뭐하지?</div>
                     <h1 style={{fontFamily: "Elice Digital Baeum"}}>아이디 찾기</h1>
                 </div>
                 <h3 className='warning_section'>{text}</h3>

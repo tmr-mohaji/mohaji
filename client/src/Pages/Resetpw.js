@@ -48,7 +48,7 @@ const ResetOnChange = (e) => {
         <div className='reset_entire_layout'>
             <div className='reset_section'>
             <form className='reset_form'>
-                <h1 style={{marginBottom:'50px'}}>로고</h1>
+                <h1 style={{marginBottom:'30px',fontSize:'50px', cursor:'pointer'}} onClick={() => { navigate('/')}}>내일뭐하지?</h1>
                 <div className={resetWarning} style={{height:'40px', marginBottom:'20px'}}>{resetText}</div>
                 <input className='reset_email' style={{fontWeight:'700'}} value={email} readOnly></input><br />
                 <input className='reset_id' style={{fontWeight:'700'}} value={id} readOnly></input><br />

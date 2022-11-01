@@ -88,7 +88,7 @@ const Signup = () => {
         <div className='signup_entire_layout'>
             <div className='signup_section'>
                 <form ref={form} className='signup_form'>
-                    <h1 style={{marginBottom:'50px'}}>로고</h1>
+                    <h1 style={{marginBottom:'30px',fontSize:'50px', fontWeight:'700', cursor:'pointer'}} onClick={() => { navigate('/')}}>내일뭐하지?</h1>
                     <div className={warning} style={{margin:'20px 0', minHeight:'40px'}}>{text}</div>
                     <input className='signup_nickname' type="text" placeholder="닉네임" name="nickname" required/>
                     <input className='signup_id' type="text" placeholder="아이디" name="id" onChange={idCheck} required/>
