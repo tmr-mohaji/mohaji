@@ -5,11 +5,13 @@ import axios from 'axios';
 
 
 function MyPlanModal (props) {
+    console.log(props.s_id);
 
     const navigate = useNavigate();
 
     let data = props.modalData;
     let id = props.id;
+    console.log(id);
 
     const closeModal = () => {
         props.setModal(false);
@@ -20,13 +22,14 @@ function MyPlanModal (props) {
     }
 
     const deleteSchedule = async (id) => {
-        console.log('this:',props.id);
+
         if ( props.id != "") {
             let result = await axios.get(process.env.REACT_APP_SCHEDULE_URL + "/deleteEvent", {
-                params : {id : props.id}
+                params : {id : props.id, s_id : props.s_id}
             });
             props.getSchedule();
             closeModal();
+            window.location.reload();
         }
     }
 
