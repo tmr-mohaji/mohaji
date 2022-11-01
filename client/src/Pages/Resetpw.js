@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Swal from "sweetalert2";
 
 import './Resetpw.scss';
 
@@ -38,8 +39,16 @@ const ResetOnChange = (e) => {
     const changePW = async () => {
         const result = await axios.post(process.env.REACT_APP_USER_URL + "/resetPW", {id: id, password: resetPW.current.value});
         if ( result.status == 200 ) { 
-            alert("비밀번호가 성공적으로 변경되었습니다.");
-            navigate('/user/login');
+            // alert("비밀번호가 성공적으로 변경되었습니다.");
+            Swal.fire({
+                text: '비밀번호가 성공적으로 변경되었습니다.',
+                confirmButtonText: 'OK',
+                width: 400,
+              }).then((res) => {
+                if (res.isConfirmed) {
+                    navigate('/user/login');
+                }
+              })
         }
     }
 

@@ -160,7 +160,17 @@ const EventDetail = (props) => {
                 })
             });
         } else {
-            alert("로그인 후 이용가능");
+            // alert("로그인 후 이용가능");
+            Swal.fire({
+                text: '로그인 후 이용가능',
+                confirmButtonText: 'OK',
+                width: 300,
+              })
+              .then((res)  => {
+                if (res.isConfirmed){
+                    navigate('/user/login');
+                }
+              })
         }
     }
 
@@ -197,10 +207,21 @@ const EventDetail = (props) => {
     // 마이페이지 클릭 시 모달 창 설정(로그인 시)
     const closeModal = async () => {
         if (date == "") {
-            alert("날짜 선택 안됨");
+            // alert("날짜 선택 안됨");
+            Swal.fire({
+                text: '날짜를 선택해주세요.',
+                confirmButtonText: 'OK',
+                width: 300,
+              })
+
         } else {
             let result = await axios.post(process.env.REACT_APP_SCHEDULE_URL + "/addEvent", { user_id: props.user_id, event_id: id, date: date });
-            alert(result.data);
+            // alert(result.data);
+            Swal.fire({
+                text: '성공적으로 등록되었습니다.',
+                confirmButtonText: 'OK',
+                width: 300,
+              })
             closeBtn();
         }
     }
@@ -208,19 +229,6 @@ const EventDetail = (props) => {
     const closeBtn = () => {
         modal.current.classList.add("d-none");
     }
-
-
-    // 카카오 공유하기
-    // useEffect(() => {
-    //     const script = document.createElement('script')
-    //     script.src = 'https://developers.kakao.com/sdk/js/kakao.js'
-    //     script.async = true
-
-    //     document.body.appendChild(script)
-    //     return () => { document.body.removeChild(script)}
-    // },[])
-
-
 
 
     useEffect(() => {

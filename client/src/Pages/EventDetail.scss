@@ -209,6 +209,10 @@
     border:1px solid #000;
     color:#fff;
     cursor: pointer;
+
+    @include media ('<1220px') {
+        min-width: 70px;
+    }
 }
 
 .bg-black:hover{
@@ -227,6 +231,10 @@
 
 .ico-stars2{
     font-size:16px;
+
+    @include media ('<1220px') {
+        font-size:14px;
+    }
 }
 
 
