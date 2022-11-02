@@ -66,8 +66,8 @@ const Login = ( props ) => {
 
                     <hr />
                     <div style={{display:'flex'}}>
-                    <div className='kakaoLogin'><a href="http://localhost:8000/auth/kakao"><img src='/img/kakao.png' style={{width:'30px', cursor:'pointer'}}></img></a></div>
-                    <div className='googleLogin'><a href="http://localhost:8000/auth/google"><img src='/img/google.png' style={{width:'30px', cursor:'pointer'}}></img></a></div>
+                    <div className='kakaoLogin'><a href={`${process.env.REACT_APP_BASE_URL}/auth/kakao`}><img src='/img/kakao.png' style={{width:'30px', cursor:'pointer'}}></img></a></div>
+                    <div className='googleLogin'><a href={`${process.env.REACT_APP_BASE_URL}/auth/google`}><img src='/img/google.png' style={{width:'30px', cursor:'pointer'}}></img></a></div>
                     </div>
                 </form>
                 

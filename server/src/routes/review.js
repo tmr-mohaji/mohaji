@@ -7,7 +7,7 @@ const multer = require("multer");
 const upload = multer({
     storage: multer.diskStorage({
         destination(req, file, done) {
-            done(null, path.join(__dirname, '../../../client/public/img/review_img/'));
+            done(null, path.join(__dirname, '../../../react/project/build/img/review_img/'));
         },
         filename(req, file, done) {
             const ext = path.extname(file.originalname);

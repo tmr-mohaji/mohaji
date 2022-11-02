@@ -74,9 +74,9 @@ const MyPage = (props) => {
 
     return (
         <section>
-            <div className='myPageBox'>
+            <div className='myPageBox' style={{minHeight:'90vh'}}>
                 <div>
-                    <img src='/img/back.jpg' style={{ width: '100%', height: '250px' }} alt='' />
+                    <img src='/img/back.jpg' style={{ width: '100%', height: '300px' }} alt='' />
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'center' }}>

@@ -54,14 +54,14 @@ const EventDetail = (props) => {
                     'Authorization': localStorage.getItem("access_token")
                 }
             }).then((result) => {
-                console.log("work");
+                // console.log("work");
                 // 좋아요 안 된 상태
                 if (!likeStatus) {
-                    console.log('like');
+                    // console.log('like');
                     axios.post(process.env.REACT_APP_EVENT_URL + "/like", { user_id: result.data.id, event_id: id });
                     setLikeStatus(true);
                 } else {
-                    console.log("dislike");
+                    // console.log("dislike");
                     axios.post(process.env.REACT_APP_EVENT_URL + "/dislike", { user_id: result.data.id, event_id: id });
                     setLikeStatus(false);
                 }
@@ -105,6 +105,7 @@ const EventDetail = (props) => {
         if (isNaN(avg)) {
             return false;
         }
+        // console.log("score : ", avg);
         setScore(avg);
     }
 
@@ -140,7 +141,7 @@ const EventDetail = (props) => {
                 formData.append('content', content);
 
                 for (let key of formData.keys()) {
-                    console.log(key, ":", formData.get(key));
+                    // console.log(key, ":", formData.get(key));
                 }
 
                 axios.post(process.env.REACT_APP_REVIEW_URL + "/writeComment", formData, {
@@ -154,9 +155,10 @@ const EventDetail = (props) => {
 
                     // 창 비우기
                     let textarea = document.querySelector(".rt_box textarea");
-                    let fileUpload = document.getElementById("img");
+                    let fileUpload = document.getElementById("img_tag");
+                    console.log(fileUpload);
                     textarea.value = "";
-                    fileUpload.value = "";
+                    fileUpload.src = "/img/no_image3.png";
                 })
             });
         } else {
@@ -216,6 +218,7 @@ const EventDetail = (props) => {
 
         } else {
             let result = await axios.post(process.env.REACT_APP_SCHEDULE_URL + "/addEvent", { user_id: props.user_id, event_id: id, date: date });
+            // console.log(result.data);
             
             { result.data == true ? (Swal.fire({
                 text: '성공적으로 등록되었습니다.',
