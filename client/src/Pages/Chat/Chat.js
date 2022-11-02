@@ -114,6 +114,8 @@ const Chat = () => {
         socket.on("newMsg", (data) => {
             // addMsg(data.nickname, data.msg);
             getData();
+            const form = document.querySelector("form");
+            form.reset();
         })
     }, [])
 
