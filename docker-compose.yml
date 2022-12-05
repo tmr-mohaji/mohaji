@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+    client:
+        volumes: 
+            - /app/node_modules
+            - ./client/:/app/
+        build: 
+            context: ./client
+        ports:
+            - "3000:3000"
+    server:
+        volumes:
+            - /app/node_modules
+            - ./server/:/app
+        build: 
+            context: ./server
+        ports:
+            - "8000:8000"
