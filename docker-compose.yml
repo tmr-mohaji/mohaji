@@ -16,3 +16,11 @@ services:
             context: ./server
         ports:
             - "8000:8000"
+        depends_on:
+            - mysql_db
+    mysql_db:
+        image: mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: 1234
+        ports:
+            - "3308:3306"
