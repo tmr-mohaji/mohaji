@@ -1,4 +1,3 @@
-CREATE DATABASE mohaji;
 use mohaji;
 
 CREATE TABLE event (
